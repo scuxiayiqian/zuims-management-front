@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-4 col-md-offset-4">
+        <div class="col-md-4 col-md-offset-4"  ng-controller="LoginCtrl">
             <div class="login-panel panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">Please Sign In</h3>
@@ -9,7 +9,7 @@
                     <form role="form">
                         <fieldset>
                             <div class="form-group">
-                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus>
+                                <input class="form-control" placeholder="E-mail" name="email" type="email" autofocus ng-model="username.line">
                             </div>
                             <div class="form-group">
                                 <input class="form-control" placeholder="Password" name="password" type="password" value="">
@@ -20,7 +20,7 @@
                                 </label>
                             </div>
                             <!-- Change this to a button or input when using this as a form -->
-                            <a ui-sref="dashboard.home" class="btn btn-lg btn-success btn-block">Login</a>
+                            <a ui-sref="dashboard.home" class="btn btn-lg btn-success btn-block" ng-click="username.list()">Login</a>
                         </fieldset>
                     </form>
                 </div>
@@ -28,3 +28,4 @@
         </div>
     </div>
 </div>
+

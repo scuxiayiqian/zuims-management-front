@@ -103,7 +103,18 @@ angular
     })
       .state('login',{
         templateUrl:'views/pages/login.html',
-        url:'/login'
+        url:'/login',
+          controller: 'LoginCtrl',
+          resolve: {
+              loadMyFiles:function($ocLazyLoad) {
+                  return $ocLazyLoad.load({
+                      name:'sbAdminApp',
+                      files:[
+                          'views/pages/login.js'
+                      ]
+                  })
+              }
+          }
     })
       .state('dashboard.chart',{
         templateUrl:'views/chart.html',

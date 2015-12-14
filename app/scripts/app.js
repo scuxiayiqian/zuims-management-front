@@ -104,7 +104,7 @@ angular
       .state('login',{
         templateUrl:'views/pages/login.html',
         url:'/login',
-          controller: 'LoginCtrl',
+          controller: 'LoginController',
           resolve: {
               loadMyFiles:function($ocLazyLoad) {
                   return $ocLazyLoad.load({
@@ -115,6 +115,21 @@ angular
                   })
               }
           }
+    })
+    .state('signup',{
+        templateUrl:'views/pages/signup.html',
+        url:'/signup',
+        controller: 'SignupController',
+        resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name:'sbAdminApp',
+                    files:[
+                        'views/pages/login.js'
+                    ]
+                })
+            }
+        }
     })
       .state('dashboard.chart',{
         templateUrl:'views/chart.html',

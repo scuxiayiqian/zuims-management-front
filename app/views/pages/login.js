@@ -52,7 +52,6 @@ angular.module('sbAdminApp')
                     headers: authHeader,
                     crossDomain: true
                 }).success(function(data) {
-                    alert(data.token);
                     $scope.signupData = {
                         name: $scope.signup.username,
                         password: $scope.signup.password,
@@ -63,14 +62,37 @@ angular.module('sbAdminApp')
                         url: 'http://localhost:8080/users',
                         headers: {
                             'Content-Type': 'application/json',
-                            'X-Auth-Token': data.token
+                            'x-auth-token': data.token
                         },
                         crossDomain: true,
                         data: JSON.stringify($scope.signupData)
-                    }).success(function(data) {
-                        alert("ergar")
-                        alert(data.name);
-                        //$state.go("dashboard.home");
+                    }).success(function() {
+                        alert("signup successed");
+                        $http({
+                            method: 'PUT',
+                            url: 'http://localhost:8080/users/logout',
+                            headers: {
+                                'x-auth-token': data.token
+                            },
+                            crossDomain: true
+                        }).success(function() {
+                            alert("logout successed");
+                            $http({
+                                method: 'GET',
+                                url: 'http://localhost:8080/token',
+                                headers: {
+                                    authorization: "Basic " + btoa($scope.signup.username + ":" + $scope.signup.password)
+                                },
+                                crossDomain: true    
+                            }).success(function(token) {
+                                alert($scope.signup.username + ":" + token.token);
+                                $state.go("dashboard.home");
+                            }).error(function() {
+                                alert("failed");
+                            })
+                        }).error(function() {
+                            alert('logout failed');
+                        })
                     }).error(function() {
                         alert('failed');
                     });

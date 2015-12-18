@@ -115,7 +115,7 @@ angular
                 return $ocLazyLoad.load({
                     name:'sbAdminApp',
                     files:[
-                        'views/pages/login.js'
+                        'script/controllers/login.js'
                     ]
                 })
             }

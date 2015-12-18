@@ -53,6 +53,7 @@ angular.module('sbAdminApp')
             var index = $scope.rowCollection.indexOf(row);
             if (index !== -1) {
                 $scope.rowCollection.splice(index, 1);
+                $scope.displayedCollection = [].concat($scope.rowCollection);
             }
         }
     }]);

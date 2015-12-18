@@ -103,18 +103,7 @@ angular
     })
       .state('login',{
         templateUrl:'views/pages/login.html',
-        url:'/login',
-          controller: 'LoginController',
-          resolve: {
-              loadMyFiles:function($ocLazyLoad) {
-                  return $ocLazyLoad.load({
-                      name:'sbAdminApp',
-                      files:[
-                          'scripts/controllers/login.js'
-                      ]
-                  })
-              }
-          }
+        url:'/login'
     })
     .state('signup',{
         templateUrl:'views/pages/signup.html',
@@ -153,7 +142,18 @@ angular
     })
       .state('dashboard.table',{
         templateUrl:'views/table.html',
-        url:'/table'
+        url:'/table',
+          controller: 'safeCtrl',
+          resolve: {
+              loadMyFiles:function($ocLazyLoad) {
+                  return $ocLazyLoad.load({
+                      name:'sbAdminApp',
+                      files:[
+                          'scripts/controllers/table.js'
+                      ]
+                  })
+              }
+          }
     })
       .state('dashboard.panels-wells',{
           templateUrl:'views/ui-elements/panels-wells.html',

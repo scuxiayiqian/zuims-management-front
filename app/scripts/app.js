@@ -115,7 +115,7 @@ angular
                 return $ocLazyLoad.load({
                     name:'sbAdminApp',
                     files:[
-                        'views/pages/login.js'
+                        'scripts/controllers/login.js'
                     ]
                 })
             }
@@ -144,7 +144,7 @@ angular
       .state('dashboard.table',{
         templateUrl:'views/table.html',
         url:'/table',
-          controller: 'safeCtrl',
+          //controller: 'safeCtrl',
           resolve: {
               loadMyFiles:function($ocLazyLoad) {
                   return $ocLazyLoad.load({

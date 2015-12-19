@@ -9,34 +9,34 @@
  * # MainCtrl
  * Controller of the sbAdminApp
  */
+
 angular.module('sbAdminApp')
-    .controller('safeCtrl', ['$scope', function ($scope) {
+    .controller('safeCtrl', function ($scope, $http) {
 
-        var firstnames = ['Laurent', 'Blandine', 'Olivier', 'Max'];
-        var lastnames = ['Renard', 'Faivre', 'Frere', 'Eponge'];
-        var dates = ['1987-05-21', '1987-04-25', '1955-08-27', '1966-06-06'];
-        var id = 1;
+        var restaurantnames = [];
+        var ispromoted = [];
 
-        function generateRandomItem(id) {
-
-            var firstname = firstnames[Math.floor(Math.random() * 3)];
-            var lastname = lastnames[Math.floor(Math.random() * 3)];
-            var birthdate = dates[Math.floor(Math.random() * 3)];
-            var balance = Math.floor(Math.random() * 2000);
-
+        function getItem(id) {
             return {
-                id: id,
-                firstName: firstname,
-                lastName: lastname,
-                birthDate: new Date(birthdate),
-                balance: balance
+                name: restaurantnames[id],
+                isPromoted: ispromoted[id]
             }
         }
 
-        $scope.rowCollection = [];
+        function restaurantInfos(restaurantArr) {
+            //console.log(restaurantArr);
+            var log = [];
+            angular.forEach(restaurantArr, function(value, key) {
+                console.log(key + ': ' + value.name + ': ' + value.isPromoted);
+                restaurantnames.push(value.name);
+                ispromoted.push(value.isPromoted);
+            }, log);
+            //expect(log).toEqual(['name: misko', 'gender: male']);
 
-        for (id; id < 5; id++) {
-            $scope.rowCollection.push(generateRandomItem(id));
+            for (var id = 0; id < restaurantnames.length ; id++) {
+                $scope.rowCollection.push(getItem(id));
+            }
+            $scope.displayedCollection = [].concat($scope.rowCollection);
         }
 
         //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
@@ -44,8 +44,11 @@ angular.module('sbAdminApp')
 
         //add to the real data holder
         $scope.addRandomItem = function addRandomItem() {
-            $scope.rowCollection.push(generateRandomItem(id));
+            $scope.rowCollection.push(getItem(id));
             id++;
+
+            //$scope.getRestaurantList();
+            console.log("#51");
         };
 
         //remove to the real data holder
@@ -53,7 +56,46 @@ angular.module('sbAdminApp')
             var index = $scope.rowCollection.indexOf(row);
             if (index !== -1) {
                 $scope.rowCollection.splice(index, 1);
-                $scope.displayedCollection = [].concat($scope.rowCollection);
+                //$scope.displayedCollection = [].concat($scope.rowCollection);
             }
         }
-    }]);
+
+        $scope.getRestaurantList = function() {
+            // get restaurant list request
+            console.log("#66");
+            //alert("ha");
+
+            var authHeader = {
+                authorization : "Basic " + btoa("Admin" + ":" + "incongruous")
+            };
+
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8080/token',
+                headers: authHeader,
+                crossDomain: true
+            }).success(function(data) {
+                //alert(data.token);
+                console.log(data.token);
+                $http({
+                    method: 'GET',
+                    url: 'http://localhost:8080/restaurants',
+                    headers: {
+                        //'Content-Type': 'application/json',
+                        'x-auth-token': data.token
+                    },
+                    crossDomain: true
+                }).success(function (restaurantArr) {
+                    restaurantInfos(restaurantArr);
+                }).error(function () {
+                    alert("failed2");
+                });
+            }).error(function () {
+                alert("failed1");
+            });
+        };
+
+        $scope.rowCollection = [];
+        $scope.getRestaurantList();
+
+    });

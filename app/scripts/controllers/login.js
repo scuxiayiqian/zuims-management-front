@@ -43,7 +43,7 @@ angular.module('sbAdminApp')
                 alert($scope.signup.username + ":" + $scope.signup.password + ":" + $scope.signup.role);
 
                 var authHeader = {
-                    authorization : "Basic " + btoa("Admin" + ":" + "incongruous"),
+                    authorization : "Basic " + btoa("Admin" + ":" + "incongruous")
                 };
 
                 $http({

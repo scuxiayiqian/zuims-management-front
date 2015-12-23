@@ -25,24 +25,20 @@
                     <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
                         <thead>
                         <tr>
+                            <th colspan="2"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
+                        </tr>
+                        <tr>
                             <th st-sort="name">name</th>
                             <th st-sort="isPromoted">isPromoted</th>
                             <!--<th st-sort="birthDate">birth date</th>-->
-                        </tr>
-                        <tr>
-                            <th colspan="5"><input st-search="" class="form-control" placeholder="global search ..." type="text"/></th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr ng-repeat="row in displayedCollection">
                             <td>{{row.name}}</td>
-                            <td>{{row.isPromoted}}</td>
-                            <!--<td>-->
-                                <!--<button type="button" ng-click="removeItem(row)" class="btn btn-sm btn-danger">-->
-                                    <!--<i class="glyphicon glyphicon-remove-circle">-->
-                                    <!--</i>-->
-                                <!--</button>-->
-                            <!--</td>-->
+                            <td>
+                                <input type="checkbox" ng-model="row.isPromoted">
+                            </td>
                         </tr>
                         </tbody>
                     </table>

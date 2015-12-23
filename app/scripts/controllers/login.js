@@ -22,8 +22,7 @@ angular.module('sbAdminApp')
                 $http({
                     method: 'GET',
                     url: 'http://localhost:8080/token',
-                    headers: headers,
-                    crossDomain: true
+                    headers: headers
                 }).success(function(data) {
                     alert(data.token);
                     $state.go("dashboard.home");

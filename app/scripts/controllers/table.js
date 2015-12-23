@@ -66,7 +66,7 @@ angular.module('sbAdminApp')
             //alert("ha");
 
             var authHeader = {
-                authorization : "Basic " + btoa("Admin" + ":" + "incongruous")
+                authorization : "Basic " + btoa("Xiayiqian" + ":" + "123456")
             };
 
             $http({

@@ -14,6 +14,8 @@ angular.module('sbAdminApp')
     .controller('safeCtrl', function ($rootScope, $scope, $http) {
 
         $scope.cities = [];
+        $scope.users = [];
+
         $scope.selectedCity = "";
 
         $scope.rowCollection = [];
@@ -24,6 +26,11 @@ angular.module('sbAdminApp')
             }
         }
 
+        function setUsers(userArray) {
+            for (var i = 0; i < userArray.length; i++) {
+                $scope.users.push(userArray[i]);
+            }
+        }
         //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
         $scope.displayedCollection = [].concat($scope.rowCollection);
 
@@ -37,15 +44,18 @@ angular.module('sbAdminApp')
         };
 
         $scope.restaurantToDelete = {};
+        $scope.restaurantToUpdate = {};
 
         $scope.setRestaurantToDelete = function(row) {
             $scope.restaurantToDelete = row;
         }
 
+        $scope.setRestaurantToUpdate = function(row) {
+            $scope.restaurantToUpdate = row;
+        }
+
         //remove to the real data holder
         $scope.deleteRestaurant = function() {
-
-            alert($rootScope.token);
 
             $http({
                 method: 'DELETE',
@@ -65,10 +75,43 @@ angular.module('sbAdminApp')
             });
         }
 
+        $scope.updateRestaurant = function () {
+
+            $http({
+                method: 'PUT',
+                url: 'http://localhost:8080/restaurants/' + $scope.restaurantToUpdate.name,
+                headers: {
+                    'x-auth-token': $rootScope.token
+                },
+                data: $scope.restaurantToUpdate,
+                crossDomain: true
+            }).success(function(data) {
+                $scope.getRestaurantList()
+            }).error(function () {
+                alert("delete failed");
+            });
+        }
+
+        $scope.createRestaurant = function () {
+
+            $http({
+                method: 'POST',
+                url: 'http://localhost:8080/restaurants',
+                headers: {
+                    'x-auth-token': $rootScope.token
+                },
+                data: $scope.restaurantToUpdate,
+                crossDomain: true
+            }).success(function(data) {
+                $scope.getRestaurantList()
+            }).error(function () {
+                alert("delete failed");
+            });
+        }
+
         $scope.updatePromotedRestaurantsByCity = function() {
             var promotedRestaurant = [];
 
-            console.log($scope.rowCollection.length);
 
             for (var i = 0; i < $scope.rowCollection.length; i++) {
 
@@ -80,17 +123,14 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'PUT',
-                url: 'http://localhost:8080/cities/' + $scope.selectedCity.name + '/restaurants/promoted',
+                url: 'http://localhost:8080/cities/' + $scope.selectedCity + '/restaurants/promoted',
                 headers: {
                     'x-auth-token': $rootScope.token
                 },
                 data: promotedRestaurant,
                 crossDomain: true
             }).success(function() {
-
-                alert("updated");
             }).error(function () {
-                alert("update failed");
             });
         }
 
@@ -99,7 +139,7 @@ angular.module('sbAdminApp')
             console.log($rootScope.token);
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/cities/' + $scope.selectedCity.name + '/restaurants',
+                url: 'http://localhost:8080/cities/' + $scope.selectedCity + '/restaurants',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $rootScope.token
@@ -109,7 +149,7 @@ angular.module('sbAdminApp')
                 $scope.rowCollection = restaurantArr;
                 $scope.displayedCollection = $scope.rowCollection;
             }).error(function () {
-                alert("failed2");
+                console.log("getRestaurantList failed");
             });
         };
 
@@ -125,7 +165,23 @@ angular.module('sbAdminApp')
             }).success(function (cityArray) {
                 setCities(cityArray);
             }).error(function () {
-                alert("failed2");
+                console.log("getCites failed");
+            });
+        }
+
+        $scope.getUsers = function() {
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8080/roles/marketing/users',
+                headers: {
+                    //'Content-Type': 'application/json',
+                    'x-auth-token': $rootScope.token
+                },
+                crossDomain: true
+            }).success(function (cityArray) {
+                setUsers(cityArray);
+            }).error(function () {
+                console.log("getCites failed");
             });
         }
 
@@ -136,9 +192,6 @@ angular.module('sbAdminApp')
             }
         }
 
-        $scope.checked = function(row) {
-            //alert($scope.rowCollection[$scope.displayedCollection.indexOf(row)].isPromoted);
-        }
-
         $scope.getCites();
+        $scope.getUsers();
     });

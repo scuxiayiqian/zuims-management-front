@@ -1,0 +1,71 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">餐厅列表</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default" ng-controller="restaurantPromotionCtrl">
+            <div class="panel-heading">
+                <div align="right">
+                    <button type="button" ng-click="updatePromotedRestaurantsByCity(r)" class="btn btn-sm btn-success">
+                        <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
+                        <i class="glyphicon glyphicon-cloud-upload">
+                        </i> 更新推荐上首页餐厅
+                    </button>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div>
+                    <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th colspan="3">
+                                <table class="table table-condensed">
+                                    <tr>
+                                        <td width="50%">
+                                            <div class="input-group">
+                                                <input st-search="" class="form-control" placeholder="搜索" type="text"/>
+                                                <span class="input-group-btn">
+                                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                                    </button>
+                                                </span>
+                                            </div>
+                                        </td>
+                                        <td width="20%">
+                                            <select class="form-control" ng-change="changeCity()" ng-model="selectedCity" ng-options="city.name as city.name for city in cities" >
+                                                <option value="">选择城市</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </th>
+                        </tr>
+                        <tr>
+                            <th st-sort="name">name</th>
+                            <th st-sort="marketingName">marketing</th>
+                            <th st-sort="isPromoted">isPromoted</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr st-select-row="row" ng-repeat="row in displayedCollection">
+                            <td>{{row.name}}</td>
+                            <td>{{row.marketingName}}</td>
+                            <td>
+                                <input type="checkbox" ng-model="row.isPromoted" ng-checked="row.isPromoted">
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

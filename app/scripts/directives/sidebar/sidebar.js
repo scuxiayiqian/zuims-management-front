@@ -15,7 +15,7 @@ angular.module('sbAdminApp')
       replace: true,
       scope: {
       },
-      controller:function($scope){
+      controller:function($rootScope, $scope){
         $scope.selectedMenu = 'dashboard';
         $scope.collapseVar = 0;
         $scope.multiCollapseVar = 0;
@@ -35,6 +35,17 @@ angular.module('sbAdminApp')
           else
             $scope.multiCollapseVar = y;
         };
+
+        $scope.setMenusVisibility = function() {
+
+            $scope.showUserManagement = $rootScope.isVisible('userManagement');
+            $scope.showRestaurantManagement = $rootScope.isVisible('restaurantManagement');
+            $scope.showRestaurantPromotion = $rootScope.isVisible('restaurantPromotion');
+            $scope.showSystemManagement = $rootScope.isVisible('systemManagement');
+
+        }
+
+          $scope.setMenusVisibility();
       }
     }
   }]);

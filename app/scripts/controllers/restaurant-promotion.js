@@ -11,7 +11,7 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('safeCtrl', function ($rootScope, $scope, $http) {
+    .controller('restaurantPromotionCtrl', function ($rootScope, $scope, $http) {
 
         $scope.cities = [];
         $scope.users = [];
@@ -33,15 +33,6 @@ angular.module('sbAdminApp')
         }
         //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
         $scope.displayedCollection = [].concat($scope.rowCollection);
-
-        //add to the real data holder
-        $scope.addRandomItem = function addRandomItem() {
-            $scope.rowCollection.push(getItem(id));
-            id++;
-
-            //$scope.getRestaurantList();
-            console.log("#51");
-        };
 
         $scope.restaurantToDelete = {};
         $scope.restaurantToUpdate = {};

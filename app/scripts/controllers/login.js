@@ -20,7 +20,7 @@ angular.module('sbAdminApp')
                     for(var i = 0; i< $scope.user.roles.length; i++){
 
                         console.log($scope.user.roles[i]);
-                        if($scope.user.roles[i] == 'admin') {
+                        if($scope.user.roles[i] == 'manager') {
                             flag = true;
                         }
                     }

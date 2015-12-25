@@ -23,6 +23,7 @@ angular.module('sbAdminApp')
                     headers: headers
                 }).success(function(data) {
                     $rootScope.token = data.token;
+                    $rootScope.user = data.user;
                     $state.go("dashboard.home");
                 }).error(function() {
                     alert('failed');

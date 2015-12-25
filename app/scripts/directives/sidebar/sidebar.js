@@ -35,6 +35,8 @@ angular.module('sbAdminApp')
           else
             $scope.multiCollapseVar = y;
         };
+
+
       }
     }
   }]);

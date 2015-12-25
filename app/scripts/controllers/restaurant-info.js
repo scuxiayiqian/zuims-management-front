@@ -11,7 +11,7 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('safeCtrl', function ($rootScope, $scope, $http) {
+    .controller('restaurantInfoCtrl', function ($rootScope, $scope, $http) {
 
         $scope.cities = [];
         $scope.users = [];

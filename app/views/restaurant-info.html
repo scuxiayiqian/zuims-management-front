@@ -7,7 +7,7 @@
 <!-- /.row -->
 <div class="row">
     <div class="col-lg-12">
-        <div class="panel panel-default" ng-controller="safeCtrl">
+        <div class="panel panel-default" ng-controller="restaurantInfoCtrl">
             <div class="panel-heading">
                 <div align="right">
                     <button type="button" ng-click="setRestaurantToUpdate()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-success">
@@ -15,32 +15,15 @@
                         <i class="glyphicon glyphicon-plus">
                         </i> 添加餐厅
                     </button>
-                    <button type="button" ng-click="updatePromotedRestaurantsByCity(r)" class="btn btn-sm btn-success">
-                        <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
-                        <i class="glyphicon glyphicon-cloud-upload">
-                        </i> 更新推荐上首页餐厅
-                    </button>
                 </div>
             </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <div>
-                    <!--<button type="button" ng-click="setRestaurantToUpdate()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-success">-->
-                    <!--&lt;!&ndash;<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">&ndash;&gt;-->
-                        <!--<i class="glyphicon glyphicon-plus">-->
-                        <!--</i> 添加餐厅-->
-                    <!--</button>-->
-
-                    <!--<button type="button" ng-click="updatePromotedRestaurantsByCity(r)" class="btn btn-sm btn-success">-->
-                        <!--&lt;!&ndash;<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">&ndash;&gt;-->
-                        <!--<i class="glyphicon glyphicon-cloud-upload">-->
-                        <!--</i> 更新推荐上首页餐厅-->
-                    <!--</button>-->
-
                     <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th colspan="4">
+                            <th colspan="3">
                                 <table class="table table-condensed">
                                     <tr>
                                         <td width="50%">
@@ -52,9 +35,6 @@
                                                 </span>
                                             </div>
                                         </td>
-                                        <!--<td width="20%" align="right" valign="center">-->
-                                            <!--<button class="btn btn-default disabled" type="button">选择城市</button>-->
-                                        <!--</td>-->
                                         <td width="20%">
                                             <select class="form-control" ng-change="changeCity()" ng-model="selectedCity" ng-options="city.name as city.name for city in cities" >
                                                 <option value="">选择城市</option>
@@ -67,7 +47,6 @@
                         <tr>
                             <th st-sort="name">name</th>
                             <th st-sort="marketingName">marketing</th>
-                            <th st-sort="isPromoted">isPromoted</th>
                             <th >Operations</th>
                         </tr>
                         </thead>
@@ -75,9 +54,6 @@
                         <tr st-select-row="row" ng-repeat="row in displayedCollection">
                             <td>{{row.name}}</td>
                             <td>{{row.marketingName}}</td>
-                            <td>
-                                <input type="checkbox" ng-model="row.isPromoted" ng-checked="row.isPromoted">
-                            </td>
                             <td>
                                 <button class="btn btn-xs" type="button" ng-click="setRestaurantToDelete(row)" data-toggle="modal" data-target="#deleteModal">
                                     <i class="fa fa-remove"></i>

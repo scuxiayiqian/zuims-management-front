@@ -141,21 +141,34 @@ angular
           }
         }
     })
-      .state('dashboard.table',{
-        templateUrl:'views/table.html',
-        url:'/table',
-          //controller: 'safeCtrl',
+      .state('dashboard.restaurant-promotion',{
+        templateUrl:'views/restaurant-promotion.html',
+        url:'/restaurant-promotion',
           resolve: {
               loadMyFiles:function($ocLazyLoad) {
                   return $ocLazyLoad.load({
                       name:'sbAdminApp',
                       files:[
-                          'scripts/controllers/table.js'
+                          'scripts/controllers/restaurant-promotion.js'
                       ]
                   })
               }
           }
     })
+        .state('dashboard.restaurant-info',{
+            templateUrl:'views/restaurant-info.html',
+            url:'/restaurant-info',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/restaurant-info.js'
+                        ]
+                    })
+                }
+            }
+        })
       .state('dashboard.panels-wells',{
           templateUrl:'views/ui-elements/panels-wells.html',
           url:'/panels-wells'

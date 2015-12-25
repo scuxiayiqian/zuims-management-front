@@ -1,30 +1,41 @@
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Tables</h1>
+        <h1 class="page-header">餐厅列表</h1>
     </div>
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
 <div class="row">
     <div class="col-lg-12">
-        <div class="panel panel-default">
+        <div class="panel panel-default" ng-controller="safeCtrl">
             <div class="panel-heading">
-                DataTables Advanced Tables
-            </div>
-            <!-- /.panel-heading -->
-            <div class="panel-body">
-                <div ng-controller="safeCtrl">
+                <div align="right">
                     <button type="button" ng-click="setRestaurantToUpdate()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-success">
-                    <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
+                        <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
                         <i class="glyphicon glyphicon-plus">
-                        </i> Add restaurant
+                        </i> 添加餐厅
                     </button>
-
                     <button type="button" ng-click="updatePromotedRestaurantsByCity(r)" class="btn btn-sm btn-success">
                         <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
                         <i class="glyphicon glyphicon-cloud-upload">
-                        </i> Update promoted restaurants
+                        </i> 更新推荐上首页餐厅
                     </button>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <div>
+                    <!--<button type="button" ng-click="setRestaurantToUpdate()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-success">-->
+                    <!--&lt;!&ndash;<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">&ndash;&gt;-->
+                        <!--<i class="glyphicon glyphicon-plus">-->
+                        <!--</i> 添加餐厅-->
+                    <!--</button>-->
+
+                    <!--<button type="button" ng-click="updatePromotedRestaurantsByCity(r)" class="btn btn-sm btn-success">-->
+                        <!--&lt;!&ndash;<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">&ndash;&gt;-->
+                        <!--<i class="glyphicon glyphicon-cloud-upload">-->
+                        <!--</i> 更新推荐上首页餐厅-->
+                    <!--</button>-->
 
                     <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
                         <thead>
@@ -32,21 +43,21 @@
                             <th colspan="4">
                                 <table class="table table-condensed">
                                     <tr>
-                                        <td width="20%">
+                                        <td width="50%">
                                             <div class="input-group">
-                                                <input st-search="" class="form-control" placeholder="global search ..." type="text"/>
+                                                <input st-search="" class="form-control" placeholder="搜索" type="text"/>
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
                                                     </button>
                                                 </span>
                                             </div>
                                         </td>
-                                        <td width="60%" align="right" valign="center">
-                                            <button class="btn btn-default disabled" type="button">City: </button>
-                                        </td>
+                                        <!--<td width="20%" align="right" valign="center">-->
+                                            <!--<button class="btn btn-default disabled" type="button">选择城市</button>-->
+                                        <!--</td>-->
                                         <td width="20%">
                                             <select class="form-control" ng-change="changeCity()" ng-model="selectedCity" ng-options="city.name as city.name for city in cities" >
-                                                <option value="">Choose a city</option>
+                                                <option value="">选择城市</option>
                                             </select>
                                         </td>
                                     </tr>

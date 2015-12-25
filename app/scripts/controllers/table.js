@@ -86,7 +86,8 @@ angular.module('sbAdminApp')
                 data: $scope.restaurantToUpdate,
                 crossDomain: true
             }).success(function(data) {
-                $scope.getRestaurantList()
+                $scope.getRestaurantList();
+                alert("success");
             }).error(function () {
                 alert("delete failed");
             });
@@ -130,6 +131,7 @@ angular.module('sbAdminApp')
                 data: promotedRestaurant,
                 crossDomain: true
             }).success(function() {
+                alert("success");
             }).error(function () {
             });
         }

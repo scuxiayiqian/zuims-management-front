@@ -10,38 +10,44 @@
                 <a ui-sref="dashboard.chart"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span></span></a>
 
             </li>
-            <li ng-class="{active: collapseVar==5}" ng-show="showUserManagement">
+            <li ng-class="{active: collapseVar==5}" ng-show="isVisible('userManagement')">
                 <a href="" ng-click="check(5)"><i class="fa fa-user fa-fw"></i> 用户管理<span
                         class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=5" ng-show="showUserManagement">
+                <ul class="nav nav-second-level" collapse="collapseVar!=5" ng-show="isVisible('userManagement')">
                     <li ui-sref-active="active">
-                        <a ui-sref="dashboard.panels-wells">用户信息管理</a>
+                        <a ui-sref="dashboard.user">用户信息管理</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li ng-class="{active: collapseVar==6}" ng-show="showRestaurantManagement">
+            <li ng-class="{active: collapseVar==6}" ng-show="isVisible('restaurantManagement')">
                 <a href="" ng-click="check(6)"><i class="fa fa-cutlery fa-fw"></i> 餐厅管理<span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=6">
-                    <li ui-sref-active="active" ng-show="showRestaurantManagement">
+                    <li ui-sref-active="active" ng-show="isVisible('city')">
+                        <a ui-sref="dashboard.city">城市管理</a>
+                    </li>
+                    <li ui-sref-active="active" ng-show="isVisible('restaurantManagement')">
                         <a ui-sref="dashboard.restaurant-info">餐厅信息管理</a>
                     </li>
-                    <li ui-sref-active="active" ng-show="showRestaurantPromotion">
+                    <li ui-sref-active="active" ng-show="isVisible('restaurantPromotion')">
                         <a ui-sref="dashboard.restaurant-promotion">餐厅促销管理</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li ng-class="{active: collapseVar==7}" ng-show="showSystemManagement">
+            <li ng-class="{active: collapseVar==7}" ng-show="isVisible('systemManagement')">
                 <a href="" ng-click="check(7)"><i class="fa fa-wrench fa-fw"></i> 系统管理<span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" collapse="collapseVar!=7">
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.panels-wells">账号管理</a>
+                    <li ui-sref-active="active" ng-show="isVisible('account')">
+                        <a ui-sref="dashboard.account">账号管理</a>
                     </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.grid">城市管理</a>
+                    <li ui-sref-active="active" ng-show="isVisible('role')">
+                        <a ui-sref="dashboard.role">角色管理</a>
+                    </li>
+                    <li ui-sref-active="active" ng-show="isVisible('right')">
+                        <a ui-sref="dashboard.right">权限管理</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->

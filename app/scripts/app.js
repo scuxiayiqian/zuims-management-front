@@ -169,7 +169,78 @@ angular
                 }
             }
         })
-      .state('dashboard.panels-wells',{
+        .state('dashboard.city',{
+            templateUrl:'views/city.html',
+            url:'/city',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/city.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.right',{
+            templateUrl:'views/right.html',
+            url:'/right',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/right.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.role',{
+            templateUrl:'views/role.html',
+            url:'/role',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/role.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.account',{
+            templateUrl:'views/account.html',
+            url:'/account',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/account.js'
+                        ]
+                    })
+                }
+            }
+        })
+
+        .state('dashboard.user',{
+            templateUrl:'views/user.html',
+            url:'/user',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/user.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.panels-wells',{
           templateUrl:'views/ui-elements/panels-wells.html',
           url:'/panels-wells'
       })

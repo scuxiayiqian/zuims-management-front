@@ -45,65 +45,8 @@ angular.module('sbAdminApp')
             $scope.restaurantToUpdate = row;
         }
 
-        //remove to the real data holder
-        $scope.deleteRestaurant = function() {
-
-            $http({
-                method: 'DELETE',
-                url: 'http://localhost:8080/restaurants/' + $scope.restaurantToDelete.name,
-                headers: {
-                    'x-auth-token': $rootScope.token
-                },
-                crossDomain: true
-            }).success(function(data) {
-                alert(data.name + "deleted");
-                var index = $scope.rowCollection.indexOf($scope.restaurantToDelete);
-                if (index !== -1) {
-                    $scope.rowCollection.splice(index, 1);
-                }
-            }).error(function () {
-                alert("delete failed");
-            });
-        }
-
-        $scope.updateRestaurant = function () {
-
-            $http({
-                method: 'PUT',
-                url: 'http://localhost:8080/restaurants/' + $scope.restaurantToUpdate.name,
-                headers: {
-                    'x-auth-token': $rootScope.token
-                },
-                data: $scope.restaurantToUpdate,
-                crossDomain: true
-            }).success(function(data) {
-                $scope.getRestaurantList();
-                alert("success");
-            }).error(function () {
-                alert("delete failed");
-            });
-        }
-
-        $scope.createRestaurant = function () {
-
-            $http({
-                method: 'POST',
-                url: 'http://localhost:8080/restaurants',
-                headers: {
-                    'x-auth-token': $rootScope.token
-                },
-                data: $scope.restaurantToUpdate,
-                crossDomain: true
-            }).success(function(data) {
-                $scope.getRestaurantList()
-            }).error(function () {
-                alert("delete failed");
-            });
-        }
-
         $scope.updatePromotedRestaurantsByCity = function() {
             var promotedRestaurant = [];
-
 
             for (var i = 0; i < $scope.rowCollection.length; i++) {
 

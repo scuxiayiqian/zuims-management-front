@@ -8,44 +8,56 @@
  */
 
 angular.module('sbAdminApp')
-  .directive('sidebar',['$location',function() {
-    return {
-      templateUrl:'scripts/directives/sidebar/sidebar.html',
-      restrict: 'E',
-      replace: true,
-      scope: {
-      },
-      controller:function($rootScope, $scope){
-        $scope.selectedMenu = 'dashboard';
-        $scope.collapseVar = 0;
-        $scope.multiCollapseVar = 0;
-        
-        $scope.check = function(x){
-          
-          if(x==$scope.collapseVar)
-            $scope.collapseVar = 0;
-          else
-            $scope.collapseVar = x;
-        };
-        
-        $scope.multiCheck = function(y){
-          
-          if(y==$scope.multiCollapseVar)
-            $scope.multiCollapseVar = 0;
-          else
-            $scope.multiCollapseVar = y;
-        };
+    .directive('sidebar',['$location',function() {
+        return {
+            templateUrl:'scripts/directives/sidebar/sidebar.html',
+            restrict: 'E',
+            replace: true,
+            scope: {
+            },
+            controller:function($rootScope, $scope){
+                $scope.selectedMenu = 'dashboard';
+                $scope.collapseVar = 0;
+                $scope.multiCollapseVar = 0;
 
-        $scope.setMenusVisibility = function() {
+                $scope.isVisible = function(item) {
 
-            $scope.showUserManagement = $rootScope.isVisible('userManagement');
-            $scope.showRestaurantManagement = $rootScope.isVisible('restaurantManagement');
-            $scope.showRestaurantPromotion = $rootScope.isVisible('restaurantPromotion');
-            $scope.showSystemManagement = $rootScope.isVisible('systemManagement');
+                    var flag = false;
 
+                    console.log($rootScope.user.roles.length);
+                    console.log($rootScope.user.roles[0].name);
+                    for (var i = 0; i < $rootScope.user.roles.length; i++) {
+                        console.log($rootScope.user.roles[i].rights.length);
+                        for (var j = 0; j < $rootScope.user.roles[i].rights.length; j++) {
+                            if($rootScope.user.roles[i].rights[j].name == item) {
+                              flag = true;
+                              break;
+                            }
+                        }
+
+                        if(flag) {
+                            break;
+                        }
+                    }
+
+                    return flag;
+                }
+
+                $scope.check = function(x){
+
+                    if(x==$scope.collapseVar)
+                        $scope.collapseVar = 0;
+                    else
+                        $scope.collapseVar = x;
+                };
+
+                $scope.multiCheck = function(y){
+
+                    if(y==$scope.multiCollapseVar)
+                        $scope.multiCollapseVar = 0;
+                    else
+                        $scope.multiCollapseVar = y;
+            };
         }
-
-          $scope.setMenusVisibility();
-      }
     }
   }]);

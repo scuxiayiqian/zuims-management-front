@@ -92,11 +92,11 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">Rights: </label>
                                             <div class="col-sm-8">
-                                                <table st-safe-src="rightsOfRole" class="table table-bordered table-striped">
+                                                <table st-safe-src="rightsOfRole" class="table table-bordered table-striped vscroll-table">
                                                     <thead>
                                                     <tr>
                                                         <th colspan="2">
-                                                            <div class="input-group">
+                                                            <div class="input-group" style="width: 100%">
                                                                 <input st-search="" class="form-control" placeholder="搜索" type="text"/>
                                                                 <span class="input-group-btn">
                                                                     <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
@@ -112,8 +112,8 @@
                                                     </thead>
                                                     <tbody>
                                                     <tr st-select-row="row" ng-repeat="row in displayedRightsOfRole">
-                                                        <td>{{row.right.name}}</td>
-                                                        <td>
+                                                        <td width="80%">{{row.right.name}}</td>
+                                                        <td width="20%">
                                                             <input type="checkbox" ng-model="row.isGranted" ng-checked="row.isGranted">
                                                         </td>
                                                     </tr>

@@ -34,8 +34,8 @@
                             </th>
                         </tr>
                         <tr>
-                            <th st-sort="name">Name</th>
-                            <th>Operations</th>
+                            <th st-sort="name">姓名</th>
+                            <th>管理</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -152,7 +152,7 @@
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">Right: </label>
                                             <div class="col-sm-8">
-                                                <table st-table="displayedRightsOfRole" st-safe-src="rightsOfRole" class="table table-bordered table-striped">
+                                                <table st-table="displayedRightsOfRole" st-safe-src="rightsOfRole" class="table table-bordered table-striped vscroll-table">
                                                     <thead>
                                                     <tr>
                                                         <th colspan="2">
@@ -172,8 +172,8 @@
                                                     </thead>
                                                     <tbody>
                                                     <tr st-select-row="row" ng-repeat="row in displayedRightsOfRole">
-                                                        <td>{{row.right.name}}</td>
-                                                        <td>
+                                                        <td width="80%">{{row.right.name}}</td>
+                                                        <td width="20%">
                                                             <input type="checkbox" ng-model="row.isGranted" ng-checked="row.isGranted">
                                                         </td>
                                                     </tr>

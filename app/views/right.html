@@ -34,9 +34,9 @@
                             </th>
                         </tr>
                         <tr>
-                            <th st-sort="name">Name</th>
-                            <th st-sort="parent">Parent</th>
-                            <th>Operations</th>
+                            <th st-sort="name">权限名称</th>
+                            <th st-sort="parent">父权限名称</th>
+                            <th>管理</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -81,18 +81,18 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="editModalLabel">Right Information</h4>
+                                    <h4 class="modal-title" id="editModalLabel">权限信息</h4>
                                 </div>
                                 <div class="modal-body" style="height:200px">
                                     <form role="form" class="form-horizontal">
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">Name: </label>
+                                            <label class="col-sm-3 control-label">权限名称: </label>
                                             <div class="col-sm-8">
                                                 <input class="form-control" ng-model="rightToUpdate.name">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">Parent: </label>
+                                            <label class="col-sm-3 control-label">父权限名称: </label>
                                             <div class="col-sm-8">
                                                 <select class="form-control" value="rightToUpdate.parent" ng-model="rightToUpdate.parent" ng-options="right.name as right.name for right in rowCollection">
                                                 </select>
@@ -101,8 +101,8 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateRight()">Yes</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateRight()">更新</button>
                                 </div>
                             </div>
                             <!-- /.modal-content -->
@@ -116,18 +116,18 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="addModalLabel">Right Information</h4>
+                                    <h4 class="modal-title" id="addModalLabel">权限信息</h4>
                                 </div>
                                 <div class="modal-body" style="height:200px">
                                     <form role="form" class="form-horizontal">
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">Name: </label>
+                                            <label class="col-sm-3 control-label">权限名称: </label>
                                             <div class="col-sm-8">
                                                 <input class="form-control" ng-model="rightToUpdate.name">
                                             </div>
                                         </div>
                                         <div class="form-group">
-                                            <label class="col-sm-3 control-label">Parent: </label>
+                                            <label class="col-sm-3 control-label">父权限名称: </label>
                                             <div class="col-sm-8">
                                                 <select class="form-control" ng-model="rightToUpdate.parent" ng-options="right.name as right.name for right in rowCollection">
                                                 </select>
@@ -136,8 +136,8 @@
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="createRight()">Yes</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="createRight()">新建</button>
                                 </div>
                             </div>
                             <!-- /.modal-content -->

@@ -10,12 +10,50 @@
                 <a ui-sref="dashboard.chart"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span></span></a>
 
             </li>
+            <li ng-class="{active: collapseVar==2}" ng-show="isVisifa-userble('reservationManagement')">
+                <a href="" ng-click="check(2)"><i class="fa  fa-fw"></i> 预定管理<span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=2">
+                    <li ui-sref-active="active" ng-show="isVisible('reservationQuantity')">
+                        <a ui-sref="dashboard.reservation-quantity">预定数量</a>
+                    </li>
+                    <li ui-sref-active="active" ng-show="isVisible('orderQuantity')">
+                        <a ui-sref="dashboard.order-quantity">订单数量</a>
+                    </li>
+                    <li ui-sref-active="active" ng-show="isVisible('repastQuantity')">
+                        <a ui-sref="dashboard.repast-quantity">就餐数量</a>
+                    </li>
+                    <li ui-sref-active="active" ng-show="isVisible('orderRate')">
+                        <a ui-sref="dashboard.orderRate">有效订单率</a>
+                    </li>
+                    <li ui-sref-active="active" ng-show="isVisible('repastRate')">
+                        <a ui-sref="dashboard.repastRate">有效就餐率</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
+            <li ng-class="{active: collapseVar==3}" ng-show="isVisible('trafficManagement')">
+                <a href="" ng-click="check(3)"><i class="fa fa-user fa-fw"></i> 流量管理<span
+                        class="fa arrow"></span></a>
+                <ul class="nav nav-second-level" collapse="collapseVar!=3" ng-show="isVisible('trafficManagement')">
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.traffic">流量统计</a>
+                    </li>
+                </ul>
+                <!-- /.nav-second-level -->
+            </li>
             <li ng-class="{active: collapseVar==5}" ng-show="isVisible('userManagement')">
                 <a href="" ng-click="check(5)"><i class="fa fa-user fa-fw"></i> 用户管理<span
                         class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=5" ng-show="isVisible('userManagement')">
+                <ul class="nav nav-second-level" collapse="collapseVar!=5">
                     <li ui-sref-active="active">
-                        <a ui-sref="dashboard.user">用户信息管理</a>
+                        <a ui-sref="dashboard.user-reservation" ng-show="isVisible('userReservation')">预定用户数量统计</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.user-reservation-rank" ng-show="isVisible('userReservationRank')">预定次数排名</a>
+                    </li>
+                    <li ui-sref-active="active">
+                        <a ui-sref="dashboard.user" ng-show="isVisible('userManagement')">用户信息管理</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
@@ -26,6 +64,9 @@
                 <ul class="nav nav-second-level" collapse="collapseVar!=6">
                     <li ui-sref-active="active" ng-show="isVisible('city')">
                         <a ui-sref="dashboard.city">城市管理</a>
+                    </li>
+                    <li ui-sref-active="active" ng-show="isVisible('service')">
+                        <a ui-sref="dashboard.serivce">服务管理</a>
                     </li>
                     <li ui-sref-active="active" ng-show="isVisible('restaurantManagement')">
                         <a ui-sref="dashboard.restaurant-info">餐厅信息管理</a>
@@ -53,34 +94,6 @@
                 <!-- /.nav-second-level -->
             </li>
 
-            <li ui-sref-active="active">
-                <a ui-sref="dashboard.form"><i class="fa fa-edit fa-fw"></i> Forms</a>
-            </li>
-            <li ng-class="{active: collapseVar==1}">
-                <a href="" ng-click="check(1)"><i class="fa fa-wrench fa-fw"></i> UI Elements<span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" collapse="collapseVar!=1">
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.panels-wells">Panels and Wells</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.buttons">Buttons</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.notifications">Notifications</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.typography">Typography</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.icons"> Icons</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.grid">Grid</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
             <li ng-class="{active: collapseVar==2}">
                 <a href="" ng-click="check(2)"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span
                         class="fa arrow"></span></a>

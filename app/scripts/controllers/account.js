@@ -11,7 +11,10 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('accountCtrl', function ($rootScope, $scope, $http) {
+    .controller('accountCtrl', function ($rootScope, $scope, $http, $cookies, utilService) {
+
+        // get token of current user
+        utilService.getCurrentToken();
 
         $scope.rowCollection = [];
         $scope.roles = [];

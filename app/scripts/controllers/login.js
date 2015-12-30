@@ -7,8 +7,7 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-    .controller('LoginController', function($rootScope, $scope, $http, $state) {
-
+    .controller('LoginController', function($rootScope, $scope, $http, $state, $cookies) {
 
         $scope.login = {
             username: "",
@@ -24,6 +23,8 @@ angular.module('sbAdminApp')
                     headers: headers
                 }).success(function(data) {
                     $rootScope.token = data.token;
+                    $cookies.put('token', data.token);
+                    console.log($cookies.get('toke'));
 
                     $rootScope.user = {
                         name: '',
@@ -38,8 +39,9 @@ angular.module('sbAdminApp')
                     }
 
                     $state.go("dashboard.home");
-                }).error(function() {
-                    alert('failed');
+                }).error(function(data) {
+                    //alert('failed');
+                    alert(data.error);
                 });
             }
         };

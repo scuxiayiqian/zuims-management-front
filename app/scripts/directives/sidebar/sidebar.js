@@ -24,10 +24,7 @@ angular.module('sbAdminApp')
 
                     var flag = false;
 
-                    console.log($rootScope.user.roles.length);
-                    console.log($rootScope.user.roles[0].name);
                     for (var i = 0; i < $rootScope.user.roles.length; i++) {
-                        console.log($rootScope.user.roles[i].rights.length);
                         for (var j = 0; j < $rootScope.user.roles[i].rights.length; j++) {
                             if($rootScope.user.roles[i].rights[j].name == item) {
                               flag = true;

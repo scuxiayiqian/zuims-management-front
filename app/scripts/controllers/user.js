@@ -28,7 +28,7 @@ angular.module('sbAdminApp')
         }
 
         $scope.setUserToUpdate = function(row) {
-            if(item == null) {
+            if(row == null) {
                 $scope.userToUpdate = {
                     name: '',
                     password: '',

@@ -11,10 +11,10 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('accountCtrl', function ($rootScope, $scope, $http, $cookies, utilService) {
+    .controller('accountCtrl', function ($scope, $http, $cookies) {
 
         // get token of current user
-        utilService.getCurrentToken();
+        $scope.token = $cookies.get('token');
 
         $scope.rowCollection = [];
         $scope.roles = [];
@@ -84,7 +84,7 @@ angular.module('sbAdminApp')
                 method: 'DELETE',
                 url: 'http://localhost:8080/users/' + $scope.accountToDelete.name,
                 headers: {
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 crossDomain: true
             }).success(function(data) {
@@ -113,7 +113,7 @@ angular.module('sbAdminApp')
                 method: 'PUT',
                 url: 'http://localhost:8080/users/' + $scope.accountToUpdate.name,
                 headers: {
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 data: $scope.accountToUpdate,
                 crossDomain: true
@@ -141,7 +141,7 @@ angular.module('sbAdminApp')
                 method: 'POST',
                 url: 'http://localhost:8080/users',
                 headers: {
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 data: $scope.accountToCreate,
                 crossDomain: true
@@ -155,13 +155,12 @@ angular.module('sbAdminApp')
 
         $scope.getAccountList = function() {
             // get role list request
-            console.log($rootScope.token);
             $http({
                 method: 'GET',
                 url: 'http://localhost:8080/users',
                 headers: {
                     //'Content-Type': 'application/json',
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 crossDomain: true
             }).success(function (roleArr) {
@@ -176,13 +175,12 @@ angular.module('sbAdminApp')
         $scope.getRoles = function() {
 
             // get right list request
-            console.log($rootScope.token);
             $http({
                 method: 'GET',
                 url: 'http://localhost:8080/roles',
                 headers: {
                     //'Content-Type': 'application/json',
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 crossDomain: true
             }).success(function (roleArr) {

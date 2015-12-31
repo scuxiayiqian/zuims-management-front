@@ -14,9 +14,9 @@ angular.module('sbAdminApp')
             replace: true,
             scope: {
             },
-            controller: function($rootScope, $scope) {
+            controller: function($scope, $cookieStore) {
 
-                $scope.username = $rootScope.user.name;
+                $scope.username = $cookieStore.get('user').name;
             }
     	}
 	});

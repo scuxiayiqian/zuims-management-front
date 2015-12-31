@@ -11,7 +11,9 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('restaurantPromotionCtrl', function ($rootScope, $scope, $http) {
+    .controller('restaurantPromotionCtrl', function ($scope, $http, $cookies) {
+
+        $scope.token = $cookies.get('token');
 
         $scope.cities = [];
         $scope.users = [];
@@ -60,7 +62,7 @@ angular.module('sbAdminApp')
                 method: 'PUT',
                 url: 'http://localhost:8080/cities/' + $scope.selectedCity + '/restaurants/promoted',
                 headers: {
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 data: promotedRestaurant,
                 crossDomain: true
@@ -72,13 +74,12 @@ angular.module('sbAdminApp')
 
         $scope.getRestaurantList = function() {
             // get restaurant list request
-            console.log($rootScope.token);
             $http({
                 method: 'GET',
                 url: 'http://localhost:8080/cities/' + $scope.selectedCity + '/restaurants',
                 headers: {
                     //'Content-Type': 'application/json',
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 crossDomain: true
             }).success(function (restaurantArr) {
@@ -95,7 +96,7 @@ angular.module('sbAdminApp')
                 url: 'http://localhost:8080/cities',
                 headers: {
                     //'Content-Type': 'application/json',
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 crossDomain: true
             }).success(function (cityArray) {
@@ -111,7 +112,7 @@ angular.module('sbAdminApp')
                 url: 'http://localhost:8080/roles/marketing/users',
                 headers: {
                     //'Content-Type': 'application/json',
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 crossDomain: true
             }).success(function (cityArray) {

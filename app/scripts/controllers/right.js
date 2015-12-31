@@ -11,7 +11,9 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('rightCtrl', function ($rootScope, $scope, $http) {
+    .controller('rightCtrl', function ($scope, $http, utilService) {
+
+        $scope.token = utilService.getCurrentToken();
 
         $scope.rowCollection = [];
 
@@ -36,7 +38,7 @@ angular.module('sbAdminApp')
                 method: 'DELETE',
                 url: 'http://localhost:8080/rights/' + $scope.rightToDelete.name,
                 headers: {
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 crossDomain: true
             }).success(function(data) {
@@ -55,7 +57,7 @@ angular.module('sbAdminApp')
                 method: 'PUT',
                 url: 'http://localhost:8080/rights/' + $scope.rightToUpdate.name,
                 headers: {
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 data: $scope.rightToUpdate,
                 crossDomain: true
@@ -73,7 +75,7 @@ angular.module('sbAdminApp')
                 method: 'POST',
                 url: 'http://localhost:8080/rights',
                 headers: {
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 data: $scope.rightToUpdate,
                 crossDomain: true
@@ -87,13 +89,12 @@ angular.module('sbAdminApp')
 
         $scope.getRightList = function() {
             // get restaurant list request
-            console.log($rootScope.token);
             $http({
                 method: 'GET',
                 url: 'http://localhost:8080/rights',
                 headers: {
                     //'Content-Type': 'application/json',
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 crossDomain: true
             }).success(function (rightArr) {

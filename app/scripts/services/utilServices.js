@@ -2,18 +2,17 @@
 
 angular.module('sbAdminApp')
 
-    .service('utilService', function($cookies, $rootScope) {
+    .service('utilService', function($state, $cookies) {
 
         this.getCurrentToken = function() {
 
-            if ($rootScope.token == null) {
-                $rootScope.token = $cookies.get('token');
-                alert("get token from cookie");
-            }
-            else {
-                return;
+            var token = $cookies.get('token');
+
+            if (token == null) {
+                $state.go('login');
             }
 
+            return token;
         };
 
     });

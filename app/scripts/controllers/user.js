@@ -11,7 +11,9 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('userCtrl', function ($rootScope, $scope, $http) {
+    .controller('userCtrl', function ($scope, $http, $cookies) {
+
+        $scope.token = $cookies.get('token');
 
         $scope.rowCollection = [];
 
@@ -48,7 +50,7 @@ angular.module('sbAdminApp')
                 method: 'DELETE',
                 url: 'http://localhost:8080/guests/' + $scope.userToDelete.name,
                 headers: {
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 crossDomain: true
             }).success(function(data) {
@@ -67,7 +69,7 @@ angular.module('sbAdminApp')
                 method: 'PUT',
                 url: 'http://localhost:8080/guests/' + $scope.userToUpdate.name,
                 headers: {
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 data: $scope.userToUpdate,
                 crossDomain: true
@@ -85,7 +87,7 @@ angular.module('sbAdminApp')
                 method: 'POST',
                 url: 'http://localhost:8080/guests',
                 headers: {
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 data: $scope.userToUpdate,
                 crossDomain: true
@@ -99,13 +101,12 @@ angular.module('sbAdminApp')
 
         $scope.getUserList = function() {
             // get restaurant list request
-            console.log($rootScope.token);
             $http({
                 method: 'GET',
                 url: 'http://localhost:8080/guests',
                 headers: {
                     //'Content-Type': 'application/json',
-                    'x-auth-token': $rootScope.token
+                    'x-auth-token': $scope.token
                 },
                 crossDomain: true
             }).success(function (userArr) {

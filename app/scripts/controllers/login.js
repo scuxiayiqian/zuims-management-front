@@ -7,7 +7,7 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-    .controller('LoginController', function($rootScope, $scope, $http, $state, $cookies) {
+    .controller('LoginController', function($scope, $http, $state, $cookies, $cookieStore) {
 
         $scope.login = {
             username: "",
@@ -22,21 +22,8 @@ angular.module('sbAdminApp')
                     url: 'http://localhost:8080/token',
                     headers: headers
                 }).success(function(data) {
-                    $rootScope.token = data.token;
                     $cookies.put('token', data.token);
-                    console.log($cookies.get('toke'));
-
-                    $rootScope.user = {
-                        name: '',
-                        roles: []
-                    }
-
-                    $rootScope.user.name = data.user.name;
-
-                    for (var i = 0; i < data.user.roles.length; i++) {
-                        $rootScope.user.roles.push(data.user.roles[i]);
-
-                    }
+                    $cookieStore.put('user', data.user);
 
                     $state.go("dashboard.home");
                 }).error(function(data) {
@@ -47,24 +34,26 @@ angular.module('sbAdminApp')
         };
 
         $scope.logout = function() {
-            if ($rootScope.token != null) {
 
-                alert($rootScope.token);
+            var token = $cookies.get('token');
+
+            if (token != null) {
 
                 $http({
                     method: 'DELETE',
                     url: 'http://localhost:8080/token',
                     headers: {
-                        'x-auth-token': $rootScope.token
+                        'x-auth-token': token
                     },
                     crossDomain: true
                 }).success(function() {
-                    $rootScope.token = null;
+                    $cookies.remove('token');
+                    $cookieStore.remove('user');
+
                     $state.go("login");
                 }).error(function() {
                     alert('logout failed');
                 });
-
             }
         }
     });

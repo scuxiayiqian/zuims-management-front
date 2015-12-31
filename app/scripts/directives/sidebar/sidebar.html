@@ -10,8 +10,8 @@
                 <a ui-sref="dashboard.chart"><i class="fa fa-bar-chart-o fa-fw"></i> Charts<span></span></a>
 
             </li>
-            <li ng-class="{active: collapseVar==2}" ng-show="isVisifa-userble('reservationManagement')">
-                <a href="" ng-click="check(2)"><i class="fa  fa-fw"></i> 预定管理<span
+            <li ng-class="{active: collapseVar==2}" ng-show="isVisible('reservationManagement')">
+                <a href="" ng-click="check(2)"><i class="fa fa-phone fa-fw"></i> 预定管理<span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" uib-collapse="collapseVar!=2">
                     <li ui-sref-active="active" ng-show="isVisible('reservationQuantity')">
@@ -33,7 +33,7 @@
                 <!-- /.nav-second-level -->
             </li>
             <li ng-class="{active: collapseVar==3}" ng-show="isVisible('trafficManagement')">
-                <a href="" ng-click="check(3)"><i class="fa fa-user fa-fw"></i> 流量管理<span
+                <a href="" ng-click="check(3)"><i class="fa fa-random fa-fw"></i> 流量管理<span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" uib-collapse="collapseVar!=3" ng-show="isVisible('trafficManagement')">
                     <li ui-sref-active="active">
@@ -65,7 +65,7 @@
                     <li ui-sref-active="active" ng-show="isVisible('city')">
                         <a ui-sref="dashboard.city">城市管理</a>
                     </li>
-                    <li ui-sref-active="active" ng-show="isVisible('service')">
+                    <li ui-sref-active="active" ng-show="isVisible('production')">
                         <a ui-sref="dashboard.serivce">服务管理</a>
                     </li>
                     <li ui-sref-active="active" ng-show="isVisible('restaurantManagement')">
@@ -93,53 +93,6 @@
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-
-            <li ng-class="{active: collapseVar==2}">
-                <a href="" ng-click="check(2)"><i class="fa fa-sitemap fa-fw"></i> Multi-Level Dropdown<span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" uib-collapse="collapseVar!=2">
-                    <li>
-                        <a href="">Second Level Item</a>
-                    </li>
-                    <li>
-                        <a href="">Second Level Item</a>
-                    </li>
-                    <li ng-init="third=!third" ng-class="{active: multiCollapseVar==3}">
-                        <a href="" ng-click="multiCheck(3)">Third Level <span class="fa arrow"></span></a>
-                        <ul class="nav nav-third-level" uib-collapse="multiCollapseVar!=3">
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-                            <li>
-                                <a href="">Third Level Item</a>
-                            </li>
-
-                        </ul>
-                        <!-- /.nav-third-level -->
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li ng-class="{active:collapseVar==4}">
-                <a href="" ng-click="check(4)"><i class="fa fa-files-o fa-fw"></i> Sample Pages<span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" uib-collapse="collapseVar!=4">
-                    <li ng-class="{active: selectedMenu=='blank'}">
-                        <a ui-sref="dashboard.blank" ng-click="selectedMenu='blank'">Blank Page</a>
-                    </li>
-                    <li>
-                        <a ui-sref="login">Login Page</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
-            <li><a href="http://www.strapui.com/">Premium Angular Themes</a></li>
         </ul>
     </div>
     <!-- /.sidebar-collapse -->

@@ -15,18 +15,26 @@ angular.module('sbAdminApp')
             replace: true,
             scope: {
             },
-            controller:function($rootScope, $scope){
+            controller:function($scope, $state, $cookieStore){
                 $scope.selectedMenu = 'dashboard';
                 $scope.collapseVar = 0;
                 $scope.multiCollapseVar = 0;
 
                 $scope.isVisible = function(item) {
 
+                    var user = $cookieStore.get('user');
+
+                    if(user == null) {
+                        $state.go('login');
+                    }
+
                     var flag = false;
 
-                    for (var i = 0; i < $rootScope.user.roles.length; i++) {
-                        for (var j = 0; j < $rootScope.user.roles[i].rights.length; j++) {
-                            if($rootScope.user.roles[i].rights[j].name == item) {
+                    var userRoles = user.roles;
+
+                    for (var i = 0; i < userRoles.length; i++) {
+                        for (var j = 0; j < userRoles[i].rights.length; j++) {
+                            if(userRoles[i].rights[j].name == item) {
                               flag = true;
                               break;
                             }

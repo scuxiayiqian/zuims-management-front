@@ -185,6 +185,20 @@ angular
                 }
             }
         })
+        .state('dashboard.production',{
+            templateUrl:'views/production.html',
+            url:'/production',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/production.js'
+                        ]
+                    })
+                }
+            }
+        })
         .state('dashboard.right',{
             templateUrl:'views/right.html',
             url:'/right',

@@ -17,6 +17,9 @@ angular.module('sbAdminApp')
 
         $scope.cities = [];
         $scope.users = [];
+        $scope.productions = [];
+
+        $scope.productionsOfRestaurant = [];
 
         $scope.selectedCity = "";
 
@@ -38,6 +41,7 @@ angular.module('sbAdminApp')
 
         $scope.restaurantToDelete = {};
         $scope.restaurantToUpdate = {};
+        $scope.restaurantToCreate = {};
 
         $scope.setRestaurantToDelete = function(row) {
             $scope.restaurantToDelete = row;
@@ -45,8 +49,46 @@ angular.module('sbAdminApp')
 
         $scope.setRestaurantToUpdate = function(row) {
             $scope.restaurantToUpdate = row;
+
+            $scope.productionsOfRestaurant = [];
+
+            var flag = false;
+            for (var i = 0; i < $scope.productions.length; i ++) {
+                flag = false;
+                for (var j = 0; j < row.productions.length; j++) {
+                    if(row.productions[j].name == $scope.productions[i].name) {
+                        flag = true;
+                        break;
+                    }
+                }
+                $scope.productionsOfRestaurant.push({
+                    production: $scope.productions[i],
+                    isProvided: flag
+                })
+            }
+
+            $scope.displayedProductionsOfRestaurant = [].concat($scope.productionsOfRestaurant);
         }
 
+        $scope.setRestaurantToCreate = function() {
+
+            $scope.restaurantToCreate = {
+                name: '',
+                city: '',
+                marketingName: '',
+                productions:[],
+                isPromoted: false
+            }
+
+            for (var i = 0; i < $scope.productions.length; i ++) {
+                $scope.productionsOfRestaurant.push({
+                    production: $scope.productions[i],
+                    isProvided: false
+                })
+            }
+
+            $scope.displayedProductionsOfRestaurant = [].concat($scope.productionsOfRestaurant);
+        }
         //remove to the real data holder
         $scope.deleteRestaurant = function() {
 
@@ -70,6 +112,15 @@ angular.module('sbAdminApp')
 
         $scope.updateRestaurant = function () {
 
+            $scope.restaurantToUpdate.productions = [];
+
+            for(var i = 0; i < $scope.productionsOfRestaurant.length; i++) {
+                if($scope.productionsOfRestaurant[i].isProvided) {
+
+                    $scope.restaurantToUpdate.productions.push($scope.productionsOfRestaurant[i].production);
+                }
+            }
+
             $http({
                 method: 'PUT',
                 url: 'http://localhost:8080/restaurants/' + $scope.restaurantToUpdate.name,
@@ -88,44 +139,29 @@ angular.module('sbAdminApp')
 
         $scope.createRestaurant = function () {
 
+            $scope.restaurantToCreate.productions = [];
+
+            $scope.selectedCity = $scope.restaurantToCreate.city;
+
+            for(var i = 0; i < $scope.productionsOfRestaurant.length; i++) {
+                if($scope.productionsOfRestaurant[i].isProvided) {
+
+                    $scope.restaurantToCreate.productions.push($scope.productionsOfRestaurant[i].production);
+                }
+            }
+
             $http({
                 method: 'POST',
                 url: 'http://localhost:8080/restaurants',
                 headers: {
                     'x-auth-token': $scope.token
                 },
-                data: $scope.restaurantToUpdate,
+                data: $scope.restaurantToCreate,
                 crossDomain: true
             }).success(function(data) {
                 $scope.getRestaurantList()
             }).error(function () {
                 alert("delete failed");
-            });
-        }
-
-        $scope.updatePromotedRestaurantsByCity = function() {
-            var promotedRestaurant = [];
-
-
-            for (var i = 0; i < $scope.rowCollection.length; i++) {
-
-                if ($scope.rowCollection[i].isPromoted) {
-
-                    promotedRestaurant.push($scope.rowCollection[i]);
-                }
-            }
-
-            $http({
-                method: 'PUT',
-                url: 'http://localhost:8080/cities/' + $scope.selectedCity + '/restaurants/promoted',
-                headers: {
-                    'x-auth-token': $scope.token
-                },
-                data: promotedRestaurant,
-                crossDomain: true
-            }).success(function() {
-                alert("success");
-            }).error(function () {
             });
         }
 
@@ -179,6 +215,22 @@ angular.module('sbAdminApp')
             });
         }
 
+        $scope.getProductions = function() {
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8080/productions',
+                headers: {
+                    //'Content-Type': 'application/json',
+                    'x-auth-token': $scope.token
+                },
+                crossDomain: true
+            }).success(function (productionArray) {
+                $scope.productions = productionArray;
+            }).error(function () {
+                console.log("getProductions failed");
+            });
+        }
+
         $scope.changeCity = function() {
 
             if($scope.selectedCity != 'Choose a city') {
@@ -188,4 +240,5 @@ angular.module('sbAdminApp')
 
         $scope.getCites();
         $scope.getUsers();
+        $scope.getProductions();
     });

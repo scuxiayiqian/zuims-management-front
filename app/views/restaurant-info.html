@@ -10,7 +10,7 @@
         <div class="panel panel-default" ng-controller="restaurantInfoCtrl">
             <div class="panel-heading">
                 <div align="right">
-                    <button type="button" ng-click="setRestaurantToUpdate()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-success">
+                    <button type="button" ng-click="setRestaurantToCreate()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-success">
                         <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
                         <i class="glyphicon glyphicon-plus">
                         </i> 添加餐厅
@@ -23,7 +23,7 @@
                     <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
                         <thead>
                         <tr>
-                            <th colspan="3">
+                            <th colspan="4">
                                 <table class="table table-condensed">
                                     <tr>
                                         <td width="50%">
@@ -94,7 +94,7 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                     <h4 class="modal-title" id="editModalLabel">Restaurant Information</h4>
                                 </div>
-                                <div class="modal-body" style="height:200px">
+                                <div class="modal-body" style="height:400px">
                                     <form role="form" class="form-horizontal">
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">Name: </label>
@@ -117,6 +117,38 @@
                                             </div>
                                         </div>
                                         <div class="form-group">
+                                            <label class="col-sm-3 control-label">Productions: </label>
+                                            <div class="col-sm-8">
+                                                <table st-table="displayedProductionsOfRestaurant" st-safe-src="productionsOfRestaurant" class="table table-bordered table-striped vscroll-table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th colspan="2">
+                                                            <div class="input-group" style="width: 100%">
+                                                                <input st-search="" class="form-control" placeholder="搜索" type="text"/>
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th st-sort="name">Name</th>
+                                                        <th st-sort="isProvided">Provided</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr st-select-row="row" ng-repeat="row in displayedProductionsOfRestaurant">
+                                                        <td width="80%">{{row.production.name}}</td>
+                                                        <td width="20%">
+                                                            <input type="checkbox" ng-model="row.isProvided" ng-checked="row.isProvided">
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                            <div class="form-group">
                                             <label class="col-sm-3 control-label">isPromoted: </label>
                                             <div class="col-sm-offset-0 col-sm-7 checkbox">
                                                 <input type="checkbox" ng-model="restaurantToUpdate.isPromoted" ng-checked="restaurantToUpdate.isPromoted">
@@ -142,32 +174,65 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                     <h4 class="modal-title" id="addModalLabel">Restaurant Information</h4>
                                 </div>
-                                <div class="modal-body" style="height:200px">
+                                <div class="modal-body" style="height:400px">
                                     <form role="form" class="form-horizontal">
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">Name: </label>
                                             <div class="col-sm-8">
-                                                <input class="form-control" ng-model="restaurantToUpdate.name">
+                                                <input class="form-control" ng-model="restaurantToCreate.name">
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">City: </label>
                                             <div class="col-sm-8">
-                                                <select class="form-control" ng-model="restaurantToUpdate.city" ng-options="city.name as city.name for city in cities">
+                                                <select class="form-control" ng-model="restaurantToCreate.city" ng-options="city.name as city.name for city in cities">
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">Marketing: </label>
                                             <div class="col-sm-8">
-                                                <select class="form-control" ng-model="restaurantToUpdate.marketingName" ng-options="user.name as user.name for user in users">
+                                                <select class="form-control" ng-model="restaurantToCreate.marketingName" ng-options="user.name as user.name for user in users">
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">Productions: </label>
+                                            <div class="col-sm-8">
+                                                <table st-table="displayedProductionsOfRestaurant" st-safe-src="productionsOfRestaurant" class="table table-bordered table-striped vscroll-table">
+                                                    <thead>
+                                                    <tr>
+                                                        <th colspan="2">
+                                                            <div class="input-group" style="width: 100%">
+                                                                <input st-search="" class="form-control" placeholder="搜索" type="text"/>
+                                                                <span class="input-group-btn">
+                                                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                                                    </button>
+                                                                </span>
+                                                            </div>
+                                                        </th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th st-sort="name">Name</th>
+                                                        <th st-sort="isProvided">Provided</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr st-select-row="row" ng-repeat="row in displayedProductionsOfRestaurant">
+                                                        <td width="80%">{{row.production.name}}</td>
+                                                        <td width="20%">
+                                                            <input type="checkbox" ng-model="row.isProvided" ng-checked="row.isProvided">
+                                                        </td>
+                                                    </tr>
+                                                    </tbody>
+                                                </table>
                                                 </select>
                                             </div>
                                         </div>
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">isPromoted: </label>
                                             <div class="col-sm-offset-0 col-sm-7 checkbox">
-                                                <input type="checkbox" ng-model="restaurantToUpdate.isPromoted" ng-checked="restaurantToUpdate.isPromoted">
+                                                <input type="checkbox" ng-model="restaurantToCreate.isPromoted" ng-checked="restaurantToCreate.isPromoted">
                                             </div>
                                         </div>
                                     </form>

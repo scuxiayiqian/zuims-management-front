@@ -1,0 +1,152 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">产品列表</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default" ng-controller="productionCtrl">
+            <div class="panel-heading">
+                <div align="right">
+                    <button type="button" ng-click="setProductionToUpdate()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-success">
+                        <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
+                        <i class="glyphicon glyphicon-plus">
+                        </i> 添加产品
+                    </button>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th colspan="3">
+                            <div class="input-group">
+                                <input st-search="" class="form-control" placeholder="搜索" type="text"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th st-sort="name">Name</th>
+                        <th st-sort="description">Description</th>
+                        <th>Operations</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr st-select-row="row" ng-repeat="row in displayedCollection">
+                        <td>{{row.name}}</td>
+                        <td>{{row.description}}</td>
+                        <td>
+                            <button class="btn btn-xs" type="button" ng-click="setProductionToDelete(row)" data-toggle="modal" data-target="#deleteModal">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                            <button class="btn btn-xs" type="button" ng-click="setProductionToUpdate(row)" data-toggle="modal" data-target="#editModal">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="deleteModalLabel">System Information</h4>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure to delete {{productionToDelete.name}}?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" ng-click="deleteProduction()" data-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- Modal -->
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="height:300px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="editModalLabel">Production Information</h4>
+                            </div>
+                            <div class="modal-body" style="height:200px">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Name: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="productionToUpdate.name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">description: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="productionToUpdate.description">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateProduction()">Yes</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- Modal -->
+                <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="height:300px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="addModalLabel">Production Information</h4>
+                            </div>
+                            <div class="modal-body" style="height:200px">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Name: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="productionToUpdate.name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Description: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="productionToUpdate.description">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="createProduction()">Yes</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

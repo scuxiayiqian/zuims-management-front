@@ -11,7 +11,7 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('userCtrl', function ($scope, $http, $cookies) {
+    .controller('productionCtrl', function ($scope, $http, $cookies) {
 
         $scope.token = $cookies.get('token');
 
@@ -20,103 +20,91 @@ angular.module('sbAdminApp')
         //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
         $scope.displayedCollection = [].concat($scope.rowCollection);
 
-        $scope.userToDelete = {};
-        $scope.userToUpdate = {};
+        $scope.productionToDelete = {};
+        $scope.productionToUpdate = {};
 
-        $scope.setUserToDelete = function(row) {
-            $scope.userToDelete = row;
+        $scope.setProductionToDelete = function(row) {
+            $scope.productionToDelete = row;
         }
 
-        $scope.setUserToUpdate = function(row) {
-            if(row == null) {
-                $scope.userToUpdate = {
-                    name: '',
-                    password: '',
-                    mobile: '',
-                    gender: false
-                }
-            }
-            else {
-                $scope.userToUpdate = row;
-
-            }
-
+        $scope.setProductionToUpdate = function(row) {
+            $scope.productionToUpdate = row;
         }
 
         //remove to the real data holder
-        $scope.deleteUser = function() {
+        $scope.deleteProduction = function() {
 
             $http({
                 method: 'DELETE',
-                url: 'http://localhost:8080/guests/' + $scope.userToDelete.name,
+                url: 'http://localhost:8080/productions/' + $scope.productionToDelete.name,
                 headers: {
                     'x-auth-token': $scope.token
                 },
                 crossDomain: true
             }).success(function(data) {
-                var index = $scope.rowCollection.indexOf($scope.userToDelete);
+                var index = $scope.rowCollection.indexOf($scope.productionToDelete);
                 if (index !== -1) {
                     $scope.rowCollection.splice(index, 1);
                 }
             }).error(function () {
-                console.log("user delete failed");
+                console.log("production delete failed");
             });
         }
 
-        $scope.updateUser = function () {
+        $scope.updateProduction = function () {
 
             $http({
                 method: 'PUT',
-                url: 'http://localhost:8080/guests/' + $scope.userToUpdate.name,
+                url: 'http://localhost:8080/productions/' + $scope.productionToUpdate.name,
                 headers: {
                     'x-auth-token': $scope.token
                 },
-                data: $scope.userToUpdate,
+                data: $scope.productionToUpdate,
                 crossDomain: true
             }).success(function(data) {
-                $scope.getUserList();
-                console.log("update user successed");
+                $scope.getProductionList();
+                console.log("update production successed");
             }).error(function () {
-                console.log("update user failed");
+                console.log("update production failed");
             });
         }
 
-        $scope.createUser = function () {
+        $scope.createProduction = function () {
 
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/guests',
+                url: 'http://localhost:8080/productions',
                 headers: {
                     'x-auth-token': $scope.token
                 },
-                data: $scope.userToUpdate,
+                data: $scope.productionToUpdate,
                 crossDomain: true
             }).success(function(data) {
-                console.log("user create successed");
-                $scope.getUserList()
+                console.log("production create successed");
+                $scope.getProductionList()
             }).error(function () {
-                console.log("user create failed");
+                console.log("production create failed");
             });
         }
 
-        $scope.getUserList = function() {
+        $scope.getProductionList = function() {
             // get restaurant list request
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/guests',
+                url: 'http://localhost:8080/productions',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
                 },
                 crossDomain: true
-            }).success(function (userArr) {
-                console.log("getUserList successed");
-                $scope.rowCollection = userArr;
+            }).success(function (productionArr) {
+                console.log("getProductionList successed");
+                $scope.rowCollection = productionArr;
                 $scope.displayedCollection = $scope.rowCollection;
             }).error(function () {
-                console.log("getUserList failed");
+                console.log("getProductionList failed");
             });
         };
 
-        $scope.getUserList();
+        $scope.getProductionList();
     });

@@ -11,9 +11,20 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('rightCtrl', function ($scope, $http, utilService) {
+    .factory('right', ['$resource', function($resource) {
+        return $resource(
+            'http://localhost:8080/rights/:name',
+            {
+                name: '@name'
+            },
+            {
+                'update': {method: 'PUT'}
+            }
+        );
+    }])
+    .controller('rightCtrl', function ($scope, $http, right, utilService) {
 
-        $scope.token = utilService.getCurrentToken();
+        utilService.getCurrentToken();
 
         $scope.rowCollection = [];
 
@@ -25,67 +36,66 @@ angular.module('sbAdminApp')
 
         $scope.setRightToDelete = function(row) {
             $scope.rightToDelete = row;
-        }
+        };
 
         $scope.setRightToUpdate = function(row) {
             $scope.rightToUpdate = row;
-        }
+        };
 
         //remove to the real data holder
         $scope.deleteRight = function() {
 
-            $http({
-                method: 'DELETE',
-                url: 'http://localhost:8080/rights/' + $scope.rightToDelete.name
-            }).success(function(data) {
-                var index = $scope.rowCollection.indexOf($scope.rightToDelete);
-                if (index !== -1) {
-                    $scope.rowCollection.splice(index, 1);
+            right.delete(
+                {
+                    name: $scope.rightToDelete.name
+                },
+                function() {
+                    $scope.getRightList();
+                },
+                function() {
+                    console.log("right delete failed");
                 }
-            }).error(function () {
-                console.log("right delete failed");
-            });
-        }
+
+            );
+        };
 
         $scope.updateRight = function () {
 
-            $http({
-                method: 'PUT',
-                url: 'http://localhost:8080/rights/' + $scope.rightToUpdate.name,
-                data: $scope.rightToUpdate
-            }).success(function(data) {
-                $scope.getRightList();
-                console.log("update right successed");
-            }).error(function () {
-                console.log("update right failed");
-            });
-        }
+            right.update(
+                {
+                    name: $scope.rightToUpdate.name
+                },
+                $scope.rightToUpdate,
+                function() {
+                    $scope.getRightList();
+                },
+                function() {
+                    console.log("update right failed");
+                }
+            );
+        };
 
         $scope.createRight = function () {
 
-            $http({
-                method: 'POST',
-                url: 'http://localhost:8080/rights',
-                data: $scope.rightToUpdate
-            }).success(function(data) {
-                console.log("right create successed");
-                $scope.getRightList()
-            }).error(function () {
-                console.log("right create failed");
-            });
-        }
+            right.save(
+                $scope.rightToUpdate,
+                function() {
+                    $scope.getRightList();
+                },
+                function() {
+                    console.log('right created failed');
+                }
+            )
+        };
 
         $scope.getRightList = function() {
-            // get restaurant list request
-            $http({
-                method: 'GET',
-                url: 'http://localhost:8080/rights'
-            }).success(function (rightArr) {
-                console.log("getRightList successed");
-                $scope.rowCollection = rightArr;
-                $scope.displayedCollection = $scope.rowCollection;
-            }).error(function () {
-                console.log("getRightList failed");
+
+            right.query(
+                function(users){
+                    $scope.rowCollection = users;
+                    $scope.displayedCollection = $scope.rowCollection;
+            },  function(){
+                    console.log('get rights failed using $resource');
             });
         };
 

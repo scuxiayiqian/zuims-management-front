@@ -31,7 +31,7 @@ angular.module('sbAdminApp')
                     $state.go("dashboard.home");
                 }, function(response) {
                     //alert('failed');
-                    console.log(response.error);
+                    console.log(response.data.error);
                 });
             }
         };

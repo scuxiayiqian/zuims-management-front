@@ -13,22 +13,25 @@ angular.module('sbAdminApp')
             username: "",
             password: "",
             logon: function() {
-                var headers = {
-                    authorization : "Basic " + btoa($scope.login.username + ":" + $scope.login.password)
-                };
 
-                $http({
+                var req = {
                     method: 'GET',
                     url: 'http://localhost:8080/token',
-                    headers: headers
-                }).success(function(data) {
-                    $cookies.put('token', data.token);
-                    $cookieStore.put('user', data.user);
+                    headers: {
+                        authorization : "Basic " + btoa($scope.login.username + ":" + $scope.login.password)
+                    }
+                }
+
+                $http(req).then(function(response) {
+                    $cookies.put('token', response.data.token);
+                    $cookieStore.put('user', response.data.user);
+
+                    $http.defaults.headers.common['x-auth-token'] = response.data.token;
 
                     $state.go("dashboard.home");
-                }).error(function(data) {
+                }, function(response) {
                     //alert('failed');
-                    alert(data.error);
+                    console.log(response.error);
                 });
             }
         };
@@ -49,6 +52,8 @@ angular.module('sbAdminApp')
                 }).success(function() {
                     $cookies.remove('token');
                     $cookieStore.remove('user');
+
+                    $http.defaults.headers.common = [];
 
                     $state.go("login");
                 }).error(function() {

@@ -36,11 +36,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'DELETE',
-                url: 'http://localhost:8080/rights/' + $scope.rightToDelete.name,
-                headers: {
-                    'x-auth-token': $scope.token
-                },
-                crossDomain: true
+                url: 'http://localhost:8080/rights/' + $scope.rightToDelete.name
             }).success(function(data) {
                 var index = $scope.rowCollection.indexOf($scope.rightToDelete);
                 if (index !== -1) {
@@ -56,11 +52,7 @@ angular.module('sbAdminApp')
             $http({
                 method: 'PUT',
                 url: 'http://localhost:8080/rights/' + $scope.rightToUpdate.name,
-                headers: {
-                    'x-auth-token': $scope.token
-                },
-                data: $scope.rightToUpdate,
-                crossDomain: true
+                data: $scope.rightToUpdate
             }).success(function(data) {
                 $scope.getRightList();
                 console.log("update right successed");
@@ -74,11 +66,7 @@ angular.module('sbAdminApp')
             $http({
                 method: 'POST',
                 url: 'http://localhost:8080/rights',
-                headers: {
-                    'x-auth-token': $scope.token
-                },
-                data: $scope.rightToUpdate,
-                crossDomain: true
+                data: $scope.rightToUpdate
             }).success(function(data) {
                 console.log("right create successed");
                 $scope.getRightList()
@@ -91,12 +79,7 @@ angular.module('sbAdminApp')
             // get restaurant list request
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/rights',
-                headers: {
-                    //'Content-Type': 'application/json',
-                    'x-auth-token': $scope.token
-                },
-                crossDomain: true
+                url: 'http://localhost:8080/rights'
             }).success(function (rightArr) {
                 console.log("getRightList successed");
                 $scope.rowCollection = rightArr;

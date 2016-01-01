@@ -15,7 +15,8 @@ angular
     'angular-loading-bar',
     'smart-table',
     'ngCookies',
-      'ngAnimate'
+      'ngAnimate',
+      'ngResource'
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     

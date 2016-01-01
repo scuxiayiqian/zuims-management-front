@@ -2,7 +2,7 @@
 
 angular.module('sbAdminApp')
 
-    .service('utilService', function($state, $cookies) {
+    .service('utilService', function($http, $state, $cookies) {
 
         this.getCurrentToken = function() {
 
@@ -11,8 +11,10 @@ angular.module('sbAdminApp')
             if (token == null) {
                 $state.go('login');
             }
+            else {
 
-            return token;
+                $http.defaults.headers.common['x-auth-token'] = token;
+            }
         };
 
     });

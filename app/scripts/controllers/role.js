@@ -78,7 +78,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'DELETE',
-                url: 'http://localhost:8080/roles/' + $scope.roleToDelete.name,
+                url: 'http://localhost:8080/roles/' + $scope.roleToDelete.id,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -107,7 +107,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'PUT',
-                url: 'http://localhost:8080/roles/' + $scope.roleToUpdate.name,
+                url: 'http://localhost:8080/roles/' + $scope.roleToUpdate.id,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -135,7 +135,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/roles',
+                url: 'http://localhost:8080/roles/-1',
                 headers: {
                     'x-auth-token': $scope.token
                 },

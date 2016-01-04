@@ -9,13 +9,17 @@
 
 angular.module('sbAdminApp')
     .controller('reservationQuantityController', function ($scope, $http, $cookies) {
+        $scope.token = $cookies.get('token');
+
+        $scope.restaurantToSearch = {};
+
         $scope.today = function() {
-            $scope.dt = new Date();
+            $scope.restaurantToSearch.endDate = new Date();
         };
         $scope.today();
 
         $scope.clear = function () {
-            $scope.dt = null;
+            $scope.endDate = null;
         };
 
         // Disable weekend selection
@@ -26,7 +30,9 @@ angular.module('sbAdminApp')
         $scope.toggleMin = function() {
             $scope.minDate = $scope.minDate ? null : new Date();
         };
-        $scope.toggleMin();
+
+        //禁用此函数,让用户可以选择当日之前的日期
+        //$scope.toggleMin();
         $scope.maxDate = new Date(2020, 5, 22);
 
         $scope.open = function($event) {
@@ -34,7 +40,7 @@ angular.module('sbAdminApp')
         };
 
         $scope.setDate = function(year, month, day) {
-            $scope.dt = new Date(year, month, day);
+            $scope.endDate = new Date(year, month, day);
         };
 
         $scope.dateOptions = {
@@ -89,4 +95,46 @@ angular.module('sbAdminApp')
             return '';
         };
 
+        function setCities(cityArray) {
+            for (var i = 0; i < cityArray.length; i++) {
+                $scope.cities.push(cityArray[i]);
+            }
+        }
+
+        $scope.cities = [];
+        $scope.getCites = function() {
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8080/cities',
+                headers: {
+                    //'Content-Type': 'application/json',
+                    'x-auth-token': $scope.token
+                },
+                crossDomain: true
+            }).success(function (cityArray) {
+                setCities(cityArray);
+            }).error(function () {
+                console.log("getCites failed");
+            });
+        };
+        $scope.getCites();
+
+        $scope.line = {
+            labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月'],
+            series: ['UV', 'PV'],
+            data: [
+                [65, 59, 80, 81, 56, 55, 40],
+                [28, 48, 40, 19, 86, 27, 120]
+            ],
+            onClick: function (points, evt) {
+                console.log(points, evt);
+            }
+        };
+
+        $scope.searchBtnClicked = function() {
+            $scope.line.data = [
+                [65, 30, 80, 81, 56, 55, 40],
+                [28, 48, 40, 19, 64, 27, 20]
+            ];
+        };
     });

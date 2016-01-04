@@ -45,7 +45,7 @@ angular.module('sbAdminApp')
 
         $scope.setRestaurantToDelete = function(row) {
             $scope.restaurantToDelete = row;
-        }
+        };
 
         $scope.setRestaurantToUpdate = function(row) {
             $scope.restaurantToUpdate = row;
@@ -68,7 +68,7 @@ angular.module('sbAdminApp')
             }
 
             $scope.displayedProductionsOfRestaurant = [].concat($scope.productionsOfRestaurant);
-        }
+        };
 
         $scope.setRestaurantToCreate = function() {
 
@@ -88,7 +88,7 @@ angular.module('sbAdminApp')
             }
 
             $scope.displayedProductionsOfRestaurant = [].concat($scope.productionsOfRestaurant);
-        }
+        };
         //remove to the real data holder
         $scope.deleteRestaurant = function() {
 
@@ -108,7 +108,7 @@ angular.module('sbAdminApp')
             }).error(function () {
                 alert("delete failed");
             });
-        }
+        };
 
         $scope.updateRestaurant = function () {
 
@@ -135,7 +135,7 @@ angular.module('sbAdminApp')
             }).error(function () {
                 alert("delete failed");
             });
-        }
+        };
 
         $scope.createRestaurant = function () {
 
@@ -163,7 +163,7 @@ angular.module('sbAdminApp')
             }).error(function () {
                 alert("delete failed");
             });
-        }
+        };
 
         $scope.getRestaurantList = function() {
             // get restaurant list request
@@ -197,7 +197,7 @@ angular.module('sbAdminApp')
             }).error(function () {
                 console.log("getCites failed");
             });
-        }
+        };
 
         $scope.getUsers = function() {
             $http({
@@ -213,7 +213,7 @@ angular.module('sbAdminApp')
             }).error(function () {
                 console.log("getCites failed");
             });
-        }
+        };
 
         $scope.getProductions = function() {
             $http({
@@ -229,14 +229,14 @@ angular.module('sbAdminApp')
             }).error(function () {
                 console.log("getProductions failed");
             });
-        }
+        };
 
         $scope.changeCity = function() {
 
             if($scope.selectedCity != 'Choose a city') {
                 $scope.getRestaurantList()
             }
-        }
+        };
 
         $scope.getCites();
         $scope.getUsers();

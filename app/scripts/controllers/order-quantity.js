@@ -1,6 +1,9 @@
 /**
  * Created by xiayiqian on 1/4/16.
  */
+/**
+ * Created by xiayiqian on 1/4/16.
+ */
 
 /**
  * Created by xiayiqian on 12/18/15.
@@ -8,7 +11,7 @@
 'use strict';
 
 angular.module('sbAdminApp')
-    .controller('reservationQuantityController', function ($scope, $http, $cookies) {
+    .controller('orderQuantityController', function ($scope, $http, $cookies) {
         $scope.token = $cookies.get('token');
 
         $scope.restaurantToSearch = {};
@@ -132,9 +135,6 @@ angular.module('sbAdminApp')
         };
 
         $scope.searchBtnClicked = function() {
-            // 城市,餐厅名,查询起止日期
-            console.log($scope.restaurantToSearch.city + " " + $scope.restaurantToSearch.name + " " +
-                $scope.restaurantToSearch.startDate + " " + $scope.restaurantToSearch.endDate);
             $scope.line.data = [
                 [65, 30, 80, 81, 56, 55, 40],
                 [28, 48, 40, 19, 64, 27, 20]

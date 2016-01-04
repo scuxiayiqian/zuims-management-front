@@ -1,0 +1,79 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">有效就餐率</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row" ng-controller="repastRateController">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-2">
+                    餐厅所在地
+                    <select class="form-control" ng-model="restaurantToSearch.city" ng-options="city.name as city.name for city in cities">
+                        <option value="">选择城市</option>
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    餐厅名称
+                    <input type="text" class="form-control ng-pristine ng-valid ng-touched" ng-model="restaurantToSearch.name">
+                </div>
+                <div class="col-md-3">
+                    开始时间
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="restaurantToSearch.startDate"
+                               is-open="status.opened" min-date="minDate" max-date="maxDate"
+                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                               ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    结束时间
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="restaurantToSearch.endDate"
+                               is-open="endDateStatus.opened" min-date="minDate" max-date="maxDate"
+                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                               ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openEndDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                    <!--<button type="button" class="btn btn-success">查询</button>-->
+                </div>
+                <div class="col-md-1">
+                    <br>
+                    <button type="button" class="btn btn-primary btn-circle" ng-click="searchBtnClicked()">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+
+    <div class="col-lg-12 col-sm-12" id="line-chart">
+        <div class="panel panel-default">
+            <div class="panel-heading">有效就餐统计图</div>
+            <div class="panel-body">
+                <canvas id="tables" class="chart chart-line chart-xl" data="line.data" labels="line.labels" legend="true"
+                        click="line.onClick" series="line.series"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+    }
+    .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+    }
+</style>

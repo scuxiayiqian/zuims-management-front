@@ -272,7 +272,67 @@ angular
                 }
             }
         })
-        
+
+        .state('dashboard.order-quantity', {
+            templateUrl: 'views/order-quantity.html',
+            url:'/order-quantity',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/order-quantity.js'
+                        ]
+                    })
+                }
+            }
+        })
+
+        .state('dashboard.repast-quantity', {
+            templateUrl: 'views/repast-quantity.html',
+            url:'/repast-quantity',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/repast-quantity.js'
+                        ]
+                    })
+                }
+            }
+        })
+
+        .state('dashboard.orderRate', {
+            templateUrl: 'views/orderRate.html',
+            url:'/orderRate',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/orderRate.js'
+                        ]
+                    })
+                }
+            }
+        })
+
+        .state('dashboard.repastRate', {
+            templateUrl: 'views/repastRate.html',
+            url:'/repastRate',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/repastRate.js'
+                        ]
+                    })
+                }
+            }
+        })
+
         .state('dashboard.panels-wells',{
           templateUrl:'views/ui-elements/panels-wells.html',
           url:'/panels-wells'

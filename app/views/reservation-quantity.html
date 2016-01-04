@@ -1,0 +1,72 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">预定统计</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body" ng-controller="reservationQuantityController">
+                <div class="col-md-3">
+                    餐厅所在地
+                    <select class="form-control" ng-model="restaurantToCreate.city" ng-options="city.name as city.name for city in cities">
+                    </select>
+                </div>
+                <div class="col-md-3">
+                    餐厅名称
+                    <!--<small>Tablets (&ge;768px)</small>-->
+                    <input type="text" class="form-control ng-pristine ng-valid ng-touched">
+                </div>
+                <div class="col-md-3">
+                    开始时间
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt"
+                               is-open="status.opened" min-date="minDate" max-date="maxDate"
+                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                               ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-md-3">
+                    结束时间
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt1"
+                               is-open="endDateStatus.opened" min-date="minDate" max-date="maxDate"
+                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                               ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openEndDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+
+    <div class="col-lg-12 col-sm-12" id="line-chart" ng-controller="ChartCtrl">
+        <div class="panel panel-default">
+            <div class="panel-heading">Line Chart</div>
+            <div class="panel-body">
+                <canvas id="line" class="chart chart-line chart-xl" data="line.data" labels="line.labels" legend="true"
+                        click="line.onClick" series="line.series"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+    }
+    .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+    }
+</style>

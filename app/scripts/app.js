@@ -257,6 +257,22 @@ angular
                 }
             }
         })
+
+        .state('dashboard.reservation-quantity', {
+            templateUrl: 'views/reservation-quantity.html',
+            url:'/reservation-quantity',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/reservation-quantity.js'
+                        ]
+                    })
+                }
+            }
+        })
+        
         .state('dashboard.panels-wells',{
           templateUrl:'views/ui-elements/panels-wells.html',
           url:'/panels-wells'

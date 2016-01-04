@@ -361,3 +361,8 @@ table.dataTable thead .sorting:after {
 .st-sort-descent:before{
     content: '\25BC';
 }
+
+.auth-form-header{
+    margin-top: 2cm;
+    /*margin-bottom: 1cm;*/
+}

@@ -22,10 +22,11 @@ angular.module('sbAdminApp')
 
         $scope.userToDelete = {};
         $scope.userToUpdate = {};
+        $scope.userToCreate = {};
 
         $scope.setUserToDelete = function(row) {
             $scope.userToDelete = row;
-        }
+        };
 
         $scope.setUserToUpdate = function(row) {
             if(row == null) {
@@ -41,7 +42,7 @@ angular.module('sbAdminApp')
 
             }
 
-        }
+        };
 
         //remove to the real data holder
         $scope.deleteUser = function() {
@@ -67,11 +68,11 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'PUT',
-                url: 'http://localhost:8080/guests/' + $scope.userToUpdate.name,
+                url: 'http://202.120.40.175:21101/users/add',
                 headers: {
                     'x-auth-token': $scope.token
                 },
-                data: $scope.userToUpdate,
+                data: $scope.userToCreate,
                 crossDomain: true
             }).success(function(data) {
                 $scope.getUserList();
@@ -83,18 +84,45 @@ angular.module('sbAdminApp')
 
         $scope.createUser = function () {
 
+            $scope.userToCreate.email = "";
+            $scope.userToCreate.memo = "";
+            $scope.userToCreate.city = "";
+            $scope.userToCreate.marriage = "";
+            $scope.userToCreate.birth = "";
+            $scope.userToCreate.education = "";
+            $scope.userToCreate.graduate = "";
+
+            $scope.userToCreate.qq = "";
+            $scope.userToCreate.wechat = "";
+            $scope.userToCreate.tel = "";
+            $scope.userToCreate.company = "";
+            $scope.userToCreate.position = "";
+            $scope.userToCreate.industry = "";
+            $scope.userToCreate.income = "";
+            $scope.userToCreate.prefer_cooking = "";
+            $scope.userToCreate.prefer_price = "";
+            $scope.userToCreate.prefer_restaurant = "";
+            $scope.userToCreate.prefer_city = "";
+            $scope.userToCreate.prefer_district = "";
+            $scope.userToCreate.dinning_purpose = "";
+            $scope.userToCreate.other_interests = "";
+
+            console.log($scope.userToCreate);
+
+
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/guests',
+                url: 'http://202.120.40.175:21101/users/add',
                 headers: {
-                    'x-auth-token': $scope.token
+                    'Content-Type': 'application/json'
                 },
-                data: $scope.userToUpdate,
+                data: $scope.userToCreate,
                 crossDomain: true
             }).success(function(data) {
                 console.log("user create successed");
-                $scope.getUserList()
-            }).error(function () {
+                //$scope.getUserList();
+            }).error(function (error) {
+                console.log(error);
                 console.log("user create failed");
             });
         }

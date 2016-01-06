@@ -45,8 +45,8 @@ angular.module('sbAdminApp')
             startingDay: 1
         };
 
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[1];
+        $scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
 
         $scope.status = {
             opened: false
@@ -117,24 +117,71 @@ angular.module('sbAdminApp')
         $scope.getCites();
 
         $scope.line = {
-            labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月'],
-            series: ['UV', 'PV'],
+            labels: ['', '', '', '', '', ''],
+            series: ['预订数量'],
             data: [
-                [65, 59, 80, 81, 56, 55, 40],
-                [28, 48, 40, 19, 86, 27, 120]
+                [0, 0, 0, 0, 0, 0, 0]
             ],
             onClick: function (points, evt) {
                 console.log(points, evt);
             }
         };
 
+        //$scope.searchBtnClicked = function() {
+        //    // 城市,餐厅名,查询起止日期
+        //    console.log($scope.restaurantToSearch.city + " " + $scope.restaurantToSearch.name + " " +
+        //        $scope.restaurantToSearch.startDate + " " + $scope.restaurantToSearch.endDate);
+        //    $scope.line.data = [
+        //        [65, 30, 80, 81, 56, 55, 40],
+        //        [28, 48, 40, 19, 64, 27, 20]
+        //    ];
+        //};
+
+        $scope.searchReservationQuantity = function(restaurant) {
+            console.log($scope.restaurantToSearch.endDate);
+            $http({
+                method: 'GET',
+                url: 'http://202.120.40.175:21104/order/orderCountInfo',
+                params: {
+                    restaurantId: restaurant.restaurantId,
+                    date: '2016-01-06'
+                },
+                crossDomain: true
+            }).success(function(data) {
+                console.log(data);
+                $scope.getDatasFromSearchingResult(data);
+            }).error(function () {
+                console.log("user delete failed");
+            });
+        };
+
+        $scope.getDatasFromSearchingResult = function(data) {
+            var makeNums = [];
+            var labels = [];
+            for (var i = 0; i < data.length; i++) {
+                console.log(data[i].dorderMakeNum);
+                makeNums.push(data[i].dorderMakeNum);
+                labels.push(i+1);
+            }
+            $scope.line.data = [makeNums];
+            $scope.line.labels = labels;
+        };
+
         $scope.searchBtnClicked = function() {
-            // 城市,餐厅名,查询起止日期
-            console.log($scope.restaurantToSearch.city + " " + $scope.restaurantToSearch.name + " " +
-                $scope.restaurantToSearch.startDate + " " + $scope.restaurantToSearch.endDate);
-            $scope.line.data = [
-                [65, 30, 80, 81, 56, 55, 40],
-                [28, 48, 40, 19, 64, 27, 20]
-            ];
+            $http({
+                method: 'GET',
+                url: 'http://202.120.40.175:21104/restaurant/search/namecity',
+                params: {
+                    restaurantName: $scope.restaurantToSearch.name,
+                    city: $scope.restaurantToSearch.city
+                },
+                crossDomain: true
+            }).success(function(data) {
+                console.log(data);
+                $scope.rowCollection = data;
+                $scope.displayedCollection = data;
+            }).error(function () {
+                console.log("user delete failed");
+            });
         };
     });

@@ -5,9 +5,65 @@
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
-<div class="row">
+<div class="row"  ng-controller="restaurantInfoCtrl">
     <div class="col-lg-12">
-        <div class="panel panel-default" ng-controller="restaurantInfoCtrl">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-5">
+                    餐厅所在地
+                    <select class="form-control" ng-model="restaurantToSearch.city" ng-options="city.name as city.name for city in cities">
+                        <option value="">选择城市</option>
+                    </select>
+                </div>
+                <div class="col-md-5">
+                    餐厅名称
+                    <input type="text" class="form-control ng-pristine ng-valid ng-touched" ng-model="restaurantToSearch.name">
+                </div>
+                <div class="col-md-2">
+                    <br>
+                    <button type="button" class="btn btn-primary btn-circle" ng-click="searchBtnClicked()">
+                        <i class="fa fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+
+
+    <div class="col-lg-12 col-sm-12" id="line-chart">
+        <div class="panel panel-default">
+            <div class="panel-heading">查询结果</div>
+            <div class="panel-body">
+                <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th st-sort="name">餐厅名</th>
+                        <th st-sort="marketingName">城市</th>
+                        <th >餐厅地理位置</th>
+                        <th >编辑</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr st-select-row="row" ng-repeat="row in displayedCollection">
+                        <td>{{row.hotelName}}</td>
+                        <td>{{row.city}}</td>
+                        <td>({{row.latitude}}, {{row.longitude}})</td>
+                        <td>
+                            <button class="btn btn-xs" type="button" ng-click="editRestaurant(row)" data-toggle="modal" data-target="#editModal">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!--这是餐厅列表,包括餐厅名,销售员和餐厅操作,暂时隐藏-->
+    <div class="col-lg-12" ng-show=false>
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <div align="right">
                     <button type="button" ng-click="setRestaurantToCreate()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-success">
@@ -52,8 +108,10 @@
                         </thead>
                         <tbody>
                         <tr st-select-row="row" ng-repeat="row in displayedCollection">
-                            <td>{{row.name}}</td>
-                            <td>{{row.marketingName}}</td>
+
+                            <!--TODO-->
+                            <!--<td>{{row.hotelName}}</td>-->
+                            <!--<td>{{row.introduction}}</td>-->
                             <td>
                                 <button class="btn btn-xs" type="button" ng-click="setRestaurantToDelete(row)" data-toggle="modal" data-target="#deleteModal">
                                     <i class="fa fa-remove"></i>

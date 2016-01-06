@@ -11,7 +11,7 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('restaurantInfoCtrl', function ($scope, $http, $cookies) {
+    .controller('restaurantInfoCtrl', function ($scope, $http, $cookies, $state) {
 
         $scope.token = $cookies.get('token');
 
@@ -24,6 +24,8 @@ angular.module('sbAdminApp')
         $scope.selectedCity = "";
 
         $scope.rowCollection = [];
+
+        $scope.restaurantToSearch = {};
 
         function setCities(cityArray) {
             for (var i = 0; i < cityArray.length; i++) {
@@ -236,6 +238,32 @@ angular.module('sbAdminApp')
             if($scope.selectedCity != 'Choose a city') {
                 $scope.getRestaurantList()
             }
+        };
+
+        $scope.searchBtnClicked = function() {
+            //console.log($scope.restaurantToSearch.city + $scope.restaurantToSearch.name);
+            $http({
+                method: 'GET',
+                url: 'http://202.120.40.175:21104/restaurant/search/namecity',
+                params: {
+                    restaurantName: $scope.restaurantToSearch.name,
+                    city: $scope.restaurantToSearch.city
+                },
+                crossDomain: true
+            }).success(function(data) {
+                console.log(data);
+                $scope.rowCollection = data;
+                $scope.displayedCollection = data;
+            }).error(function () {
+                console.log("user delete failed");
+            });
+        };
+
+        $scope.editRestaurant = function(restaurant) {
+            console.log(restaurant.restaurantId);
+            $cookies.put('restID', restaurant.restaurantId);
+
+            $state.go("dashboard.restaurant-detail");
         };
 
         $scope.getCites();

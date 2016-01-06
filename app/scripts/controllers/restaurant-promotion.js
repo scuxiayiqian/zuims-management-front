@@ -47,29 +47,30 @@ angular.module('sbAdminApp')
             $scope.restaurantToUpdate = row;
         }
 
-        $scope.updatePromotedRestaurantsByCity = function() {
+        $scope.updatePromotedRestaurant = function() {
             var promotedRestaurant = [];
 
             for (var i = 0; i < $scope.rowCollection.length; i++) {
 
-                if ($scope.rowCollection[i].isPromoted) {
+                promotedRestaurant.push($scope.rowCollection[i]);
+                console.log($scope.rowCollection[i].recommendLevel);
 
-                    promotedRestaurant.push($scope.rowCollection[i]);
-                }
+                $http({
+                    method: 'POST',
+                    url: 'http://202.120.40.175:21104/restaurant/update',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    data: $scope.rowCollection[i],
+                    crossDomain: true
+                }).success(function() {
+                    console.log("success" + i);
+                }).error(function () {
+                });
+
             }
 
-            $http({
-                method: 'PUT',
-                url: 'http://localhost:8080/cities/' + $scope.selectedCity + '/restaurants/promoted',
-                headers: {
-                    'x-auth-token': $scope.token
-                },
-                data: promotedRestaurant,
-                crossDomain: true
-            }).success(function() {
-                alert("success");
-            }).error(function () {
-            });
+            alert("success!");
         }
 
         $scope.getRestaurantList = function() {
@@ -124,10 +125,29 @@ angular.module('sbAdminApp')
 
         $scope.changeCity = function() {
 
-            if($scope.selectedCity != 'Choose a city') {
+            if ($scope.selectedCity != 'Choose a city') {
                 $scope.getRestaurantList()
             }
-        }
+        };
+
+        $scope.searchBtnClicked = function() {
+            //console.log($scope.restaurantToSearch.city + $scope.restaurantToSearch.name);
+            $http({
+                method: 'GET',
+                url: 'http://202.120.40.175:21104/restaurant/search/namecity',
+                params: {
+                    restaurantName: $scope.restaurantToSearch.name,
+                    city: $scope.restaurantToSearch.city
+                },
+                crossDomain: true
+            }).success(function(data) {
+                console.log(data);
+                $scope.rowCollection = data;
+                $scope.displayedCollection = data;
+            }).error(function () {
+                console.log("user delete failed");
+            });
+        };
 
         $scope.getCites();
         $scope.getUsers();

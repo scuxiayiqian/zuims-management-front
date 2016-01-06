@@ -60,6 +60,7 @@ angular.module('sbAdminApp')
 
             $scope.rolesOfAccount = [];
 
+
             var flag = false;
             for (var i = 0; i < $scope.roles.length; i ++) {
                 flag = false;

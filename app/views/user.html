@@ -33,19 +33,20 @@
                         </th>
                     </tr>
                     <tr>
-                        <th st-sort="name">姓名</th>
-                        <th st-sort="password">密码</th>
-                        <th st-sort="mobile">手机</th>
-                        <th st-sort="gender">性别</th>
+                        <th st-sort="row.lastName">姓名</th>
+                        <th st-sort="row.password">密码</th>
+                        <th st-sort="row.phoneid">手机</th>
+                        <th>性别</th>
                         <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr st-select-row="row" ng-repeat="row in displayedCollection">
-                        <td>{{row.name}}</td>
+                        <td>{{row.lastName}}{{row.firstName}}</td>
                         <td>{{row.password}}</td>
-                        <td>{{row.mobile}}</td>
-                        <td>{{row.gender}}</td>
+                        <td>{{row.phoneid}}</td>
+                        <!--<td>{{row.gender}}</td>-->
+                        <td>{{ row.gender == 1 ? '男' : '女' }}</td>
                         <td>
                             <button class="btn btn-xs" type="button" ng-click="setUserToDelete(row)" data-toggle="modal" data-target="#deleteModal">
                                 <i class="fa fa-remove"></i>
@@ -66,11 +67,11 @@
                                 <h4 class="modal-title" id="deleteModalLabel">System Information</h4>
                             </div>
                             <div class="modal-body">
-                                Are you sure to delete {{userToDelete.name}}?
+                                Are you sure to delete {{userToDelete.lastName}}{{userToDelete.firstName}}?
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary" ng-click="deleteUser()" data-dismiss="modal">Yes</button>
+                                <button type="button" class="btn btn-primary" ng-click="deleteUser(userToDelete.phoneid)" data-dismiss="modal">Yes</button>
                             </div>
                         </div>
                         <!-- /.modal-content -->
@@ -80,36 +81,47 @@
                 <!-- /.modal -->
                 <!-- Modal -->
                 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" style="height:300px">
+                    <div class="modal-dialog" style="height:280px">
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                 <h4 class="modal-title" id="editModalLabel">User Information</h4>
                             </div>
-                            <div class="modal-body" style="height:200px">
+                            <div class="modal-body" style="height:280px">
                                 <form role="form" class="form-horizontal">
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Name: </label>
+                                        <label class="col-sm-3 control-label">姓: </label>
                                         <div class="col-sm-8">
-                                            <input class="form-control" ng-model="userToUpdate.name">
+                                            <input class="form-control" ng-model="userToUpdate.lastName">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Password: </label>
+                                        <label class="col-sm-3 control-label">名: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="userToUpdate.firstName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">性别: </label>
+                                        <div class="col-sm-8">
+                                            <label class="radio-inline">
+                                                <input type="radio" ng-model="userToUpdate.gender" value="0">男
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" ng-model="userToUpdate.gender" value="1">女
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">密码: </label>
                                         <div class="col-sm-8">
                                             <input class="form-control" ng-model="userToUpdate.password">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Mobile: </label>
+                                        <label class="col-sm-3 control-label">手机号: </label>
                                         <div class="col-sm-8">
-                                            <input class="form-control" ng-model="userToUpdate.mobile">
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-3 control-label">Gender: </label>
-                                        <div class="col-sm-offset-0 col-sm-7 checkbox">
-                                            <input type="checkbox" ng-model="userToUpdate.gender" ng-checked="userToUpdate.gender">
+                                            <input class="form-control" ng-model="userToUpdate.phoneid">
                                         </div>
                                     </div>
                                 </form>

@@ -39,20 +39,19 @@ angular.module('sbAdminApp')
             }
             else {
                 $scope.userToUpdate = row;
-
+                console.log("laaa");
             }
 
         };
 
         //remove to the real data holder
-        $scope.deleteUser = function() {
+        $scope.deleteUser = function(phoneid) {
 
+            console.log(phoneid);
             $http({
-                method: 'DELETE',
-                url: 'http://localhost:8080/guests/' + $scope.userToDelete.name,
-                headers: {
-                    'x-auth-token': $scope.token
-                },
+                method: 'GET',
+                url: 'http://202.120.40.175:21101/users/delete',
+                params: {phoneId: phoneid},
                 crossDomain: true
             }).success(function(data) {
                 var index = $scope.rowCollection.indexOf($scope.userToDelete);
@@ -67,18 +66,19 @@ angular.module('sbAdminApp')
         $scope.updateUser = function () {
 
             $http({
-                method: 'PUT',
-                url: 'http://202.120.40.175:21101/users/add',
+                method: 'POST',
+                url: 'http://202.120.40.175:21101/users/update',
                 headers: {
-                    'x-auth-token': $scope.token
+                    'Content-Type': 'application/json'
                 },
-                data: $scope.userToCreate,
+                data: $scope.userToUpdate,
                 crossDomain: true
             }).success(function(data) {
+                console.log("user update successed");
                 $scope.getUserList();
-                console.log("update user successed");
-            }).error(function () {
-                console.log("update user failed");
+            }).error(function (error) {
+                console.log(error);
+                console.log("user update failed");
             });
         }
 
@@ -109,7 +109,6 @@ angular.module('sbAdminApp')
 
             console.log($scope.userToCreate);
 
-
             $http({
                 method: 'POST',
                 url: 'http://202.120.40.175:21101/users/add',
@@ -120,7 +119,7 @@ angular.module('sbAdminApp')
                 crossDomain: true
             }).success(function(data) {
                 console.log("user create successed");
-                //$scope.getUserList();
+                $scope.getUserList();
             }).error(function (error) {
                 console.log(error);
                 console.log("user create failed");
@@ -131,11 +130,7 @@ angular.module('sbAdminApp')
             // get restaurant list request
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/guests',
-                headers: {
-                    //'Content-Type': 'application/json',
-                    'x-auth-token': $scope.token
-                },
+                url: 'http://202.120.40.175:21101/users/all',
                 crossDomain: true
             }).success(function (userArr) {
                 console.log("getUserList successed");

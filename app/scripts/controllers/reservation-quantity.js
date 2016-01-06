@@ -2,9 +2,6 @@
  * Created by xiayiqian on 1/4/16.
  */
 
-/**
- * Created by xiayiqian on 12/18/15.
- */
 'use strict';
 
 angular.module('sbAdminApp')

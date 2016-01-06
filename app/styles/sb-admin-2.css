@@ -366,3 +366,234 @@ table.dataTable thead .sorting:after {
     margin-top: 2cm;
     /*margin-bottom: 1cm;*/
 }
+
+/*餐厅图文信息开始*/
+.image-uploads {
+    min-height: 150px;
+    height: 100%;
+    overflow: auto;
+    margin-bottom: 10px;
+}
+
+#recommend-pic {
+    display: block;
+    float: left;
+    width: 38%;
+    /*height: 570px;*/
+}
+
+.handle-image {
+    width: 100%;
+    text-align: center;
+}
+
+#detail-pic {
+    float: left;
+    width: 60%;
+}
+
+.cropAreaRecommend {
+    background: #E4E4E4;
+    overflow: hidden;
+    width: 270px;
+    height: 360px;
+    margin: 0 auto;
+}
+
+.cropAreaDetail {
+    background: #E4E4E4;
+    overflow: hidden;
+    width: 400px;
+    height: 225px;
+    margin: 0 auto;
+}
+
+.image-upload {
+    margin: 10px;
+    overflow: auto;
+}
+
+.picDetailDescription {
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 400px;
+
+}
+
+.picRecommendDescription {
+    margin: 0 auto;
+    margin-top: 10px;
+    width: 270px;
+}
+/*餐厅图文信息结束*/
+
+/*餐厅基本信息开始*/
+.basic-info {
+    padding: 10px 20px;
+    display: table;
+}
+
+.info-item span {
+    padding-right: 10px;
+}
+
+.info-item {
+    display: table-cell;
+    line-height: 34px;
+    vertical-align: middle;
+    padding: 0 10px;
+}
+
+.info-item select {
+    width: 100px;
+}
+/*餐厅基本信息结束*/
+
+/*上传图片样式开始*/
+.file {
+    position: relative;
+    display: inline-block;
+    background: #FF7F00;
+    border: 1px solid #FF7256;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+}
+
+.file-cancel {
+    position: relative;
+    display: inline-block;
+    background: #3c3c3c;
+    border: 1px solid #2e2e2e;
+    border-radius: 4px;
+    padding: 4px 12px;
+    overflow: hidden;
+    color: #FFFFFF;
+    text-decoration: none;
+    text-indent: 0;
+    line-height: 20px;
+}
+
+.file input {
+    position: absolute;
+    font-size: 100px;
+    right: 0;
+    top: 0;
+    opacity: 0;
+}
+
+.file:hover {
+    background: #ec971f;
+    border-color: #d58512;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+
+.file-cancel:hover {
+    background: #8f8f8f;
+    border-color: #3A3A3A;
+    color: #FFFFFF;
+    text-decoration: none;
+}
+/*上传图片结束*/
+
+/*餐厅联系人开始*/
+.contacts-infos {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.contact-info {
+    margin-top: 10px;
+}
+
+.contact-input {
+    border-radius: 3px;
+    margin-right: 5px;
+    margin-left: 5px;
+    height: 30px;
+    padding: 5px;
+}
+
+.contact {
+    margin-top: 10px;
+    color: #ff6100;
+}
+/*餐厅联系人结束*/
+
+
+/*商户信息管理保存按钮*/
+.save-btn {
+    text-align: center;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+/*自动接单设置*/
+.autoAccept {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.autoAcceptConfig {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 10px;
+}
+
+.explain {
+    color: #d58512;
+    font-size: 12px;
+    font-weight: 500;
+    /*padding-left: 20px;*/
+}
+
+.config-item {
+    margin-bottom: 10px;
+}
+
+.config-input {
+    width: 60px;
+    margin: 0 10px;
+    padding-left: 10px;
+    height: 25px;
+    border-radius: 2px;
+}
+/*自动接单设置结束*/
+
+/*商户信息关系分隔符*/
+.separator {
+    border-bottom: dashed 1px;
+    margin-bottom: 30px;
+}
+
+
+/*餐厅联系人开始*/
+.contacts-infos {
+    width: 90%;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.contact-info {
+    margin-top: 10px;
+}
+
+.contact-input {
+    border-radius: 3px;
+    margin-right: 5px;
+    margin-left: 5px;
+    height: 30px;
+    padding: 5px;
+}
+
+.contact {
+    margin-top: 10px;
+    color: #ff6100;
+}
+/*餐厅联系人结束*/

@@ -25,6 +25,7 @@ angular.module('sbAdminApp')
                 $http(req).then(function(response) {
                     $cookies.put('token', response.data.token);
                     $cookieStore.put('user', response.data.user);
+                    $cookies.put('restID', '11234sffe');
 
                     $http.defaults.headers.common['x-auth-token'] = response.data.token;
 

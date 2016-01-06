@@ -15,8 +15,10 @@ angular
     'angular-loading-bar',
     'smart-table',
     'ngCookies',
-      'ngAnimate',
-      'ngResource'
+    'ngAnimate',
+    'ngResource',
+    'ngImgCrop',
+    'ngDialog'
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     
@@ -327,6 +329,21 @@ angular
                         name:'sbAdminApp',
                         files:[
                             'scripts/controllers/repastRate.js'
+                        ]
+                    })
+                }
+            }
+        })
+
+        .state('dashboard.restaurant-detail', {
+            templateUrl: 'views/restaurant-detail.html',
+            url:'/restaurant-detail',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/restaurant-detail.js'
                         ]
                     })
                 }

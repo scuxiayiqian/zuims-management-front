@@ -9,6 +9,11 @@
 angular.module('sbAdminApp')
     .controller('LoginController', function($scope, $http, $state, $cookies, $cookieStore) {
 
+        $scope.clickEnterToLogin = function () {
+            console.log("click enter to login");
+            $scope.login.logon();
+        };
+
         $scope.login = {
             username: "",
             password: "",

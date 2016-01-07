@@ -109,7 +109,17 @@ angular
     })
       .state('login',{
         templateUrl:'views/pages/login.html',
-        url:'/login'
+        url:'/login',
+        resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+                return $ocLazyLoad.load({
+                    name:'sbAdminApp',
+                    files:[
+                        'scripts/directives/keypress/ngEnter.js'
+                    ]
+                })
+            }
+        }
     })
     .state('signup',{
         templateUrl:'views/pages/signup.html',
@@ -288,6 +298,13 @@ angular
             resolve: {
                 loadMyFiles:function($ocLazyLoad) {
                     return $ocLazyLoad.load({
+                        name:'chart.js',
+                        files:[
+                            'bower_components/angular-chart.js/dist/angular-chart.min.js',
+                            'bower_components/angular-chart.js/dist/angular-chart.css'
+                        ]
+                    }),
+                        $ocLazyLoad.load({
                         name:'sbAdminApp',
                         files:[
                             'scripts/controllers/order-quantity.js'
@@ -303,6 +320,12 @@ angular
             resolve: {
                 loadMyFiles:function($ocLazyLoad) {
                     return $ocLazyLoad.load({
+                        name:'chart.js',
+                        files:[
+                            'bower_components/angular-chart.js/dist/angular-chart.min.js',
+                            'bower_components/angular-chart.js/dist/angular-chart.css'
+                        ]
+                    }), $ocLazyLoad.load({
                         name:'sbAdminApp',
                         files:[
                             'scripts/controllers/repast-quantity.js'
@@ -318,6 +341,12 @@ angular
             resolve: {
                 loadMyFiles:function($ocLazyLoad) {
                     return $ocLazyLoad.load({
+                        name:'chart.js',
+                        files:[
+                            'bower_components/angular-chart.js/dist/angular-chart.min.js',
+                            'bower_components/angular-chart.js/dist/angular-chart.css'
+                        ]
+                    }), $ocLazyLoad.load({
                         name:'sbAdminApp',
                         files:[
                             'scripts/controllers/orderRate.js'
@@ -333,6 +362,12 @@ angular
             resolve: {
                 loadMyFiles:function($ocLazyLoad) {
                     return $ocLazyLoad.load({
+                        name:'chart.js',
+                        files:[
+                            'bower_components/angular-chart.js/dist/angular-chart.min.js',
+                            'bower_components/angular-chart.js/dist/angular-chart.css'
+                        ]
+                    }), $ocLazyLoad.load({
                         name:'sbAdminApp',
                         files:[
                             'scripts/controllers/repastRate.js'

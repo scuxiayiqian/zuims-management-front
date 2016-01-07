@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('sbAdminApp')
-    .controller('reservationQuantityController', function ($scope, $http, $cookies) {
+    .controller('reservationQuantityController', function ($scope, $http, $cookies, $filter) {
         $scope.token = $cookies.get('token');
 
         $scope.restaurantToSearch = {};
@@ -138,13 +138,12 @@ angular.module('sbAdminApp')
         //};
 
         $scope.searchReservationQuantity = function(restaurant) {
-            console.log($scope.restaurantToSearch.endDate);
             $http({
                 method: 'GET',
                 url: 'http://202.120.40.175:21104/order/orderCountInfo',
                 params: {
                     restaurantId: restaurant.restaurantId,
-                    date: '2016-01-06'
+                    date: $filter('date')($scope.restaurantToSearch.endDate, 'yyyy-MM-dd')
                 },
                 crossDomain: true
             }).success(function(data) {
@@ -177,7 +176,6 @@ angular.module('sbAdminApp')
                 },
                 crossDomain: true
             }).success(function(data) {
-                console.log(data);
                 $scope.rowCollection = data;
                 $scope.displayedCollection = data;
             }).error(function () {

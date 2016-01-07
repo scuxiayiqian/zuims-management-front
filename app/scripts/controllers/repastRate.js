@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('sbAdminApp')
-    .controller('repastRateController', function ($scope, $http, $cookies) {
+    .controller('repastRateController', function ($scope, $http, $cookies, utilService) {
         $scope.token = $cookies.get('token');
 
         $scope.restaurantToSearch = {};
@@ -113,11 +113,10 @@ angular.module('sbAdminApp')
         $scope.getCites();
 
         $scope.line = {
-            labels: ['一月', '二月', '三月', '四月', '五月', '六月', '七月'],
-            series: ['总就餐数量', '有效就餐数量'],
+            labels: ['', '', '', '', '', ''],
+            series: ['有效订单率'],
             data: [
-                [65, 59, 80, 81, 56, 55, 40],
-                [60, 59, 68, 77, 51, 30, 39]
+                [0, 0, 0, 0, 0, 0, 0]
             ],
             onClick: function (points, evt) {
                 console.log(points, evt);
@@ -125,9 +124,32 @@ angular.module('sbAdminApp')
         };
 
         $scope.searchBtnClicked = function() {
-            $scope.line.data = [
-                [65, 59, 80, 81, 56, 55, 40],
-                [60, 22, 44, 72, 51, 30, 30]
-            ];
+            $http({
+                method: 'GET',
+                url: 'http://202.120.40.175:21104/restaurant/search/namecity',
+                params: {
+                    restaurantName: $scope.restaurantToSearch.name,
+                    city: $scope.restaurantToSearch.city
+                },
+                crossDomain: true
+            }).success(function(data) {
+                $scope.rowCollection = data;
+                $scope.displayedCollection = data;
+            }).error(function () {
+                console.log("user delete failed");
+            });
+        };
+
+        $scope.searchOrderQuantity = function(restaurant) {
+            utilService.getOrderCountInfo(restaurant.restaurantId, $scope.restaurantToSearch.endDate)
+                .success(function(data) {
+
+                    var formatdata = utilService.formatOrderCountInfo(data, "repastRate");
+                    $scope.line.data = formatdata[0];
+                    $scope.line.labels = formatdata[1];
+                })
+                .error(function() {
+                    console.log("get order count info failed");
+                });
         };
     });

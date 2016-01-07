@@ -51,6 +51,18 @@ angular.module('sbAdminApp')
                     labels.push(i+1);
                 }
             }
+            else if (whichDataToFormat == "orderRate") {
+                for (var i = 0; i < data.length; i++) {
+                    makeNums.push(data[i].dorderConfirmNum / data[i].dorderMakeNum);
+                    labels.push(i+1);
+                }
+            }
+            else if (whichDataToFormat == "repastRate") {
+                for (var i = 0; i < data.length; i++) {
+                    makeNums.push(data[i].dorderFinishNum / data[i].dorderMakeNum);
+                    labels.push(i+1);
+                }
+            }
 
             return [[makeNums], labels];
         };

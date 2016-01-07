@@ -8,42 +8,56 @@
     <!-- /.row -->
     <div class="row">
         
-        <stats number="6" comments="New comments!" colour="primary" type="comments" goto="dashboard.chart"></stats>
+        <stats number="6" comments="New comments!" colour="primary" type="comments" goto="dashboard.grid"></stats>
         <stats number="12" comments="New tasks!" colour="primary" type="user" goto="dashboard.buttons"></stats>
         <stats number="18" comments="New orders!" colour="yellow" type="shopping-cart" goto="dashboard.restaurant-detail"></stats>
         <stats number="24" comments="Support tickets!" colour="red" type="support" goto="dashboard.grid"></stats>
 
+
+        <!--<a ng-click="redirectto()">click me</a>-->
+    </div>
+
+    <div class="row">
+        <div class="col-lg-6">
+            <button type="button" class="btn btn-outline btn-primary btn-lg btn-block" ng-click="redirecttoVM()">虚拟机集群监控系统</button>
+        </div>
+
+        <div class="col-lg-6">
+            <button type="button" class="btn btn-outline btn-primary btn-lg btn-block" ng-click="redirecttoContainers()">容器集群监控系统</button>
+        </div>
+        </div>
     </div>
     
     <!-- /.panel -->
-    <div class="row">
-        <div class="col-lg-8">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-clock-o fa-fw"></i> Responsive Timeline
-                </div>
-                <!-- /.panel-heading -->
-                <timeline></timeline>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-        </div>
-        <!-- /.col-lg-8 -->
-        <div class="col-lg-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <i class="fa fa-bell fa-fw"></i> Notifications Panel
-                </div>
-                <!-- /.panel-heading -->
-                <notifications></notifications> 
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
+    <!--<div class="row">-->
 
-            <chat></chat>
-             <!-- /.panel .chat-panel -->
-        </div>
-        <!-- /.col-lg-4 -->
-    </div>
+        <!--<div class="col-lg-8">-->
+            <!--<div class="panel panel-default">-->
+                <!--<div class="panel-heading">-->
+                    <!--<i class="fa fa-clock-o fa-fw"></i> Responsive Timeline-->
+                <!--</div>-->
+                <!--&lt;!&ndash; /.panel-heading &ndash;&gt;-->
+                <!--<timeline></timeline>-->
+                <!--&lt;!&ndash; /.panel-body &ndash;&gt;-->
+            <!--</div>-->
+            <!--&lt;!&ndash; /.panel &ndash;&gt;-->
+        <!--</div>-->
+        <!--&lt;!&ndash; /.col-lg-8 &ndash;&gt;-->
+        <!--<div class="col-lg-4">-->
+            <!--<div class="panel panel-default">-->
+                <!--<div class="panel-heading">-->
+                    <!--<i class="fa fa-bell fa-fw"></i> Notifications Panel-->
+                <!--</div>-->
+                <!--&lt;!&ndash; /.panel-heading &ndash;&gt;-->
+                <!--<notifications></notifications> -->
+                <!--&lt;!&ndash; /.panel-body &ndash;&gt;-->
+            <!--</div>-->
+            <!--&lt;!&ndash; /.panel &ndash;&gt;-->
+
+            <!--<chat></chat>-->
+             <!--&lt;!&ndash; /.panel .chat-panel &ndash;&gt;-->
+        <!--</div>-->
+        <!--&lt;!&ndash; /.col-lg-4 &ndash;&gt;-->
+    <!--</div>-->
     <!-- /.row -->
 </div>

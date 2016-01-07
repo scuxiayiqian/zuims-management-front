@@ -12,7 +12,6 @@
 
 angular.module('sbAdminApp')
     .controller('accountCtrl', function ($scope, $http, $cookies) {
-
         // get token of current user
         $scope.token = $cookies.get('token');
 

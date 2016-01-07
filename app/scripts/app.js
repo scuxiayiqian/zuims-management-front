@@ -24,7 +24,7 @@ angular
     
     $ocLazyLoadProvider.config({
       debug:false,
-      events:true,
+      events:true
     });
 
     $urlRouterProvider.otherwise('/login');
@@ -131,7 +131,7 @@ angular
         url:'/chart',
         controller:'ChartCtrl',
         resolve: {
-          loadMyFile:function($ocLazyLoad) {
+          loadMyFiles:function($ocLazyLoad) {
             return $ocLazyLoad.load({
               name:'chart.js',
               files:[

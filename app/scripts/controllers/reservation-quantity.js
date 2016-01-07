@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('sbAdminApp')
-    .controller('reservationQuantityController', function ($scope, $http, $cookies) {
+    .controller('reservationQuantityController', function ($scope, $http, $cookies, $filter) {
         $scope.token = $cookies.get('token');
 
         $scope.restaurantToSearch = {};
@@ -127,24 +127,13 @@ angular.module('sbAdminApp')
             }
         };
 
-        //$scope.searchBtnClicked = function() {
-        //    // 城市,餐厅名,查询起止日期
-        //    console.log($scope.restaurantToSearch.city + " " + $scope.restaurantToSearch.name + " " +
-        //        $scope.restaurantToSearch.startDate + " " + $scope.restaurantToSearch.endDate);
-        //    $scope.line.data = [
-        //        [65, 30, 80, 81, 56, 55, 40],
-        //        [28, 48, 40, 19, 64, 27, 20]
-        //    ];
-        //};
-
         $scope.searchReservationQuantity = function(restaurant) {
-            console.log($scope.restaurantToSearch.endDate);
             $http({
                 method: 'GET',
                 url: 'http://202.120.40.175:21104/order/orderCountInfo',
                 params: {
                     restaurantId: restaurant.restaurantId,
-                    date: '2016-01-06'
+                    date: $filter('date')($scope.restaurantToSearch.endDate, 'yyyy-MM-dd')
                 },
                 crossDomain: true
             }).success(function(data) {
@@ -177,7 +166,6 @@ angular.module('sbAdminApp')
                 },
                 crossDomain: true
             }).success(function(data) {
-                console.log(data);
                 $scope.rowCollection = data;
                 $scope.displayedCollection = data;
             }).error(function () {

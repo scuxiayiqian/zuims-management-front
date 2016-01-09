@@ -70,7 +70,7 @@ angular.module('sbAdminApp')
 
             }
 
-            alert("success!");
+            alert("更新成功");
         }
 
         $scope.getRestaurantList = function() {

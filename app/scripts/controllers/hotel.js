@@ -17,14 +17,14 @@ angular.module('sbAdminApp')
     .controller('hotelCtrl', function ($scope, $http, $cookies, $state) {
 
         $scope.token = $cookies.get('token');
+        $scope.cities = [];
 
         $scope.rowCollection = [];
 
         //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
         $scope.displayedCollection = [].concat($scope.rowCollection);
 
-        $scope.cityToDelete = {};
-        $scope.cityToUpdate = {};
+        $scope.hotelToCreate = {};
 
         $scope.setCityToDelete = function(row) {
             $scope.cityToDelete = row;
@@ -72,21 +72,26 @@ angular.module('sbAdminApp')
             });
         }
 
-        $scope.createCity = function () {
+        $scope.createHotel = function () {
 
+            console.log($scope.hotelToCreate);
+
+            $scope.hotelToCreate.contractStat = parseInt( $scope.hotelToCreate.contractStat );
+            $scope.hotelToCreate.memo = "";
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/cities',
+                url: 'http://202.120.40.175:21104/restaurant/hotel/add',
                 headers: {
-                    'x-auth-token': $scope.token
+                    'Content-Type': 'application/json'
                 },
-                data: $scope.cityToUpdate,
+                data: $scope.hotelToCreate,
                 crossDomain: true
             }).success(function(data) {
-                console.log("city create successed");
-                $scope.getCityList()
+                console.log("hotel create successed");
+                $scope.getHotelList();
             }).error(function () {
                 console.log("city create failed");
+                alert("fail");
             });
         };
 
@@ -114,5 +119,29 @@ angular.module('sbAdminApp')
             $state.go("dashboard.restaurant-create");
 
         };
+
+        $scope.getCites = function() {
+            $http({
+                method: 'GET',
+                url: 'http://localhost:8080/cities',
+                headers: {
+                    //'Content-Type': 'application/json',
+                    'x-auth-token': $scope.token
+                },
+                crossDomain: true
+            }).success(function (cityArray) {
+                setCities(cityArray);
+            }).error(function () {
+                console.log("getCites failed");
+            });
+        };
+
+        function setCities(cityArray) {
+            for (var i = 0; i < cityArray.length; i++) {
+                $scope.cities.push(cityArray[i]);
+            }
+        };
+
         $scope.getHotelList();
+        $scope.getCites();
     });

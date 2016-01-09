@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-5">
                     餐厅名称
-                    <input type="text" class="form-control ng-pristine ng-valid ng-touched" ng-model="restaurantToSearch.name">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-touched" ng-model="restaurantToSearch.name" ng-enter="searchBtnClicked()">
                 </div>
                 <div class="col-md-2">
                     <br>
@@ -34,13 +34,14 @@
     <div class="col-lg-12 col-sm-12" id="line-chart">
         <div class="panel panel-default">
             <div class="panel-heading">
-                <div align="right">
-                    <button type="button" ng-click="createRestaurant()" class="btn btn-sm btn-success">
-                        <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
-                        <i class="glyphicon glyphicon-plus">
-                        </i>  新建餐厅
-                    </button>
-                </div>
+                搜索结果
+                <!--<div align="right">-->
+                    <!--<button type="button" ng-click="createRestaurant()" class="btn btn-sm btn-success">-->
+                        <!--&lt;!&ndash;<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">&ndash;&gt;-->
+                        <!--<i class="glyphicon glyphicon-plus">-->
+                        <!--</i>  新建餐厅-->
+                    <!--</button>-->
+                <!--</div>-->
             </div>
             <div class="panel-body">
                 <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">

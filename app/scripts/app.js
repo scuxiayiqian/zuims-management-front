@@ -164,7 +164,8 @@ angular
                   return $ocLazyLoad.load({
                       name:'sbAdminApp',
                       files:[
-                          'scripts/controllers/restaurant-promotion.js'
+                          'scripts/controllers/restaurant-promotion.js',
+                          'scripts/directives/keypress/ngEnter.js'
                       ]
                   })
               }
@@ -178,7 +179,8 @@ angular
                     return $ocLazyLoad.load({
                         name:'sbAdminApp',
                         files:[
-                            'scripts/controllers/restaurant-info.js'
+                            'scripts/controllers/restaurant-info.js',
+                            'scripts/directives/keypress/ngEnter.js'
                         ]
                     })
                 }
@@ -285,7 +287,8 @@ angular
                         $ocLazyLoad.load({
                         name:'sbAdminApp',
                         files:[
-                            'scripts/controllers/reservation-quantity.js'
+                            'scripts/controllers/reservation-quantity.js',
+                            'scripts/directives/keypress/ngEnter.js'
                         ]
                     })
                 }
@@ -307,7 +310,8 @@ angular
                         $ocLazyLoad.load({
                         name:'sbAdminApp',
                         files:[
-                            'scripts/controllers/order-quantity.js'
+                            'scripts/controllers/order-quantity.js',
+                            'scripts/directives/keypress/ngEnter.js'
                         ]
                     })
                 }
@@ -328,7 +332,8 @@ angular
                     }), $ocLazyLoad.load({
                         name:'sbAdminApp',
                         files:[
-                            'scripts/controllers/repast-quantity.js'
+                            'scripts/controllers/repast-quantity.js',
+                            'scripts/directives/keypress/ngEnter.js'
                         ]
                     })
                 }
@@ -349,7 +354,8 @@ angular
                     }), $ocLazyLoad.load({
                         name:'sbAdminApp',
                         files:[
-                            'scripts/controllers/orderRate.js'
+                            'scripts/controllers/orderRate.js',
+                            'scripts/directives/keypress/ngEnter.js'
                         ]
                     })
                 }
@@ -370,7 +376,8 @@ angular
                     }), $ocLazyLoad.load({
                         name:'sbAdminApp',
                         files:[
-                            'scripts/controllers/repastRate.js'
+                            'scripts/controllers/repastRate.js',
+                            'scripts/directives/keypress/ngEnter.js'
                         ]
                     })
                 }

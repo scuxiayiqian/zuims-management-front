@@ -17,7 +17,7 @@
                 </div>
                 <div class="col-md-5">
                     餐厅名称
-                    <input type="text" class="form-control ng-pristine ng-valid ng-touched" ng-model="restaurantToSearch.name">
+                    <input type="text" class="form-control ng-pristine ng-valid ng-touched" ng-model="restaurantToSearch.name" ng-enter="searchBtnClicked()">
                 </div>
                 <div class="col-md-2">
                     <br>
@@ -34,10 +34,10 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div align="right">
-                    <button type="button" ng-click="updatePromotedRestaurant()" class="btn btn-sm btn-success">
+                    <button type="button" ng-click="updatePromotedRestaurant()" class="btn btn-sm btn-primary">
                         <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
                         <i class="glyphicon glyphicon-cloud-upload">
-                        </i> 更新推荐上首页餐厅
+                        </i> 更新推荐上的首页餐厅
                     </button>
                 </div>
             </div>

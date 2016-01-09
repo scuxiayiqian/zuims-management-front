@@ -14,15 +14,15 @@
                     <h4>餐厅基本信息</h4>
                     <table class="table table-bordered" style="width: 95%; margin: 0px auto">
                         <tr>
-                            <td width="10%">
-                                餐厅所在地
+                            <td width="15%">
+                                城市
                                 <select class="form-control" ng-model="restaurantInfo.city">
                                     <option value="北京">北京</option>
                                     <option value="上海">上海</option>
                                     <option value="广州">广州</option>
                                 </select>
                             </td>
-                            <td width="30%">
+                            <td width="25%">
                                 <span>餐厅名称</span>
                                 <input type="text" class="form-control" ng-model="basicInfo.restaurantName"></td>
                             <td>
@@ -35,14 +35,14 @@
                                     <option value="酒廊">酒廊</option>
                                 </select>
                             </td>
-                            <td>
-                                优惠类型
-                                <select class="form-control" ng-model="basicInfo.discountType[0]">
-                                    <option value="discount">三免一</option>
-                                    <option value="none">暂无</option>
-                                </select>
-                            </td>
-                            <td width="10%">
+                            <!--<td>-->
+                                <!--优惠类型-->
+                                <!--<select class="form-control" ng-model="basicInfo.discountType[0]">-->
+                                    <!--<option value="discount">三免一</option>-->
+                                    <!--<option value="none">暂无</option>-->
+                                <!--</select>-->
+                            <!--</td>-->
+                            <td width="20%">
                                 人均价格
                                 <input class="form-control" type="number" ng-model="basicInfo.averagePrice">
                             </td>

@@ -7,7 +7,7 @@
 <div class="row" ng-controller="reservationQuantityController">
     <div class="col-lg-12">
         <div class="panel panel-default">
-            <div class="panel-body">
+            <div class="panel-body" ng-enter="searchBtnClicked()">
                 <div class="col-md-2">
                     餐厅所在地
                     <select class="form-control" ng-model="restaurantToSearch.city" ng-options="city.name as city.name for city in cities">

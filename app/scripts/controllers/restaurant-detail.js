@@ -225,9 +225,13 @@ angular.module('sbAdminApp')
         angular.element(document.querySelector('#fileInputRecommend')).on('change', handleFileSelect);
 
         $scope.uploadPic = function () {
+
+            if ($scope.picDescription == null ) {
+                alert("请填写图片描述!");
+                return;
+            }
             $scope.begin = $scope.myRecommendCroppedPic.indexOf("base64") + 7;
             $scope.myUploadPic = $scope.myRecommendCroppedPic.substr($scope.begin);
-
 
             if ($scope.picDescription.length > 20) {
                 alert('图片描述不能超过20个字!');
@@ -424,9 +428,9 @@ angular.module('sbAdminApp')
     .controller('BasicInfoCtrl', function ($scope, ManageService, $cookies) {
 
         $scope.saveBasicInfo = function () {
-            $scope.temp = [];
-            $scope.temp.push($scope.basicInfo.discountType);
-            $scope.basicInfo.discountType = $scope.temp;
+            //$scope.temp = [];
+            //$scope.temp.push($scope.basicInfo.discountType);
+            //$scope.basicInfo.discountType = $scope.temp;
             ManageService.updateBasicInfo($scope.basicInfo)
                 .success(function (data) {
                     alert("信息保存成功!");
@@ -449,7 +453,7 @@ angular.module('sbAdminApp')
         };
 
     })
-    .controller('PwdCtrl', function ($scope, ManageService) {
+    .controller('PwdCtrl', function ($scope, ManageService, $cookies) {
 
 
         $scope.updatePwd = function () {
@@ -461,7 +465,7 @@ angular.module('sbAdminApp')
             }
 
             $scope.pwdInfo = {
-                'restaurantId': parseInt($.cookie('restaurantId')),
+                'restaurantId': parseInt($cookies.get('restID')),
                 'newpwd': $scope.newPwd,
                 'oldpwd': $scope.oldPwd
             };

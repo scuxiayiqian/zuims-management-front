@@ -380,12 +380,43 @@ angular
         .state('dashboard.restaurant-detail', {
             templateUrl: 'views/restaurant-detail.html',
             url:'/restaurant-detail',
+            controller: 'ManagementCtrl',
             resolve: {
                 loadMyFiles:function($ocLazyLoad) {
                     return $ocLazyLoad.load({
                         name:'sbAdminApp',
                         files:[
                             'scripts/controllers/restaurant-detail.js'
+                        ]
+                    })
+                }
+            }
+        })
+
+        .state('dashboard.restaurant-create', {
+            templateUrl: 'views/restaurant-create.html',
+            url:'/restaurant-create',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/restaurant-create.js'
+                        ]
+                    })
+                }
+            }
+        })
+
+        .state('dashboard.hotel', {
+            templateUrl: 'views/hotel.html',
+            url:'/hotel',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/hotel.js'
                         ]
                     })
                 }

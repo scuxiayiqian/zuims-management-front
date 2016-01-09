@@ -1,0 +1,165 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">城市列表</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default" ng-controller="hotelCtrl">
+            <div class="panel-heading">
+                <div align="right">
+                    <button type="button" ng-click="setCityToUpdate()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-success">
+                        <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
+                        <i class="glyphicon glyphicon-plus">
+                        </i> 添加城市
+                    </button>
+                </div>
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th colspan="5">
+                            <div class="input-group">
+                                <input st-search="" class="form-control" placeholder="搜索" type="text"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th width="20%" st-sort="hotelName">酒店名称</th>
+                        <th width="10%" st-sort="city">城市</th>
+                        <th width="40%">酒店地址</th>
+                        <th width="20%">电话号码</th>
+                        <th width="10%">添加餐厅</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr st-select-row="row" ng-repeat="row in displayedCollection">
+                        <td>{{row.hotelName}}</td>
+                        <td>{{row.city}}</td>
+                        <td>{{row.hotelAddress}}</td>
+                        <td>{{row.hotelTele}}</td>
+                        <td align="center">
+                            <button class="btn btn-xs" type="button" ng-click="createRestaurantClicked(row)">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="deleteModalLabel">System Information</h4>
+                            </div>
+                            <div class="modal-body">
+                                Are you sure to delete {{cityToDelete.name}}?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" ng-click="deleteCity()" data-dismiss="modal">Yes</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- Modal -->
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="height:300px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="editModalLabel">City Information</h4>
+                            </div>
+                            <div class="modal-body" style="height:200px">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Name: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="cityToUpdate.name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Longitude: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="cityToUpdate.longitude">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Latitude: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="cityToUpdate.latitude">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateCity()">Yes</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- Modal -->
+                <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="height:300px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="addModalLabel">City Information</h4>
+                            </div>
+                            <div class="modal-body" style="height:200px">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Name: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="cityToUpdate.name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Longitude: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="cityToUpdate.longitude">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">Latitude: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="cityToUpdate.latitude">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="createCity()">Yes</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

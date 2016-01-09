@@ -266,6 +266,10 @@ angular.module('sbAdminApp')
             $state.go("dashboard.restaurant-detail");
         };
 
+        $scope.createRestaurant = function() {
+            $state.go("dashboard.restaurant-create");
+        };
+
         $scope.getCites();
         $scope.getUsers();
         $scope.getProductions();

@@ -553,6 +553,13 @@ table.dataTable thead .sorting:after {
     /*padding-left: 20px;*/
 }
 
+.explain-blue {
+    color: #AAA;
+    font-size: 12px;
+    font-weight: 500;
+    /*padding-left: 20px;*/
+}
+
 .config-item {
     margin-bottom: 10px;
 }
@@ -597,3 +604,276 @@ table.dataTable thead .sorting:after {
     color: #ff6100;
 }
 /*餐厅联系人结束*/
+
+/*图文信息展示*/
+.r-single {
+    margin-top: 30px;
+}
+
+.r-active {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    box-shadow: 0 0 10px #999;
+}
+
+.w-300 {
+    position: relative;
+}
+
+.overflow-h {
+    overflow: hidden;
+}
+
+.transform45 {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.smy {
+    width: 155px;
+    line-height: 20px;
+    text-align: center;
+    top: 23px;
+    right: -40px;
+    position: absolute;
+}
+
+.r-active p {
+    display: block;
+}
+
+.r-single p {
+    display: none;
+}
+
+.bg-t {
+    background: rgba(9, 2, 1, 0.7);
+}
+
+.per100 {
+    width: 100%;
+}
+
+.l-ht30 {
+    line-height: 30px;
+}
+
+.display-ib {
+    display: inline-block;
+}
+
+.font-white {
+    color: white;
+}
+
+p {
+    margin: 0 0 10px;
+}
+
+p {
+    text-indent: 0;
+    font-size: 12px;
+    line-height: 20px;
+    margin-bottom: 12px;
+}
+
+.bg-orange {
+    background: #ff8500;
+}
+
+.font-white {
+    color: white;
+}
+
+.tc {
+    text-align: center;
+}
+
+.per100 {
+    width: 100%;
+}
+
+.bottom20 {
+    bottom: 20px;
+}
+
+.pos-a, .absolute {
+    position: absolute;
+}
+
+.mt16 {
+    margin-top: 16px !important;
+}
+
+.font-c-8f {
+    color: #8f8f8f;
+}
+
+.font-c-40 {
+    color: #404040;
+}
+
+.text-d-lt {
+    text-decoration: line-through;
+}
+
+.ml5 {
+    margin-left: 5px !important;
+}
+
+.mr5 {
+    margin-right: 5px !important;
+}
+
+.fl {
+    float: left;
+}
+
+/*ul li, ol li {*/
+/*line-height: 1.42857;*/
+/*color: #333333;*/
+/*font-size: 12px;*/
+/*}*/
+
+.pos-r {
+    position: relative;
+}
+
+.font-c-f8 {
+    color: #ff8500;
+}
+
+.ml10 {
+    margin-left: 10px !important;
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.pr10 {
+    padding-right: 10px !important;
+}
+
+.mt10 {
+    margin-top: 10px !important;
+}
+
+.ht70 {
+    height: 70px;
+}
+
+.overflow-h {
+    overflow: hidden;
+}
+
+.pos-r, .relative {
+    position: relative;
+}
+
+.list-unstyled {
+    padding-left: 0;
+    list-style: none;
+}
+
+.border-r-5 {
+    border-radius: 5px;
+}
+
+.pl10 {
+    padding-left: 10px !important;
+}
+
+.padding {
+    padding: 10px;
+}
+
+.small-pic {
+    width: 66px;
+    height: 53px;
+}
+
+.per90 {
+    width: 90%;
+}
+
+.l-ht40 {
+    line-height: 40px;
+}
+
+.ht40 {
+    height: 40px;
+}
+
+.display-ib {
+    display: inline-block;
+}
+
+.mb16 {
+    margin-bottom: 16px !important;
+}
+
+.border {
+    border: 1px solid #ccc;
+}
+
+.pl5 {
+    padding-left: 5px !important;
+}
+
+.pr5 {
+    padding-right: 5px !important;
+}
+
+.ml10 {
+    margin-left: 10px !important;
+}
+
+.l-ht20 {
+    line-height: 20px;
+}
+
+.ht20 {
+    height: 20px;
+}
+
+.display-ib {
+    display: inline-block;
+}
+
+/*图文信息展示结束*/
+
+/*修改密码*/
+.changePwd {
+    width: 90%;
+    /*text-align: center;*/
+    margin: 0 auto;
+}
+
+.pwd-input {
+    border-radius: 3px;
+    margin-right: 10px;
+    margin-left: 5px;
+    margin-bottom: 10px;
+    height: 30px;
+    padding: 5px;
+
+}
+
+.question {
+    font-size: 15px;
+    font-weight: 500;
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+
+.answer {
+    margin: 0 20px;
+    margin-bottom: 10px;
+}

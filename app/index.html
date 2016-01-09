@@ -21,7 +21,8 @@
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css">
     <link rel="stylesheet" href="bower_components/font-awesome/css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" type="text/css" href="bower_components/ngImgCropFullExtended/compile/minified/ng-img-crop.css">
-    <link rel="stylesheet" href="bower_components/ngDialog/css/ngDialog.min.css">
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog.min.css">
+    <link rel="stylesheet" href="bower_components/ng-dialog/css/ngDialog-theme-default.min.css">
     <!-- endbuild -->
     
     <!-- build:js(.) scripts/vendor.js -->
@@ -40,8 +41,12 @@
     <script src="bower_components/angular-smart-table/dist/smart-table.min.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
     <script src="bower_components/angular-animate/angular-animate.min.js"></script>
-    <script src="bower_components/ngImgCropFullExtended/compile/minified/ng-img-crop.js"></script>
-    <script src="bower_components/ngDialog/js/ngDialog.min.js"></script>
+    <script src="https://rawgit.com/CrackerakiUA/ngImgCropFullExtended/dev/compile/unminified/ng-img-crop.js"></script>
+    <script src="bower_components/ng-dialog/js/ngDialog.min.js"></script>
+
+      <script>
+          document.createElement('ng-dialog');
+      </script>
 
     <!-- endbower -->
     <!-- endbuild -->

@@ -90,14 +90,14 @@
 
                     <div class="handle-image" ng-controller="ImageRecommendCtrl">
                         <div id="recommend-pic">
-                            平台首页展示餐厅照片<span class="explain"><i>分辨率:720*960</i></span>
+                            平台首页展示餐厅照片
+                            <div><span class="explain"><i>图片分辨率:530*715</i></span></div>
 
 
-                            <!--homepageshow 记得去掉注释-->
-                            <!--<div ng-show="homePageShow">-->
+                            <div ng-show="homePageShow">
                                 <div class="cropAreaRecommend">
-                                    <img-crop image="myRecommendImage" area-type="rectangle" aspect-ratio="0.8"
-                                              result-image-size='{w: 750,h: 960}'
+                                    <img-crop image="myRecommendImage" area-type="rectangle" aspect-ratio="0.74125874"
+                                              result-image-size='{w: 530,h: 715}'
                                               result-image='myRecommendCroppedPic'
 
                                     ></img-crop>
@@ -117,24 +117,25 @@
                                             class="glyphicon glyphicon-remove"></span>取消上传
                                     </a>
                                 </div>
-                            <!--</div>-->
-                            <!--<div class="image-upload" ng-hide="homePageShow">-->
+                            </div>
+                            <div class="image-upload" ng-hide="homePageShow">
                                 <a href="javascript:;" class="file"><span class="glyphicon glyphicon-picture"></span>选择图片
                                     <input type="file" accept="image/*" name="recommend" id="fileInputRecommend">
                                 </a>
                                 <a href="javascript:;" class="file btn-warning" ng-click="previewHomePage()"><span
                                         class="glyphicon glyphicon-search"></span>首页图文信息预览
                                 </a>
-                            <!--</div>-->
+                            </div>
                             <div class="clearfix"></div>
                         </div>
                         <div id="detail-pic" ng-controller="ImageDetailCtrl">
-                            餐厅详情图文<span class="explain"><i>分辨率:1280*720</i></span>
+                            餐厅详情图文
+                            <div><span class="explain"><i>图片分辨率:640*420,用户手机端显示最近上传的五张图片以及对应的文字描述</i></span></div>
 
-                            <!--<div ng-show="detailPicShow">-->
+                            <div ng-show="detailPicShow">
                                 <div class="cropAreaDetail">
-                                    <img-crop image="myDetailImage" area-type="rectangle" aspect-ratio="1.8"
-                                              result-image-size='{w: 1280,h: 720}'
+                                    <img-crop image="myDetailImage" area-type="rectangle" aspect-ratio="1.52380952"
+                                              result-image-size='{w: 640,h: 420}'
                                               result-image='myDetailCroppedPic'
                                     ></img-crop>
 
@@ -153,8 +154,8 @@
                                             class="glyphicon glyphicon-remove"></span>取消上传
                                     </a>
                                 </div>
-                            <!--</div>-->
-                            <!--<div class="image-upload" ng-hide="detailPicShow">-->
+                            </div>
+                            <div class="image-upload" ng-hide="detailPicShow">
                                 <a href="javascript:;" class="file"><span
                                         class="glyphicon glyphicon-picture"></span>选择图片
                                     <input type="file" accept="image/*" name="detail" id="fileInputDetail"
@@ -164,7 +165,7 @@
                                 <a href="javascript:;" class="file btn-warning" ng-click="previewDetail()"><span
                                         class="glyphicon glyphicon-search"></span>餐厅详细图文信息预览
                                 </a>
-                            <!--</div>-->
+                            </div>
                         </div>
                     </div>
                     <!--<div class="save-btn">-->
@@ -273,4 +274,105 @@
     </div>
     <!-- /.col-lg-12 -->
 
+
 </div>
+
+<script type="text/ng-template" id="homePic.html">
+    <!--餐厅介绍开始-->
+    <div class="w-300 r-active">
+        <div class="pos-r overflow-h">
+            <img ng-src="{{restaurantInfo.homePagePic}}" class="img-responsive">
+
+            <div class="pos-a font-white bg-orange transform45 smy" ng-show="discount">三免一</div>
+            <div class="pos-a tc per100 bottom20">
+                <p class="bg-t display-ib per100 l-ht30 font-white">{{description}}</p>
+            </div>
+        </div>
+        <div class="introduce">
+            <p class="tc mt16"><b class="font16">{{restaurantInfo.restaurantName}}</b><i class="font-c-f8 ml10">hot</i>
+            </p>
+
+            <p>
+                <span class="font-c-8f">每位：</span>
+                <span class="font-c-40">￥{{restaurantInfo.averagePrice}}（含15%服务费）</span>
+            </p>
+
+            <p>
+                <span class="font-c-8f">地址 ：</span>
+                <span class="font-c-40">{{restaurantInfo.restaurantAddress}}</span>
+            </p>
+
+            <p>
+                <span class="font-c-8f">电话 ：</span>
+                        <span class="font-c-40"><span ng-repeat=" tel in restaurantInfo.restaurantTeles">
+                            <a class="font-c-40" href="tel:{{tel}}">{{tel}}</a></span> </span>
+            </p>
+
+        </div>
+    </div>
+    <!--餐厅介绍结束-->
+</script>
+
+<script type="text/ng-template" id="detailPic.html">
+    <!--内容开始-->
+    <div class="pd15 mt70" style="margin-top: 20px">
+        <div class="border border-r-5 bg-white padding">
+            <div class="pos-r">
+                <img src="{{details[0].picname}}" class="per100" id="d-img">
+
+                <div class="pos-a tc per100 bottom20">
+                    <p class="bg-t display-ib per90 ht40 l-ht40 font-white" id="description">{{description}}</p>
+                </div>
+            </div>
+            <!--图片列表开始-->
+            <div class="overflow-x-auto carousel">
+                <ul class="list-unstyled pr10 ht70 img-list mt10 pos-r overflow-h">
+                    <li class="fl pl10 border-r-5" ng-repeat="detail in details">
+                        <img src="{{detail.picname}}" class="per100 small-pic" change-pic
+                             description="{{detail.introduction}}">
+                    </li>
+                </ul>
+            </div>
+            <!--图片列表结束-->
+            <!--餐厅介绍开始-->
+            <div class="pl10 pr10 pos-r">
+                <div class="mb16">
+                    <b class="font16">{{restaurantInfo.restaurantName}}</b>
+                    <span class="display-ib ht20 l-ht20 pl5 pr5 border ml10" ng-show="discount">三免一餐厅</span>
+                </div>
+                <p>
+                    <span class="font-c-8f">地址 ：</span>
+                    <span class="font-c-40">{{restaurantInfo.restaurantAddress}}</span>
+                </p>
+
+                <p>
+                    <span class="font-c-8f">电话 ：</span>
+                    <span class="font-c-40">{{restaurantInfo.restaurantTele}}</span>
+                </p>
+                <p>
+                    <span class="font-c-8f">每位：</span>
+                    <!--<span class="font-c-8f text-d-lt">￥200</span>-->
+                    <span class="font-c-40">￥{{restaurantInfo.averagePrice}}（含15%服务费）</span>
+                </p>
+
+                <p>
+                    <span class="font-c-8f">餐厅类别：</span>
+                    <span class="font-c-40">{{restaurantInfo.restaurantType}}</span>
+                </p>
+
+                <p>
+                    <span class="font-c-8f">停车泊位：</span>
+                    <span class="font-c-40">{{restaurantInfo.park}}</span>
+                </p>
+
+                <p>
+                    <span class="font-c-8f">营业时间：</span>
+                    <span class="font-c-40">{{restaurantInfo.restaurantOpenTime}}</span>
+                </p>
+
+            </div>
+            <!--餐厅介绍结束-->
+
+        </div>
+    </div>
+</script>

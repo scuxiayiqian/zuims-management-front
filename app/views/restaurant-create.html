@@ -1,0 +1,172 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">创建餐厅</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+
+                <!--餐厅基本信息开始-->
+                <div id="basic-info" class="separator" ng-controller="CreateRestaurantController">
+                    <h4>餐厅基本信息</h4>
+                    <table class="table table-bordered" style="width: 95%; margin: 0px auto">
+                        <tr>
+                            <td width="25%">
+                                餐厅所在地
+                                <select class="form-control" ng-model="basicInfo.city">
+                                    <option value="北京">北京</option>
+                                    <option value="上海">上海</option>
+                                    <option value="广州">广州</option>
+                                </select>
+                            </td>
+                            <td width="25%">
+                                <span>餐厅名称</span>
+                                <input type="text" class="form-control" ng-model="basicInfo.restaurantName"></td>
+                            <td width="25%">
+                                餐厅类型
+                                <select class="form-control" ng-model="basicInfo.restaurantType">
+                                    <option value="自助餐">自助餐</option>
+                                    <option value="下午茶">下午茶</option>
+                                    <option value="大堂吧">大堂吧</option>
+                                    <option value="商务套餐">商务套餐</option>
+                                    <option value="酒廊">酒廊</option>
+                                </select>
+                            </td>
+                            <td width="25%">
+                                餐厅所属酒店
+                                <input class="form-control" type="text" ng-model="basicInfo.hotelName" disabled>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered" style="width: 95%; margin: 0px auto">
+                        <tr>
+                            <td width="25%">
+                                餐厅账号
+                                <input class="form-control" type="text" ng-model="basicInfo.account">
+                            </td>
+                            <td width="25%">
+                                餐厅密码
+                                <input class="form-control" type="text" ng-model="basicInfo.password">
+                            </td>
+                            <td width="25%">
+                                预留接单时间(单位:小时)
+                                <input class="form-control" type="number" ng-model="basicInfo.persistTime">
+                            </td>
+                            <td width="25%">
+                                是否签约
+                                <select class="form-control" ng-model="basicInfo.contractState">
+                                    <option value=1>是</option>
+                                    <option value=0>否</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered" style="width: 95%; margin: 0px auto">
+                        <tr>
+                            <!--<td width="20%">-->
+                                <!--优惠类型-->
+                                <!--<select class="form-control" ng-model="basicInfo.discountType[0]">-->
+                                    <!--<option value="discount">三免一</option>-->
+                                    <!--<option value="none">暂无</option>-->
+                                <!--</select>-->
+                            <!--</td>-->
+                            <td width="25%">
+                                人均价格
+                                <input class="form-control" type="number" ng-model="basicInfo.averagePrice">
+                            </td>
+                            <td width="25%">
+                                预留接单数
+                                <input class="form-control" type="number" ng-model="basicInfo.persistTable">
+                            </td>
+                            <td width="25%">
+                                免费泊车
+                                <select class="form-control" ng-model="basicInfo.park">
+                                    <option value="无停车位">无停车位</option>
+                                    <option value="停车收费">停车收费</option>
+                                    <option value="免费停车">免费停车</option>
+                                </select>
+                            </td>
+                            <td width="25%">
+                                是否允许吸烟
+                                <select class="form-control" ng-model="basicInfo.smoke">
+                                    <option value="否">否</option>
+                                    <option value="是">是</option>
+                                    <option value="吸烟区">吸烟区</option>
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
+                    <table class="table table-bordered" style="width: 95%; margin: 0px auto">
+                        <tr>
+                            <td width="33%">
+                                餐厅详细地址<span class="explain" style="padding-left: 10px"><i>城市不用重复填写</i></span>
+                                <input type="datetime" class="form-control"
+                                       ng-model="basicInfo.restaurantAddress"/>
+                            </td>
+                            <td width="34%">
+                                餐厅电话<span class="explain" style="padding-left: 10px"><i>若有多个电话号码,用空格分开</i></span>
+                                <input type="tel" class="form-control" ng-model="basicInfo.restaurantTele">
+                            </td>
+                            <td width="33%">
+                                营业时间<span class="explain" style="padding-left: 10px"><i>格式:
+                                11:30-14:30,17:30-22:00</i></span>
+                                <input type="text" class="form-control" ng-model="basicInfo.restaurantOpenTime">
+                            </td>
+                        </tr>
+                    </table>
+                    <!--<table class="table table-bordered" style="width: 95%; margin: 0px auto">-->
+                        <!--<tr>-->
+                            <!--<td width="50%">-->
+                                <!--经度-->
+                                <!--<input type="number" class="form-control"-->
+                                       <!--ng-model="basicInfo.longitude"/>-->
+                            <!--</td>-->
+                            <!--<td width="50%">-->
+                                <!--纬度-->
+                                <!--<input type="number" class="form-control" ng-model="basicInfo.latitude">-->
+                            <!--</td>-->
+                        <!--</tr>-->
+                    <!--</table>-->
+                    <table class="table table-bordered" style="width: 95%; margin: 0px auto;margin-bottom: 20px">
+                        <tr>
+                            <td width="25%">
+                                销售人员
+                                <select class="form-control" ng-model="basicInfo.sellerId">
+                                    <option value=3>3</option>
+                                </select>
+                            </td>
+                            <td width="25%">
+                                是否推荐上首页
+                                <select class="form-control" ng-model="basicInfo.recommendLevel">
+                                    <option value=1>是</option>
+                                    <option value=0>否</option>
+                                </select>
+                            </td>
+                            <td width="25%">
+                                餐厅介绍
+                                <input type="text" class="form-control" ng-model="basicInfo.introduction">
+                            </td>
+                            <td width="25%">
+                                备注
+                                <input type="text" class="form-control" ng-model="basicInfo.memo">
+                            </td>
+                        </tr>
+                    </table>
+
+                    <div class="save-btn">
+                        <button class="btn btn-primary" ng-click="createRestaurant()"><span
+                                class="glyphicon glyphicon-ok"></span>  新建餐厅
+                        </button>
+                    </div>
+                </div>
+                <!--餐厅基本信息结束-->
+
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+
+</div>

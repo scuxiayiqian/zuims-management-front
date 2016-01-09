@@ -61,11 +61,11 @@
                                     <h4 class="modal-title" id="deleteModalLabel">System Information</h4>
                                 </div>
                                 <div class="modal-body">
-                                    Are you sure to delete {{accountToDelete.name}}?
+                                    确定删除 {{accountToDelete.name}} 吗?
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-primary" ng-click="deleteAccount()" data-dismiss="modal">Yes</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-danger" ng-click="deleteAccount()" data-dismiss="modal">删除</button>
                                 </div>
                             </div>
                             <!-- /.modal-content -->

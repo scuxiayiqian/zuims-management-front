@@ -60,14 +60,14 @@
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="deleteModalLabel">System Information</h4>
+                                    <h4 class="modal-title" id="deleteModalLabel">警告</h4>
                                 </div>
                                 <div class="modal-body">
-                                    Are you sure to delete {{rightToDelete.name}}?
+                                    确定删除{{rightToDelete.name}}吗?
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                    <button type="button" class="btn btn-primary" ng-click="deleteRight()" data-dismiss="modal">Yes</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                    <button type="button" class="btn btn-danger" ng-click="deleteRight()" data-dismiss="modal">删除</button>
                                 </div>
                             </div>
                             <!-- /.modal-content -->

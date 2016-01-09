@@ -33,9 +33,9 @@
                         </th>
                     </tr>
                     <tr>
-                        <th st-sort="name">Name</th>
-                        <th st-sort="description">Description</th>
-                        <th>Operations</th>
+                        <th st-sort="name">名称</th>
+                        <th st-sort="description">描述</th>
+                        <th>操作</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -59,14 +59,14 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="deleteModalLabel">System Information</h4>
+                                <h4 class="modal-title" id="deleteModalLabel">警告</h4>
                             </div>
                             <div class="modal-body">
-                                Are you sure to delete {{productionToDelete.name}}?
+                                确定删除{{productionToDelete.name}}吗?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary" ng-click="deleteProduction()" data-dismiss="modal">Yes</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-danger" ng-click="deleteProduction()" data-dismiss="modal">删除</button>
                             </div>
                         </div>
                         <!-- /.modal-content -->
@@ -80,18 +80,18 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="editModalLabel">Production Information</h4>
+                                <h4 class="modal-title" id="editModalLabel">产品信息</h4>
                             </div>
                             <div class="modal-body" style="height:200px">
                                 <form role="form" class="form-horizontal">
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Name: </label>
+                                        <label class="col-sm-3 control-label">姓名: </label>
                                         <div class="col-sm-8">
                                             <input class="form-control" ng-model="productionToUpdate.name">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">description: </label>
+                                        <label class="col-sm-3 control-label">描述: </label>
                                         <div class="col-sm-8">
                                             <input class="form-control" ng-model="productionToUpdate.description">
                                         </div>
@@ -99,8 +99,8 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateProduction()">Yes</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateProduction()">更新</button>
                             </div>
                         </div>
                         <!-- /.modal-content -->
@@ -114,18 +114,18 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="addModalLabel">Production Information</h4>
+                                <h4 class="modal-title" id="addModalLabel">产品信息</h4>
                             </div>
                             <div class="modal-body" style="height:200px">
                                 <form role="form" class="form-horizontal">
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Name: </label>
+                                        <label class="col-sm-3 control-label">名称: </label>
                                         <div class="col-sm-8">
                                             <input class="form-control" ng-model="productionToUpdate.name">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Description: </label>
+                                        <label class="col-sm-3 control-label">描述: </label>
                                         <div class="col-sm-8">
                                             <input class="form-control" ng-model="productionToUpdate.description">
                                         </div>
@@ -133,8 +133,8 @@
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="createProduction()">Yes</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="createProduction()">新建</button>
                             </div>
                         </div>
                         <!-- /.modal-content -->

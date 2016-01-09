@@ -37,6 +37,7 @@ angular.module('sbAdminApp')
 
             $scope.rightsOfRole = [];
             $scope.roleToCreate = {
+                id: -1,
                 name: '',
                 rights: []
             };
@@ -78,7 +79,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'DELETE',
-                url: 'http://localhost:8080/roles/' + $scope.roleToDelete.name,
+                url: 'http://localhost:8080/roles/' + $scope.roleToDelete.id,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -107,7 +108,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'PUT',
-                url: 'http://localhost:8080/roles/' + $scope.roleToUpdate.name,
+                url: 'http://localhost:8080/roles/' + $scope.roleToUpdate.id,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -135,7 +136,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/roles/' + $scope.roleToCreate.name,
+                url: 'http://localhost:8080/roles/' + $scope.roleToCreate.id,
                 headers: {
                     'x-auth-token': $scope.token
                 },

@@ -13,9 +13,9 @@
 angular.module('sbAdminApp')
     .factory('right', ['$resource', function($resource) {
         return $resource(
-            'http://localhost:8080/rights/:name',
+            'http://localhost:8080/rights/:id',
             {
-                name: '@name'
+                id: '@id'
             },
             {
                 'update': {method: 'PUT'}
@@ -33,6 +33,12 @@ angular.module('sbAdminApp')
 
         $scope.rightToDelete = {};
         $scope.rightToUpdate = {};
+        $scope.rightToCreate = {
+
+            id: -1,
+            name: '',
+            parent: -1
+        };
 
         $scope.setRightToDelete = function(row) {
             $scope.rightToDelete = row;
@@ -45,9 +51,11 @@ angular.module('sbAdminApp')
         //remove to the real data holder
         $scope.deleteRight = function() {
 
+            console.log($scope.rightToDelete);
+
             right.delete(
                 {
-                    name: $scope.rightToDelete.name
+                    id: $scope.rightToDelete.id
                 },
                 function() {
                     $scope.getRightList();
@@ -63,7 +71,7 @@ angular.module('sbAdminApp')
 
             right.update(
                 {
-                    name: $scope.rightToUpdate.name
+                    id: $scope.rightToUpdate.id
                 },
                 $scope.rightToUpdate,
                 function() {
@@ -77,10 +85,20 @@ angular.module('sbAdminApp')
 
         $scope.createRight = function () {
 
+            console.log($scope.rightToCreate);
+
             right.save(
-                $scope.rightToUpdate,
+                $scope.rightToCreate,
                 function() {
                     $scope.getRightList();
+
+                    $scope.rightToCreate = {
+
+                        id: -1,
+                        name: '',
+                        parent: -1
+                    };
+
                 },
                 function() {
                     console.log('right created failed');

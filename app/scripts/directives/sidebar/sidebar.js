@@ -36,7 +36,7 @@ angular.module('sbAdminApp')
                         for (var j = 0; j < userRoles[i].rights.length; j++) {
                             if(userRoles[i].rights[j].name == item) {
                               flag = true;
-                              break;
+                                break;
                             }
                         }
 
@@ -45,6 +45,9 @@ angular.module('sbAdminApp')
                         }
                     }
 
+                    if(!flag) {
+                        console.log(item);
+                    }
                     return flag;
                 }
 

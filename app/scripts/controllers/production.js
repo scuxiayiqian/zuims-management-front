@@ -36,7 +36,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'DELETE',
-                url: 'http://localhost:8080/productions/' + $scope.productionToDelete.name,
+                url: 'http://localhost:8080/productions/' + $scope.productionToDelete.id,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -55,7 +55,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'PUT',
-                url: 'http://localhost:8080/productions/' + $scope.productionToUpdate.name,
+                url: 'http://localhost:8080/productions/' + $scope.productionToUpdate.id,
                 headers: {
                     'x-auth-token': $scope.token
                 },

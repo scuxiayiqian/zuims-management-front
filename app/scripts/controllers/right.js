@@ -13,7 +13,7 @@
 angular.module('sbAdminApp')
     .factory('right', ['$resource', function($resource) {
         return $resource(
-            'http://localhost:8080/rights/:id',
+            'http://202.120.40.175:21108/rights/:id',
             {
                 id: '@id'
             },

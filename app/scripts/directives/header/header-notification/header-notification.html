@@ -201,6 +201,11 @@
             <!--<li><a href="http://www.strapui.com/"><i class="fa fa-eye fa-fw"></i> Premium Angular Themes</a></li>-->
             <!--<li class="divider"></li>-->
             <li ng-controller="LoginController">
+                <a ui-sref="dashboard.profile">
+                    <i class="fa fa-male fa-fw"></i> 个人中心
+                </a>
+            </li>
+            <li ng-controller="LoginController">
                 <a ui-sref="login" ng-click="logout()">
                     <i class="fa fa-sign-out fa-fw"></i> 退出登录
                 </a>

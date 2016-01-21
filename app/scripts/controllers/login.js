@@ -21,11 +21,11 @@ angular.module('sbAdminApp')
 
                 var req = {
                     method: 'GET',
-                    url: 'http://202.120.40.175:21108/token',
+                    url: 'http://localhost:8080/token',
                     headers: {
                         authorization : "Basic " + btoa($scope.login.username + ":" + $scope.login.password)
                     }
-                }
+                };
 
                 $http(req).then(function(response) {
                     $cookies.put('token', response.data.token);
@@ -49,7 +49,7 @@ angular.module('sbAdminApp')
 
                 $http({
                     method: 'DELETE',
-                    url: 'http://202.120.40.175:21108/token',
+                    url: 'http://localhost:8080/token',
                     headers: {
                         'x-auth-token': token
                     },
@@ -65,5 +65,5 @@ angular.module('sbAdminApp')
                     alert('logout failed');
                 });
             }
-        }
+        };
     });

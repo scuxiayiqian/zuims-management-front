@@ -430,6 +430,21 @@ angular
             }
         })
 
+        .state('dashboard.profile', {
+            templateUrl: 'views/profile.html',
+            url:'/profile',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/profile.js'
+                        ]
+                    })
+                }
+            }
+        })
+
         .state('dashboard.panels-wells',{
           templateUrl:'views/ui-elements/panels-wells.html',
           url:'/panels-wells'

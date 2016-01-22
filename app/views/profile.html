@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row" xmlns="http://www.w3.org/1999/html">
     <div class="col-lg-12">
         <h3 class="page-header">个人中心</h3>
     </div>
@@ -69,6 +69,43 @@
                         </div>
                     </form>
                 </div>
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                安全信息
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <form name="myForm" ng-submit="updatePsw()">
+                    <div class="col-lg-3">
+                        <!--<form name="profileForm" novalidate>-->
+                        <label>旧密码</label>
+                        <input class="form-control" type="password" id="oldpw" name="oldpw"
+                               ng-model="oldpw" required/>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>新密码</label>
+                        <input class="form-control" type="password" id="pw1" name="pw1" ng-model="pw1" required/>
+                    </div>
+                    <div class="col-lg-3">
+                        <label>新密码确认</label>
+                        <input class="form-control" type="password" id="pw2" name="pw2" ng-model="pw2" required pw-check="pw1"/>
+                        <div class="msg-block" ng-show="myForm.$error">
+                            <span class="msg-error" ng-show="myForm.pw2.$error.pwmatch">
+                                新密码不一致
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3" style="margin-top: 25px">
+                        <button type="submit" class="btn btn-warning" ng-disabled="myForm.$invalid">
+                            修改密码
+                        </button>
+                    </div>
+                </form>
             </div>
             <!-- /.panel-body -->
         </div>

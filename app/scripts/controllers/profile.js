@@ -19,6 +19,60 @@ angular.module('sbAdminApp')
             roles:[]
         };
 
+        $scope.updatePsw = function() {
+            var data = {
+                "oldPassword": $scope.oldpw,
+                "newPassword": $scope.pw1
+            };
+            
+            $http({
+                method: 'PUT',
+                url: 'http://localhost:8080/users/' + $cookieStore.get('user').id + '/pwd',
+                headers: {
+                    'x-auth-token': $cookies.get('token'),
+                    'Content-Type': 'application/json'
+                },
+                data: data,
+                crossDomain: true
+            }).success(function(data) {
+                if (data) {
+                    alert("密码修改成功,请重新登录");
+                    $scope.logout();
+                }
+                else {
+                    alert("密码修改失败");
+                }
+            }).error(function () {
+                console.log("update psw failed");
+            });
+        };
+
+        $scope.logout = function() {
+
+            var token = $cookies.get('token');
+
+            if (token != null) {
+
+                $http({
+                    method: 'DELETE',
+                    url: 'http://localhost:8080/token',
+                    headers: {
+                        'x-auth-token': token
+                    },
+                    crossDomain: true
+                }).success(function() {
+                    $cookies.remove('token');
+                    $cookieStore.remove('user');
+
+                    $http.defaults.headers.common = [];
+
+                    $state.go("login");
+                }).error(function() {
+                    alert('logout failed');
+                });
+            }
+        };
+
         $scope.getUserInfo = function() {
 
             //$scope.userInfo.name = $cookieStore.get('user').name;

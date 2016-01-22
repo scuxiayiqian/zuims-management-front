@@ -134,8 +134,8 @@
                         <tr>
                             <td width="25%">
                                 销售人员
-                                <select class="form-control" ng-model="basicInfo.sellerId">
-                                    <option value=3>3</option>
+                                <select class="form-control" ng-model="basicInfo.sellerId" ng-options="marketing.id as marketing.fullname for marketing in marketingUsers">
+                                    <!--<option value=3></option>-->
                                 </select>
                             </td>
                             <td width="25%">

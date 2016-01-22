@@ -438,7 +438,8 @@ angular
                     return $ocLazyLoad.load({
                         name:'sbAdminApp',
                         files:[
-                            'scripts/controllers/profile.js'
+                            'scripts/controllers/profile.js',
+                            'scripts/directives/pswcheck/pswcheck.js'
                         ]
                     })
                 }

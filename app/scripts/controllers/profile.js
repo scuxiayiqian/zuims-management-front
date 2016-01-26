@@ -27,7 +27,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'PUT',
-                url: 'http://localhost:8080/users/' + $cookieStore.get('user').id + '/pwd',
+                url: 'http://202.120.40.175:21108/users/' + $cookieStore.get('user').id + '/pwd',
                 headers: {
                     'x-auth-token': $cookies.get('token'),
                     'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ angular.module('sbAdminApp')
 
                 $http({
                     method: 'DELETE',
-                    url: 'http://localhost:8080/token',
+                    url: 'http://202.120.40.175:21108/token',
                     headers: {
                         'x-auth-token': token
                     },
@@ -90,7 +90,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'PUT',
-                url: 'http://localhost:8080/users/' + $cookieStore.get('user').id,
+                url: 'http://202.120.40.175:21108/users/' + $cookieStore.get('user').id,
                 headers: {
                     'x-auth-token': $cookies.get('token'),
                     'Content-Type': 'application/json'

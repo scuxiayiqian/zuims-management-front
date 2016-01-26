@@ -96,7 +96,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'DELETE',
-                url: 'http://localhost:8080/restaurants/' + $scope.restaurantToDelete.name,
+                url: 'http://202.120.40.175:21108/restaurants/' + $scope.restaurantToDelete.name,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -125,7 +125,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'PUT',
-                url: 'http://localhost:8080/restaurants/' + $scope.restaurantToUpdate.name,
+                url: 'http://202.120.40.175:21108/restaurants/' + $scope.restaurantToUpdate.name,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -154,7 +154,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'POST',
-                url: 'http://localhost:8080/restaurants',
+                url: 'http://202.120.40.175:21108/restaurants',
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -171,7 +171,7 @@ angular.module('sbAdminApp')
             // get restaurant list request
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/cities/' + $scope.selectedCity + '/restaurants',
+                url: 'http://202.120.40.175:21108/cities/' + $scope.selectedCity + '/restaurants',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -188,7 +188,7 @@ angular.module('sbAdminApp')
         $scope.getCites = function() {
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/cities',
+                url: 'http://202.120.40.175:21108/cities',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -204,7 +204,7 @@ angular.module('sbAdminApp')
         $scope.getUsers = function() {
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/roles/marketing/users',
+                url: 'http://202.120.40.175:21108/roles/marketing/users',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -220,7 +220,7 @@ angular.module('sbAdminApp')
         $scope.getProductions = function() {
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/productions',
+                url: 'http://202.120.40.175:21108/productions',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token

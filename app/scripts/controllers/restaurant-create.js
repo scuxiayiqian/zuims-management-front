@@ -51,7 +51,7 @@ angular.module('sbAdminApp')
         $scope.getMarketingUsers = function() {
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/roles/marketing/users',
+                url: 'http://202.120.40.175:21108/roles/marketing/users',
                 headers: {
                     'x-auth-token': $scope.token
                 },

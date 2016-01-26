@@ -111,7 +111,7 @@ angular.module('sbAdminApp')
         $scope.getCites = function() {
             $http({
                 method: 'GET',
-                url: 'http://localhost:8080/cities',
+                url: 'http://202.120.40.175:21108/cities',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token

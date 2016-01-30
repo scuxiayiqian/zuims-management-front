@@ -26,55 +26,71 @@ angular.module('sbAdminApp')
 
         $scope.hotelToCreate = {};
 
-        $scope.setCityToDelete = function(row) {
-            $scope.cityToDelete = row;
+        $scope.setHotelToDelete = function(row) {
+            $scope.hotelToDelete = row;
         }
 
-        $scope.setCityToUpdate = function(row) {
-            $scope.cityToUpdate = row;
+        $scope.setHotelToUpdate = function(row) {
+            $scope.hotelToUpdate = row;
+
+            $scope.hotelToUpdate.longitudeNLatitude = row.longitude + "," + row.latitude;
         }
 
         //remove to the real data holder
-        $scope.deleteCity = function() {
+        $scope.deleteHotel = function() {
 
             $http({
-                method: 'DELETE',
-                url: 'http://202.120.40.175:21108/cities/' + $scope.cityToDelete.name,
+                method: 'GET',
+                url: 'http://202.120.40.175:21104/restaurant/hotel/delete?hotelId=' + $scope.hotelToDelete.hotelId,
                 headers: {
-                    'x-auth-token': $scope.token
+                    'Content-Type': 'application/json'
                 },
                 crossDomain: true
             }).success(function(data) {
-                var index = $scope.rowCollection.indexOf($scope.cityToDelete);
+                var index = $scope.rowCollection.indexOf($scope.hotelToDelete);
                 if (index !== -1) {
                     $scope.rowCollection.splice(index, 1);
                 }
             }).error(function () {
-                console.log("city delete failed");
+                console.log("hotel delete failed");
             });
         }
 
-        $scope.updateCity = function () {
+        $scope.updateHotel = function () {
+
+            console.log($scope.hotelToUpdate);
+
+            var geolocation = $scope.hotelToUpdate.longitudeNLatitude;
+            var geolocationArr = geolocation.split(',');
+
+            $scope.hotelToUpdate.longitude = geolocationArr[0];
+            $scope.hotelToUpdate.latitude = geolocationArr[1];
 
             $http({
-                method: 'PUT',
-                url: 'http://202.120.40.175:21108/cities/' + $scope.cityToUpdate.name,
+                method: 'POST',
+                url: 'http://202.120.40.175:21104/restaurant/hotel/update',
                 headers: {
-                    'x-auth-token': $scope.token
+                    'Content-Type': 'application/json'
                 },
-                data: $scope.cityToUpdate,
+                data: $scope.hotelToUpdate,
                 crossDomain: true
             }).success(function(data) {
-                $scope.getCityList();
-                console.log("update city successed");
+                $scope.getHotelList();
+                console.log("update hotel successed");
             }).error(function () {
-                console.log("update city failed");
+                console.log("update hotel failed");
             });
         }
 
         $scope.createHotel = function () {
 
             console.log($scope.hotelToCreate);
+
+            var geolocation = $scope.hotelToCreate.longitudeNatitude;
+            var geolocationArr = geolocation.split(',');
+
+            $scope.hotelToCreate.longitude = geolocationArr[0];
+            $scope.hotelToCreate.latitude = geolocationArr[1];
 
             $scope.hotelToCreate.contractStat = parseInt( $scope.hotelToCreate.contractStat );
             $scope.hotelToCreate.memo = "";

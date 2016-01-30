@@ -22,7 +22,7 @@
                 <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th colspan="5">
+                        <th colspan="6">
                             <div class="input-group">
                                 <input st-search="" class="form-control" placeholder="搜索" type="text"/>
                                 <span class="input-group-btn">
@@ -34,10 +34,11 @@
                     </tr>
                     <tr>
                         <th width="20%" st-sort="hotelName">酒店名称</th>
-                        <th width="10%" st-sort="city">城市</th>
+                        <th width="8%" st-sort="city">城市</th>
                         <th width="40%">酒店地址</th>
-                        <th width="20%">电话号码</th>
-                        <th width="10%">添加餐厅</th>
+                        <th width="17%">电话号码</th>
+                        <th width="7%">操作</th>
+                        <th width="8%">添加餐厅</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -46,6 +47,14 @@
                         <td>{{row.city}}</td>
                         <td>{{row.hotelAddress}}</td>
                         <td>{{row.hotelTele}}</td>
+                        <td>
+                            <button class="btn btn-xs" type="button" ng-click="setHotelToDelete(row)" data-toggle="modal" data-target="#deleteModal">
+                                <i class="fa fa-remove"></i>
+                            </button>
+                            <button class="btn btn-xs" type="button" ng-click="setHotelToUpdate(row)" data-toggle="modal" data-target="#editModal">
+                                <i class="fa fa-edit"></i>
+                            </button>
+                        </td>
                         <td align="center">
                             <button class="btn btn-xs" type="button" ng-click="createRestaurantClicked(row)">
                                 <i class="fa fa-plus"></i>
@@ -60,14 +69,14 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="deleteModalLabel">System Information</h4>
+                                <h4 class="modal-title" id="deleteModalLabel">系统提示</h4>
                             </div>
                             <div class="modal-body">
-                                Are you sure to delete {{cityToDelete.name}}?
+                                确定删除酒店: {{hotelToDelete.hotelName}}?
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary" ng-click="deleteCity()" data-dismiss="modal">Yes</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-primary" ng-click="deleteHotel()" data-dismiss="modal">确定</button>
                             </div>
                         </div>
                         <!-- /.modal-content -->
@@ -81,33 +90,61 @@
                         <div class="modal-content">
                             <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="editModalLabel">City Information</h4>
+                                <h4 class="modal-title" id="updateModalLabel">酒店信息</h4>
                             </div>
-                            <div class="modal-body" style="height:200px">
+                            <div class="modal-body" style="height:380px">
                                 <form role="form" class="form-horizontal">
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Name: </label>
+                                        <label class="col-sm-3 control-label">城市: </label>
                                         <div class="col-sm-8">
-                                            <input class="form-control" ng-model="cityToUpdate.name">
+                                            <select class="form-control" ng-model="hotelToUpdate.city" ng-options="city.name as city.name for city in cities">
+                                                <option value="">选择城市</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Longitude: </label>
+                                        <label class="col-sm-3 control-label">酒店名: </label>
                                         <div class="col-sm-8">
-                                            <input class="form-control" ng-model="cityToUpdate.longitude">
+                                            <input class="form-control" ng-model="hotelToUpdate.hotelName">
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="col-sm-3 control-label">Latitude: </label>
+                                        <label class="col-sm-3 control-label">酒店电话: </label>
                                         <div class="col-sm-8">
-                                            <input class="form-control" ng-model="cityToUpdate.latitude">
+                                            <input class="form-control" ng-model="hotelToUpdate.hotelTele">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">酒店地址: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="hotelToUpdate.hotelAddress">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">酒店经纬度: </label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" ng-model="hotelToUpdate.longitudeNLatitude">
+                                        </div>
+                                        <div class="col-sm-4 control-label">
+                                            <a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度怎么填?点我查询</a >
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">是否签约: </label>
+                                        <div class="col-sm-8">
+                                            <label class="radio-inline">
+                                                <input type="radio" ng-model="hotelToUpdate.contractStat" value="1" checked>是
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" ng-model="hotelToUpdate.contractStat" value="0">否
+                                            </label>
                                         </div>
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateCity()">Yes</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="updateHotel()">确定</button>
                             </div>
                         </div>
                         <!-- /.modal-content -->

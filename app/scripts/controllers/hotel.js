@@ -86,7 +86,7 @@ angular.module('sbAdminApp')
 
             console.log($scope.hotelToCreate);
 
-            var geolocation = $scope.hotelToCreate.longitudeNatitude;
+            var geolocation = $scope.hotelToCreate.longitudeNLatitude;
             var geolocationArr = geolocation.split(',');
 
             $scope.hotelToCreate.longitude = geolocationArr[0];

@@ -38,6 +38,7 @@ angular.module('sbAdminApp')
                 $scope.users.push(userArray[i]);
             }
         }
+
         //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
         $scope.displayedCollection = [].concat($scope.rowCollection);
 
@@ -94,21 +95,40 @@ angular.module('sbAdminApp')
         //remove to the real data holder
         $scope.deleteRestaurant = function() {
 
+            //$http({
+            //    method: 'DELETE',
+            //    url: 'http://202.120.40.175:21108/restaurants/' + $scope.restaurantToDelete.name,
+            //    headers: {
+            //        'x-auth-token': $scope.token
+            //    },
+            //    crossDomain: true
+            //}).success(function(data) {
+            //    alert(data.name + "deleted");
+            //    var index = $scope.rowCollection.indexOf($scope.restaurantToDelete);
+            //    if (index !== -1) {
+            //        $scope.rowCollection.splice(index, 1);
+            //    }
+            //}).error(function () {
+            //    alert("delete failed");
+            //});
+
+            console.log($scope.restaurantToDelete);
+
             $http({
-                method: 'DELETE',
-                url: 'http://202.120.40.175:21108/restaurants/' + $scope.restaurantToDelete.name,
+                method: 'GET',
+                url: 'http://202.120.40.175:21104/restaurant/delete?restaurantId=' + $scope.restaurantToDelete.restaurantId,
                 headers: {
-                    'x-auth-token': $scope.token
+                    'Content-Type': 'application/json'
                 },
                 crossDomain: true
             }).success(function(data) {
-                alert(data.name + "deleted");
-                var index = $scope.rowCollection.indexOf($scope.restaurantToDelete);
+                alert("删除成功");
+                var index = $scope.rowCollection.indexOf($scope.hotelToDelete);
                 if (index !== -1) {
                     $scope.rowCollection.splice(index, 1);
                 }
             }).error(function () {
-                alert("delete failed");
+                console.log("hotel delete failed");
             });
         };
 

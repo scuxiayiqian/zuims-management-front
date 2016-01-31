@@ -47,6 +47,7 @@
                 <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
                     <thead>
                     <tr>
+                        <th st-sort="hotelName">酒店名</th>
                         <th st-sort="name">餐厅名</th>
                         <th st-sort="marketingName">城市</th>
                         <th >餐厅地理位置</th>
@@ -55,6 +56,7 @@
                     </thead>
                     <tbody>
                     <tr st-select-row="row" ng-repeat="row in displayedCollection">
+                        <td>{{row.hotelName}}</td>
                         <td>{{row.restaurantName}}</td>
                         <td>{{row.city}}</td>
                         <td>({{row.latitude}}, {{row.longitude}})</td>
@@ -62,10 +64,34 @@
                             <button class="btn btn-xs" type="button" ng-click="editRestaurant(row)" data-toggle="modal" data-target="#editModal">
                                 <i class="fa fa-edit"></i>
                             </button>
+                            <button class="btn btn-xs" type="button" ng-click="setRestaurantToDelete(row)" data-toggle="modal" data-target="#deleteModal">
+                                <i class="fa fa-remove"></i>
+                            </button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+                <!-- Modal -->
+                <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="deleteModalLabel">系统提示</h4>
+                            </div>
+                            <div class="modal-body">
+                                确定删除餐厅: {{restaurantToDelete.restaurantName}}?
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-danger" ng-click="deleteRestaurant()" data-dismiss="modal">删除</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
             </div>
         </div>
     </div>

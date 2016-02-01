@@ -10,15 +10,54 @@ angular.module('sbAdminApp')
         $scope.token = $cookies.get('token');
         $scope.marketingUsers = [];
         $scope.basicInfo = {};
+        $scope.basicInfo.restaurantType = "";
+        $scope.basicInfo.city = "";
         $scope.basicInfo.hotelId = $cookies.get('hotelId');
         $scope.basicInfo.hotelName = $cookies.get('hotelName');
         $scope.basicInfo.longitude = $cookies.get('longitude');
         $scope.basicInfo.latitude = $cookies.get('latitude');
+        $scope.basicInfo.longitudeNLatitude = $scope.basicInfo.longitude + "," + $scope.basicInfo.latitude;
 
         console.log($scope.basicInfo);
 
+        $scope.getProductions = function() {
+            $http({
+                method: 'GET',
+                url: 'http://202.120.40.175:21108/productions',
+                headers: {
+                    'x-auth-token': $scope.token
+                },
+                crossDomain: true
+            }).success(function (productionArr) {
+                $scope.productions = productionArr;
+            }).error(function () {
+                console.log("getProductionList failed");
+            });
+        };
+
+        $scope.getCities = function() {
+            $http({
+                method: 'GET',
+                url: 'http://202.120.40.175:21108/cities',
+                headers: {
+                    'x-auth-token': $scope.token
+                },
+                crossDomain: true
+            }).success(function (cityArray) {
+                $scope.cities = cityArray;
+            }).error(function () {
+                console.log("getCites failed");
+            });
+        };
         $scope.createRestaurant = function() {
             console.log($scope.basicInfo);
+
+            var geolocation = $scope.basicInfo.longitudeNLatitude;
+            var geolocationArr = geolocation.split(',');
+
+            $scope.basicInfo.longitude = geolocationArr[0];
+            $scope.basicInfo.latitude = geolocationArr[1];
+
             $http({
                 method: 'POST',
                 url: 'http://202.120.40.175:21104/restaurant/add',
@@ -73,4 +112,6 @@ angular.module('sbAdminApp')
         }
 
         $scope.getMarketingUsers();
+        $scope.getCities();
+        $scope.getProductions();
     });

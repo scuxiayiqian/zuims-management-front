@@ -16,10 +16,8 @@
                         <tr>
                             <td width="25%">
                                 餐厅所在地
-                                <select class="form-control" ng-model="basicInfo.city">
-                                    <option value="北京">北京</option>
-                                    <option value="上海">上海</option>
-                                    <option value="广州">广州</option>
+                                <select class="form-control" ng-model="basicInfo.city" ng-options="city.name as city.name for city in cities">
+                                    <option value="">选择城市</option>
                                 </select>
                             </td>
                             <td width="25%">
@@ -27,12 +25,8 @@
                                 <input type="text" class="form-control" ng-model="basicInfo.restaurantName"></td>
                             <td width="25%">
                                 餐厅类型
-                                <select class="form-control" ng-model="basicInfo.restaurantType">
-                                    <option value="自助餐">自助餐</option>
-                                    <option value="下午茶">下午茶</option>
-                                    <option value="大堂吧">大堂吧</option>
-                                    <option value="商务套餐">商务套餐</option>
-                                    <option value="酒廊">酒廊</option>
+                                <select class="form-control" ng-model="basicInfo.restaurantType" ng-options="product.name as product.name for product in productions">
+                                    <option value="">餐厅类型</option>
                                 </select>
                             </td>
                             <td width="25%">
@@ -117,19 +111,15 @@
                             </td>
                         </tr>
                     </table>
-                    <!--<table class="table table-bordered" style="width: 95%; margin: 0px auto">-->
-                        <!--<tr>-->
-                            <!--<td width="50%">-->
-                                <!--经度-->
-                                <!--<input type="number" class="form-control"-->
-                                       <!--ng-model="basicInfo.longitude"/>-->
-                            <!--</td>-->
-                            <!--<td width="50%">-->
-                                <!--纬度-->
-                                <!--<input type="number" class="form-control" ng-model="basicInfo.latitude">-->
-                            <!--</td>-->
-                        <!--</tr>-->
-                    <!--</table>-->
+                    <table class="table table-bordered" style="width: 95%; margin: 0px auto">
+                        <tr>
+                            <td width="50%">
+                                经度
+                                <input class="form-control" ng-model="basicInfo.longitudeNLatitude"/>
+                                <a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度怎么填?点我查询</a >
+                            </td>
+                        </tr>
+                    </table>
                     <table class="table table-bordered" style="width: 95%; margin: 0px auto;margin-bottom: 20px">
                         <tr>
                             <td width="25%">

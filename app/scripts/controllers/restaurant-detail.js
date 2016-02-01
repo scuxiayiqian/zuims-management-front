@@ -158,7 +158,7 @@ angular.module('sbAdminApp')
         }
         ManageService.getRestaurantInfo($cookies.get('restID'))
             .success(function (data) {
-                //console.log(data);
+                console.log(data);
                 data.averagePrice = parseFloat(data.averagePrice, 10);
                 $scope.restaurantInfo = data;
                 $scope.basicInfo = data;

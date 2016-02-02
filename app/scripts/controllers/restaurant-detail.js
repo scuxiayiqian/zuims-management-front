@@ -404,6 +404,7 @@ angular.module('sbAdminApp')
             var temp = email;
             //对电子邮件的验证
             var myreg = /^[0-9a-zA-Z][_.\-0-9a-zA-Z]{0,31}@([0-9a-zA-Z][0-9a-zA-Z\-]{0,30}[0-9a-zA-Z]\.){1,4}[a-zA-Z]{2,4}$/;
+
             if (!myreg.test(temp)) {
                 alert('提示\n请输入有效的邮箱址！\n' + temp + '不是正确的邮箱地址');
                 return false;
@@ -450,10 +451,10 @@ angular.module('sbAdminApp')
             }
 
 
-            ManageService.updateLinkmanInfo($scope.contact)
-                .success(function (data) {
-                    alert("保存联系人信息成功!");
-                });
+            //ManageService.updateLinkmanInfo($scope.contact)
+            //    .success(function (data) {
+            //        alert("保存联系人信息成功!");
+            //    });
         };
 
     })

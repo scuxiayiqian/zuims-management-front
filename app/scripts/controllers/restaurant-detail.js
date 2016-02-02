@@ -451,10 +451,10 @@ angular.module('sbAdminApp')
             }
 
 
-            //ManageService.updateLinkmanInfo($scope.contact)
-            //    .success(function (data) {
-            //        alert("保存联系人信息成功!");
-            //    });
+            ManageService.updateLinkmanInfo($scope.contact)
+                .success(function (data) {
+                    alert("保存联系人信息成功!");
+                });
         };
 
     })

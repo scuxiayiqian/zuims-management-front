@@ -35,7 +35,7 @@ angular.module('sbAdminApp')
 
                     $state.go("dashboard.home");
                 }, function(response) {
-                    //alert('failed');
+                    alert('密码错误');
                     console.log(response.data.error);
                 });
             }

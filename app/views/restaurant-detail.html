@@ -17,9 +17,7 @@
                             <td width="15%">
                                 城市
                                 <select class="form-control" ng-model="restaurantInfo.city">
-                                    <option value="北京">北京</option>
-                                    <option value="上海">上海</option>
-                                    <option value="广州">广州</option>
+                                    <option ng-repeat="city in cities" value="{{city.name}}">{{city.name}}</option>
                                 </select>
                             </td>
                             <td width="25%">
@@ -28,11 +26,12 @@
                             <td>
                                 餐厅类型
                                 <select class="form-control" ng-model="basicInfo.restaurantType">
-                                    <option value="自助餐">自助餐</option>
-                                    <option value="下午茶">下午茶</option>
-                                    <option value="大堂吧">大堂吧</option>
-                                    <option value="商务套餐">商务套餐</option>
-                                    <option value="酒廊">酒廊</option>
+                                    <!--<option value="自助餐">自助餐</option>-->
+                                    <!--<option value="下午茶">下午茶</option>-->
+                                    <!--<option value="大堂吧">大堂吧</option>-->
+                                    <!--<option value="商务套餐">商务套餐</option>-->
+                                    <!--<option value="酒廊">酒廊</option>-->
+                                    <option ng-repeat="production in productions" value="{{production.name}}">{{production.name}}</option>
                                 </select>
                             </td>
                             <!--<td>-->
@@ -83,7 +82,7 @@
                             </td>
                             <td colspan="3">
                                 餐厅经纬度:<span class="explain" style="padding-left: 10px"><a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度怎么填?点我查询</a ></span>
-                                <input class="form-control" ng-model="hotelToUpdate.longitudeNLatitude">
+                                <input class="form-control" ng-model="longitudeNLatitude" placeholder="格式: 00.00000,11.11111">
                             </td>
                         </tr>
                     </table>

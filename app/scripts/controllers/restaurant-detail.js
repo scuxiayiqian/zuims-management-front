@@ -20,8 +20,11 @@ angular.module('sbAdminApp')
             }
         };
     })
-    .factory('ManageService', ['$http', function ($http) {
+    .factory('ManageService', ['$http', '$cookies', function ($http, $cookies) {
         var restaurantBaseUrl = "http://202.120.40.175:21104";
+        var managementBaseUrl = "http://202.120.40.175:21108";
+
+        var token = $cookies.get('token');
 
         var uploadHomePagePicRequest = function (imageInfo) {
             return $http({
@@ -69,6 +72,28 @@ angular.module('sbAdminApp')
                 method: "GET",
                 url: restaurantBaseUrl + '/restaurant/linkman?id=' + restaurantId
             });
+        };
+
+        var getCitiesRequest = function () {
+            return $http({
+                method: "GET",
+                url: managementBaseUrl + '/cities',
+                headers: {
+                    'x-auth-token': token
+                },
+                crossDomain: true
+            })
+        };
+
+        var getProductionRequest = function () {
+            return $http({
+                method: "GET",
+                url: managementBaseUrl + '/productions',
+                headers: {
+                    'x-auth-token': token
+                },
+                crossDomain: true
+            })
         };
 
         var getChartInfoRequest = function (id, date) {
@@ -148,6 +173,12 @@ angular.module('sbAdminApp')
             },
             updatePersisInfo: function (persistInfo) {
                 return updatePersistInfoRequest(persistInfo);
+            },
+            getCityInfo: function() {
+                return getCitiesRequest();
+            },
+            getProductionInfo: function () {
+                return getProductionRequest();
             }
         }
 
@@ -166,9 +197,10 @@ angular.module('sbAdminApp')
                 delete $scope.basicInfo.introduction;
                 delete $scope.basicInfo.smoke;
                 delete $scope.basicInfo.images;
-                delete $scope.basicInfo.latitude;
-                delete $scope.basicInfo.longitude;
+                //delete $scope.basicInfo.latitude;
+                //delete $scope.basicInfo.longitude;
 
+                $scope.longitudeNLatitude = $scope.basicInfo.longitude + ',' + $scope.basicInfo.latitude;
             });
 
         $scope.goto = function (id) {
@@ -371,7 +403,7 @@ angular.module('sbAdminApp')
         function checkEMail(email) {
             var temp = email;
             //对电子邮件的验证
-            var myreg = /^[0-9a-z][_.0-9a-z-]{0,31}@([0-9a-z][0-9a-z-]{0,30}[0-9a-z]\.){1,4}[a-z]{2,4}$/;
+            var myreg = /^[0-9a-zA-Z][_.\-0-9a-zA-Z]{0,31}@([0-9a-zA-Z][0-9a-zA-Z\-]{0,30}[0-9a-zA-Z]\.){1,4}[a-zA-Z]{2,4}$/;
             if (!myreg.test(temp)) {
                 alert('提示\n请输入有效的邮箱址！\n' + temp + '不是正确的邮箱地址');
                 return false;
@@ -431,10 +463,31 @@ angular.module('sbAdminApp')
             //$scope.temp = [];
             //$scope.temp.push($scope.basicInfo.discountType);
             //$scope.basicInfo.discountType = $scope.temp;
+
+            setLongitudeNLatitude();
             ManageService.updateBasicInfo($scope.basicInfo)
                 .success(function (data) {
                     alert("信息保存成功!");
                 });
+        };
+
+        ManageService.getCityInfo()
+            .success(function(data) {
+                $scope.cities = data;
+            });
+
+        ManageService.getProductionInfo()
+            .success(function(data) {
+                console.log(data);
+                $scope.productions = data;
+            });
+
+        var setLongitudeNLatitude = function () {
+            var geolocation = $scope.longitudeNLatitude;
+            var geolocationArr = geolocation.split(',');
+
+            $scope.basicInfo.longitude = geolocationArr[0];
+            $scope.basicInfo.latitude = geolocationArr[1];
         };
     })
     .controller('PersistInfoCtrl', function ($scope, ManageService, $cookies) {

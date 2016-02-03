@@ -221,9 +221,9 @@ angular.module('sbAdminApp')
                     $scope.restaurantInfo.restaurantTeles = $scope.restaurantInfo.restaurantTele.split(" ");
                     $scope.description = data.introduction;
 
-                    if (data.picname == "" || data.picname == null)
+                    if (data.picname == "" || data.picname == null) {
                         $scope.restaurantInfo.homePagePic = "http://202.120.40.175:21100/restaurants/images?relativePath=NonePicture.jpg";
-
+                    }
 
                     $scope.discount = true;
                     ngDialog.open({

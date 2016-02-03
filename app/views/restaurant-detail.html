@@ -329,7 +329,7 @@
     <div class="pd15 mt70" style="margin-top: 20px">
         <div class="border border-r-5 bg-white padding">
             <div class="pos-r">
-                <img src="{{details[0].picname}}" class="per100" id="d-img">
+                <img ng-src="{{details[0].picname}}" class="per100" id="d-img">
 
                 <div class="pos-a tc per100 bottom20">
                     <p class="bg-t display-ib per90 ht40 l-ht40 font-white" id="description">{{description}}</p>
@@ -339,7 +339,7 @@
             <div class="overflow-x-auto carousel">
                 <ul class="list-unstyled pr10 ht70 img-list mt10 pos-r overflow-h">
                     <li class="fl pl10 border-r-5" ng-repeat="detail in details">
-                        <img src="{{detail.picname}}" class="per100 small-pic" change-pic
+                        <img ng-src="{{detail.picname}}" class="per100 small-pic" change-pic
                              description="{{detail.introduction}}">
                     </li>
                 </ul>

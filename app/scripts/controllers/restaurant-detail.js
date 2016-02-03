@@ -217,7 +217,7 @@ angular.module('sbAdminApp')
             ManageService.getHomePage($cookies.get('restID'))
                 .success(function (data) {
 
-                    $scope.restaurantInfo.homePagePic = data.picname;
+                    $scope.restaurantInfo.homePagePic = "http://202.120.40.175:21100" + data.picname;
                     $scope.restaurantInfo.restaurantTeles = $scope.restaurantInfo.restaurantTele.split(" ");
                     $scope.description = data.introduction;
 
@@ -304,6 +304,11 @@ angular.module('sbAdminApp')
         ManageService.getDetail($cookies.get('restID'))
             .success(function (data) {
                 $scope.details = data;
+
+                for(var i = 0; i < $scope.details.length; i ++) {
+
+                    $scope.details[i].picname = 'http://202.120.40.175:21100' + $scope.details[i].picname;
+                }
             });
 
         //详情图文信息预览
@@ -318,6 +323,9 @@ angular.module('sbAdminApp')
             }
             if ($scope.picLen > 5)
                 $scope.details = $scope.details.slice(-5);
+
+            console.log($scope.details);
+            
             ngDialog.open({
                 templateUrl: 'detailPic.html',
                 scope: $scope

@@ -469,15 +469,47 @@ angular.module('sbAdminApp')
     .controller('BasicInfoCtrl', function ($scope, ManageService, $cookies) {
 
         $scope.saveBasicInfo = function () {
-            //$scope.temp = [];
-            //$scope.temp.push($scope.basicInfo.discountType);
-            //$scope.basicInfo.discountType = $scope.temp;
-
             setLongitudeNLatitude();
-            ManageService.updateBasicInfo($scope.basicInfo)
-                .success(function (data) {
-                    alert("信息保存成功!");
-                });
+
+            var cityName = $scope.basicInfo.city + '市';
+            console.log(cityName);
+
+            // 百度地图API功能
+            var map = new BMap.Map("allmap");
+            var point = new BMap.Point(116.331398,39.897445);
+            map.centerAndZoom(point,12);
+            // 创建地址解析器实例
+            var myGeo = new BMap.Geocoder();
+
+            // 将地址解析结果显示在地图上,并调整地图视野
+            myGeo.getPoint(cityName + $scope.basicInfo.restaurantAddress, function(point){
+
+                console.log(point.lng + "," + point.lat);
+                console.log('----');
+                console.log($scope.basicInfo.longitude + "," + $scope.basicInfo.latitude);
+
+                if ((point.lng == $scope.basicInfo.longitude) && (point.lat == $scope.basicInfo.latitude)) {
+
+                    console.log('1');
+                    map.centerAndZoom(point, 16);
+                    map.addOverlay(new BMap.Marker(point));
+                    updateBasicInfo();
+
+                } else {
+                    if (Math.abs(point.lng - $scope.basicInfo.longitude) < 0.00001 && Math.abs(point.lat - $scope.basicInfo.latitude) < 0.00001)
+                    {
+                        console.log('2');
+                        updateBasicInfo();
+                    }
+
+                    else {
+                        console.log('3');
+                        alert("经检验,您填写的餐厅地址与餐厅经纬度匹配的精准度不够高,请重新查询地址或经纬度后再提交!");
+                        return;
+                    }
+                }
+            }, cityName);
+
         };
 
         ManageService.getCityInfo()
@@ -490,6 +522,13 @@ angular.module('sbAdminApp')
                 console.log(data);
                 $scope.productions = data;
             });
+
+        var updateBasicInfo = function() {
+            ManageService.updateBasicInfo($scope.basicInfo)
+                .success(function (data) {
+                    alert("信息保存成功!");
+                });
+        };
 
         var setLongitudeNLatitude = function () {
             var geolocation = $scope.longitudeNLatitude;

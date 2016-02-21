@@ -62,14 +62,9 @@
                                 <input type="text" class="form-control" placeholder="城市不用重复填写"
                                        ng-model="basicInfo.restaurantAddress"/>
                             </td>
-
-                            <td>餐厅电话<span class="explain" style="padding-left: 10px"><i>若有多个电话号码,用一个空格分开</i></span>
-                                <input type="tel" class="form-control" ng-model="basicInfo.restaurantTele">
-                            </td>
-                            <td colspan="2">
-                                营业时间<span class="explain" style="padding-left: 10px"><i>格式:
-                                11:30-14:30,17:30-22:00</i></span>
-                                <input type="text" class="form-control" ng-model="basicInfo.restaurantOpenTime">
+                            <td colspan="3">
+                                餐厅经纬度:<span class="explain" style="padding-left: 10px"><a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度怎么填?点我查询</a ></span>
+                                <input class="form-control" ng-model="longitudeNLatitude" placeholder="格式: 00.00000,11.11111">
                             </td>
                         </tr>
                         <tr>
@@ -80,9 +75,13 @@
                                     <option value="none">暂无</option>
                                 </select>
                             </td>
-                            <td colspan="3">
-                                餐厅经纬度:<span class="explain" style="padding-left: 10px"><a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度怎么填?点我查询</a ></span>
-                                <input class="form-control" ng-model="longitudeNLatitude" placeholder="格式: 00.00000,11.11111">
+                            <td>餐厅电话<span class="explain" style="padding-left: 10px"><i>若有多个电话号码,用一个空格分开</i></span>
+                                <input type="tel" class="form-control" ng-model="basicInfo.restaurantTele">
+                            </td>
+                            <td colspan="2">
+                                营业时间<span class="explain" style="padding-left: 10px"><i>格式:
+                                11:30-14:30,17:30-22:00</i></span>
+                                <input type="text" class="form-control" ng-model="basicInfo.restaurantOpenTime">
                             </td>
                         </tr>
                     </table>

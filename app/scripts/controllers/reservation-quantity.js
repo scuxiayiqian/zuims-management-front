@@ -174,7 +174,7 @@ angular.module('sbAdminApp')
             $scope.line.labels = labels;
         };
 
-        
+
         $scope.searchBtnClicked = function() {
             $http({
                 method: 'GET',

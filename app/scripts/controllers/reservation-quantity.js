@@ -173,6 +173,7 @@ angular.module('sbAdminApp')
             $scope.line.data = [makeNums];
             $scope.line.labels = labels;
         };
+
         
         $scope.searchBtnClicked = function() {
             $http({

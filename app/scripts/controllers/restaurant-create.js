@@ -57,6 +57,9 @@ angular.module('sbAdminApp')
 
             $scope.basicInfo.longitude = geolocationArr[0];
             $scope.basicInfo.latitude = geolocationArr[1];
+            $scope.basicInfo.smoke = "否";
+            $scope.basicInfo.introduction = "无";
+            $scope.basicInfo.memo = "无";
 
             $http({
                 method: 'POST',

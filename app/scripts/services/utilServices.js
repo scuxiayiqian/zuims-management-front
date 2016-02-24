@@ -33,31 +33,47 @@ angular.module('sbAdminApp')
             var makeNums = [];
             var labels = [];
 
+            var reverse = false;
+            var orderBy = $filter('orderBy');
+
+            function order(predicate) {
+                var predicate = predicate;
+                data = orderBy(data, predicate, reverse);
+
+                console.log(data);
+            }
+
+            order('dorderDate', true);
             if (whichDataToFormat == "dorderFinishNum") {
+
                 for (var i = 0; i < data.length; i++) {
                     makeNums.push(data[i].dorderFinishNum);
                     labels.push(i+1);
                 }
             }
             else if (whichDataToFormat == "dorderConfirmNum") {
+                //$scope.order('dorderDate', true);
                 for (var i = 0; i < data.length; i++) {
                     makeNums.push(data[i].dorderConfirmNum);
                     labels.push(i+1);
                 }
             }
             else if (whichDataToFormat == "dorderMakeNum") {
+                //$scope.order('dorderDate', true);
                 for (var i = 0; i < data.length; i++) {
                     makeNums.push(data[i].dorderMakeNum);
                     labels.push(i+1);
                 }
             }
             else if (whichDataToFormat == "orderRate") {
+                //$scope.order('dorderDate', true);
                 for (var i = 0; i < data.length; i++) {
                     makeNums.push(data[i].dorderConfirmNum / data[i].dorderMakeNum);
                     labels.push(i+1);
                 }
             }
             else if (whichDataToFormat == "repastRate") {
+                //$scope.order('dorderDate', true);
                 for (var i = 0; i < data.length; i++) {
                     makeNums.push(data[i].dorderFinishNum / data[i].dorderMakeNum);
                     labels.push(i+1);

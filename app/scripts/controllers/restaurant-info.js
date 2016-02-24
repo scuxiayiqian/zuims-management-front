@@ -123,10 +123,14 @@ angular.module('sbAdminApp')
                 crossDomain: true
             }).success(function(data) {
                 alert("删除成功");
-                var index = $scope.rowCollection.indexOf($scope.hotelToDelete);
+                var index = $scope.displayedCollection.indexOf($scope.restaurantToDelete);
+                console.log(index);
+                console.log($scope.displayedCollection);
                 if (index !== -1) {
-                    $scope.rowCollection.splice(index, 1);
+                    $scope.displayedCollection.splice(index, 1);
+                    console.log($scope.displayedCollection);
                 }
+                console.log($scope.displayedCollection);
             }).error(function () {
                 console.log("hotel delete failed");
             });
@@ -264,9 +268,9 @@ angular.module('sbAdminApp')
             //console.log($scope.restaurantToSearch.city + $scope.restaurantToSearch.name);
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/search/namecity',
+                url: 'http://202.120.40.175:21104/restaurant/search/hotelnamecity',
                 params: {
-                    restaurantName: $scope.restaurantToSearch.name,
+                    hotelName: $scope.restaurantToSearch.hotelName,
                     city: $scope.restaurantToSearch.city
                 },
                 crossDomain: true

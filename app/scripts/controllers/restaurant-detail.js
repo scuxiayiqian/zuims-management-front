@@ -466,8 +466,18 @@ angular.module('sbAdminApp')
         };
 
     })
-    .controller('BasicInfoCtrl', function ($scope, ManageService, $cookies) {
+    .controller('BasicInfoCtrl', function ($scope, ManageService) {
 
+        $scope.objects = [
+            {
+                value: 0,
+                key: '否'
+            },
+            {
+                value: 1,
+                key: '是'
+            }
+        ];
         $scope.saveBasicInfo = function () {
             setLongitudeNLatitude();
 

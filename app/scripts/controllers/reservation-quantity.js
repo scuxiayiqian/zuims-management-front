@@ -144,16 +144,11 @@ angular.module('sbAdminApp')
             });
         };
 
-        function sortSearchingResult(a, b) {
-            return a.dorderDate > b.dorderDate;
-        }
-
         $scope.getDatasFromSearchingResult = function(data) {
             var makeNums = [];
             var labels = [];
 
             $scope.reverse = false;
-
             var orderBy = $filter('orderBy');
 
             $scope.order = function(predicate) {

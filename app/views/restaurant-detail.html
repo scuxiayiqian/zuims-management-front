@@ -57,14 +57,22 @@
                     </table>
                     <table class="table table-bordered" style="width: 95%; margin: 0px auto;margin-bottom: 20px">
                         <tr>
-                            <td colspan="3">
+                            <td colspan="2">
                                 餐厅详细地址<span class="explain" style="padding-left: 10px"><i>城市不用重复填写</i></span>
                                 <input type="text" class="form-control" placeholder="城市不用重复填写"
                                        ng-model="basicInfo.restaurantAddress"/>
                             </td>
-                            <td colspan="3">
+                            <td colspan="2">
                                 餐厅经纬度:<span class="explain" style="padding-left: 10px"><a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度怎么填?点我查询</a ></span>
                                 <input class="form-control" ng-model="longitudeNLatitude" placeholder="格式: 00.00000,11.11111">
+                            </td>
+                            <td colspan="2">
+                                是否推荐上首页
+                                <select class="form-control" ng-model="basicInfo.recommendLevel" ng-options="object.value as object.key for object in objects">
+                                </select>
+                                    <!--<option value=1>是</option>-->
+                                    <!--<option value=0>否</option>-->
+                                <!--</select>-->
                             </td>
                         </tr>
                         <tr>

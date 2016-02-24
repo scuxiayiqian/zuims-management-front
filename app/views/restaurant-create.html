@@ -67,15 +67,15 @@
                                     <!--<option value="none">暂无</option>-->
                                 <!--</select>-->
                             <!--</td>-->
-                            <td width="25%">
+                            <td width="33%">
                                 人均价格
                                 <input class="form-control" type="number" ng-model="basicInfo.averagePrice">
                             </td>
-                            <td width="25%">
+                            <td width="34%">
                                 预留接单数
                                 <input class="form-control" type="number" ng-model="basicInfo.persistTable">
                             </td>
-                            <td width="25%">
+                            <td width="33%">
                                 免费泊车
                                 <select class="form-control" ng-model="basicInfo.park">
                                     <option value="无停车位">无停车位</option>
@@ -83,14 +83,14 @@
                                     <option value="免费停车">免费停车</option>
                                 </select>
                             </td>
-                            <td width="25%">
-                                是否允许吸烟
-                                <select class="form-control" ng-model="basicInfo.smoke">
-                                    <option value="否">否</option>
-                                    <option value="是">是</option>
-                                    <option value="吸烟区">吸烟区</option>
-                                </select>
-                            </td>
+                            <!--<td width="25%">-->
+                                <!--是否允许吸烟-->
+                                <!--<select class="form-control" ng-model="basicInfo.smoke">-->
+                                    <!--<option value="否">否</option>-->
+                                    <!--<option value="是">是</option>-->
+                                    <!--<option value="吸烟区">吸烟区</option>-->
+                                <!--</select>-->
+                            <!--</td>-->
                         </tr>
                     </table>
                     <table class="table table-bordered" style="width: 95%; margin: 0px auto">
@@ -122,27 +122,27 @@
                     </table>
                     <table class="table table-bordered" style="width: 95%; margin: 0px auto;margin-bottom: 20px">
                         <tr>
-                            <td width="25%">
+                            <td width="50%">
                                 销售人员
                                 <select class="form-control" ng-model="basicInfo.sellerId" ng-options="marketing.id as marketing.fullname for marketing in marketingUsers">
                                     <!--<option value=3></option>-->
                                 </select>
                             </td>
-                            <td width="25%">
+                            <td width="50%">
                                 是否推荐上首页
                                 <select class="form-control" ng-model="basicInfo.recommendLevel">
                                     <option value=1>是</option>
                                     <option value=0>否</option>
                                 </select>
                             </td>
-                            <td width="25%">
-                                餐厅介绍
-                                <input type="text" class="form-control" ng-model="basicInfo.introduction">
-                            </td>
-                            <td width="25%">
-                                备注
-                                <input type="text" class="form-control" ng-model="basicInfo.memo">
-                            </td>
+                            <!--<td width="25%">-->
+                                <!--餐厅介绍-->
+                                <!--<input type="text" class="form-control" ng-model="basicInfo.introduction">-->
+                            <!--</td>-->
+                            <!--<td width="25%">-->
+                                <!--备注-->
+                                <!--<input type="text" class="form-control" ng-model="basicInfo.memo">-->
+                            <!--</td>-->
                         </tr>
                     </table>
 

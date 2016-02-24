@@ -144,18 +144,36 @@ angular.module('sbAdminApp')
             });
         };
 
+        function sortSearchingResult(a, b) {
+            return a.dorderDate > b.dorderDate;
+        }
+
         $scope.getDatasFromSearchingResult = function(data) {
             var makeNums = [];
             var labels = [];
+
+            $scope.reverse = false;
+
+            var orderBy = $filter('orderBy');
+
+            $scope.order = function(predicate) {
+                $scope.predicate = predicate;
+                data = orderBy(data, predicate, $scope.reverse);
+
+                console.log(data);
+            };
+            $scope.order('dorderDate', true);
+
             for (var i = 0; i < data.length; i++) {
-                console.log(data[i].dorderMakeNum);
+                //console.log(sortedData[i].dorderMakeNum);
                 makeNums.push(data[i].dorderMakeNum);
-                labels.push(i+1);
+                labels.push(data[i].dorderDate);
             }
+
             $scope.line.data = [makeNums];
             $scope.line.labels = labels;
         };
-
+        
         $scope.searchBtnClicked = function() {
             $http({
                 method: 'GET',

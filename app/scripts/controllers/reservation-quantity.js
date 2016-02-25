@@ -165,8 +165,13 @@ angular.module('sbAdminApp')
                 labels.push(data[i].dorderDate);
             }
 
-            $scope.line.data = [makeNums];
-            $scope.line.labels = labels;
+            if (data.length > 0) {
+                $scope.line.data = [makeNums];
+                $scope.line.labels = labels;
+            } else {
+                $scope.line.data = [[0, 0, 0, 0, 0, 0, 0]];
+                $scope.line.labels = ['', '', '', '', '', ''];
+            }
         };
 
 

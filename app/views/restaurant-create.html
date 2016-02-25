@@ -16,9 +16,7 @@
                         <tr>
                             <td width="25%">
                                 餐厅所在地
-                                <select class="form-control" ng-model="basicInfo.city" ng-options="city.name as city.name for city in cities">
-                                    <option value="">选择城市</option>
-                                </select>
+                                <input class="form-control" type="text" ng-model="basicInfo.city" disabled>
                             </td>
                             <td width="25%">
                                 <span>餐厅名称</span>

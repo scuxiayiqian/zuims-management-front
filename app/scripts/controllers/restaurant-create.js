@@ -11,7 +11,7 @@ angular.module('sbAdminApp')
         $scope.marketingUsers = [];
         $scope.basicInfo = {};
         $scope.basicInfo.restaurantType = "";
-        $scope.basicInfo.city = "";
+        $scope.basicInfo.city = $cookies.get('city');
         $scope.basicInfo.hotelId = $cookies.get('hotelId');
         $scope.basicInfo.hotelName = $cookies.get('hotelName');
         $scope.basicInfo.longitude = $cookies.get('longitude');
@@ -35,20 +35,6 @@ angular.module('sbAdminApp')
             });
         };
 
-        $scope.getCities = function() {
-            $http({
-                method: 'GET',
-                url: 'http://202.120.40.175:21108/cities',
-                headers: {
-                    'x-auth-token': $scope.token
-                },
-                crossDomain: true
-            }).success(function (cityArray) {
-                $scope.cities = cityArray;
-            }).error(function () {
-                console.log("getCites failed");
-            });
-        };
         $scope.createRestaurant = function() {
             console.log($scope.basicInfo);
 
@@ -70,14 +56,19 @@ angular.module('sbAdminApp')
                 data: $scope.basicInfo,
                 crossDomain: true
             }).success(function(data) {
+                console.log(data);
+
                 alert("创建餐厅成功");
+
 
                 $cookies.remove('hotelId');
                 $cookies.remove('hotelName');
                 $cookies.remove('longitude');
                 $cookies.remove('latitude');
 
-                $state.go("dashboard.restaurant-info");
+                $cookies.put('restID', data.restaurantId);
+
+                $state.go("dashboard.restaurant-detail");
             }).error(function (error) {
 
                 alert(error.message);
@@ -115,6 +106,5 @@ angular.module('sbAdminApp')
         }
 
         $scope.getMarketingUsers();
-        $scope.getCities();
         $scope.getProductions();
     });

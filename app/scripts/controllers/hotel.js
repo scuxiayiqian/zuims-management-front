@@ -132,6 +132,8 @@ angular.module('sbAdminApp')
             $cookies.put('hotelName', row.hotelName);
             $cookies.put('longitude', row.longitude);
             $cookies.put('latitude', row.latitude);
+            $cookies.put('city', row.city);
+
             $state.go("dashboard.restaurant-create");
 
         };

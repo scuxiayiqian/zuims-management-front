@@ -48,39 +48,52 @@ angular.module('sbAdminApp')
 
                 for (var i = 0; i < data.length; i++) {
                     makeNums.push(data[i].dorderFinishNum);
-                    labels.push(i+1);
+                    labels.push(data[i].dorderDate);
                 }
             }
             else if (whichDataToFormat == "dorderConfirmNum") {
                 //$scope.order('dorderDate', true);
                 for (var i = 0; i < data.length; i++) {
                     makeNums.push(data[i].dorderConfirmNum);
-                    labels.push(i+1);
+                    labels.push(data[i].dorderDate);
                 }
             }
             else if (whichDataToFormat == "dorderMakeNum") {
                 //$scope.order('dorderDate', true);
                 for (var i = 0; i < data.length; i++) {
                     makeNums.push(data[i].dorderMakeNum);
-                    labels.push(i+1);
+                    labels.push(data[i].dorderDate);
                 }
             }
             else if (whichDataToFormat == "orderRate") {
                 //$scope.order('dorderDate', true);
                 for (var i = 0; i < data.length; i++) {
-                    makeNums.push(data[i].dorderConfirmNum / data[i].dorderMakeNum);
-                    labels.push(i+1);
+
+                    if (data[i].dorderMakeNum == 0) {
+                        makeNums.push(0);
+                    } else {
+                        makeNums.push(data[i].dorderConfirmNum / data[i].dorderMakeNum);
+                    }
+                    labels.push(data[i].dorderDate);
                 }
             }
             else if (whichDataToFormat == "repastRate") {
                 //$scope.order('dorderDate', true);
                 for (var i = 0; i < data.length; i++) {
-                    makeNums.push(data[i].dorderFinishNum / data[i].dorderMakeNum);
-                    labels.push(i+1);
+                    if (data[i].dorderMakeNum == 0) {
+                        makeNums.push(0);
+                    } else {
+                        makeNums.push(data[i].dorderFinishNum / data[i].dorderMakeNum);
+                    }
+                    labels.push(data[i].dorderDate);
                 }
             }
 
-            return [[makeNums], labels];
+            if (data.length > 0) {
+                return [[makeNums], labels];
+            } else {
+                return [[[0, 0, 0, 0, 0, 0, 0]], ['', '', '', '', '', '']];
+            }
         };
 
     });

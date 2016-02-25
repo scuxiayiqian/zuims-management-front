@@ -48,6 +48,7 @@
                 <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
                     <thead>
                     <tr>
+                        <th st-sort="name">酒店名</th>
                         <th st-sort="name">餐厅名</th>
                         <th st-sort="marketingName">城市</th>
                         <th >查看</th>
@@ -55,6 +56,7 @@
                     </thead>
                     <tbody>
                     <tr st-select-row="row" ng-repeat="row in displayedCollection">
+                        <td>{{row.hotelName}}</td>
                         <td>{{row.restaurantName}}</td>
                         <td>{{row.city}}</td>
                         <td>

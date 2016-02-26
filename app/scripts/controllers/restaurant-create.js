@@ -56,8 +56,6 @@ angular.module('sbAdminApp')
                 data: $scope.basicInfo,
                 crossDomain: true
             }).success(function(data) {
-                console.log(data);
-
                 alert("创建餐厅成功");
 
 
@@ -66,7 +64,7 @@ angular.module('sbAdminApp')
                 $cookies.remove('longitude');
                 $cookies.remove('latitude');
 
-                $cookies.put('restID', data.restaurantId);
+                $cookies.put('restID', data);
 
                 $state.go("dashboard.restaurant-detail");
             }).error(function (error) {

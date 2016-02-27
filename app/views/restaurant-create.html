@@ -19,6 +19,10 @@
                                 <input class="form-control" type="text" ng-model="basicInfo.city" disabled>
                             </td>
                             <td width="25%">
+                                餐厅所属酒店
+                                <input class="form-control" type="text" ng-model="basicInfo.hotelName" disabled>
+                            </td>
+                            <td width="25%">
                                 <span>餐厅名称</span>
                                 <input type="text" class="form-control" ng-model="basicInfo.restaurantName"></td>
                             <td width="25%">
@@ -26,10 +30,6 @@
                                 <select class="form-control" ng-model="basicInfo.restaurantType" ng-options="product.name as product.name for product in productions">
                                     <option value="">餐厅类型</option>
                                 </select>
-                            </td>
-                            <td width="25%">
-                                餐厅所属酒店
-                                <input class="form-control" type="text" ng-model="basicInfo.hotelName" disabled>
                             </td>
                         </tr>
                     </table>
@@ -65,15 +65,19 @@
                                     <!--<option value="none">暂无</option>-->
                                 <!--</select>-->
                             <!--</td>-->
-                            <td width="33%">
-                                人均价格
-                                <input class="form-control" type="number" ng-model="basicInfo.averagePrice">
+                            <td width="25%">
+                                午餐价格
+                                <input class="form-control" type="number" ng-model="basicInfo.noonPrice">
                             </td>
-                            <td width="34%">
+                            <td width="25%">
+                                晚餐价格
+                                <input class="form-control" type="number" ng-model="basicInfo.nightPrice">
+                            </td>
+                            <td width="25%">
                                 预留接单数
                                 <input class="form-control" type="number" ng-model="basicInfo.persistTable">
                             </td>
-                            <td width="33%">
+                            <td width="25%">
                                 免费泊车
                                 <select class="form-control" ng-model="basicInfo.park">
                                     <option value="无停车位">无停车位</option>
@@ -93,25 +97,21 @@
                     </table>
                     <table class="table table-bordered" style="width: 95%; margin: 0px auto">
                         <tr>
-                            <td width="33%">
+                            <td width="25%">
                                 餐厅详细地址<span class="explain" style="padding-left: 10px"><i>城市不用重复填写</i></span>
                                 <input type="text" class="form-control"
                                        ng-model="basicInfo.restaurantAddress"/>
                             </td>
-                            <td width="34%">
+                            <td width="25%">
                                 餐厅电话<span class="explain" style="padding-left: 10px"><i>若有多个电话号码,用空格分开</i></span>
                                 <input type="tel" class="form-control" ng-model="basicInfo.restaurantTele">
                             </td>
-                            <td width="33%">
+                            <td width="25%">
                                 营业时间<span class="explain" style="padding-left: 10px"><i>格式:
                                 11:30-14:30,17:30-22:00</i></span>
                                 <input type="text" class="form-control" ng-model="basicInfo.restaurantOpenTime">
                             </td>
-                        </tr>
-                    </table>
-                    <table class="table table-bordered" style="width: 95%; margin: 0px auto">
-                        <tr>
-                            <td width="50%">
+                            <td width="25%">
                                 经纬度
                                 <input class="form-control" ng-model="basicInfo.longitudeNLatitude"/>
                                 <a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度怎么填?点我查询</a >

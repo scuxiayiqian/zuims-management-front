@@ -190,7 +190,8 @@ angular.module('sbAdminApp')
         ManageService.getRestaurantInfo($cookies.get('restID'))
             .success(function (data) {
                 console.log(data);
-                data.averagePrice = parseFloat(data.averagePrice, 10);
+                data.noonPrice = parseFloat(data.noonPrice, 10);
+                data.nightPrice = parseFloat(data.nightPrice, 10)
                 $scope.restaurantInfo = data;
                 $scope.basicInfo = data;
                 $scope.persistInfo = {"persistTable": data.persistTable, "persistTime": data.persistTime};

@@ -16,6 +16,7 @@ angular.module('sbAdminApp')
         $scope.basicInfo.hotelName = $cookies.get('hotelName');
         $scope.basicInfo.longitude = $cookies.get('longitude');
         $scope.basicInfo.latitude = $cookies.get('latitude');
+        $scope.basicInfo.restaurantAddress = $cookies.get('hotelAddress');
         $scope.basicInfo.longitudeNLatitude = $scope.basicInfo.longitude + "," + $scope.basicInfo.latitude;
 
         console.log($scope.basicInfo);

@@ -14,7 +14,7 @@
                     <h4>餐厅基本信息</h4>
                     <table class="table table-bordered" style="width: 95%; margin: 0px auto">
                         <tr>
-                            <td width="15%">
+                            <td width="25%">
                                 城市
                                 <select class="form-control" ng-model="restaurantInfo.city">
                                     <option ng-repeat="city in cities" value="{{city.name}}">{{city.name}}</option>
@@ -23,7 +23,7 @@
                             <td width="25%">
                                 <span>餐厅名称</span>
                                 <input type="text" class="form-control" ng-model="basicInfo.restaurantName"></td>
-                            <td>
+                            <td width="25%">
                                 餐厅类型
                                 <select class="form-control" ng-model="basicInfo.restaurantType">
                                     <!--<option value="自助餐">自助餐</option>-->
@@ -41,11 +41,7 @@
                                     <!--<option value="none">暂无</option>-->
                                 <!--</select>-->
                             <!--</td>-->
-                            <td width="20%">
-                                人均价格
-                                <input class="form-control" type="number" ng-model="basicInfo.averagePrice">
-                            </td>
-                            <td>
+                            <td width="25%">
                                 免费泊车
                                 <select class="form-control" ng-model="basicInfo.park">
                                     <option value="无停车位">无停车位</option>
@@ -57,36 +53,44 @@
                     </table>
                     <table class="table table-bordered" style="width: 95%; margin: 0px auto;margin-bottom: 20px">
                         <tr>
-                            <td colspan="2">
+                            <td width="25%">
+                                午餐价格
+                                <input class="form-control" type="number" ng-model="basicInfo.noonPrice">
+                            </td>
+                            <td width="25%">
+                                晚餐价格
+                                <input class="form-control" type="number" ng-model="basicInfo.nightPrice">
+                            </td>
+                            <td width="25%">
                                 餐厅详细地址<span class="explain" style="padding-left: 10px"><i>城市不用重复填写</i></span>
                                 <input type="text" class="form-control" placeholder="城市不用重复填写"
                                        ng-model="basicInfo.restaurantAddress"/>
                             </td>
-                            <td colspan="2">
+                            <td width="25%">
                                 餐厅经纬度:<span class="explain" style="padding-left: 10px"><a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度怎么填?点我查询</a ></span>
                                 <input class="form-control" ng-model="longitudeNLatitude" placeholder="格式: 00.00000,11.11111">
                             </td>
-                            <td colspan="2">
+                        </tr>
+                        <tr>
+                            <td width="25%">
                                 是否推荐上首页
                                 <select class="form-control" ng-model="basicInfo.recommendLevel" ng-options="object.value as object.key for object in objects">
                                 </select>
-                                    <!--<option value=1>是</option>-->
-                                    <!--<option value=0>否</option>-->
+                                <!--<option value=1>是</option>-->
+                                <!--<option value=0>否</option>-->
                                 <!--</select>-->
                             </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
+                            <td width="25%">
                                 优惠类型
                                 <select class="form-control" ng-model="basicInfo.discountType[0]">
                                     <option value="discount">三免一</option>
                                     <option value="none">暂无</option>
                                 </select>
                             </td>
-                            <td>餐厅电话<span class="explain" style="padding-left: 10px"><i>若有多个电话号码,用一个空格分开</i></span>
+                            <td width="25%">餐厅电话<span class="explain" style="padding-left: 10px"><i>若有多个电话号码,用一个空格分开</i></span>
                                 <input type="tel" class="form-control" ng-model="basicInfo.restaurantTele">
                             </td>
-                            <td colspan="2">
+                            <td width="25%">
                                 营业时间<span class="explain" style="padding-left: 10px"><i>格式:
                                 11:30-14:30,17:30-22:00</i></span>
                                 <input type="text" class="form-control" ng-model="basicInfo.restaurantOpenTime">

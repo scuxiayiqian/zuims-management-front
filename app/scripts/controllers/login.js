@@ -33,7 +33,7 @@ angular.module('sbAdminApp')
 
                     $http.defaults.headers.common['x-auth-token'] = response.data.token;
 
-                    $state.go("dashboard.home");
+                    $state.go("dashboard.reservation-quantity");
                 }, function(response) {
                     alert('密码错误');
                     console.log(response.data.error);

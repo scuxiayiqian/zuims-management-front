@@ -3,7 +3,7 @@
  */
 
 
-angular.module('sbAdminApp', [])
+angular.module('sbAdminApp')
     .directive('pwCheck', [function () {
         return {
             require: 'ngModel',

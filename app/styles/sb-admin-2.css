@@ -885,3 +885,33 @@ p {
     color:#F00;
     font-size:14px;
 }
+
+.display-right {
+    float: right;
+    width: 200px;
+    font-size: 15px;
+}
+
+.query-data {
+    width: 100%;
+    margin: 10px auto;
+    line-height: 34px;
+}
+
+.selectDays {
+    color: #555;
+}
+
+a {
+    margin: 0 8px;
+}
+
+a:active {
+    color: #555;
+}
+
+a:hover {
+    color: #555;
+    cursor: pointer;
+    text-decoration: none;
+}

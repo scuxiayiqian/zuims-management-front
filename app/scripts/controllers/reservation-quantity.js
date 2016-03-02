@@ -8,6 +8,18 @@ angular.module('sbAdminApp')
     .controller('reservationQuantityController', function ($scope, $http, $cookies, $filter) {
         $scope.token = $cookies.get('token');
 
+
+        $scope.getStartDate = function (num) {
+            var startDate = new Date(); //获取今天日期
+            startDate.setDate(startDate.getDate() - num);
+            return startDate;
+        };
+
+        $scope.startDate = $filter('date')($scope.getStartDate(7), 'yyyy-MM-dd');
+        $scope.endDate = $filter('date')($scope.getStartDate(1), 'yyyy-MM-dd');
+        $scope.myStart = $scope.startDate;
+        $scope.myEnd = $scope.endDate;
+
         $scope.restaurantToSearch = {};
 
         $scope.today = function() {
@@ -21,7 +33,7 @@ angular.module('sbAdminApp')
 
         // Disable weekend selection
         $scope.disabled = function(date, mode) {
-            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+            return false;
         };
 
         $scope.toggleMin = function() {
@@ -117,7 +129,7 @@ angular.module('sbAdminApp')
         $scope.getCites();
 
         $scope.line = {
-            labels: ['', '', '', '', '', ''],
+            labels: ['', '', '', '', '', '', ''],
             series: ['预订数量'],
             data: [
                 [0, 0, 0, 0, 0, 0, 0]
@@ -127,14 +139,24 @@ angular.module('sbAdminApp')
             }
         };
 
-        $scope.searchReservationQuantity = function(restaurant) {
+        $scope.queryOrder = function (num) {
+
+            $scope.startDate = $filter('date')($scope.getStartDate(num), 'yyyy-MM-dd');
+            $scope.endDate = $filter('date')($scope.getStartDate(1), 'yyyy-MM-dd');
+            $scope.myStart = $scope.startDate;
+            $scope.myEnd = $scope.endDate;
+
+            //$("#start").val($scope.myStart);
+            //$("#end").val($scope.myEnd);
+            $scope.searchReservationQuantity($scope.startDate, $scope.endDate);
+
+        };
+
+        $scope.searchReservationQuantity = function(startdate, enddate) {
+
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/order/orderCountInfo',
-                params: {
-                    restaurantId: restaurant.restaurantId,
-                    date: $filter('date')($scope.restaurantToSearch.endDate, 'yyyy-MM-dd')
-                },
+                url: 'http://202.120.40.175:21104' + '/order/periodcount?restaurantId=' + $scope.restuarantIdToSearch + '&date1=' + $scope.myStart + '&date2=' + $scope.myEnd,
                 crossDomain: true
             }).success(function(data) {
                 console.log(data);
@@ -143,6 +165,43 @@ angular.module('sbAdminApp')
                 console.log("user delete failed");
             });
         };
+
+        $scope.searchReservationQuantityForSevenDays = function(restaurant) {
+            $scope.restuarantIdToSearch = restaurant.restaurantId;
+            var startdate = $filter('date')($scope.getStartDate(7), 'yyyy-MM-dd');
+            var enddate = $filter('date')($scope.getStartDate(1), 'yyyy-MM-dd');
+
+            $http({
+                method: 'GET',
+                //url: 'http://202.120.40.175:21104/order/orderCountInfo',
+                url: 'http://202.120.40.175:21104' + '/order/periodcount?restaurantId=' + restaurant.restaurantId + '&date1=' + startdate + '&date2=' + enddate,
+                crossDomain: true
+            }).success(function(data) {
+                console.log(data);
+                $scope.getDatasFromSearchingResult(data);
+            }).error(function () {
+                console.log("user delete failed");
+            });
+        };
+
+        $scope.searchReservationQuantityFromSelectedStartAndEnd = function () {
+
+            var startdate = $filter('date')($scope.myStart, 'yyyy-MM-dd');
+            var enddate = $filter('date')($scope.myEnd, 'yyyy-MM-dd');
+
+            $http({
+                method: 'GET',
+                //url: 'http://202.120.40.175:21104/order/orderCountInfo',
+                url: 'http://202.120.40.175:21104' + '/order/periodcount?restaurantId=' + $scope.restuarantIdToSearch + '&date1=' + startdate + '&date2=' + enddate,
+                crossDomain: true
+            }).success(function(data) {
+                console.log(data);
+                $scope.getDatasFromSearchingResult(data);
+            }).error(function () {
+                console.log("user delete failed");
+            });
+        };
+
 
         $scope.getDatasFromSearchingResult = function(data) {
             var makeNums = [];
@@ -170,7 +229,7 @@ angular.module('sbAdminApp')
                 $scope.line.labels = labels;
             } else {
                 $scope.line.data = [[0, 0, 0, 0, 0, 0, 0]];
-                $scope.line.labels = ['', '', '', '', '', ''];
+                $scope.line.labels = ['', '', '', '', '', '', ''];
             }
         };
 
@@ -191,4 +250,11 @@ angular.module('sbAdminApp')
                 console.log("user delete failed");
             });
         };
+
+
+
+
+        console.log($scope.myStart + "... " + $scope.myEnd);
+
+
     });

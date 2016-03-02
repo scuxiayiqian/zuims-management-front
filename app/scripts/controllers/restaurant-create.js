@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('sbAdminApp')
-    .controller('CreateRestaurantController', function ($scope, $http, $cookies, $state) {
+    .controller('CreateRestaurantController', function ($scope, $http, $cookies, $state, $cookieStore) {
 
         $scope.token = $cookies.get('token');
         $scope.marketingUsers = [];
@@ -18,8 +18,41 @@ angular.module('sbAdminApp')
         $scope.basicInfo.latitude = $cookies.get('latitude');
         $scope.basicInfo.restaurantAddress = $cookies.get('hotelAddress');
         $scope.basicInfo.longitudeNLatitude = $scope.basicInfo.longitude + "," + $scope.basicInfo.latitude;
+        $scope.basicInfo.persistTime = 3;
+        $scope.basicInfo.persistTable = 10;
 
         console.log($scope.basicInfo);
+
+        $scope.isMarketing = function() {
+
+            var user = $cookieStore.get('user');
+
+            if(user == null) {
+                $state.go('login');
+            }
+
+            var flag = false;
+
+            var userRoles = user.roles;
+
+            for (var i = 0; i < userRoles.length; i++) {
+                if (userRoles[i].name == 'marketing') {
+                    flag = true;
+
+                    // set basicInfo.sellerId to loggin user's id
+                    $scope.basicInfo.sellerId = parseInt($cookieStore.get('user').id, 10);
+                }
+
+                if(flag) {
+                    break;
+                }
+            }
+
+            if(!flag) {
+                console.log('not marketing');
+            }
+            //return flag;
+        };
 
         $scope.getProductions = function() {
             $http({
@@ -102,8 +135,9 @@ angular.module('sbAdminApp')
 
                 $state.go("dashboard.hotel");
             });
-        }
+        };
 
         $scope.getMarketingUsers();
         $scope.getProductions();
+        $scope.isMarketing();
     });

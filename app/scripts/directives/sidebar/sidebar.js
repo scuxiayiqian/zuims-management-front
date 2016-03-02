@@ -49,7 +49,7 @@ angular.module('sbAdminApp')
                         console.log(item);
                     }
                     return flag;
-                }
+                };
 
                 $scope.check = function(x){
 

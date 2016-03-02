@@ -11,7 +11,7 @@
             <div class="panel-body">
                 <div class="col-md-5">
                     餐厅所在地
-                    <select class="form-control" ng-model="restaurantToSearch.city" ng-options="city.name as city.name for city in cities">
+                    <select class="form-control" ng-model="restaurantToSearch.city" ng-options="city.name as city.name for city in cities" ng-change="citySelected()">
                         <!--<option value="">选择城市</option>-->
                     </select>
                 </div>
@@ -47,8 +47,8 @@
                 <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
                     <thead>
                     <tr>
-                        <th st-sort="hotelName">酒店名</th>
                         <th st-sort="name">餐厅名</th>
+                        <th st-sort="hotelName">酒店名</th>
                         <th st-sort="marketingName">城市</th>
                         <th >餐厅地理位置</th>
                         <th >编辑</th>
@@ -56,8 +56,8 @@
                     </thead>
                     <tbody>
                     <tr st-select-row="row" ng-repeat="row in displayedCollection">
-                        <td>{{row.hotelName}}</td>
                         <td>{{row.restaurantName}}</td>
+                        <td>{{row.hotelName}}</td>
                         <td>{{row.city}}</td>
                         <td>({{row.longitude}}, {{row.latitude}})</td>
                         <td>

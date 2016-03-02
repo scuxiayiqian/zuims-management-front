@@ -297,7 +297,31 @@ angular.module('sbAdminApp')
             $state.go("dashboard.restaurant-create");
         };
 
+        $scope.citySelected = function() {
+
+            $scope.restaurantToSearch.hotelName = '';
+
+            $http({
+                method: 'GET',
+                url: 'http://202.120.40.175:21104/restaurant/search/hotelnamecity',
+                params: {
+                    hotelName: "",
+                    city: $scope.restaurantToSearch.city
+                },
+                crossDomain: true
+            }).success(function(data) {
+                console.log(data);
+                $scope.rowCollection = data;
+                $scope.displayedCollection = data;
+            }).error(function () {
+                console.log("user delete failed");
+            });
+
+            console.log($scope.rowCollection);
+        };
+
         $scope.getCites();
         $scope.getUsers();
         $scope.getProductions();
+        $scope.citySelected();
     });

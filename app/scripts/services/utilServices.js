@@ -17,14 +17,11 @@ angular.module('sbAdminApp')
             }
         };
 
-        this.getOrderCountInfo = function(restid, enddate) {
+        this.getOrderCountInfo = function(restid, startdate, enddate) {
+
             return $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/order/orderCountInfo',
-                params: {
-                    restaurantId: restid,
-                    date: $filter('date')(enddate, 'yyyy-MM-dd')
-                },
+                url: 'http://202.120.40.175:21104/order/periodcount?restaurantId=' + restid + '&date1=' + startdate + '&date2=' + enddate,
                 crossDomain: true
             });
         };
@@ -92,7 +89,7 @@ angular.module('sbAdminApp')
             if (data.length > 0) {
                 return [[makeNums], labels];
             } else {
-                return [[[0, 0, 0, 0, 0, 0, 0]], ['', '', '', '', '', '']];
+                return [[[0, 0, 0, 0, 0, 0, 0]], ['', '', '', '', '', '', '']];
             }
         };
 

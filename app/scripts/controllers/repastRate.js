@@ -1,23 +1,25 @@
 'use strict';
 
 angular.module('sbAdminApp')
-    .controller('repastRateController', function ($scope, $http, $cookies, utilService) {
+    .controller('repastRateController', function ($scope, $http, $cookies, $filter, utilService) {
         $scope.token = $cookies.get('token');
 
-        $scope.restaurantToSearch = {};
+        $scope.restaurantToSearch = null;
 
-        $scope.today = function() {
-            $scope.restaurantToSearch.endDate = new Date();
+        $scope.getStartDate = function (num) {
+            var startDate = new Date(); //获取今天日期
+            startDate.setDate(startDate.getDate() - num);
+            return startDate;
         };
-        $scope.today();
 
-        $scope.clear = function () {
-            $scope.endDate = null;
-        };
+        $scope.startDate = $filter('date')($scope.getStartDate(7), 'yyyy-MM-dd');
+        $scope.endDate = $filter('date')($scope.getStartDate(1), 'yyyy-MM-dd');
+        $scope.myStart = $scope.startDate;
+        $scope.myEnd = $scope.endDate;
 
         // Disable weekend selection
         $scope.disabled = function(date, mode) {
-            return ( mode === 'day' && ( date.getDay() === 0 || date.getDay() === 6 ) );
+            return false;
         };
 
         $scope.toggleMin = function() {
@@ -113,7 +115,7 @@ angular.module('sbAdminApp')
         $scope.getCites();
 
         $scope.line = {
-            labels: ['', '', '', '', '', ''],
+            labels: ['', '', '', '', '', '', ''],
             series: ['有效订单率'],
             data: [
                 [0, 0, 0, 0, 0, 0, 0]
@@ -140,8 +142,34 @@ angular.module('sbAdminApp')
             });
         };
 
-        $scope.searchOrderQuantity = function(restaurant) {
-            utilService.getOrderCountInfo(restaurant.restaurantId, $scope.restaurantToSearch.endDate)
+        $scope.queryOrder = function (num) {
+
+            $scope.startDate = $filter('date')($scope.getStartDate(num), 'yyyy-MM-dd');
+            $scope.endDate = $filter('date')($scope.getStartDate(1), 'yyyy-MM-dd');
+            $scope.myStart = $scope.startDate;
+            $scope.myEnd = $scope.endDate;
+
+            //$("#start").val($scope.myStart);
+            //$("#end").val($scope.myEnd);
+            $scope.searchRepastRateFromSelectedStartAndEnd();
+        };
+
+        $scope.searchRepastRateFromSelectedStartAndEnd = function (restaurant) {
+
+            if (restaurant != null) {
+                $scope.restuarantIdToSearch = restaurant.restaurantId;
+            }
+
+            if ($scope.restaurantToSearch == null) {
+                return;
+            }
+
+            var startdate = $filter('date')($scope.myStart, 'yyyy-MM-dd');
+            var enddate = $filter('date')($scope.myEnd, 'yyyy-MM-dd');
+
+            console.log('search: ' + startdate + ' to ' + enddate);
+
+            utilService.getOrderCountInfo($scope.restuarantIdToSearch, startdate, enddate)
                 .success(function(data) {
 
                     var formatdata = utilService.formatOrderCountInfo(data, "repastRate");

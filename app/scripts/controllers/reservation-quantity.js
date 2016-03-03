@@ -20,7 +20,7 @@ angular.module('sbAdminApp')
         $scope.myStart = $scope.startDate;
         $scope.myEnd = $scope.endDate;
 
-        $scope.restaurantToSearch = {};
+        $scope.restaurantToSearch = null;
 
         $scope.today = function() {
             $scope.restaurantToSearch.endDate = new Date();
@@ -148,51 +148,26 @@ angular.module('sbAdminApp')
 
             //$("#start").val($scope.myStart);
             //$("#end").val($scope.myEnd);
-            $scope.searchReservationQuantity($scope.startDate, $scope.endDate);
+            $scope.searchReservationQuantityFromSelectedStartAndEnd();
 
         };
 
-        $scope.searchReservationQuantity = function(startdate, enddate) {
+        $scope.searchReservationQuantityFromSelectedStartAndEnd = function(restaurant) {
 
-            $http({
-                method: 'GET',
-                url: 'http://202.120.40.175:21104' + '/order/periodcount?restaurantId=' + $scope.restuarantIdToSearch + '&date1=' + $scope.myStart + '&date2=' + $scope.myEnd,
-                crossDomain: true
-            }).success(function(data) {
-                console.log(data);
-                $scope.getDatasFromSearchingResult(data);
-            }).error(function () {
-                console.log("user delete failed");
-            });
-        };
+            if (restaurant != null) {
+                $scope.restuarantIdToSearch = restaurant.restaurantId;
+            }
 
-        $scope.searchReservationQuantityForSevenDays = function(restaurant) {
-            $scope.restuarantIdToSearch = restaurant.restaurantId;
-            var startdate = $filter('date')($scope.getStartDate(7), 'yyyy-MM-dd');
-            var enddate = $filter('date')($scope.getStartDate(1), 'yyyy-MM-dd');
-
-            $http({
-                method: 'GET',
-                //url: 'http://202.120.40.175:21104/order/orderCountInfo',
-                url: 'http://202.120.40.175:21104' + '/order/periodcount?restaurantId=' + restaurant.restaurantId + '&date1=' + startdate + '&date2=' + enddate,
-                crossDomain: true
-            }).success(function(data) {
-                console.log(data);
-                $scope.getDatasFromSearchingResult(data);
-            }).error(function () {
-                console.log("user delete failed");
-            });
-        };
-
-        $scope.searchReservationQuantityFromSelectedStartAndEnd = function () {
+            if ($scope.restaurantToSearch == null) {
+                return;
+            }
 
             var startdate = $filter('date')($scope.myStart, 'yyyy-MM-dd');
             var enddate = $filter('date')($scope.myEnd, 'yyyy-MM-dd');
 
             $http({
                 method: 'GET',
-                //url: 'http://202.120.40.175:21104/order/orderCountInfo',
-                url: 'http://202.120.40.175:21104' + '/order/periodcount?restaurantId=' + $scope.restuarantIdToSearch + '&date1=' + startdate + '&date2=' + enddate,
+                url: 'http://202.120.40.175:21104/order/periodcount?restaurantId=' + $scope.restuarantIdToSearch + '&date1=' + startdate + '&date2=' + enddate,
                 crossDomain: true
             }).success(function(data) {
                 console.log(data);

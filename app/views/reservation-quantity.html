@@ -18,30 +18,6 @@
                     餐厅名称
                     <input type="text" class="form-control ng-pristine ng-valid ng-touched" ng-model="restaurantToSearch.name">
                 </div>
-                <!--<div class="col-md-4">-->
-                    <!--查询时间  <small>(从当月第一天到本日)</small>-->
-                    <!--<p class="input-group">-->
-                        <!--<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="restaurantToSearch.endDate"-->
-                               <!--is-open="status.opened" min-date="minDate" max-date="maxDate"-->
-                               <!--datepicker-options="dateOptions" date-disabled="disabled(date, mode)"-->
-                               <!--ng-required="true" close-text="Close" />-->
-                        <!--<span class="input-group-btn">-->
-                            <!--<button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>-->
-                        <!--</span>-->
-                    <!--</p>-->
-                <!--</div>-->
-                <!--<div class="col-md-3">-->
-                    <!--结束时间-->
-                    <!--<p class="input-group">-->
-                        <!--<input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="restaurantToSearch.endDate"-->
-                               <!--is-open="endDateStatus.opened" min-date="minDate" max-date="maxDate"-->
-                               <!--datepicker-options="dateOptions" date-disabled="disabled(date, mode)"-->
-                               <!--ng-required="true" close-text="Close" />-->
-                        <!--<span class="input-group-btn">-->
-                            <!--<button type="button" class="btn btn-default" ng-click="openEndDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>-->
-                        <!--</span>-->
-                    <!--</p>-->
-                <!--</div>-->
                 <div class="col-md-2">
                     <br>
                     <button type="button" class="btn btn-primary" ng-click="searchBtnClicked()">
@@ -72,10 +48,9 @@
                         <td>{{row.restaurantName}}</td>
                         <td>{{row.city}}</td>
                         <td>
-                            <button class="btn btn-xs btn-primary" type="button" ng-click="searchReservationQuantityForSevenDays(row)">
+                            <button class="btn btn-xs btn-primary" type="button" ng-click="searchReservationQuantityFromSelectedStartAndEnd(row)">
                                 <i class="fa fa-search"></i>
                             </button>
-                            <!--<button type="button" class="btn btn-success">查询</button>-->
                         </td>
                     </tr>
                     </tbody>

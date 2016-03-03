@@ -21,16 +21,7 @@ angular.module('sbAdminApp')
         $scope.myEnd = $scope.endDate;
 
         $scope.restaurantToSearch = null;
-
-        $scope.today = function() {
-            $scope.restaurantToSearch.endDate = new Date();
-        };
-        $scope.today();
-
-        $scope.clear = function () {
-            $scope.endDate = null;
-        };
-
+        
         // Disable weekend selection
         $scope.disabled = function(date, mode) {
             return false;

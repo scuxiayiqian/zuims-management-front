@@ -67,8 +67,8 @@
                                        ng-model="basicInfo.restaurantAddress"/>
                             </td>
                             <td width="25%">
-                                餐厅经纬度:<span class="explain" style="padding-left: 10px"><a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度怎么填?点我查询</a ></span>
-                                <input class="form-control" ng-model="longitudeNLatitude" placeholder="格式: 00.00000,11.11111">
+                                餐厅经纬度<span class="explain" style="padding-left: 10px"><a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度怎么填？点我查询</a ></span>
+                                <input class="form-control" ng-model="longitudeNLatitude" placeholder="格式：00.00000,11.11111">
                             </td>
                         </tr>
                         <tr>
@@ -87,11 +87,11 @@
                                     <option value="none">暂无</option>
                                 </select>
                             </td>
-                            <td width="25%">餐厅电话<span class="explain" style="padding-left: 10px">若有多个电话号码,用一个空格分开</span>
+                            <td width="25%">餐厅电话<span class="explain" style="padding-left: 10px">若有多个电话号码，用一个空格分开</span>
                                 <input type="tel" class="form-control" ng-model="basicInfo.restaurantTele">
                             </td>
                             <td width="25%">
-                                营业时间<span class="explain" style="padding-left: 10px">格式:
+                                营业时间<span class="explain" style="padding-left: 10px">格式：
                                 11:30-14:30,17:30-22:00</span>
                                 <input type="text" class="form-control" ng-model="basicInfo.restaurantOpenTime">
                             </td>
@@ -113,7 +113,7 @@
                     <div class="handle-image" ng-controller="ImageRecommendCtrl">
                         <div id="recommend-pic">
                             平台首页展示餐厅照片
-                            <div><span class="explain">图片分辨率:530*715</span></div>
+                            <div><span class="explain">图片分辨率：530*715</span></div>
 
 
                             <div ng-show="homePageShow">
@@ -128,7 +128,7 @@
                                 <div class="croppedPic" style="display: none"><img ng-src="{{myRecommendCroppedPic}}"/>
                                 </div>
                                 <div class="picRecommendDescription">
-                                    <input class="form-control" type="text" placeholder="图片描述,限20字,与图片同时显示在用户手机上"
+                                    <input class="form-control" type="text" placeholder="图片描述，限20字，与图片同时显示在用户手机上"
                                            ng-model="picDescription"/>
                                 </div>
                                 <div class="image-upload">
@@ -152,7 +152,7 @@
                         </div>
                         <div id="detail-pic" ng-controller="ImageDetailCtrl">
                             餐厅详情图文
-                            <div><span class="explain">图片分辨率:640*420,用户手机端显示最近上传的五张图片以及对应的文字描述</span></div>
+                            <div><span class="explain">图片分辨率：640*420，用户手机端显示最近上传的五张图片以及对应的文字描述</span></div>
 
                             <div ng-show="detailPicShow">
                                 <div class="cropAreaDetail">
@@ -165,7 +165,7 @@
                                 <!--<div>图片预览:</div>-->
                                 <div class="croppedPic" style="display: none"><img ng-src="{{myDetailCroppedPic}}"/></div>
                                 <div class="picDetailDescription">
-                                    <input class="form-control" type="text" placeholder="图片描述,限20字,与图片同时显示在用户手机上"
+                                    <input class="form-control" type="text" placeholder="图片描述，限20字，与图片同时显示在用户手机上"
                                            ng-model="picDescription"/>
                                 </div>
                                 <div class="image-upload">
@@ -205,13 +205,13 @@
                     <div class="autoAcceptConfig">
                         <div class="config-item">
                             餐厅为最美食会员预留桌数最大值<input class="config-input" type="number" ng-model="persistInfo.persistTable">
-                            <span class="explain">(说明:如果系统内当日未完成预定超过预设值,则自动转为人工接单)</span>
+                            <span class="explain">（说明：如果系统内当日未完成预定超过预设值，则自动转为人工接单）</span>
                         </div>
                         <div class="config-item">
-                            用户发起预定时距离时间大于<input type="number" class="config-input" ng-model="persistInfo.persistTime">小时的订单,系统自动订单.
+                            用户发起预定时距离时间大于<input type="number" class="config-input" ng-model="persistInfo.persistTime">小时的订单，系统自动订单.
                         </div>
                         <div class="config-item">
-                            <span class="explain">自动接单:在指定时间范围内的订单系统自动为商户确定订单,在指定时间范围外的订单需要餐厅联系人进行人工确认接单.</span>
+                            <span class="explain">自动接单：在指定时间范围内的订单系统自动为商户确定订单，在指定时间范围外的订单需要餐厅联系人进行人工确认接单。</span>
                         </div>
                     </div>
                     <div class="save-btn">
@@ -225,47 +225,47 @@
                 <!--餐厅联系人设置开始-->
                 <div class="contacts separator" ng-controller="ContactCtrl">
                     <h4>餐厅联系人设置 <span class="explain"
-                                      style="padding-left: 20px;">至少两位联系人,请填写有效联系方式,否则系统无法正常传递预定信息</span>
+                                      style="padding-left: 20px;">至少两位联系人，请填写有效联系方式，否则系统无法正常传递预定信息</span>
                     </h4>
 
                     <div class="contacts-infos">
                         <div class="contact">
-                            联系人1:
+                            联系人1：
                         </div>
                         <div class="contact-info">
-                            姓名:<input type="text" class="contact-input" ng-model="contact[0].linkmanName"
+                            姓名：<input type="text" class="contact-input" ng-model="contact[0].linkmanName"
                                       style="width: 100px">
-                            手机号:<input type="tel" class="contact-input" ng-model="contact[0].linkmanPhone"
+                            手机号：<input type="tel" class="contact-input" ng-model="contact[0].linkmanPhone"
                                        style="width: 120px">
-                            Email:<input type="email" class="contact-input" ng-model="contact[0].linkmanEmail">
-                            职位:<input type="text" class="contact-input" ng-model="contact[0].position" style="width: 80px">
+                            Email：<input type="email" class="contact-input" ng-model="contact[0].linkmanEmail">
+                            职位：<input type="text" class="contact-input" ng-model="contact[0].position" style="width: 80px">
                             <input type="radio" name="contact0" ng-model="selectContact" value="0">预定信息优先通知给他/她
                         </div>
 
                         <div class="contact">
-                            联系人2:
+                            联系人2：
                         </div>
                         <div class="contact-info">
-                            姓名:<input type="text" class="contact-input" ng-model="contact[1].linkmanName"
+                            姓名：<input type="text" class="contact-input" ng-model="contact[1].linkmanName"
                                       style="width: 100px">
-                            手机号:<input type="tel" class="contact-input" ng-model="contact[1].linkmanPhone"
+                            手机号：<input type="tel" class="contact-input" ng-model="contact[1].linkmanPhone"
                                        style="width: 120px">
-                            Email:<input type="email" class="contact-input" ng-model="contact[1].linkmanEmail">
-                            职位:<input type="text" class="contact-input" ng-model="contact[1].position" style="width: 80px">
+                            Email：<input type="email" class="contact-input" ng-model="contact[1].linkmanEmail">
+                            职位：<input type="text" class="contact-input" ng-model="contact[1].position" style="width: 80px">
                             <input type="radio" name="contact1" ng-model="selectContact" value="1">预定信息优先通知给他/她
                         </div>
 
                         <div class="contact">
-                            联系人3:
+                            联系人3：
                         </div>
                         <div class="contact-info">
-                            姓名:<input type="text" class="contact-input" ng-model="contact[2].linkmanName"
+                            姓名：<input type="text" class="contact-input" ng-model="contact[2].linkmanName"
                                       style="width: 100px">
-                            手机号:<input type="tel" class="contact-input" ng-model="contact[2].linkmanPhone"
+                            手机号：<input type="tel" class="contact-input" ng-model="contact[2].linkmanPhone"
                                        style="width: 120px">
-                            Email:<input type="email" class="contact-input" ng-model="contact[2].linkmanEmail">
+                            Email：<input type="email" class="contact-input" ng-model="contact[2].linkmanEmail">
 
-                            职位:<input type="text" class="contact-input" ng-model="contact[2].position" style="width: 80px">
+                            职位：<input type="text" class="contact-input" ng-model="contact[2].position" style="width: 80px">
                             <input type="radio" name="contact2" ng-model="selectContact" value="2">预定信息优先通知给他/她
                         </div>
                     </div>
@@ -282,9 +282,9 @@
                     <h4>登录密码修改</h4>
 
                     <div class="changePwd">
-                        旧密码:<input type="password" class="pwd-input" ng-model="oldPwd"/>
-                        新密码:<input type="password" class="pwd-input" ng-model="newPwd"/>
-                        重复新密码:<input type="password" class="pwd-input" ng-model="newPwdRepeat"/>
+                        旧密码：<input type="password" class="pwd-input" ng-model="oldPwd"/>
+                        新密码：<input type="password" class="pwd-input" ng-model="newPwd"/>
+                        重复新密码：<input type="password" class="pwd-input" ng-model="newPwdRepeat"/>
                         <button style="margin-left: 10px" class="btn btn-warning" ng-click="updatePwd()"><span
                                 class="glyphicon glyphicon-ok"></span>修改密码
                         </button>
@@ -320,12 +320,12 @@
             </p>
 
             <p>
-                <span class="font-c-8f">地址 ：</span>
+                <span class="font-c-8f">地址：</span>
                 <span class="font-c-40">{{restaurantInfo.restaurantAddress}}</span>
             </p>
 
             <p>
-                <span class="font-c-8f">电话 ：</span>
+                <span class="font-c-8f">电话：</span>
                         <span class="font-c-40"><span ng-repeat=" tel in restaurantInfo.restaurantTeles">
                             <a class="font-c-40" href="tel:{{tel}}">{{tel}}</a></span> </span>
             </p>
@@ -363,12 +363,12 @@
                     <span class="display-ib ht20 l-ht20 pl5 pr5 border ml10" ng-show="discount">三免一餐厅</span>
                 </div>
                 <p>
-                    <span class="font-c-8f">地址 ：</span>
+                    <span class="font-c-8f">地址：</span>
                     <span class="font-c-40">{{restaurantInfo.restaurantAddress}}</span>
                 </p>
 
                 <p>
-                    <span class="font-c-8f">电话 ：</span>
+                    <span class="font-c-8f">电话：</span>
                     <span class="font-c-40">{{restaurantInfo.restaurantTele}}</span>
                 </p>
                 <p>

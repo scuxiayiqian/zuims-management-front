@@ -62,7 +62,7 @@
                                 <input class="form-control" type="number" ng-model="basicInfo.nightPrice">
                             </td>
                             <td width="25%">
-                                餐厅详细地址<span class="explain" style="padding-left: 10px"><i>城市不用重复填写</i></span>
+                                餐厅详细地址<span class="explain" style="padding-left: 10px">城市不用重复填写</span>
                                 <input type="text" class="form-control" placeholder="城市不用重复填写"
                                        ng-model="basicInfo.restaurantAddress"/>
                             </td>
@@ -87,12 +87,12 @@
                                     <option value="none">暂无</option>
                                 </select>
                             </td>
-                            <td width="25%">餐厅电话<span class="explain" style="padding-left: 10px"><i>若有多个电话号码,用一个空格分开</i></span>
+                            <td width="25%">餐厅电话<span class="explain" style="padding-left: 10px">若有多个电话号码,用一个空格分开</span>
                                 <input type="tel" class="form-control" ng-model="basicInfo.restaurantTele">
                             </td>
                             <td width="25%">
-                                营业时间<span class="explain" style="padding-left: 10px"><i>格式:
-                                11:30-14:30,17:30-22:00</i></span>
+                                营业时间<span class="explain" style="padding-left: 10px">格式:
+                                11:30-14:30,17:30-22:00</span>
                                 <input type="text" class="form-control" ng-model="basicInfo.restaurantOpenTime">
                             </td>
                         </tr>
@@ -113,7 +113,7 @@
                     <div class="handle-image" ng-controller="ImageRecommendCtrl">
                         <div id="recommend-pic">
                             平台首页展示餐厅照片
-                            <div><span class="explain"><i>图片分辨率:530*715</i></span></div>
+                            <div><span class="explain">图片分辨率:530*715</span></div>
 
 
                             <div ng-show="homePageShow">
@@ -152,7 +152,7 @@
                         </div>
                         <div id="detail-pic" ng-controller="ImageDetailCtrl">
                             餐厅详情图文
-                            <div><span class="explain"><i>图片分辨率:640*420,用户手机端显示最近上传的五张图片以及对应的文字描述</i></span></div>
+                            <div><span class="explain">图片分辨率:640*420,用户手机端显示最近上传的五张图片以及对应的文字描述</span></div>
 
                             <div ng-show="detailPicShow">
                                 <div class="cropAreaDetail">
@@ -205,13 +205,13 @@
                     <div class="autoAcceptConfig">
                         <div class="config-item">
                             餐厅为最美食会员预留桌数最大值<input class="config-input" type="number" ng-model="persistInfo.persistTable">
-                            <span class="explain"><i>(说明:如果系统内当日未完成预定超过预设值,则自动转为人工接单)</i></span>
+                            <span class="explain">(说明:如果系统内当日未完成预定超过预设值,则自动转为人工接单)</span>
                         </div>
                         <div class="config-item">
                             用户发起预定时距离时间大于<input type="number" class="config-input" ng-model="persistInfo.persistTime">小时的订单,系统自动订单.
                         </div>
                         <div class="config-item">
-                            <span class="explain"><i>自动接单:在指定时间范围内的订单系统自动为商户确定订单,在指定时间范围外的订单需要餐厅联系人进行人工确认接单.</i></span>
+                            <span class="explain">自动接单:在指定时间范围内的订单系统自动为商户确定订单,在指定时间范围外的订单需要餐厅联系人进行人工确认接单.</span>
                         </div>
                     </div>
                     <div class="save-btn">
@@ -225,7 +225,7 @@
                 <!--餐厅联系人设置开始-->
                 <div class="contacts separator" ng-controller="ContactCtrl">
                     <h4>餐厅联系人设置 <span class="explain"
-                                      style="padding-left: 20px;"><i>至少两位联系人,请填写有效联系方式,否则系统无法正常传递预定信息</i></span>
+                                      style="padding-left: 20px;">至少两位联系人,请填写有效联系方式,否则系统无法正常传递预定信息</span>
                     </h4>
 
                     <div class="contacts-infos">

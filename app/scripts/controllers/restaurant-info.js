@@ -28,7 +28,7 @@ angular.module('sbAdminApp')
         $scope.restaurantToSearch = {};
 
         // 城市默认选择上海
-        $scope.restaurantToSearch.city = '上海';
+        $scope.restaurantToSearch.city = '上海市';
 
         function setCities(cityArray) {
             for (var i = 0; i < cityArray.length; i++) {

@@ -35,14 +35,14 @@
                     <tr>
                         <th width="15%" st-sort="hotelName">餐厅名称</th>
                         <th width="10%">餐厅类型</th>
-                        <th width="10%" >餐厅电话</th>
+                        <th width="15%" >餐厅电话</th>
                         <th width="5%"> 订单用户</th>
-                        <th width="10%" st-sort="city">城市</th>
-                        <th width="10%">订单时间</th>
-                        <th width="10%">用户邮箱</th>
-                        <th width="5%">会员等级</th>
-                        <th width="15%">联系人</th>
-                        <th width="10%">处理订单</th>
+                        <th width="5%">就餐人数</th>
+                        <th width="10%">就餐时间</th>
+                        <th width="10%">预订人联系方式</th>
+                        <th width="10%">会员等级</th>
+                        <th width="15%">餐厅联系人</th>
+                        <th width="5%">处理订单</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -51,9 +51,9 @@
                         <td>{{row.restaurantType}}</td>
                         <td>{{row.restaurantTel}}</td>
                         <td>{{row.userLastName}}{{row.userFirstName}}</td>
-                        <td>{{row.city}}</td>
-                        <td>{{row.createTime}}</td>
-                        <td>{{row.userEmail}}</td>
+                        <td>{{row.dinerNum}}</td>
+                        <td>{{row.orderTime}}</td>
+                        <td><b>{{row.phoneId}}</b></td>
                         <td>{{row.userVipLevel}}</td>
                         <td>{{row.linkman}}</td>
                         <td align="center">

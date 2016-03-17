@@ -113,7 +113,7 @@ angular.module('sbAdminApp')
         $scope.getCites = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/cities',
+                url: 'http://115.159.87.129:8008/cities',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -142,7 +142,7 @@ angular.module('sbAdminApp')
         $scope.searchBtnClicked = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/search/namecity',
+                url: 'http://115.159.87.129:8004/restaurant/search/namecity',
                 params: {
                     restaurantName: $scope.restaurantToSearch.name,
                     city: $scope.restaurantToSearch.city

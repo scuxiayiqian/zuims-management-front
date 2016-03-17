@@ -57,7 +57,7 @@ angular.module('sbAdminApp')
         $scope.getProductions = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/productions',
+                url: 'http://115.159.87.129:8008/productions',
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -83,7 +83,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'POST',
-                url: 'http://202.120.40.175:21104/restaurant/add',
+                url: 'http://115.159.87.129:8004/restaurant/add',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -116,7 +116,7 @@ angular.module('sbAdminApp')
         $scope.getMarketingUsers = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/roles/marketing/users',
+                url: 'http://115.159.87.129:8008/roles/marketing/users',
                 headers: {
                     'x-auth-token': $scope.token
                 },

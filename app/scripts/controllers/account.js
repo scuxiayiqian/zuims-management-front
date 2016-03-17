@@ -82,7 +82,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'DELETE',
-                url: 'http://202.120.40.175:21108/users/' + $scope.accountToDelete.id,
+                url: 'http://115.159.87.129:8008/users/' + $scope.accountToDelete.id,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -111,7 +111,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'PUT',
-                url: 'http://202.120.40.175:21108/users/' + $scope.accountToUpdate.id,
+                url: 'http://115.159.87.129:8008/users/' + $scope.accountToUpdate.id,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -139,7 +139,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'POST',
-                url: 'http://202.120.40.175:21108/users/-1',
+                url: 'http://115.159.87.129:8008/users/-1',
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -157,7 +157,7 @@ angular.module('sbAdminApp')
             // get role list request
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/users',
+                url: 'http://115.159.87.129:8008/users',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -177,7 +177,7 @@ angular.module('sbAdminApp')
             // get right list request
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/roles',
+                url: 'http://115.159.87.129:8008/roles',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token

@@ -100,7 +100,7 @@ angular.module('sbAdminApp')
 
             //$http({
             //    method: 'DELETE',
-            //    url: 'http://202.120.40.175:21108/restaurants/' + $scope.restaurantToDelete.name,
+            //    url: 'http://115.159.87.129:8008/restaurants/' + $scope.restaurantToDelete.name,
             //    headers: {
             //        'x-auth-token': $scope.token
             //    },
@@ -119,7 +119,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/delete?restaurantId=' + $scope.restaurantToDelete.restaurantId,
+                url: 'http://115.159.87.129:8004/restaurant/delete?restaurantId=' + $scope.restaurantToDelete.restaurantId,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -152,7 +152,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'PUT',
-                url: 'http://202.120.40.175:21108/restaurants/' + $scope.restaurantToUpdate.name,
+                url: 'http://115.159.87.129:8008/restaurants/' + $scope.restaurantToUpdate.name,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -181,7 +181,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'POST',
-                url: 'http://202.120.40.175:21108/restaurants',
+                url: 'http://115.159.87.129:8008/restaurants',
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -198,7 +198,7 @@ angular.module('sbAdminApp')
             // get restaurant list request
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/cities/' + $scope.selectedCity + '/restaurants',
+                url: 'http://115.159.87.129:8008/cities/' + $scope.selectedCity + '/restaurants',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -215,7 +215,7 @@ angular.module('sbAdminApp')
         $scope.getCites = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/cities',
+                url: 'http://115.159.87.129:8008/cities',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -231,7 +231,7 @@ angular.module('sbAdminApp')
         $scope.getUsers = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/roles/marketing/users',
+                url: 'http://115.159.87.129:8008/roles/marketing/users',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -247,7 +247,7 @@ angular.module('sbAdminApp')
         $scope.getProductions = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/productions',
+                url: 'http://115.159.87.129:8008/productions',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -271,7 +271,7 @@ angular.module('sbAdminApp')
             //console.log($scope.restaurantToSearch.city + $scope.restaurantToSearch.name);
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/search/hotelnamecity',
+                url: 'http://115.159.87.129:8004/restaurant/search/hotelnamecity',
                 params: {
                     hotelName: $scope.restaurantToSearch.hotelName,
                     city: $scope.restaurantToSearch.city
@@ -303,7 +303,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/search/hotelnamecity',
+                url: 'http://115.159.87.129:8004/restaurant/search/hotelnamecity',
                 params: {
                     hotelName: "",
                     city: $scope.restaurantToSearch.city

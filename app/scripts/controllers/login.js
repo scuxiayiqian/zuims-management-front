@@ -21,7 +21,7 @@ angular.module('sbAdminApp')
 
                 var req = {
                     method: 'GET',
-                    url: 'http://202.120.40.175:21108/token',
+                    url: 'http://115.159.87.129:8008/token',
                     headers: {
                         authorization : "Basic " + btoa($scope.login.username + ":" + $scope.login.password)
                     }
@@ -49,7 +49,7 @@ angular.module('sbAdminApp')
 
                 $http({
                     method: 'DELETE',
-                    url: 'http://202.120.40.175:21108/token',
+                    url: 'http://115.159.87.129:8008/token',
                     headers: {
                         'x-auth-token': token
                     },

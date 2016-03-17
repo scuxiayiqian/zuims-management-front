@@ -41,7 +41,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/hotel/delete?hotelId=' + $scope.hotelToDelete.hotelId,
+                url: 'http://115.159.87.129:8004/restaurant/hotel/delete?hotelId=' + $scope.hotelToDelete.hotelId,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -68,7 +68,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'POST',
-                url: 'http://202.120.40.175:21104/restaurant/hotel/update',
+                url: 'http://115.159.87.129:8004/restaurant/hotel/update',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -96,7 +96,7 @@ angular.module('sbAdminApp')
             $scope.hotelToCreate.memo = "";
             $http({
                 method: 'POST',
-                url: 'http://202.120.40.175:21104/restaurant/hotel/add',
+                url: 'http://115.159.87.129:8004/restaurant/hotel/add',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -115,7 +115,7 @@ angular.module('sbAdminApp')
             // get restaurant list request
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/hotel/all',
+                url: 'http://115.159.87.129:8004/restaurant/hotel/all',
                 crossDomain: true
             }).success(function (hotelArr) {
                 console.log("get hotel list successed");
@@ -142,7 +142,7 @@ angular.module('sbAdminApp')
         $scope.getCites = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/cities',
+                url: 'http://115.159.87.129:8008/cities',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token

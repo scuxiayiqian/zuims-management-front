@@ -36,7 +36,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'DELETE',
-                url: 'http://202.120.40.175:21108/productions/' + $scope.productionToDelete.id,
+                url: 'http://115.159.87.129:8008/productions/' + $scope.productionToDelete.id,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -55,7 +55,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'PUT',
-                url: 'http://202.120.40.175:21108/productions/' + $scope.productionToUpdate.id,
+                url: 'http://115.159.87.129:8008/productions/' + $scope.productionToUpdate.id,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -73,7 +73,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'POST',
-                url: 'http://202.120.40.175:21108/productions',
+                url: 'http://115.159.87.129:8008/productions',
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -91,7 +91,7 @@ angular.module('sbAdminApp')
             // get restaurant list request
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/productions',
+                url: 'http://115.159.87.129:8008/productions',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token

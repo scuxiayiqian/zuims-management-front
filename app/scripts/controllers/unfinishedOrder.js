@@ -21,7 +21,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/order/confirmOrder',
+                url: 'http://115.159.87.129:8004/order/confirmOrder',
                 params: {
                     orderId: row,
                     opt: 1
@@ -39,7 +39,7 @@ angular.module('sbAdminApp')
         $scope.cancelOrder = function(row) {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/order/confirmOrder',
+                url: 'http://115.159.87.129:8004/order/confirmOrder',
                 params: {
                     orderId: row,
                     opt: 0
@@ -61,7 +61,7 @@ angular.module('sbAdminApp')
             // get restaurant list request
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/order/unconfirmedorder',
+                url: 'http://115.159.87.129:8004/order/unconfirmedorder',
                 crossDomain: true
             }).success(function (orderArr) {
                 console.log("get all order list successed");
@@ -72,7 +72,7 @@ angular.module('sbAdminApp')
             });
 
 
-            //202.120.40.175:21104/order/unconfirmedorder
+            //115.159.87.129:8004/order/unconfirmedorder
         };
 
         $scope.createRestaurantClicked = function(row) {
@@ -91,7 +91,7 @@ angular.module('sbAdminApp')
         $scope.getCites = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/cities',
+                url: 'http://115.159.87.129:8008/cities',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token

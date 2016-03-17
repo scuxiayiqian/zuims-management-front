@@ -21,7 +21,7 @@ angular.module('sbAdminApp')
 
             return $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/order/periodcount?restaurantId=' + restid + '&date1=' + startdate + '&date2=' + enddate,
+                url: 'http://115.159.87.129:8004/order/periodcount?restaurantId=' + restid + '&date1=' + startdate + '&date2=' + enddate,
                 crossDomain: true
             });
         };

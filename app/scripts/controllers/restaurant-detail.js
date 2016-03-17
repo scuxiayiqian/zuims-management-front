@@ -21,8 +21,8 @@ angular.module('sbAdminApp')
         };
     })
     .factory('ManageService', ['$http', '$cookies', function ($http, $cookies) {
-        var restaurantBaseUrl = "http://202.120.40.175:21104";
-        var managementBaseUrl = "http://202.120.40.175:21108";
+        var restaurantBaseUrl = "http://115.159.87.129:8004";
+        var managementBaseUrl = "http://115.159.87.129:8008";
 
         var token = $cookies.get('token');
 
@@ -218,12 +218,12 @@ angular.module('sbAdminApp')
             ManageService.getHomePage($cookies.get('restID'))
                 .success(function (data) {
 
-                    $scope.restaurantInfo.homePagePic = "http://202.120.40.175:21100" + data.picname;
+                    $scope.restaurantInfo.homePagePic = "http://115.159.87.129:8004" + data.picname;
                     $scope.restaurantInfo.restaurantTeles = $scope.restaurantInfo.restaurantTele.split(" ");
                     $scope.description = data.introduction;
 
                     if (data.picname == "" || data.picname == null) {
-                        $scope.restaurantInfo.homePagePic = "http://202.120.40.175:21100/restaurants/images?relativePath=NonePicture.jpg";
+                        $scope.restaurantInfo.homePagePic = "http://115.159.87.129:8004/restaurants/images?relativePath=NonePicture.jpg";
                     }
 
                     $scope.discount = true;
@@ -308,7 +308,7 @@ angular.module('sbAdminApp')
 
                 for(var i = 0; i < $scope.details.length; i ++) {
 
-                    $scope.details[i].picname = 'http://202.120.40.175:21100' + $scope.details[i].picname;
+                    $scope.details[i].picname = 'http://115.159.87.129:8004' + $scope.details[i].picname;
                 }
             });
 
@@ -320,7 +320,7 @@ angular.module('sbAdminApp')
                 $scope.description = $scope.details[0].introduction;
             }
             else {
-                $scope.details[0].picname = 'http://202.120.40.175:21100/restaurants/images?relativePath=NonePicture2.jpg';
+                $scope.details[0].picname = 'http://115.159.87.129:8004/restaurants/images?relativePath=NonePicture2.jpg';
             }
             if ($scope.picLen > 5)
                 $scope.details = $scope.details.slice(-5);

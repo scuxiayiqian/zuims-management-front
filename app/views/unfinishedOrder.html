@@ -1,0 +1,231 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">未处理订单</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default" ng-controller="unfinishedOrderCtrl">
+            <div class="panel-heading">
+                <!--<div align="right">-->
+                    <!--<button type="button" ng-click="setHotelToUpdate()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-success">-->
+                        <!--&lt;!&ndash;<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">&ndash;&gt;-->
+                        <!--<i class="glyphicon glyphicon-plus">-->
+                        <!--</i> 添加酒店-->
+                    <!--</button>-->
+                <!--</div>-->
+            </div>
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th colspan="10">
+                            <div class="input-group">
+                                <input st-search="" class="form-control" placeholder="搜索" type="text"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th width="15%" st-sort="hotelName">餐厅名称</th>
+                        <th width="10%">餐厅类型</th>
+                        <th width="10%" >餐厅电话</th>
+                        <th width="5%"> 订单用户</th>
+                        <th width="10%" st-sort="city">城市</th>
+                        <th width="10%">订单时间</th>
+                        <th width="10%">用户邮箱</th>
+                        <th width="5%">会员等级</th>
+                        <th width="15%">联系人</th>
+                        <th width="10%">处理订单</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr st-select-row="row" ng-repeat="row in displayedCollection">
+                        <td>{{row.restaurantName}}</td>
+                        <td>{{row.restaurantType}}</td>
+                        <td>{{row.restaurantTel}}</td>
+                        <td>{{row.userLastName}}{{row.userFirstName}}</td>
+                        <td>{{row.city}}</td>
+                        <td>{{row.createTime}}</td>
+                        <td>{{row.userEmail}}</td>
+                        <td>{{row.userVipLevel}}</td>
+                        <td>{{row.linkman}}</td>
+                        <td align="center">
+                            <button class="btn btn-xs" type="button" ng-click="setOrderToHandle(row)" data-toggle="modal" data-target="#confirmOrder">
+                                <i class="fa fa-send"></i>
+                            </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- Modal -->
+                <div class="modal fade" id="confirmOrder" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="deleteModalLabel">订单处理</h4>
+                            </div>
+                            <div class="modal-body">
+                                {{orderToHandle.restaurantName}}:来自{{orderToHandle.userLastName}}{{orderToHandle.userFirstName}}的订单
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" ng-click="cancelOrder(orderToHandle.orderId)" data-dismiss="modal">取消订单</button>
+                                <button type="button" class="btn btn-success" ng-click="confirmOrder(orderToHandle.orderId)" data-dismiss="modal">确认订单</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- Modal -->
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="height:300px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="updateModalLabel">酒店信息</h4>
+                            </div>
+                            <div class="modal-body" style="height:380px">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">城市: </label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" ng-model="hotelToUpdate.city" ng-options="city.name as city.name for city in cities">
+                                                <option value="">选择城市</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">酒店名: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="hotelToUpdate.hotelName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">酒店电话: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="hotelToUpdate.hotelTele">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">酒店地址: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="hotelToUpdate.hotelAddress">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">酒店经纬度: </label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" ng-model="hotelToUpdate.longitudeNLatitude">
+                                        </div>
+                                        <div class="col-sm-4 control-label">
+                                            <a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度怎么填?点我查询</a >
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">是否签约: </label>
+                                        <div class="col-sm-8">
+                                            <label class="radio-inline">
+                                                <input type="radio" ng-model="hotelToUpdate.contractStat" value="1" checked>是
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" ng-model="hotelToUpdate.contractStat" value="0">否
+                                            </label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="updateHotel()">确定</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+                <!-- Modal -->
+                <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="height:380px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="addModalLabel">酒店信息</h4>
+                            </div>
+                            <div class="modal-body" style="height:380px">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">城市: </label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" ng-model="hotelToCreate.city" ng-options="city.name as city.name for city in cities">
+                                                <option value="">选择城市</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">酒店名: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="hotelToCreate.hotelName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">酒店电话: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="hotelToCreate.hotelTele">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">酒店地址: </label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="hotelToCreate.hotelAddress">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">酒店经纬度: </label>
+                                        <div class="col-sm-4">
+                                            <input class="form-control" ng-model="hotelToCreate.longitudeNLatitude">
+                                        </div>
+                                        <div class="col-sm-4 control-label">
+                                            <a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度怎么填?点我查询</a >
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">是否签约: </label>
+                                        <div class="col-sm-8">
+                                            <label class="radio-inline">
+                                                <input type="radio" ng-model="hotelToCreate.contractStat" value="1" checked>是
+                                            </label>
+                                            <label class="radio-inline">
+                                                <input type="radio" ng-model="hotelToCreate.contractStat" value="0">否
+                                            </label>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="button" class="btn btn-success" data-dismiss="modal" ng-click="createHotel()">新建</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

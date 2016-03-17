@@ -272,6 +272,21 @@ angular
             }
         })
 
+        .state('dashboard.unconfirmedOrder',{
+            templateUrl:'views/unfinishedOrder.html',
+            url:'/unfinishedOrder',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/unfinishedOrder.js'
+                        ]
+                    })
+                }
+            }
+        })
+
         .state('dashboard.reservation-quantity', {
             templateUrl: 'views/reservation-quantity.html',
             url:'/reservation-quantity',

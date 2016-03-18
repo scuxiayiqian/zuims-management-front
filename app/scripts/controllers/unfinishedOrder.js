@@ -82,7 +82,7 @@ angular.module('sbAdminApp')
             //$scope.stop();
 
             // store the interval promise
-            promise = $interval(getOrderList, 5000);
+            promise = $interval(getOrderList, 60000);
             console.log("start");
         };
 

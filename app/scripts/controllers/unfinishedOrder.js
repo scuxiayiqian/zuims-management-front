@@ -2,7 +2,7 @@
 
 
 angular.module('sbAdminApp')
-    .controller('unfinishedOrderCtrl', function ($scope, $http, $cookies, $state) {
+    .controller('unfinishedOrderCtrl', function ($scope, $http, $cookies, $state, $interval) {
 
         $scope.token = $cookies.get('token');
         $scope.cities = [];
@@ -12,7 +12,6 @@ angular.module('sbAdminApp')
         //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
         $scope.displayedCollection = [].concat($scope.rowCollection);
 
-        $scope.hotelToCreate = {};
 
         $scope.orderToHandle = {};
 
@@ -57,7 +56,7 @@ angular.module('sbAdminApp')
             $scope.orderToHandle = row;
         };
 
-        $scope.getOrderList = function() {
+        function getOrderList() {
             // get restaurant list request
             $http({
                 method: 'GET',
@@ -73,43 +72,33 @@ angular.module('sbAdminApp')
 
 
             //202.120.40.175:21104/order/unconfirmedorder
+        }
+
+        getOrderList();
+
+        var promise;
+
+        // starts the interval
+        $scope.start = function() {
+            // stops any running interval to avoid two intervals running at the same time
+            //$scope.stop();
+
+            // store the interval promise
+            promise = $interval(getOrderList, 5000);
+            console.log("start");
         };
 
-        $scope.createRestaurantClicked = function(row) {
-
-            $cookies.put('hotelId', row.hotelId);
-            $cookies.put('hotelName', row.hotelName);
-            $cookies.put('longitude', row.longitude);
-            $cookies.put('latitude', row.latitude);
-            $cookies.put('city', row.city);
-            $cookies.put('hotelAddress', row.hotelAddress);
-
-            $state.go("dashboard.restaurant-create");
-
+        // stops the interval
+        $scope.stop = function() {
+            $interval.cancel(promise);
+            console.log("cancel");
         };
 
-        $scope.getCites = function() {
-            $http({
-                method: 'GET',
-                url: 'http://202.120.40.175:21108/cities',
-                headers: {
-                    //'Content-Type': 'application/json',
-                    'x-auth-token': $scope.token
-                },
-                crossDomain: true
-            }).success(function (cityArray) {
-                setCities(cityArray);
-            }).error(function () {
-                console.log("getCites failed");
-            });
-        };
+        // starting the interval by default
+        $scope.start();
 
-        function setCities(cityArray) {
-            for (var i = 0; i < cityArray.length; i++) {
-                $scope.cities.push(cityArray[i]);
-            }
-        };
+        $scope.$on('$destroy', function() {
+            $scope.stop();
+        });
 
-        $scope.getOrderList();
-        $scope.getCites();
     });

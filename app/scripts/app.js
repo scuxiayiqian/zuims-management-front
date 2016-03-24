@@ -117,7 +117,8 @@ angular
                 return $ocLazyLoad.load({
                     name:'sbAdminApp',
                     files:[
-                        'scripts/directives/keypress/ngEnter.js'
+                        'scripts/directives/keypress/ngEnter.js',
+                        'scripts/controllers/login.js'
                     ]
                 })
             }

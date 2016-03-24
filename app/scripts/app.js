@@ -18,7 +18,9 @@ angular
     'ngAnimate',
     'ngResource',
     'ngImgCrop',
-    'ngDialog'
+    'ngDialog',
+      'ngSanitize',
+      'ngCsv'
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     
@@ -439,6 +441,21 @@ angular
                         name:'sbAdminApp',
                         files:[
                             'scripts/controllers/hotel.js'
+                        ]
+                    })
+                }
+            }
+        })
+
+        .state('dashboard.dataGathering', {
+            templateUrl: 'views/dataGathering.html',
+            url:'/dataGathering',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/dataGathering.js'
                         ]
                     })
                 }

@@ -22,6 +22,8 @@ angular.module('sbAdminApp')
 
         $scope.restaurantToSearch = null;
 
+        $scope.defaultSearchWay = "searchByCity";
+
         // Disable weekend selection
         $scope.disabled = function(date, mode) {
             return false;
@@ -105,7 +107,7 @@ angular.module('sbAdminApp')
         $scope.getCites = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/cities',
+                url: 'http://115.159.87.129:8008/cities',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -137,9 +139,14 @@ angular.module('sbAdminApp')
             $scope.myStart = $scope.startDate;
             $scope.myEnd = $scope.endDate;
 
-            //$("#start").val($scope.myStart);
-            //$("#end").val($scope.myEnd);
-            $scope.searchReservationQuantityFromSelectedStartAndEnd();
+            //$scope.searchReservationQuantityFromSelectedStartAndEnd();
+
+            if ($scope.defaultSearchWay == "searchByCity") {
+                $scope.citySelected();
+            }
+            else if ($scope.defaultSearchWay == "searchByRestaurat") {
+                $scope.searchOrderQuantityFromSelectedStartAndEnd();
+            }
 
         };
 
@@ -163,6 +170,7 @@ angular.module('sbAdminApp')
             }).success(function(data) {
                 console.log(data);
                 $scope.getDatasFromSearchingResult(data);
+                $scope.defaultSearchWay = "searchByRestaurant";
             }).error(function () {
                 console.log("user delete failed");
             });
@@ -217,10 +225,30 @@ angular.module('sbAdminApp')
             });
         };
 
+        $scope.getDataByCity = function() {
 
+            var url = 'http://202.120.40.175:21104/order/periodcount/city?';
 
+            if ($scope.restaurantToSearch == null) {
 
-        console.log($scope.myStart + "... " + $scope.myEnd);
+                url = url + 'date1=' + $scope.myStart + '&date2=' + $scope.myEnd;
+            } else {
 
+                url = url + 'city=' + $scope.restaurantToSearch.city + '&date1=' + $scope.myStart + '&date2=' + $scope.myEnd;
+            }
+            $http({
+                method: 'GET',
+                url: url,
+                crossDomain: true
+            }).success(function(data) {
+                $scope.getDatasFromSearchingResult(data);
+            }).error(function () {
+                console.log("user delete failed");
+            });
+        }
+
+        $scope.getDataByCity();
+
+        //console.log($scope.myStart + "... " + $scope.myEnd);
 
     });

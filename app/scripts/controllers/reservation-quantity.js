@@ -22,6 +22,8 @@ angular.module('sbAdminApp')
 
         $scope.restaurantToSearch = null;
 
+        $scope.defaultSearchWay = "searchByCity";
+
         // Disable weekend selection
         $scope.disabled = function(date, mode) {
             return false;
@@ -137,9 +139,14 @@ angular.module('sbAdminApp')
             $scope.myStart = $scope.startDate;
             $scope.myEnd = $scope.endDate;
 
-            //$("#start").val($scope.myStart);
-            //$("#end").val($scope.myEnd);
-            $scope.searchReservationQuantityFromSelectedStartAndEnd();
+            //$scope.searchReservationQuantityFromSelectedStartAndEnd();
+
+            if ($scope.defaultSearchWay == "searchByCity") {
+                $scope.citySelected();
+            }
+            else if ($scope.defaultSearchWay == "searchByRestaurat") {
+                $scope.searchOrderQuantityFromSelectedStartAndEnd();
+            }
 
         };
 
@@ -163,6 +170,7 @@ angular.module('sbAdminApp')
             }).success(function(data) {
                 console.log(data);
                 $scope.getDatasFromSearchingResult(data);
+                $scope.defaultSearchWay = "searchByRestaurant";
             }).error(function () {
                 console.log("user delete failed");
             });
@@ -217,10 +225,19 @@ angular.module('sbAdminApp')
             });
         };
 
+        $scope.citySelected = function() {
+            $http({
+                method: 'GET',
+                url: 'http://202.120.40.175:21104/order/periodcount/city?city=' + $scope.restaurantToSearch.city + '&date1=' + $scope.myStart + '&date2=' + $scope.myEnd,
+                crossDomain: true
+            }).success(function(data) {
+                console.log(data);
+                $scope.getDatasFromSearchingResult(data);
+            }).error(function () {
+                console.log("user delete failed");
+            });
+        };
 
-
-
-        console.log($scope.myStart + "... " + $scope.myEnd);
-
+        //console.log($scope.myStart + "... " + $scope.myEnd);
 
     });

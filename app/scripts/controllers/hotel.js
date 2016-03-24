@@ -26,15 +26,31 @@ angular.module('sbAdminApp')
 
         $scope.hotelToCreate = {};
 
+
+        //...
+        $scope.filename = "test";
+        $scope.getArray = [{a: 1, b:2, c:3}, {a:3, b:4, c:5}];
+
+        //$scope.addRandomRow = function() {
+        //    $scope.getArray.push({a: Math.floor((Math.random()*10)+1), b: Math.floor((Math.random()*10)+1)});
+        //};
+
+        $scope.getHeader = function () {return ["A", "B", "C"]};
+
+        $scope.clickFn = function() {
+            console.log("click click click");
+        };
+        //...
+
         $scope.setHotelToDelete = function(row) {
             $scope.hotelToDelete = row;
-        }
+        };
 
         $scope.setHotelToUpdate = function(row) {
             $scope.hotelToUpdate = row;
 
             $scope.hotelToUpdate.longitudeNLatitude = row.longitude + "," + row.latitude;
-        }
+        };
 
         //remove to the real data holder
         $scope.deleteHotel = function() {
@@ -54,7 +70,7 @@ angular.module('sbAdminApp')
             }).error(function () {
                 console.log("hotel delete failed");
             });
-        }
+        };
 
         $scope.updateHotel = function () {
 
@@ -80,7 +96,7 @@ angular.module('sbAdminApp')
             }).error(function () {
                 console.log("update hotel failed");
             });
-        }
+        };
 
         $scope.createHotel = function () {
 
@@ -159,7 +175,7 @@ angular.module('sbAdminApp')
             for (var i = 0; i < cityArray.length; i++) {
                 $scope.cities.push(cityArray[i]);
             }
-        };
+        }
 
         $scope.getHotelList();
         $scope.getCites();

@@ -1,0 +1,114 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">数据汇总</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->
+<div class="row"  ng-controller="dataGatheringCtrl">
+    <div class="col-lg-12 col-sm-12" id="line-chart">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <div align="right">
+                    <button type="button" ng-click="setHotelToUpdate()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-primary">
+                         导出Excel
+                    </button>
+                </div>
+                </div>
+            <div class="panel-body">
+
+                <div class="query-data">
+                    <!--<div style="float: right">-->
+                        <!--<button class="btn btn-primary" style="margin-left: 10px;height:30px;margin-right: 20px;font-size: 13px">-->
+                            <!--导出Excel-->
+                        <!--</button>-->
+                    <!--</div>-->
+                    <div style="float: right">
+                        <button class="btn btn-xs btn-primary" style="margin-left: 10px;width:30px;height:30px;margin-right: 20px"  type="button" ng-click="searchReservationQuantityFromSelectedStartAndEnd()">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+                    <div class='input-group date display-right' id="endDate" style="height:30px">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="myEnd"
+                               is-open="status.opened" min-date="minDate" max-date="maxDate"
+                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                               ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                        </span>
+                    </div>
+                    <div style="float: right;padding: 0 10px; font-size: 15px">
+                        至
+                    </div>
+                    <div class='input-group date display-right' id="startDate" style="height:30px">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="myStart"
+                               is-open="endDateStatus.opened" min-date="minDate" max-date="maxDate"
+                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                               ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openEndDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                    </div>
+
+                    <div style="float: left;margin: 0 10px; font-size: 15px">
+                        选择城市
+                    </div>
+                    <div class="display-left" style="width: 100px">
+
+                        <select class="form-control" ng-model="restaurantToSearch.city" ng-options="city.name as city.name for city in cities" ng-change="citySelected()">
+                            <!--<option value="">选择城市</option>-->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="query-data">
+
+                    <div style="margin-top:10px; margin-bottom: 10px; float: right; padding: 0 10px;height: 30px" class="display-right">
+                        <a class="days selectDays" ng-click="queryOrder(7)" style="padding-right: 10px;">7天</a>
+                        <a class="days" ng-click="queryOrder(14)" style="padding-right: 10px;">14天</a>
+                        <a class="days" ng-click="queryOrder(30)" style="padding-right: 10px;">30天</a>
+                    </div>
+
+                </div>
+
+                <div style="margin-top: 70px">
+                    <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
+                        <thead>
+                        <tr>
+                            <th width="16%">时间</th>
+                            <th width="14%">未完成订单</th>
+                            <th width="14%">预定数量</th>
+                            <th width="14%">订单数量</th>
+                            <th width="14%">就餐数量</th>
+                            <th width="14%">有效订单率</th>
+                            <th width="14%">有效就餐率</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr st-select-row="row" ng-repeat="row in displayedCollection">
+                            <td>{{row.hotelName}}</td>
+                            <td>{{row.city}}</td>
+                            <td>{{row.hotelAddress}}</td>
+                            <td>{{row.hotelTele}}</td>
+                            <td align="center">
+                                <button class="btn btn-xs" type="button" ng-click="setHotelToUpdate(row)" data-toggle="modal" data-target="#editModal">
+                                    <i class="fa fa-edit"></i>
+                                </button>
+                                <button class="btn btn-xs" type="button" ng-click="setHotelToDelete(row)" data-toggle="modal" data-target="#deleteModal">
+                                    <i class="fa fa-remove"></i>
+                                </button>
+                            </td>
+                            <td align="center">
+                                <button class="btn btn-xs" type="button" ng-click="createRestaurantClicked(row)">
+                                    <i class="fa fa-plus"></i>
+                                </button>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

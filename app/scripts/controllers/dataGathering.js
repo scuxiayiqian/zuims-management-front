@@ -192,6 +192,10 @@ angular.module('sbAdminApp')
             });
         };
 
+        $scope.filename = "data";
+
+        $scope.getHeader = function () {return ["时间", "预订数量", "订单数量", "就餐数量", "有效订单率", "有效就餐率"]};
+        
         $scope.queryOrder = function (num) {
 
             $scope.startDate = $filter('date')($scope.getStartDate(num), 'yyyy-MM-dd');
@@ -226,12 +230,27 @@ angular.module('sbAdminApp')
                 console.log(data);
                 $scope.rowCollection = data;
                 $scope.displayedCollection = data;
+                $scope.prepareCSVData(data);
             }).error(function () {
                 console.log("user delete failed");
             });
 
             console.log($scope.rowCollection);
         };
+
+        $scope.csvData = [];
+
+        $scope.prepareCSVData = function(data) {
+
+            $scope.csvData = [];
+            for(var i = 0; i < data.length; i++) {
+                $scope.csvData.push({date: data[i].dorderDate, reservation: data[i].dorderMakeNum,
+                    order: data[i].dorderConfirmNum, repast: data[i].dorderFinishNum,
+                    orderRate: data[i].dorderConfirmNum/data[i].dorderMakeNum,
+                    repastRate: data[i].dorderFinishNum/data[i].dorderMakeNum
+                });
+            }
+        }
 
         $scope.getCites();
         $scope.citySelected();

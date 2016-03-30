@@ -21,10 +21,10 @@ angular.module('sbAdminApp')
             return startDate;
         };
 
-        $scope.startDate = $filter('date')($scope.getStartDate(7), 'yyyy-MM-dd');
-        $scope.endDate = $filter('date')($scope.getStartDate(1), 'yyyy-MM-dd');
-        $scope.myStart = $scope.startDate;
-        $scope.myEnd = $scope.endDate;
+        $scope.myStart = $scope.getStartDate(7);
+        $scope.myEnd = $scope.getStartDate(1);
+        $scope.startDate = $filter('date')($scope.myStart, 'yyyy-MM-dd');
+        $scope.endDate = $filter('date')($scope.myEnd, 'yyyy-MM-dd');
 
         // Disable weekend selection
         $scope.disabled = function(date, mode) {
@@ -48,12 +48,12 @@ angular.module('sbAdminApp')
         };
 
         $scope.dateOptions = {
+            dateDisabled: $scope.disabled,
             formatYear: 'yy',
+            minDate: $scope.minDate,
+            maxDate: $scope.maxDate,
             startingDay: 1
         };
-
-        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
-        $scope.format = $scope.formats[1];
 
         $scope.status = {
             opened: false
@@ -198,10 +198,10 @@ angular.module('sbAdminApp')
         
         $scope.queryOrder = function (num) {
 
-            $scope.startDate = $filter('date')($scope.getStartDate(num), 'yyyy-MM-dd');
-            $scope.endDate = $filter('date')($scope.getStartDate(1), 'yyyy-MM-dd');
-            $scope.myStart = $scope.startDate;
-            $scope.myEnd = $scope.endDate;
+            $scope.myStart = $scope.getStartDate(num);
+            $scope.myEnd = $scope.getStartDate(1);
+            $scope.startDate = $filter('date')($scope.myStart, 'yyyy-MM-dd');
+            $scope.endDate = $filter('date')($scope.myEnd, 'yyyy-MM-dd');
 
             //$scope.searchReservationQuantityFromSelectedStartAndEnd();
 

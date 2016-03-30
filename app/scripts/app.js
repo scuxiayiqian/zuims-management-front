@@ -19,8 +19,8 @@ angular
     'ngResource',
     'ngImgCrop',
     'ngDialog',
-      'ngSanitize',
-      'ngCsv'
+    'ngSanitize',
+    'ngCsv'
   ])
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     

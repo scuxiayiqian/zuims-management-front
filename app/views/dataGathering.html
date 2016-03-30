@@ -25,12 +25,10 @@
                     </div>
                     <div class='input-group date display-right' id="endDate" style="height:30px">
                         <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="myEnd"
-                               is-open="status.opened" min-date="minDate" max-date="maxDate"
-                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                               is-open="status.opened" datepicker-options="dateOptions"
                                ng-required="true" close-text="Close" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
-                        </span>
                         </span>
                     </div>
                     <div style="float: right;padding: 0 10px; font-size: 15px">
@@ -38,8 +36,7 @@
                     </div>
                     <div class='input-group date display-right' id="startDate" style="height:30px">
                         <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="myStart"
-                               is-open="endDateStatus.opened" min-date="minDate" max-date="maxDate"
-                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                               is-open="endDateStatus.opened" datepicker-options="dateOptions"
                                ng-required="true" close-text="Close" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="openEndDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>

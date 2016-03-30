@@ -15,10 +15,8 @@ angular.module('sbAdminApp')
             return startDate;
         };
 
-        $scope.startDate = $filter('date')($scope.getStartDate(7), 'yyyy-MM-dd');
-        $scope.endDate = $filter('date')($scope.getStartDate(1), 'yyyy-MM-dd');
-        $scope.myStart = $scope.startDate;
-        $scope.myEnd = $scope.endDate;
+        $scope.myStart = $scope.getStartDate(7);
+        $scope.myEnd = $scope.getStartDate(1);
 
         $scope.restaurantToSearch = null;
 
@@ -46,7 +44,10 @@ angular.module('sbAdminApp')
         };
 
         $scope.dateOptions = {
+            dateDisabled: $scope.disabled,
             formatYear: 'yy',
+            minDate: $scope.minDate,
+            maxDate: $scope.maxDate,
             startingDay: 1
         };
 
@@ -134,38 +135,46 @@ angular.module('sbAdminApp')
 
         $scope.queryOrder = function (num) {
 
-            $scope.startDate = $filter('date')($scope.getStartDate(num), 'yyyy-MM-dd');
-            $scope.endDate = $filter('date')($scope.getStartDate(1), 'yyyy-MM-dd');
-            $scope.myStart = $scope.startDate;
-            $scope.myEnd = $scope.endDate;
-
-            //$scope.searchReservationQuantityFromSelectedStartAndEnd();
+            $scope.myStart = $scope.getStartDate(num);
+            $scope.myEnd = $scope.getStartDate(1);
 
             if ($scope.defaultSearchWay == "searchByCity") {
                 $scope.getDataByCity();
             }
-            else if ($scope.defaultSearchWay == "searchByRestaurat") {
+            else if ($scope.defaultSearchWay == "searchByRestaurant") {
                 $scope.searchReservationQuantityFromSelectedStartAndEnd();
             }
 
         };
 
+        $scope.searchFSTE = function() {
+
+            if ($scope.defaultSearchWay == "searchByCity") {
+                $scope.getDataByCity();
+            } else {
+                $scope.searchRepastQuantityFromSelectedStartAndEnd();
+            }
+        }
+
         $scope.searchReservationQuantityFromSelectedStartAndEnd = function(restaurant) {
 
             if (restaurant != null) {
-                $scope.restuarantIdToSearch = restaurant.restaurantId;
+
+                $scope.restaurantToSearch.Id = restaurant.restaurantId;
             }
 
             if ($scope.restaurantToSearch == null) {
                 return;
             }
 
+            $scope.defaultSearchWay = "searchByRestaurant";
+
             var startdate = $filter('date')($scope.myStart, 'yyyy-MM-dd');
             var enddate = $filter('date')($scope.myEnd, 'yyyy-MM-dd');
 
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/order/periodcount?restaurantId=' + $scope.restuarantIdToSearch + '&date1=' + startdate + '&date2=' + enddate,
+                url: 'http://202.120.40.175:21104/order/periodcount?restaurantId=' + $scope.restaurantToSearch.Id + '&date1=' + startdate + '&date2=' + enddate,
                 crossDomain: true
             }).success(function(data) {
                 console.log(data);
@@ -234,13 +243,16 @@ angular.module('sbAdminApp')
             $scope.rowCollection = null;
             $scope.displayedCollection = null;
 
+            var startdate = $filter('date')($scope.myStart, 'yyyy-MM-dd');
+            var enddate = $filter('date')($scope.myEnd, 'yyyy-MM-dd');
+
             if ($scope.restaurantToSearch == null || $scope.restaurantToSearch.city == null) {
 
-                url = url + 'date1=' + $scope.myStart + '&date2=' + $scope.myEnd;
+                url = url + 'date1=' + startdate + '&date2=' + enddate;
             } else {
 
                 $scope.restaurantToSearch.name = "";
-                url = url + 'city=' + $scope.restaurantToSearch.city + '&date1=' + $scope.myStart + '&date2=' + $scope.myEnd;
+                url = url + 'city=' + $scope.restaurantToSearch.city + '&date1=' + startdate + '&date2=' + enddate;
             }
             $http({
                 method: 'GET',

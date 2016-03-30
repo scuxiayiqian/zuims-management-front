@@ -67,14 +67,13 @@
                 <div class="query-data">
 
                     <div style="float: right">
-                        <button class="btn btn-xs btn-primary" style="margin-left: 10px;width:30px;height:30px;margin-right: 20px"  type="button" ng-click="searchRepastRateFromSelectedStartAndEnd()">
+                        <button class="btn btn-xs btn-primary" style="margin-left: 10px;width:30px;height:30px;margin-right: 20px"  type="button" ng-click="searchFSTE()">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
                     <div class='input-group date display-right' id="endDate" style="height:30px">
                         <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="myEnd"
-                               is-open="status.opened" min-date="minDate" max-date="maxDate"
-                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                               is-open="status.opened" datepicker-options="dateOptions"
                                ng-required="true" close-text="Close" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
@@ -86,8 +85,7 @@
                     </div>
                     <div class='input-group date display-right' id="startDate" style="height:30px">
                         <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="myStart"
-                               is-open="endDateStatus.opened" min-date="minDate" max-date="maxDate"
-                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                               is-open="endDateStatus.opened" datepicker-options="dateOptions"
                                ng-required="true" close-text="Close" />
                         <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="openEndDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>

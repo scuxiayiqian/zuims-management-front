@@ -25,10 +25,8 @@ angular.module('sbAdminApp')
             return startDate;
         };
 
-        $scope.startDate = $filter('date')($scope.getStartDate(7), 'yyyy-MM-dd');
-        $scope.endDate = $filter('date')($scope.getStartDate(1), 'yyyy-MM-dd');
-        $scope.myStart = $scope.startDate;
-        $scope.myEnd = $scope.endDate;
+        $scope.myStart = $scope.getStartDate(7);
+        $scope.myEnd = $scope.getStartDate(1);
 
         // Disable weekend selection
         $scope.disabled = function(date, mode) {
@@ -52,7 +50,10 @@ angular.module('sbAdminApp')
         };
 
         $scope.dateOptions = {
+            dateDisabled: $scope.disabled,
             formatYear: 'yy',
+            minDate: $scope.minDate,
+            maxDate: $scope.maxDate,
             startingDay: 1
         };
 
@@ -160,13 +161,8 @@ angular.module('sbAdminApp')
 
         $scope.queryOrder = function (num) {
 
-            $scope.startDate = $filter('date')($scope.getStartDate(num), 'yyyy-MM-dd');
-            $scope.endDate = $filter('date')($scope.getStartDate(1), 'yyyy-MM-dd');
-            $scope.myStart = $scope.startDate;
-            $scope.myEnd = $scope.endDate;
-
-            //$("#start").val($scope.myStart);
-            //$("#end").val($scope.myEnd);
+            $scope.myStart = $scope.getStartDate(num);
+            $scope.myEnd = $scope.getStartDate(1);
 
             if ($scope.defaultSearchWay == "searchByCity") {
                 $scope.getDataByCity();
@@ -175,16 +171,24 @@ angular.module('sbAdminApp')
             }
         };
 
+        $scope.searchFSTE = function() {
+
+            if ($scope.defaultSearchWay == "searchByCity") {
+                $scope.getDataByCity();
+            } else {
+                $scope.searchRepastQuantityFromSelectedStartAndEnd();
+            }
+        }
         $scope.searchRepastQuantityFromSelectedStartAndEnd = function (restaurant) {
 
             if (restaurant != null) {
-                $scope.restuarantIdToSearch = restaurant.restaurantId;
+                $scope.restaurantToSearch.Id = restaurant.restaurantId;
             }
 
             if ($scope.restaurantToSearch == null) {
                 return;
             }
-            
+
             $scope.defaultSearchWay = "searchByRestaurant";
 
             var startdate = $filter('date')($scope.myStart, 'yyyy-MM-dd');
@@ -192,7 +196,7 @@ angular.module('sbAdminApp')
 
             console.log('search: ' + startdate + ' to ' + enddate);
 
-            utilService.getOrderCountInfo($scope.restuarantIdToSearch, startdate, enddate)
+            utilService.getOrderCountInfo($scope.restaurantToSearch.Id, startdate, enddate)
                 .success(function(data) {
 
                     var formatdata = utilService.formatOrderCountInfo(data, "dorderFinishNum");

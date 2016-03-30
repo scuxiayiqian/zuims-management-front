@@ -27,6 +27,20 @@ angular.module('sbAdminApp')
 
         $scope.restaurantToSearch = {};
 
+
+        $scope.filename = "test";
+        $scope.getArray = [{a: 1, b:2}, {a:3, b:4}];
+
+        $scope.addRandomRow = function() {
+            $scope.getArray.push({a: Math.floor((Math.random()*10)+1), b: Math.floor((Math.random()*10)+1)});
+        };
+
+        $scope.getHeader = function () {return ["A", "B"]};
+
+        $scope.clickFn = function() {
+            console.log("click click click");
+        };
+
         // 城市默认选择上海
         $scope.restaurantToSearch.city = '上海市';
 

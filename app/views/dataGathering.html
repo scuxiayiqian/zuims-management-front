@@ -10,7 +10,7 @@
         <div class="panel panel-default">
             <div class="panel-heading">
                 <div align="right">
-                    <button type="button" ng-click="setHotelToUpdate()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-primary">
+                    <button type="button" ng-csv="getArray" csv-header="getHeader()" filename="{{ filename }}" class="btn btn-sm btn-primary">
                          导出Excel
                     </button>
                 </div>

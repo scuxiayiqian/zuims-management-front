@@ -250,7 +250,7 @@ angular.module('sbAdminApp')
                     repastRate: data[i].dorderFinishNum/data[i].dorderMakeNum
                 });
             }
-        }
+        };
 
         $scope.getCites();
         $scope.citySelected();

@@ -26,6 +26,24 @@ angular.module('sbAdminApp')
             });
         };
 
+        this.getOrderCountInfoByCity = function(city, startDate, endDate) {
+
+            var url = 'http://202.120.40.175:21104/order/periodcount/city?';
+            
+            if (city == null) {
+
+                url = url + 'date1=' + startDate + '&date2=' + endDate;
+            } else {
+
+                url = url + 'city=' + city + '&date1=' + startDate + '&date2=' + endDate;
+            }
+            return $http({
+                method: 'GET',
+                url: url,
+                crossDomain: true
+            });
+        }
+        
         this.formatOrderCountInfo = function(data, whichDataToFormat) {
             var makeNums = [];
             var labels = [];

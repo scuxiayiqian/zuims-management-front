@@ -18,13 +18,8 @@
             <div class="panel-body">
 
                 <div class="query-data">
-                    <!--<div style="float: right">-->
-                        <!--<button class="btn btn-primary" style="margin-left: 10px;height:30px;margin-right: 20px;font-size: 13px">-->
-                            <!--导出Excel-->
-                        <!--</button>-->
-                    <!--</div>-->
                     <div style="float: right">
-                        <button class="btn btn-xs btn-primary" style="margin-left: 10px;width:30px;height:30px;margin-right: 20px"  type="button" ng-click="searchReservationQuantityFromSelectedStartAndEnd()">
+                        <button class="btn btn-xs btn-primary" style="margin-left: 10px;width:30px;height:30px;margin-right: 20px"  type="button" ng-click="citySelected()">
                             <i class="fa fa-search"></i>
                         </button>
                     </div>
@@ -51,13 +46,10 @@
                         </span>
                     </div>
 
-                    <div style="float: left;margin: 0 10px; font-size: 15px">
-                        选择城市
-                    </div>
                     <div class="display-left" style="width: 100px">
 
-                        <select class="form-control" ng-model="restaurantToSearch.city" ng-options="city.name as city.name for city in cities" ng-change="citySelected()">
-                            <!--<option value="">选择城市</option>-->
+                        <select class="form-control" ng-model="cityToSearch" ng-options="city.name as city.name for city in cities" ng-change="citySelected()">
+                            <option value="">所有城市</option>
                         </select>
                     </div>
                 </div>
@@ -87,23 +79,15 @@
                         </thead>
                         <tbody>
                         <tr st-select-row="row" ng-repeat="row in displayedCollection">
-                            <td>{{row.hotelName}}</td>
-                            <td>{{row.city}}</td>
-                            <td>{{row.hotelAddress}}</td>
-                            <td>{{row.hotelTele}}</td>
-                            <td align="center">
-                                <button class="btn btn-xs" type="button" ng-click="setHotelToUpdate(row)" data-toggle="modal" data-target="#editModal">
-                                    <i class="fa fa-edit"></i>
-                                </button>
-                                <button class="btn btn-xs" type="button" ng-click="setHotelToDelete(row)" data-toggle="modal" data-target="#deleteModal">
-                                    <i class="fa fa-remove"></i>
-                                </button>
-                            </td>
-                            <td align="center">
-                                <button class="btn btn-xs" type="button" ng-click="createRestaurantClicked(row)">
-                                    <i class="fa fa-plus"></i>
-                                </button>
-                            </td>
+                            <td>{{row.dorderDate}}</td>
+                            <td></td>
+                            <td>{{row.dorderMakeNum}}</td>
+                            <td>{{row.dorderConfirmNum}}</td>
+                            <td>{{row.dorderFinishNum}}</td>
+                            <td ng-if="row.dorderMakeNum==0">N/A</td>
+                            <td ng-if="row.dorderMakeNum!=0">{{((row.dorderConfirmNum/row.dorderMakeNum)*100).toFixed(2)}}%</td>
+                            <td ng-if="row.dorderMakeNum==0">N/A</td>
+                            <td ng-if="row.dorderMakeNum!=0">{{((row.dorderFinishNum/row.dorderMakeNum)*100).toFixed(2)}}%</td>
                         </tr>
                         </tbody>
                     </table>

@@ -11,24 +11,104 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('dataGatheringCtrl', function ($scope, $http, $cookies, $state) {
+    .controller('dataGatheringCtrl', function ($scope, $http, $cookies, $filter) {
 
         $scope.token = $cookies.get('token');
 
+        $scope.getStartDate = function (num) {
+            var startDate = new Date(); //获取今天日期
+            startDate.setDate(startDate.getDate() - num);
+            return startDate;
+        };
+
+        $scope.startDate = $filter('date')($scope.getStartDate(7), 'yyyy-MM-dd');
+        $scope.endDate = $filter('date')($scope.getStartDate(1), 'yyyy-MM-dd');
+        $scope.myStart = $scope.startDate;
+        $scope.myEnd = $scope.endDate;
+
+        // Disable weekend selection
+        $scope.disabled = function(date, mode) {
+            return false;
+        };
+
+        $scope.toggleMin = function() {
+            $scope.minDate = $scope.minDate ? null : new Date();
+        };
+
+        //禁用此函数,让用户可以选择当日之前的日期
+        //$scope.toggleMin();
+        $scope.maxDate = new Date(2020, 5, 22);
+
+        $scope.open = function($event) {
+            $scope.status.opened = true;
+        };
+
+        $scope.setDate = function(year, month, day) {
+            $scope.endDate = new Date(year, month, day);
+        };
+
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            startingDay: 1
+        };
+
+        $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[1];
+
+        $scope.status = {
+            opened: false
+        };
+
+        $scope.endDateStatus = {
+            opened: false
+        };
+
+        $scope.formats = ['yyyy-MM-dd', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
+        $scope.format = $scope.formats[0];
+
+        $scope.openEndDate = function($event) {
+            $scope.endDateStatus.opened = true;
+        };
+
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        var afterTomorrow = new Date();
+        afterTomorrow.setDate(tomorrow.getDate() + 2);
+        $scope.events =
+            [
+                {
+                    date: tomorrow,
+                    status: 'full'
+                },
+                {
+                    date: afterTomorrow,
+                    status: 'partially'
+                }
+            ];
+
+        $scope.getDayClass = function(date, mode) {
+            if (mode === 'day') {
+                var dayToCheck = new Date(date).setHours(0,0,0,0);
+
+                for (var i=0;i<$scope.events.length;i++){
+                    var currentDay = new Date($scope.events[i].date).setHours(0,0,0,0);
+
+                    if (dayToCheck === currentDay) {
+                        return $scope.events[i].status;
+                    }
+                }
+            }
+
+            return '';
+        };
+
         $scope.cities = [];
-        $scope.users = [];
-        $scope.productions = [];
-
-        $scope.productionsOfRestaurant = [];
-
         $scope.selectedCity = "";
 
         $scope.rowCollection = [];
 
-        $scope.restaurantToSearch = {};
+        $scope.cityToSearch = null;
 
-        // 城市默认选择上海
-        $scope.restaurantToSearch.city = '上海市';
 
         function setCities(cityArray) {
             for (var i = 0; i < cityArray.length; i++) {
@@ -36,182 +116,8 @@ angular.module('sbAdminApp')
             }
         }
 
-        function setUsers(userArray) {
-            for (var i = 0; i < userArray.length; i++) {
-                $scope.users.push(userArray[i]);
-            }
-        }
-
         //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
         $scope.displayedCollection = [].concat($scope.rowCollection);
-
-        $scope.restaurantToDelete = {};
-        $scope.restaurantToUpdate = {};
-        $scope.restaurantToCreate = {};
-
-        $scope.setRestaurantToDelete = function(row) {
-            $scope.restaurantToDelete = row;
-        };
-
-        $scope.setRestaurantToUpdate = function(row) {
-            $scope.restaurantToUpdate = row;
-
-            $scope.productionsOfRestaurant = [];
-
-            var flag = false;
-            for (var i = 0; i < $scope.productions.length; i ++) {
-                flag = false;
-                for (var j = 0; j < row.productions.length; j++) {
-                    if(row.productions[j].name == $scope.productions[i].name) {
-                        flag = true;
-                        break;
-                    }
-                }
-                $scope.productionsOfRestaurant.push({
-                    production: $scope.productions[i],
-                    isProvided: flag
-                })
-            }
-
-            $scope.displayedProductionsOfRestaurant = [].concat($scope.productionsOfRestaurant);
-        };
-
-        $scope.setRestaurantToCreate = function() {
-
-            $scope.restaurantToCreate = {
-                name: '',
-                city: '',
-                marketingName: '',
-                productions:[],
-                isPromoted: false
-            }
-
-            for (var i = 0; i < $scope.productions.length; i ++) {
-                $scope.productionsOfRestaurant.push({
-                    production: $scope.productions[i],
-                    isProvided: false
-                })
-            }
-
-            $scope.displayedProductionsOfRestaurant = [].concat($scope.productionsOfRestaurant);
-        };
-        //remove to the real data holder
-        $scope.deleteRestaurant = function() {
-
-            //$http({
-            //    method: 'DELETE',
-            //    url: 'http://115.159.87.129:8008/restaurants/' + $scope.restaurantToDelete.name,
-            //    headers: {
-            //        'x-auth-token': $scope.token
-            //    },
-            //    crossDomain: true
-            //}).success(function(data) {
-            //    alert(data.name + "deleted");
-            //    var index = $scope.rowCollection.indexOf($scope.restaurantToDelete);
-            //    if (index !== -1) {
-            //        $scope.rowCollection.splice(index, 1);
-            //    }
-            //}).error(function () {
-            //    alert("delete failed");
-            //});
-
-            console.log($scope.restaurantToDelete);
-
-            $http({
-                method: 'GET',
-                url: 'http://115.159.87.129:8004/restaurant/delete?restaurantId=' + $scope.restaurantToDelete.restaurantId,
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                crossDomain: true
-            }).success(function(data) {
-                alert("删除成功");
-                var index = $scope.displayedCollection.indexOf($scope.restaurantToDelete);
-                console.log(index);
-                console.log($scope.displayedCollection);
-                if (index !== -1) {
-                    $scope.displayedCollection.splice(index, 1);
-                    console.log($scope.displayedCollection);
-                }
-                console.log($scope.displayedCollection);
-            }).error(function () {
-                console.log("hotel delete failed");
-            });
-        };
-
-        $scope.updateRestaurant = function () {
-
-            $scope.restaurantToUpdate.productions = [];
-
-            for(var i = 0; i < $scope.productionsOfRestaurant.length; i++) {
-                if($scope.productionsOfRestaurant[i].isProvided) {
-
-                    $scope.restaurantToUpdate.productions.push($scope.productionsOfRestaurant[i].production);
-                }
-            }
-
-            $http({
-                method: 'PUT',
-                url: 'http://115.159.87.129:8008/restaurants/' + $scope.restaurantToUpdate.name,
-                headers: {
-                    'x-auth-token': $scope.token
-                },
-                data: $scope.restaurantToUpdate,
-                crossDomain: true
-            }).success(function(data) {
-                $scope.getRestaurantList();
-                alert("success");
-            }).error(function () {
-                alert("delete failed");
-            });
-        };
-
-        $scope.createRestaurant = function () {
-
-            $scope.restaurantToCreate.productions = [];
-
-            $scope.selectedCity = $scope.restaurantToCreate.city;
-
-            for(var i = 0; i < $scope.productionsOfRestaurant.length; i++) {
-                if($scope.productionsOfRestaurant[i].isProvided) {
-
-                    $scope.restaurantToCreate.productions.push($scope.productionsOfRestaurant[i].production);
-                }
-            }
-
-            $http({
-                method: 'POST',
-                url: 'http://115.159.87.129:8008/restaurants',
-                headers: {
-                    'x-auth-token': $scope.token
-                },
-                data: $scope.restaurantToCreate,
-                crossDomain: true
-            }).success(function(data) {
-                $scope.getRestaurantList()
-            }).error(function () {
-                alert("delete failed");
-            });
-        };
-
-        $scope.getRestaurantList = function() {
-            // get restaurant list request
-            $http({
-                method: 'GET',
-                url: 'http://115.159.87.129:8008/cities/' + $scope.selectedCity + '/restaurants',
-                headers: {
-                    //'Content-Type': 'application/json',
-                    'x-auth-token': $scope.token
-                },
-                crossDomain: true
-            }).success(function (restaurantArr) {
-                $scope.rowCollection = restaurantArr;
-                $scope.displayedCollection = $scope.rowCollection;
-            }).error(function () {
-                console.log("getRestaurantList failed");
-            });
-        };
-
         $scope.getCites = function() {
             $http({
                 method: 'GET',
@@ -286,28 +192,35 @@ angular.module('sbAdminApp')
             });
         };
 
-        $scope.editRestaurant = function(restaurant) {
-            console.log(restaurant.restaurantId);
-            $cookies.put('restID', restaurant.restaurantId);
+        $scope.queryOrder = function (num) {
 
-            $state.go("dashboard.restaurant-detail");
-        };
+            $scope.startDate = $filter('date')($scope.getStartDate(num), 'yyyy-MM-dd');
+            $scope.endDate = $filter('date')($scope.getStartDate(1), 'yyyy-MM-dd');
+            $scope.myStart = $scope.startDate;
+            $scope.myEnd = $scope.endDate;
 
-        $scope.createRestaurant = function() {
-            $state.go("dashboard.restaurant-create");
+            //$scope.searchReservationQuantityFromSelectedStartAndEnd();
+
+            $scope.citySelected();
         };
 
         $scope.citySelected = function() {
 
-            $scope.restaurantToSearch.hotelName = '';
+            var url = 'http://202.120.40.175:21104/order/periodcount/city?';
 
+            var startdate = $filter('date')($scope.myStart, 'yyyy-MM-dd');
+            var enddate = $filter('date')($scope.myEnd, 'yyyy-MM-dd');
+
+            if ($scope.cityToSearch == null) {
+
+                url = url + 'date1=' + startdate + '&date2=' + enddate;
+            } else {
+                url = url + 'city=' + $scope.cityToSearch + '&date1=' + startdate + '&date2=' + enddate;
+            }
+            
             $http({
                 method: 'GET',
-                url: 'http://115.159.87.129:8004/restaurant/search/hotelnamecity',
-                params: {
-                    hotelName: "",
-                    city: $scope.restaurantToSearch.city
-                },
+                url: url,
                 crossDomain: true
             }).success(function(data) {
                 console.log(data);
@@ -321,7 +234,5 @@ angular.module('sbAdminApp')
         };
 
         $scope.getCites();
-        $scope.getUsers();
-        $scope.getProductions();
         $scope.citySelected();
     });

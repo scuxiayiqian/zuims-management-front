@@ -142,10 +142,10 @@ angular.module('sbAdminApp')
             //$scope.searchReservationQuantityFromSelectedStartAndEnd();
 
             if ($scope.defaultSearchWay == "searchByCity") {
-                $scope.citySelected();
+                $scope.getDataByCity();
             }
             else if ($scope.defaultSearchWay == "searchByRestaurat") {
-                $scope.searchOrderQuantityFromSelectedStartAndEnd();
+                $scope.searchReservationQuantityFromSelectedStartAndEnd();
             }
 
         };
@@ -227,13 +227,19 @@ angular.module('sbAdminApp')
 
         $scope.getDataByCity = function() {
 
+            $scope.defaultSearchWay = "searchByCity";
+            
             var url = 'http://202.120.40.175:21104/order/periodcount/city?';
 
-            if ($scope.restaurantToSearch == null) {
+            $scope.rowCollection = null;
+            $scope.displayedCollection = null;
+
+            if ($scope.restaurantToSearch == null || $scope.restaurantToSearch.city == null) {
 
                 url = url + 'date1=' + $scope.myStart + '&date2=' + $scope.myEnd;
             } else {
 
+                $scope.restaurantToSearch.name = "";
                 url = url + 'city=' + $scope.restaurantToSearch.city + '&date1=' + $scope.myStart + '&date2=' + $scope.myEnd;
             }
             $http({
@@ -250,5 +256,4 @@ angular.module('sbAdminApp')
         $scope.getDataByCity();
 
         //console.log($scope.myStart + "... " + $scope.myEnd);
-
     });

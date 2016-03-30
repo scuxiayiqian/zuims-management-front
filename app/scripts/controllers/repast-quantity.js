@@ -156,6 +156,8 @@ angular.module('sbAdminApp')
             });
         };
 
+        $scope.defaultSearchWay = "searchByCity";
+
         $scope.queryOrder = function (num) {
 
             $scope.startDate = $filter('date')($scope.getStartDate(num), 'yyyy-MM-dd');
@@ -165,7 +167,12 @@ angular.module('sbAdminApp')
 
             //$("#start").val($scope.myStart);
             //$("#end").val($scope.myEnd);
-            $scope.searchRepastQuantityFromSelectedStartAndEnd();
+
+            if ($scope.defaultSearchWay == "searchByCity") {
+                $scope.getDataByCity();
+            } else {
+                $scope.searchRepastQuantityFromSelectedStartAndEnd();
+            }
         };
 
         $scope.searchRepastQuantityFromSelectedStartAndEnd = function (restaurant) {
@@ -177,6 +184,8 @@ angular.module('sbAdminApp')
             if ($scope.restaurantToSearch == null) {
                 return;
             }
+            
+            $scope.defaultSearchWay = "searchByRestaurant";
 
             var startdate = $filter('date')($scope.myStart, 'yyyy-MM-dd');
             var enddate = $filter('date')($scope.myEnd, 'yyyy-MM-dd');
@@ -194,4 +203,36 @@ angular.module('sbAdminApp')
                     console.log("get order count info failed");
                 });
         };
+
+        $scope.getDataByCity = function() {
+
+            var city = null;
+
+            $scope.defaultSearchWay = "searchByCity";
+            
+            var startdate = $filter('date')($scope.myStart, 'yyyy-MM-dd');
+            var enddate = $filter('date')($scope.myEnd, 'yyyy-MM-dd');
+
+            $scope.rowCollection = null;
+            $scope.displayedCollection = null;
+
+            if ($scope.restaurantToSearch != null) {
+
+                city = $scope.restaurantToSearch.city;
+                $scope.restaurantToSearch.name = "";
+            }
+            
+            utilService.getOrderCountInfoByCity(city, startdate, enddate)
+                .success(function(data) {
+
+                    var formatdata = utilService.formatOrderCountInfo(data, "dorderFinishNum");
+                    $scope.line.data = formatdata[0];
+                    $scope.line.labels = formatdata[1];
+
+                }).error(function () {
+                    console.log("user delete failed");
+                });
+        }
+
+        $scope.getDataByCity();
     });

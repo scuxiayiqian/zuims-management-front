@@ -10,7 +10,7 @@
             <div class="panel-body"  ng-enter="searchBtnClicked()">
                 <div class="col-md-4">
                     餐厅所在地
-                    <select class="form-control" ng-model="restaurantToSearch.city" ng-options="city.name as city.name for city in cities" ng-change="citySelected()">
+                    <select class="form-control" ng-model="restaurantToSearch.city" ng-options="city.name as city.name for city in cities" ng-change="getDataByCity()">
                         <option value="">选择城市</option>
                     </select>
                 </div>

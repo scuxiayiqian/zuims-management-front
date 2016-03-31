@@ -11,9 +11,9 @@
  */
 
 angular.module('sbAdminApp')
-    .factory('right', ['$resource', function($resource) {
+    .factory('right', ['$resource', 'API', function($resource, API) {
         return $resource(
-            'http://202.120.40.175:21108/rights/:id',
+            API.OPERATION + '/rights/:id',
             {
                 id: '@id'
             },

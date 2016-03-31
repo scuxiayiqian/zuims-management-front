@@ -43,6 +43,12 @@
                         </span>
                     </div>
 
+                    <div style="float: right; padding: 0 10px;height: 30px" class="display-right">
+                        <a class="days selectDays" ng-click="queryOrder(7)" style="padding-right: 10px;">7天</a>
+                        <a class="days" ng-click="queryOrder(14)" style="padding-right: 10px;">14天</a>
+                        <a class="days" ng-click="queryOrder(30)" style="padding-right: 10px;">30天</a>
+                    </div>
+
                     <div class="display-left" style="width: 100px">
 
                         <select class="form-control" ng-model="cityToSearch" ng-options="city.name as city.name for city in cities" ng-change="citySelected()">
@@ -51,17 +57,7 @@
                     </div>
                 </div>
 
-                <div class="query-data">
-
-                    <div style="margin-top:10px; margin-bottom: 10px; float: right; padding: 0 10px;height: 30px" class="display-right">
-                        <a class="days selectDays" ng-click="queryOrder(7)" style="padding-right: 10px;">7天</a>
-                        <a class="days" ng-click="queryOrder(14)" style="padding-right: 10px;">14天</a>
-                        <a class="days" ng-click="queryOrder(30)" style="padding-right: 10px;">30天</a>
-                    </div>
-
-                </div>
-
-                <div style="margin-top: 70px">
+                <div style="margin-top: 30px">
                     <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
                         <thead>
                         <tr>
@@ -93,3 +89,12 @@
         </div>
     </div>
 </div>
+
+<script>
+    $('.days').click(function () {
+        $('.days').each(function () {
+            $(this).removeClass("selectDays");
+        });
+        $(this).addClass("selectDays");
+    });
+</script>

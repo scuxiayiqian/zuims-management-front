@@ -7,7 +7,7 @@
  * Controller of the sbAdminApp
  */
 angular.module('sbAdminApp')
-    .controller('LoginController', function($scope, $http, $state, $cookies, $cookieStore) {
+    .controller('LoginController', function($scope, $http, $state, $cookies, $cookieStore, API) {
 
         $scope.clickEnterToLogin = function () {
             console.log("click enter to login");
@@ -21,7 +21,7 @@ angular.module('sbAdminApp')
 
                 var req = {
                     method: 'GET',
-                    url: 'http://202.120.40.175:21108/token',
+                    url: API.OPERATION + '/token',
                     headers: {
                         authorization : "Basic " + btoa($scope.login.username + ":" + $scope.login.password)
                     }
@@ -49,7 +49,7 @@ angular.module('sbAdminApp')
 
                 $http({
                     method: 'DELETE',
-                    url: 'http://202.120.40.175:21108/token',
+                    url: API.OPERATION + '/token',
                     headers: {
                         'x-auth-token': token
                     },

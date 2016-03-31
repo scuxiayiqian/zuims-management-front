@@ -2,7 +2,7 @@
 
 
 angular.module('sbAdminApp')
-    .controller('unfinishedOrderCtrl', function ($scope, $http, $cookies, $state, $interval) {
+    .controller('unfinishedOrderCtrl', function ($scope, $http, $cookies, $state, $interval, API) {
 
         $scope.token = $cookies.get('token');
         $scope.cities = [];
@@ -20,7 +20,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/order/confirmOrder',
+                url: API.MERCHANT + '/order/confirmOrder',
                 params: {
                     orderId: row,
                     opt: 1
@@ -38,7 +38,7 @@ angular.module('sbAdminApp')
         $scope.cancelOrder = function(row) {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/order/confirmOrder',
+                url: API.MERCHANT + '/order/confirmOrder',
                 params: {
                     orderId: row,
                     opt: 0
@@ -60,7 +60,7 @@ angular.module('sbAdminApp')
             // get restaurant list request
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/order/unconfirmedorder',
+                url: API.MERCHANT + '/order/unconfirmedorder',
                 crossDomain: true
             }).success(function (orderArr) {
                 console.log("get all order list successed");
@@ -69,9 +69,6 @@ angular.module('sbAdminApp')
             }).error(function () {
                 console.log("get order list failed");
             });
-
-
-            //202.120.40.175:21104/order/unconfirmedorder
         }
 
         getOrderList();
@@ -80,9 +77,7 @@ angular.module('sbAdminApp')
 
         // starts the interval
         $scope.start = function() {
-            // stops any running interval to avoid two intervals running at the same time
-            //$scope.stop();
-
+ 
             // store the interval promise
             promise = $interval(getOrderList, 60000);
             console.log("start");

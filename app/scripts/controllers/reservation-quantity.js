@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('sbAdminApp')
-    .controller('reservationQuantityController', function ($scope, $http, $cookies, $filter) {
+    .controller('reservationQuantityController', function ($scope, $http, $cookies, $filter, API) {
         $scope.token = $cookies.get('token');
 
 
@@ -108,7 +108,7 @@ angular.module('sbAdminApp')
         $scope.getCites = function() {
             $http({
                 method: 'GET',
-                url: 'http://115.159.87.129:8008/cities',
+                url: API.OPERATION + '/cities',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -174,7 +174,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/order/periodcount?restaurantId=' + $scope.restaurantToSearch.Id + '&date1=' + startdate + '&date2=' + enddate,
+                url: API.DATA + '/order/periodcount?restaurantId=' + $scope.restaurantToSearch.Id + '&date1=' + startdate + '&date2=' + enddate,
                 crossDomain: true
             }).success(function(data) {
                 console.log(data);
@@ -220,7 +220,7 @@ angular.module('sbAdminApp')
         $scope.searchBtnClicked = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/search/namecity',
+                url: API.MERCHANT + '/restaurant/search/namecity',
                 params: {
                     restaurantName: $scope.restaurantToSearch.name,
                     city: $scope.restaurantToSearch.city
@@ -238,7 +238,7 @@ angular.module('sbAdminApp')
 
             $scope.defaultSearchWay = "searchByCity";
             
-            var url = 'http://202.120.40.175:21104/order/periodcount/city?';
+            var url = API.DATA + '/order/periodcount/city?';
 
             $scope.rowCollection = null;
             $scope.displayedCollection = null;

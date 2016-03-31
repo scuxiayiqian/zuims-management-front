@@ -2,7 +2,7 @@
 
 angular.module('sbAdminApp')
 
-    .service('utilService', function($http, $state, $cookies, $filter) {
+    .service('utilService', function($http, $state, $cookies, $filter, API) {
 
         this.getCurrentToken = function() {
 
@@ -21,14 +21,14 @@ angular.module('sbAdminApp')
 
             return $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/order/periodcount?restaurantId=' + restid + '&date1=' + startdate + '&date2=' + enddate,
+                url: API.DATA + '/order/periodcount?restaurantId=' + restid + '&date1=' + startdate + '&date2=' + enddate,
                 crossDomain: true
             });
         };
 
         this.getOrderCountInfoByCity = function(city, startDate, endDate) {
 
-            var url = 'http://202.120.40.175:21104/order/periodcount/city?';
+            var url = API.DATA + '/order/periodcount/city?';
             
             if (city == null) {
 

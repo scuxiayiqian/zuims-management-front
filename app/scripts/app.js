@@ -22,6 +22,13 @@ angular
     'ngSanitize',
     'ngCsv'
   ])
+    .constant('API', {
+        USER: 'http://202.120.40.175:21101',
+        RESTAURANT: 'http://202.120.40.175:21100',
+        MERCHANT: 'http://202.120.40.175:21104',
+        OPERATION: 'http://202.120.40.175:21108',
+        DATA: 'http://202.120.40.175:21104'
+    })
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     
     $ocLazyLoadProvider.config({

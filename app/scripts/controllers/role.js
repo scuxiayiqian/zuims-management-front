@@ -11,7 +11,7 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('roleCtrl', function ($scope, $http, $cookies) {
+    .controller('roleCtrl', function ($scope, $http, $cookies, API) {
 
         $scope.token = $cookies.get('token');
 
@@ -79,7 +79,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'DELETE',
-                url: 'http://202.120.40.175:21108/roles/' + $scope.roleToDelete.id,
+                url: API.OPERATION + '/roles/' + $scope.roleToDelete.id,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -108,7 +108,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'PUT',
-                url: 'http://202.120.40.175:21108/roles/' + $scope.roleToUpdate.id,
+                url: API.OPERATION + '/roles/' + $scope.roleToUpdate.id,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -136,7 +136,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'POST',
-                url: 'http://202.120.40.175:21108/roles/' + $scope.roleToCreate.id,
+                url: API.OPERATION + '/roles/' + $scope.roleToCreate.id,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -154,7 +154,7 @@ angular.module('sbAdminApp')
             // get role list request
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/roles',
+                url: API.OPERATION + '/roles',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -174,7 +174,7 @@ angular.module('sbAdminApp')
             // get right list request
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/rights',
+                url: API.OPERATION + '/rights',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token

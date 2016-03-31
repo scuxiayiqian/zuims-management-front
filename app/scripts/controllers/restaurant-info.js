@@ -11,15 +11,11 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('restaurantInfoCtrl', function ($scope, $http, $cookies, $state) {
+    .controller('restaurantInfoCtrl', function ($scope, $http, $cookies, $state, API) {
 
         $scope.token = $cookies.get('token');
 
         $scope.cities = [];
-        $scope.users = [];
-        $scope.productions = [];
-
-        $scope.productionsOfRestaurant = [];
 
         $scope.selectedCity = "";
 
@@ -53,73 +49,13 @@ angular.module('sbAdminApp')
             $scope.restaurantToDelete = row;
         };
 
-        $scope.setRestaurantToUpdate = function(row) {
-            $scope.restaurantToUpdate = row;
-
-            $scope.productionsOfRestaurant = [];
-
-            var flag = false;
-            for (var i = 0; i < $scope.productions.length; i ++) {
-                flag = false;
-                for (var j = 0; j < row.productions.length; j++) {
-                    if(row.productions[j].name == $scope.productions[i].name) {
-                        flag = true;
-                        break;
-                    }
-                }
-                $scope.productionsOfRestaurant.push({
-                    production: $scope.productions[i],
-                    isProvided: flag
-                })
-            }
-
-            $scope.displayedProductionsOfRestaurant = [].concat($scope.productionsOfRestaurant);
-        };
-
-        $scope.setRestaurantToCreate = function() {
-
-            $scope.restaurantToCreate = {
-                name: '',
-                city: '',
-                marketingName: '',
-                productions:[],
-                isPromoted: false
-            }
-
-            for (var i = 0; i < $scope.productions.length; i ++) {
-                $scope.productionsOfRestaurant.push({
-                    production: $scope.productions[i],
-                    isProvided: false
-                })
-            }
-
-            $scope.displayedProductionsOfRestaurant = [].concat($scope.productionsOfRestaurant);
-        };
         //remove to the real data holder
         $scope.deleteRestaurant = function() {
 
-            //$http({
-            //    method: 'DELETE',
-            //    url: 'http://202.120.40.175:21108/restaurants/' + $scope.restaurantToDelete.name,
-            //    headers: {
-            //        'x-auth-token': $scope.token
-            //    },
-            //    crossDomain: true
-            //}).success(function(data) {
-            //    alert(data.name + "deleted");
-            //    var index = $scope.rowCollection.indexOf($scope.restaurantToDelete);
-            //    if (index !== -1) {
-            //        $scope.rowCollection.splice(index, 1);
-            //    }
-            //}).error(function () {
-            //    alert("delete failed");
-            //});
-
-            console.log($scope.restaurantToDelete);
 
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/delete?restaurantId=' + $scope.restaurantToDelete.restaurantId,
+                url: API.MERCHANT + '/restaurant/delete?restaurantId=' + $scope.restaurantToDelete.restaurantId,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -139,83 +75,10 @@ angular.module('sbAdminApp')
             });
         };
 
-        $scope.updateRestaurant = function () {
-
-            $scope.restaurantToUpdate.productions = [];
-
-            for(var i = 0; i < $scope.productionsOfRestaurant.length; i++) {
-                if($scope.productionsOfRestaurant[i].isProvided) {
-
-                    $scope.restaurantToUpdate.productions.push($scope.productionsOfRestaurant[i].production);
-                }
-            }
-
-            $http({
-                method: 'PUT',
-                url: 'http://202.120.40.175:21108/restaurants/' + $scope.restaurantToUpdate.name,
-                headers: {
-                    'x-auth-token': $scope.token
-                },
-                data: $scope.restaurantToUpdate,
-                crossDomain: true
-            }).success(function(data) {
-                $scope.getRestaurantList();
-                alert("success");
-            }).error(function () {
-                alert("delete failed");
-            });
-        };
-
-        $scope.createRestaurant = function () {
-
-            $scope.restaurantToCreate.productions = [];
-
-            $scope.selectedCity = $scope.restaurantToCreate.city;
-
-            for(var i = 0; i < $scope.productionsOfRestaurant.length; i++) {
-                if($scope.productionsOfRestaurant[i].isProvided) {
-
-                    $scope.restaurantToCreate.productions.push($scope.productionsOfRestaurant[i].production);
-                }
-            }
-
-            $http({
-                method: 'POST',
-                url: 'http://202.120.40.175:21108/restaurants',
-                headers: {
-                    'x-auth-token': $scope.token
-                },
-                data: $scope.restaurantToCreate,
-                crossDomain: true
-            }).success(function(data) {
-                $scope.getRestaurantList()
-            }).error(function () {
-                alert("delete failed");
-            });
-        };
-
-        $scope.getRestaurantList = function() {
-            // get restaurant list request
-            $http({
-                method: 'GET',
-                url: 'http://202.120.40.175:21108/cities/' + $scope.selectedCity + '/restaurants',
-                headers: {
-                    //'Content-Type': 'application/json',
-                    'x-auth-token': $scope.token
-                },
-                crossDomain: true
-            }).success(function (restaurantArr) {
-                $scope.rowCollection = restaurantArr;
-                $scope.displayedCollection = $scope.rowCollection;
-            }).error(function () {
-                console.log("getRestaurantList failed");
-            });
-        };
-
         $scope.getCites = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/cities',
+                url: API.OPERATION + '/cities',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -225,38 +88,6 @@ angular.module('sbAdminApp')
                 setCities(cityArray);
             }).error(function () {
                 console.log("getCites failed");
-            });
-        };
-
-        $scope.getUsers = function() {
-            $http({
-                method: 'GET',
-                url: 'http://202.120.40.175:21108/roles/marketing/users',
-                headers: {
-                    //'Content-Type': 'application/json',
-                    'x-auth-token': $scope.token
-                },
-                crossDomain: true
-            }).success(function (cityArray) {
-                setUsers(cityArray);
-            }).error(function () {
-                console.log("getCites failed");
-            });
-        };
-
-        $scope.getProductions = function() {
-            $http({
-                method: 'GET',
-                url: 'http://202.120.40.175:21108/productions',
-                headers: {
-                    //'Content-Type': 'application/json',
-                    'x-auth-token': $scope.token
-                },
-                crossDomain: true
-            }).success(function (productionArray) {
-                $scope.productions = productionArray;
-            }).error(function () {
-                console.log("getProductions failed");
             });
         };
 
@@ -271,7 +102,7 @@ angular.module('sbAdminApp')
             //console.log($scope.restaurantToSearch.city + $scope.restaurantToSearch.name);
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/search/hotelnamecity',
+                url: API.MERCHANT + '/restaurant/search/hotelnamecity',
                 params: {
                     hotelName: $scope.restaurantToSearch.hotelName,
                     city: $scope.restaurantToSearch.city
@@ -303,7 +134,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/search/hotelnamecity',
+                url: API.MERCHANT + '/restaurant/search/hotelnamecity',
                 params: {
                     hotelName: "",
                     city: $scope.restaurantToSearch.city
@@ -321,7 +152,5 @@ angular.module('sbAdminApp')
         };
 
         $scope.getCites();
-        $scope.getUsers();
-        $scope.getProductions();
         $scope.citySelected();
     });

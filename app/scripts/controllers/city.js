@@ -11,7 +11,7 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('cityCtrl', function ($scope, $http, $cookies) {
+    .controller('cityCtrl', function ($scope, $http, $cookies, API) {
 
         $scope.token = $cookies.get('token');
 
@@ -36,7 +36,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'DELETE',
-                url: 'http://202.120.40.175:21108/cities/' + $scope.cityToDelete.name,
+                url: API.OPERATION + '/cities/' + $scope.cityToDelete.name,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -55,7 +55,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'PUT',
-                url: 'http://202.120.40.175:21108/cities/' + $scope.cityToUpdate.name,
+                url: API.OPERATION + '/cities/' + $scope.cityToUpdate.name,
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -73,7 +73,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'POST',
-                url: 'http://202.120.40.175:21108/cities',
+                url: API.OPERATION + '/cities',
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -91,7 +91,7 @@ angular.module('sbAdminApp')
             // get restaurant list request
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/cities',
+                url: API.OPERATION + '/cities',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token

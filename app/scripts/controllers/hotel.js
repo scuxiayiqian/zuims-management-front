@@ -14,7 +14,7 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('hotelCtrl', function ($scope, $http, $cookies, $state) {
+    .controller('hotelCtrl', function ($scope, $http, $cookies, $state, API) {
 
         $scope.token = $cookies.get('token');
         $scope.cities = [];
@@ -41,7 +41,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/hotel/delete?hotelId=' + $scope.hotelToDelete.hotelId,
+                url: API.MERCHANT + 'restaurant/hotel/delete?hotelId=' + $scope.hotelToDelete.hotelId,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -68,7 +68,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'POST',
-                url: 'http://202.120.40.175:21104/restaurant/hotel/update',
+                url: API.MERCHANT + '/restaurant/hotel/update',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -96,7 +96,7 @@ angular.module('sbAdminApp')
             $scope.hotelToCreate.memo = "";
             $http({
                 method: 'POST',
-                url: 'http://202.120.40.175:21104/restaurant/hotel/add',
+                url: API.MERCHANT + '/restaurant/hotel/add',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -115,7 +115,7 @@ angular.module('sbAdminApp')
             // get restaurant list request
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/hotel/all',
+                url: API.MERCHANT + '/restaurant/hotel/all',
                 crossDomain: true
             }).success(function (hotelArr) {
                 console.log("get hotel list successed");
@@ -142,7 +142,7 @@ angular.module('sbAdminApp')
         $scope.getCites = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/cities',
+                url: API.OPERATION + '/cities',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token

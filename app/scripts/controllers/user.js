@@ -11,7 +11,7 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('userCtrl', function ($scope, $http, $cookies) {
+    .controller('userCtrl', function ($scope, $http, $cookies, API) {
 
         $scope.token = $cookies.get('token');
 
@@ -50,7 +50,7 @@ angular.module('sbAdminApp')
             console.log(phoneid);
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21101/users/delete',
+                url: API.USER + '/users/delete',
                 params: {phoneId: phoneid},
                 crossDomain: true
             }).success(function(data) {
@@ -67,7 +67,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'POST',
-                url: 'http://202.120.40.175:21101/users/update',
+                url: API.USER + '/users/update',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -111,7 +111,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'POST',
-                url: 'http://202.120.40.175:21101/users/add',
+                url: API.USER + '/users/add',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -130,7 +130,7 @@ angular.module('sbAdminApp')
             // get restaurant list request
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21101/users/all',
+                url: API.USER + '/users/all',
                 crossDomain: true
             }).success(function (userArr) {
                 console.log("getUserList successed");

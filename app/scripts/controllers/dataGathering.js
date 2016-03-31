@@ -11,7 +11,7 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('dataGatheringCtrl', function ($scope, $http, $cookies, $filter) {
+    .controller('dataGatheringCtrl', function ($scope, $http, $cookies, $filter, API) {
 
         $scope.token = $cookies.get('token');
 
@@ -118,10 +118,11 @@ angular.module('sbAdminApp')
 
         //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
         $scope.displayedCollection = [].concat($scope.rowCollection);
+
         $scope.getCites = function() {
             $http({
                 method: 'GET',
-                url: 'http://115.159.87.129:8008/cities',
+                url: API.OPERATION + '/cities',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -131,64 +132,6 @@ angular.module('sbAdminApp')
                 setCities(cityArray);
             }).error(function () {
                 console.log("getCites failed");
-            });
-        };
-
-        $scope.getUsers = function() {
-            $http({
-                method: 'GET',
-                url: 'http://115.159.87.129:8008/roles/marketing/users',
-                headers: {
-                    //'Content-Type': 'application/json',
-                    'x-auth-token': $scope.token
-                },
-                crossDomain: true
-            }).success(function (cityArray) {
-                setUsers(cityArray);
-            }).error(function () {
-                console.log("getCites failed");
-            });
-        };
-
-        $scope.getProductions = function() {
-            $http({
-                method: 'GET',
-                url: 'http://115.159.87.129:8008/productions',
-                headers: {
-                    //'Content-Type': 'application/json',
-                    'x-auth-token': $scope.token
-                },
-                crossDomain: true
-            }).success(function (productionArray) {
-                $scope.productions = productionArray;
-            }).error(function () {
-                console.log("getProductions failed");
-            });
-        };
-
-        $scope.changeCity = function() {
-
-            if($scope.selectedCity != 'Choose a city') {
-                $scope.getRestaurantList()
-            }
-        };
-
-        $scope.searchBtnClicked = function() {
-            //console.log($scope.restaurantToSearch.city + $scope.restaurantToSearch.name);
-            $http({
-                method: 'GET',
-                url: 'http://115.159.87.129:8004/restaurant/search/hotelnamecity',
-                params: {
-                    hotelName: $scope.restaurantToSearch.hotelName,
-                    city: $scope.restaurantToSearch.city
-                },
-                crossDomain: true
-            }).success(function(data) {
-                console.log(data);
-                $scope.rowCollection = data;
-                $scope.displayedCollection = data;
-            }).error(function () {
-                console.log("user delete failed");
             });
         };
 
@@ -203,14 +146,12 @@ angular.module('sbAdminApp')
             $scope.startDate = $filter('date')($scope.myStart, 'yyyy-MM-dd');
             $scope.endDate = $filter('date')($scope.myEnd, 'yyyy-MM-dd');
 
-            //$scope.searchReservationQuantityFromSelectedStartAndEnd();
-
             $scope.citySelected();
         };
 
         $scope.citySelected = function() {
 
-            var url = 'http://202.120.40.175:21104/order/periodcount/city?';
+            var url = API.DATA + '/order/periodcount/city?';
 
             var startdate = $filter('date')($scope.myStart, 'yyyy-MM-dd');
             var enddate = $filter('date')($scope.myEnd, 'yyyy-MM-dd');

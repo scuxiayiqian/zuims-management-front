@@ -5,7 +5,7 @@
 'use strict';
 
 angular.module('sbAdminApp')
-    .controller('CreateRestaurantController', function ($scope, $http, $cookies, $state, $cookieStore) {
+    .controller('CreateRestaurantController', function ($scope, $http, $cookies, $state, $cookieStore, API) {
 
         $scope.token = $cookies.get('token');
         $scope.marketingUsers = [];
@@ -57,7 +57,7 @@ angular.module('sbAdminApp')
         $scope.getProductions = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/productions',
+                url: API.OPERATION + '/productions',
                 headers: {
                     'x-auth-token': $scope.token
                 },
@@ -83,7 +83,7 @@ angular.module('sbAdminApp')
 
             $http({
                 method: 'POST',
-                url: 'http://202.120.40.175:21104/restaurant/add',
+                url: API.MERCHANT + '/restaurant/add',
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -116,7 +116,7 @@ angular.module('sbAdminApp')
         $scope.getMarketingUsers = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/roles/marketing/users',
+                url: API.OPERATION + '/roles/marketing/users',
                 headers: {
                     'x-auth-token': $scope.token
                 },

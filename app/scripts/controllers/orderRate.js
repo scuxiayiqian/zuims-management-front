@@ -18,7 +18,7 @@
 'use strict';
 
 angular.module('sbAdminApp')
-    .controller('orderRateController', function ($scope, $http, $cookies, $filter, utilService) {
+    .controller('orderRateController', function ($scope, $http, $cookies, $filter, utilService, API) {
         $scope.token = $cookies.get('token');
 
         $scope.restaurantToSearch = null;
@@ -118,7 +118,7 @@ angular.module('sbAdminApp')
         $scope.getCites = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/cities',
+                url: API.OPERATION + '/cities',
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -146,7 +146,7 @@ angular.module('sbAdminApp')
         $scope.searchBtnClicked = function() {
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/search/namecity',
+                url: API.MERCHANT + '/restaurant/search/namecity',
                 params: {
                     restaurantName: $scope.restaurantToSearch.name,
                     city: $scope.restaurantToSearch.city

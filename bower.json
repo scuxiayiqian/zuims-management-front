@@ -12,7 +12,7 @@
     "angular-touch": "1.4.8",
     "angular-route": "1.4.8",
     "font-awesome": "4.3.0",
-    "angular-bootstrap": "0.14.3",
+    "angular-bootstrap": "1.2.5",
     "oclazyload": "1.0.9",
     "angular-loading-bar": "~0.7.0",
     "angular-ui-router": "~0.2.13",
@@ -23,14 +23,14 @@
     "ngImgCropFullExtended": "~0.4.9",
     "ngDialog": "0.5.6",
     "ng-csv": "0.3.6",
-    "angular-bootstrap": "1.2.5"
+    "underscore": "~1.8.3"
   },
   "devDependencies": {
     "angular-mocks": "1.4.8",
     "angular-scenario": "1.4.8"
   },
-  "resolutions":{
-      "bootstrap": "~3.1.1"
-    },
+  "resolutions": {
+    "bootstrap": "~3.1.1"
+  },
   "appPath": "app"
 }

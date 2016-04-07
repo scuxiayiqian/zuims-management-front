@@ -29,6 +29,11 @@ angular
         OPERATION: 'http://202.120.40.175:21108',
         DATA: 'http://202.120.40.175:21104'
     })
+
+    .constant('_',
+        window._
+    )
+
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
     
     $ocLazyLoadProvider.config({

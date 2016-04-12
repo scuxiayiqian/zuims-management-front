@@ -12,6 +12,7 @@ angular.module('sbAdminApp')
         $scope.hotelToSearch.city = '上海市';
         $scope.searchResultIsShow = false;
         $scope.newRestaurantIsShow = false;
+        $scope.notFoundHotel = false;
         $scope.cities = [];
         $scope.stars = ['四星','五星'];
         $scope.restaurantToCreate = {};
@@ -233,6 +234,7 @@ angular.module('sbAdminApp')
         };
 
         $scope.citySelected = function() {
+            $scope.notFoundHotel = true;
 
             if ($scope.starToSearch != 0) {
                 $http({
@@ -329,6 +331,10 @@ angular.module('sbAdminApp')
                 console.log('not marketing');
             }
             //return flag;
+        };
+
+        $scope.goHotel = function () {
+            $state.go('dashboard.hotel');
         };
 
         $scope.getCities();

@@ -29,9 +29,9 @@
                         <option value="">选择酒店</option>
                     </select>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-2" ng-show="notFoundHotel">
                     <br>
-                    <button type="button" class="btn btn-primary" ng-click="searchBtnClicked()">
+                    <button type="button" class="btn btn-primary" ng-click="goHotel()">
                         未查询到酒店?去新建酒店
                     </button>
                 </div>

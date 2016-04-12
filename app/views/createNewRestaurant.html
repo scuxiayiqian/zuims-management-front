@@ -212,6 +212,7 @@
                             <!--地址 经纬度 电话 营业时间  账号 密码-->
                             <div ng-switch-when="基本信息-找到我">
                                 <div style="margin-top: 20px">
+                                    <button ng-click="saveBasicInfo()">保存</button>
                                     <form role="form" class="form-horizontal">
                                         <div class="form-group">
                                             <label class="col-sm-3 control-label">餐厅详细地址 (不用重复填写城市)</label>
@@ -268,6 +269,7 @@
                             <div ng-switch-when="餐厅图片">
                                 <div class="image-uploads separator" style="margin-top: 20px">
                                     <div class="handle-image" ng-controller="ImageRecommendCtrl">
+
                                         <div id="recommend-pic">
                                             平台首页展示餐厅照片
                                             <div><span class="explain">图片分辨率：530*715</span></div>

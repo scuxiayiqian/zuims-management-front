@@ -355,6 +355,8 @@ angular.module('sbAdminApp')
         //详情图文信息预览
         ManageService.getDetail($cookies.get('restID'))
             .success(function (data) {
+                console.log('---------');
+                console.log(data);
                 $scope.details = data;
 
                 for(var i = 0; i < $scope.details.length; i ++) {

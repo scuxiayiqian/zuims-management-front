@@ -63,18 +63,59 @@ angular.module('sbAdminApp')
             return !_.isUndefined($scope.steps[previousStep]);
         };
 
+        $scope.saveBasicInfo = function() {
+            console.log($scope.restaurantToCreate);
+
+            var geolocation = $scope.restaurantLL.lalong;
+            var geolocationArr = geolocation.split(',');
+
+            $scope.restaurantToCreate.longitude = geolocationArr[0];
+            $scope.restaurantToCreate.latitude = geolocationArr[1];
+            //$scope.longitudeNLatitude = $scope.restaurantLL.lalong;
+            $scope.restaurantToCreate.smoke = "否";
+            $scope.restaurantToCreate.introduction = "无";
+            $scope.restaurantToCreate.memo = "无";
+            $scope.restaurantToCreate.hotelId = $scope.hotelIdToSearch.toString();
+
+            $http({
+                method: 'POST',
+                url: API.MERCHANT + '/restaurant/add',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                data: $scope.restaurantToCreate,
+                crossDomain: true
+            }).success(function(data) {
+                //alert("创建餐厅成功");
+
+                $cookies.remove('hotelId');
+                $cookies.remove('hotelName');
+                $cookies.remove('longitude');
+                $cookies.remove('latitude');
+
+                $cookies.put('restID', data);
+            }).error(function (error) {
+
+                console.log(error);
+                alert("创建餐厅失败");
+                //$cookies.put('restID', error);
+                alert(error.message);
+                $cookies.remove('hotelId');
+                $cookies.remove('hotelName');
+                $cookies.remove('longitude');
+                $cookies.remove('latitude');
+            });
+        };
+
         $scope.incrementStep = function() {
             if ( $scope.hasNextStep() )
             {
                 var stepIndex = $scope.getCurrentStepIndex();
 
-                var nextStep = stepIndex + 1;
-                $scope.selection = $scope.steps[nextStep];
-
                 // restaurant basic info finished
                 // send a post to server
+                console.log(stepIndex);
                 if (stepIndex == 2) {
-                    //$scope.createRestaurant();
                     console.log($scope.restaurantToCreate);
 
                     var geolocation = $scope.restaurantLL.lalong;
@@ -97,7 +138,6 @@ angular.module('sbAdminApp')
                         data: $scope.restaurantToCreate,
                         crossDomain: true
                     }).success(function(data) {
-                        //alert("创建餐厅成功");
 
                         $cookies.remove('hotelId');
                         $cookies.remove('hotelName');
@@ -105,8 +145,12 @@ angular.module('sbAdminApp')
                         $cookies.remove('latitude');
 
                         $cookies.put('restID', data);
+
+                        var nextStep = stepIndex + 1;
+                        $scope.selection = $scope.steps[nextStep];
                     }).error(function (error) {
 
+                        console.log(error);
                         alert("创建餐厅失败");
                         //$cookies.put('restID', error);
                         alert(error.message);
@@ -114,55 +158,13 @@ angular.module('sbAdminApp')
                         $cookies.remove('hotelName');
                         $cookies.remove('longitude');
                         $cookies.remove('latitude');
-
                     });
-
+                }
+                else {
+                    var nextStep = stepIndex + 1;
+                    $scope.selection = $scope.steps[nextStep];
                 }
             }
-        };
-
-        $scope.createRestaurant = function() {
-            console.log($scope.restaurantToCreate);
-
-            $scope.geolocation = $scope.restaurantLL.lalong;
-            $scope.geolocationArr = $scope.geolocation.split(',');
-
-            $scope.restaurantToCreate.longitude = $scope.geolocationArr[0];
-            $scope.restaurantToCreate.latitude = $scope.geolocationArr[1];
-            $scope.restaurantToCreate.smoke = "否";
-            $scope.restaurantToCreate.introduction = "无";
-            $scope.restaurantToCreate.memo = "无";
-
-            $http({
-                method: 'POST',
-                url: API.MERCHANT + '/restaurant/add',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                data: $scope.restaurantToCreate,
-                crossDomain: true
-            }).success(function(data) {
-                alert("创建餐厅成功");
-
-                $cookies.remove('hotelId');
-                $cookies.remove('hotelName');
-                $cookies.remove('longitude');
-                $cookies.remove('latitude');
-
-                $cookies.put('restID', data);
-
-                //$state.go("dashboard.restaurant-detail");
-            }).error(function (error) {
-
-                alert(error.message);
-                $cookies.remove('hotelId');
-                $cookies.remove('hotelName');
-                $cookies.remove('longitude');
-                $cookies.remove('latitude');
-
-                $state.go('dashboard.createNewRestaurant');
-
-            });
         };
 
         $scope.decrementStep = function() {

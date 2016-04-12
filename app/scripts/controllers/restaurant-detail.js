@@ -185,9 +185,9 @@ angular.module('sbAdminApp')
 
     }])
     .controller('ManagementCtrl', function ($scope, $location, $anchorScroll, ManageService, ngDialog, $cookies, API) {
-        if ($cookies.get('restID') == null || $cookies.get('restID') == "" || $cookies.get('restID') == undefined) {
-            window.location = "/";
-        }
+        //if ($cookies.get('restID') == null || $cookies.get('restID') == "" || $cookies.get('restID') == undefined) {
+        //    window.location = "/";
+        //}
         ManageService.getRestaurantInfo($cookies.get('restID'))
             .success(function (data) {
                 console.log(data);
@@ -237,7 +237,7 @@ angular.module('sbAdminApp')
 
 
     })
-    .controller('ImageRecommendCtrl', function ($scope, ManageService, $cookies) {
+    .controller('ImageRecommendCtrl', function ($scope, $location, $anchorScroll, ManageService, ngDialog, $cookies, API) {
 
         $scope.myRecommendImage = '';
         $scope.myRecommendCroppedPic = '';
@@ -293,6 +293,56 @@ angular.module('sbAdminApp')
             $scope.picDescription = '';
             $scope.myRecommendCroppedPic = '';
 
+        };
+
+        if ($cookies.get('restID') == null || $cookies.get('restID') == "" || $cookies.get('restID') == undefined) {
+            window.location = "/";
+        }
+        ManageService.getRestaurantInfo($cookies.get('restID'))
+            .success(function (data) {
+                console.log(data);
+                data.noonPrice = parseFloat(data.noonPrice, 10);
+                data.nightPrice = parseFloat(data.nightPrice, 10)
+                $scope.restaurantInfo = data;
+                $scope.basicInfo = data;
+                $scope.persistInfo = {"persistTable": data.persistTable, "persistTime": data.persistTime};
+                delete $scope.basicInfo.introduction;
+                delete $scope.basicInfo.smoke;
+                delete $scope.basicInfo.images;
+                //delete $scope.basicInfo.latitude;
+                //delete $scope.basicInfo.longitude;
+
+                $scope.longitudeNLatitude = $scope.basicInfo.longitude + ',' + $scope.basicInfo.latitude;
+            });
+
+        $scope.goto = function (id) {
+            $location.hash(id);
+            $anchorScroll();
+        };
+
+
+        $scope.reservationNum = 20;
+        $scope.advanceTime = 4;
+
+        //首页图文信息预览
+        $scope.previewHomePage = function () {
+            ManageService.getHomePage($cookies.get('restID'))
+                .success(function (data) {
+
+                    $scope.restaurantInfo.homePagePic = API.DATA + data.picname;
+                    $scope.restaurantInfo.restaurantTeles = $scope.restaurantInfo.restaurantTele.split(" ");
+                    $scope.description = data.introduction;
+
+                    if (data.picname == "" || data.picname == null) {
+                        $scope.restaurantInfo.homePagePic = API.DATA + "/restaurants/images?relativePath=NonePicture.jpg";
+                    }
+
+                    $scope.discount = true;
+                    ngDialog.open({
+                        templateUrl: 'homePic.html',
+                        scope: $scope
+                    });
+                });
         };
 
     })

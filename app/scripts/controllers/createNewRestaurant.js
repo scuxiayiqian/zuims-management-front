@@ -8,6 +8,7 @@ angular.module('sbAdminApp')
     .controller('CreateNewRestaurantCtrl', function ($scope, $http, $cookies, $state, $cookieStore, API) {
 
         $scope.token = $cookies.get('token');
+        $cookies.remove('restID');
         $scope.hotelToSearch = {};
         $scope.hotelToSearch.city = '上海市';
         $scope.searchResultIsShow = false;
@@ -24,6 +25,7 @@ angular.module('sbAdminApp')
         $scope.rowCollection = [];
         $scope.displayedCollection = [].concat($scope.rowCollection);
         $scope.hotelCollection = [];
+
 
         $scope.steps = [
             '基本信息-知道我',
@@ -80,10 +82,11 @@ angular.module('sbAdminApp')
 
                     $scope.restaurantToCreate.longitude = geolocationArr[0];
                     $scope.restaurantToCreate.latitude = geolocationArr[1];
+                    //$scope.longitudeNLatitude = $scope.restaurantLL.lalong;
                     $scope.restaurantToCreate.smoke = "否";
                     $scope.restaurantToCreate.introduction = "无";
                     $scope.restaurantToCreate.memo = "无";
-                    $scope.restaurantToCreate.hotelId = $scope.hotelIdToSearch;
+                    $scope.restaurantToCreate.hotelId = $scope.hotelIdToSearch.toString();
 
                     $http({
                         method: 'POST',
@@ -94,7 +97,7 @@ angular.module('sbAdminApp')
                         data: $scope.restaurantToCreate,
                         crossDomain: true
                     }).success(function(data) {
-                        alert("创建餐厅成功");
+                        //alert("创建餐厅成功");
 
                         $cookies.remove('hotelId');
                         $cookies.remove('hotelName');
@@ -102,10 +105,10 @@ angular.module('sbAdminApp')
                         $cookies.remove('latitude');
 
                         $cookies.put('restID', data);
-
-                        //$state.go("dashboard.restaurant-detail");
                     }).error(function (error) {
 
+                        alert("创建餐厅失败");
+                        //$cookies.put('restID', error);
                         alert(error.message);
                         $cookies.remove('hotelId');
                         $cookies.remove('hotelName');
@@ -121,14 +124,11 @@ angular.module('sbAdminApp')
         $scope.createRestaurant = function() {
             console.log($scope.restaurantToCreate);
 
-            $scope.geolocation = $scope.longitudeAndLatitude;
+            $scope.geolocation = $scope.restaurantLL.lalong;
             $scope.geolocationArr = $scope.geolocation.split(',');
 
-            console.log($scope.longitudeAndLatitude);
-            console.log(geolocationArr);
-
-            $scope.restaurantToCreate.longitude = geolocationArr[0];
-            $scope.restaurantToCreate.latitude = geolocationArr[1];
+            $scope.restaurantToCreate.longitude = $scope.geolocationArr[0];
+            $scope.restaurantToCreate.latitude = $scope.geolocationArr[1];
             $scope.restaurantToCreate.smoke = "否";
             $scope.restaurantToCreate.introduction = "无";
             $scope.restaurantToCreate.memo = "无";
@@ -159,6 +159,8 @@ angular.module('sbAdminApp')
                 $cookies.remove('hotelName');
                 $cookies.remove('longitude');
                 $cookies.remove('latitude');
+
+                $state.go('dashboard.createNewRestaurant');
 
             });
         };

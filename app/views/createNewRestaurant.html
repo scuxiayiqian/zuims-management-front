@@ -1,0 +1,441 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">新建餐厅</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row" ng-controller="CreateNewRestaurantCtrl">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">查询酒店</div>
+            <div class="panel-body" ng-enter="searchBtnClicked()">
+                <div class="col-md-2">
+                    酒店所在地
+                    <select class="form-control" ng-model="cityToSearch" ng-options="city.name as city.name for city in cities" ng-change="citySelected()">
+                        <option value="">选择城市</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    酒店星级
+                    <select class="form-control" ng-model="starToSearch" ng-change="citySelected()">
+                        <!--<option value="">选择星级</option>-->
+                        <option value="5">五星</option>
+                        <option value="4">四星</option>
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    酒店名称
+                    <select class="form-control" ng-model="hotelIdToSearch" ng-options="hotel.hotelId as hotel.hotelName for hotel in hotelCollection" ng-change="hotelSelected()">
+                        <option value="">选择酒店</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <br>
+                    <button type="button" class="btn btn-primary" ng-click="searchBtnClicked()">
+                        未查询到酒店?去新建酒店
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+
+    <div class="col-lg-12 col-sm-12" ng-show="searchResultIsShow">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                餐厅搜索结果
+                <button style="float: right;" type="button" ng-click="addNewRestaurant()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-success">
+                    <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
+                    <i class="glyphicon glyphicon-plus">
+                    </i> 添加新的餐厅
+                </button>
+            </div>
+            <div class="panel-body">
+                <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th>餐厅名</th>
+                        <th>酒店名</th>
+                        <th>城市</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr st-select-row="row" ng-repeat="row in displayedCollection">
+                        <td>{{row.restaurantName}}</td>
+                        <td>{{row.hotelName}}</td>
+                        <td>{{row.city}}</td>
+                        <!--<td>-->
+                            <!--<button class="btn btn-xs btn-success" type="button" ng-click="createNewRestaurantForTheHotel(row)">-->
+                                <!--<i class="fa fa-plus"></i>-->
+                            <!--</button>-->
+                        <!--</td>-->
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12 col-sm-12" id="line-chart" ng-show="newRestaurantIsShow">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                新建餐厅</div>
+            <div class="panel-body">
+
+                <div class="content">
+
+                    <form class="form-horizontal">
+
+                        <ul class="nav nav-tabs">
+                            <li ng-repeat="step in steps" ng-class="{active: $index==getCurrentStepIndex()}">
+                                <a href="javascript:void(0)" ng-click="goToStep($index)">{{step}}</a>
+                            </li>
+                        </ul>
+                        <div ng-switch on="selection">
+
+                            <!-- First Step -->
+                            <!--城市 酒店 餐厅名-->
+                            <div ng-switch-when="基本信息-知道我">
+                                <div style="margin-top: 20px">
+                                    <form role="form" class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">所在城市</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" ng-model="restaurantToCreate.city" ng-options="city.name as city.name for city in cities" disabled>
+                                                    <option value="">选择城市</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">所在酒店</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" ng-model="restaurantToCreate.hotelName" disabled>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">餐厅名</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" ng-model="restaurantToCreate.restaurantName">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Second Step -->
+                            <div ng-switch-when="基本信息-了解我">
+                                <!--餐厅类型 优惠类型 午餐价 晚餐价  停车 接单数 接单时间 上首页 是否签约-->
+                                <div style="margin-top: 20px">
+                                    <form role="form" class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">餐厅类型</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" ng-model="restaurantToCreate.restaurantType" ng-options="product.name as product.name for product in productions">
+                                                    <option value="">餐厅类型</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">优惠类型</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" ng-model="discountType[0]">
+                                                    <option value="discount">三免一</option>
+                                                    <option value="none">暂无</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">午餐价格</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" ng-model="restaurantToCreate.noonPrice">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">晚餐价格</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" ng-model="restaurantToCreate.nightPrice">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">免费停车</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" ng-model="restaurantToCreate.park">
+                                                    <option value="无停车位">无停车位</option>
+                                                    <option value="停车收费">停车收费</option>
+                                                    <option value="免费停车">免费停车</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">预留接单数</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" type="number" ng-model="restaurantToCreate.persistTable">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">预定接单时间(小时)</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" type="number" ng-model="restaurantToCreate.persistTime">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">是否推荐上首页</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" ng-model="restaurantToCreate.recommendLevel">
+                                                    <option value=1>是</option>
+                                                    <option value=0>否</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">是否签约</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" ng-model="restaurantToCreate.contractState">
+                                                    <option value=1>是</option>
+                                                    <option value=0>否</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">销售人员</label>
+                                            <div class="col-sm-8">
+                                                <select class="form-control" ng-model="restaurantToCreate.sellerId" ng-options="marketing.id as marketing.fullname for marketing in marketingUsers">
+                                                    <!--<option value=3></option>-->
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!-- Third Step -->
+                            <!--地址 经纬度 电话 营业时间  账号 密码-->
+                            <div ng-switch-when="基本信息-找到我">
+                                <div style="margin-top: 20px">
+                                    <form role="form" class="form-horizontal">
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">餐厅详细地址 (不用重复填写城市)</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" ng-model="restaurantToCreate.restaurantAddress">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">经纬度</label>
+                                            <div class="col-sm-8">
+                                                <input class="form-control" ng-model="restaurantLL.lalong">
+                                                <a target="_blank" href="http://api.map.baidu.com/lbsapi/getpoint/index.html">经纬度怎么填?点我查询</a >
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                                餐厅电话
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input type="tel" class="form-control" ng-model="restaurantToCreate.restaurantTele">
+                                                <span class="explain" style="padding-left: 10px">若有多个电话号码,用空格分开</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                                营业时间
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input type="tel" class="form-control" ng-model="restaurantToCreate.restaurantOpenTime">
+                                                <span class="explain" style="padding-left: 10px">格式: 11:30-14:30,17:30-22:00</span>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                                餐厅账户
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input type="tel" class="form-control" ng-model="restaurantToCreate.account">
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-3 control-label">
+                                                账户密码
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <input type="tel" class="form-control" ng-model="restaurantToCreate.password">
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+
+                            <!--Fourth step-->
+                            <div ng-switch-when="餐厅图片">
+                                <div class="image-uploads separator" style="margin-top: 20px">
+                                    <div class="handle-image" ng-controller="ImageRecommendCtrl">
+                                        <div id="recommend-pic">
+                                            平台首页展示餐厅照片
+                                            <div><span class="explain">图片分辨率：530*715</span></div>
+                                            <div ng-show="homePageShow">
+                                                <div class="cropAreaRecommend">
+                                                    <img-crop image="myRecommendImage" area-type="rectangle" aspect-ratio="0.74125874"
+                                                              result-image-size='{w: 530,h: 715}'
+                                                              result-image='myRecommendCroppedPic'
+
+                                                    ></img-crop>
+                                                </div>
+                                                <!--<div>图片预览:</div>-->
+                                                <div class="croppedPic" style="display: none"><img ng-src="{{myRecommendCroppedPic}}"/>
+                                                </div>
+                                                <div class="picRecommendDescription">
+                                                    <input class="form-control" type="text" placeholder="图片描述，限20字，与图片同时显示在用户手机上"
+                                                           ng-model="picDescription"/>
+                                                </div>
+                                                <div class="image-upload">
+                                                    <a href="javascript:;" class="file" ng-click="uploadPic()"><span
+                                                            class="glyphicon glyphicon-saved"></span>上传图片
+                                                    </a>
+                                                    <a href="javascript:;" class="file-cancel" ng-click="removePic()"><span
+                                                            class="glyphicon glyphicon-remove"></span>取消上传
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="image-upload" ng-hide="homePageShow">
+                                                <a href="javascript:;" class="file"><span class="glyphicon glyphicon-picture"></span>选择图片
+                                                    <input type="file" accept="image/*" name="recommend" id="fileInputRecommend">
+                                                </a>
+                                                <a href="javascript:;" class="file btn-warning" ng-click="previewHomePage()"><span
+                                                        class="glyphicon glyphicon-search"></span>首页图文信息预览
+                                                </a>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div id="detail-pic" ng-controller="ImageDetailCtrl">
+                                            餐厅详情图文
+                                            <div><span class="explain">图片分辨率：640*420，用户手机端显示最近上传的五张图片以及对应的文字描述</span></div>
+
+                                            <div ng-show="detailPicShow">
+                                                <div class="cropAreaDetail">
+                                                    <img-crop image="myDetailImage" area-type="rectangle" aspect-ratio="1.52380952"
+                                                              result-image-size='{w: 640,h: 420}'
+                                                              result-image='myDetailCroppedPic'
+                                                    ></img-crop>
+
+                                                </div>
+                                                <!--<div>图片预览:</div>-->
+                                                <div class="croppedPic" style="display: none"><img ng-src="{{myDetailCroppedPic}}"/></div>
+                                                <div class="picDetailDescription">
+                                                    <input class="form-control" type="text" placeholder="图片描述，限20字，与图片同时显示在用户手机上"
+                                                           ng-model="picDescription"/>
+                                                </div>
+                                                <div class="image-upload">
+                                                    <a href="javascript:;" class="file" ng-click="uploadPic()"><span
+                                                            class="glyphicon glyphicon-saved"></span>上传图片
+                                                    </a>
+                                                    <a href="javascript:;" class="file-cancel" ng-click="removePic()"><span
+                                                            class="glyphicon glyphicon-remove"></span>取消上传
+                                                    </a>
+                                                </div>
+                                            </div>
+                                            <div class="image-upload" ng-hide="detailPicShow">
+                                                <a href="javascript:;" class="file"><span
+                                                        class="glyphicon glyphicon-picture"></span>选择图片
+                                                    <input type="file" accept="image/*" name="detail" id="fileInputDetail"
+                                                    >
+                                                </a>
+
+                                                <a href="javascript:;" class="file btn-warning" ng-click="previewDetail()"><span
+                                                        class="glyphicon glyphicon-search"></span>餐厅详细图文信息预览
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Fifth step-->
+                            <div ng-switch-when="餐厅联系人">
+                                <div class="contacts separator" ng-controller="ContactCtrl" style="margin-top: 20px">
+                                    <div class="contacts-infos">
+                                        <div class="contact">
+                                            联系人1：
+                                        </div>
+                                        <div class="contact-info">
+                                            姓名：<input type="text" class="contact-input" ng-model="contact[0].linkmanName"
+                                                      style="width: 100px">
+                                            手机号：<input type="tel" class="contact-input" ng-model="contact[0].linkmanPhone"
+                                                       style="width: 120px">
+                                            Email：<input type="email" class="contact-input" ng-model="contact[0].linkmanEmail">
+                                            职位：<input type="text" class="contact-input" ng-model="contact[0].position" style="width: 80px">
+                                            <input type="radio" name="contact0" ng-model="selectContact" value="0">预定信息优先通知给他/她
+                                        </div>
+
+                                        <div class="contact">
+                                            联系人2：
+                                        </div>
+                                        <div class="contact-info">
+                                            姓名：<input type="text" class="contact-input" ng-model="contact[1].linkmanName"
+                                                      style="width: 100px">
+                                            手机号：<input type="tel" class="contact-input" ng-model="contact[1].linkmanPhone"
+                                                       style="width: 120px">
+                                            Email：<input type="email" class="contact-input" ng-model="contact[1].linkmanEmail">
+                                            职位：<input type="text" class="contact-input" ng-model="contact[1].position" style="width: 80px">
+                                            <input type="radio" name="contact1" ng-model="selectContact" value="1">预定信息优先通知给他/她
+                                        </div>
+
+                                        <div class="contact">
+                                            联系人3：
+                                        </div>
+                                        <div class="contact-info">
+                                            姓名：<input type="text" class="contact-input" ng-model="contact[2].linkmanName"
+                                                      style="width: 100px">
+                                            手机号：<input type="tel" class="contact-input" ng-model="contact[2].linkmanPhone"
+                                                       style="width: 120px">
+                                            Email：<input type="email" class="contact-input" ng-model="contact[2].linkmanEmail">
+
+                                            职位：<input type="text" class="contact-input" ng-model="contact[2].position" style="width: 80px">
+                                            <input type="radio" name="contact2" ng-model="selectContact" value="2">预定信息优先通知给他/她
+                                        </div>
+                                    </div>
+                                    <div class="save-btn">
+                                        <button class="btn btn-warning" ng-click="updateContactInfo()"><span
+                                                class="glyphicon glyphicon-ok"></span>保存餐厅联系人设置
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <ul class="pager">
+                            <li class="" ng-class="{disabled: !hasPreviousStep()}">
+                                <a href="javascript:void(0);" ng-click="decrementStep()">&larr; 上一步</a>
+                            </li>
+                            <li class="" ng-class="{disabled: !hasNextStep()}">
+                                <a href="javascript:void(0);" ng-click="incrementStep()">下一步 &rarr;</a>
+                            </li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+    }
+    .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+    }
+</style>
+
+<script>
+    $('.days').click(function () {
+        $('.days').each(function () {
+            $(this).removeClass("selectDays");
+        });
+        $(this).addClass("selectDays");
+    });
+</script>

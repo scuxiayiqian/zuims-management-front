@@ -21,7 +21,7 @@ angular.module('sbAdminApp')
         };
     })
     .factory('ManageService', ['$http', '$cookies', 'API', function ($http, $cookies, API) {
-        console.log(API);
+        //console.log(API);
         var restaurantBaseUrl = API.MERCHANT;
         var managementBaseUrl = API.OPERATION;
 
@@ -219,12 +219,12 @@ angular.module('sbAdminApp')
             ManageService.getHomePage($cookies.get('restID'))
                 .success(function (data) {
 
-                    $scope.restaurantInfo.homePagePic = API.USER + data.picname;
+                    $scope.restaurantInfo.homePagePic = API.DATA + data.picname;
                     $scope.restaurantInfo.restaurantTeles = $scope.restaurantInfo.restaurantTele.split(" ");
                     $scope.description = data.introduction;
 
                     if (data.picname == "" || data.picname == null) {
-                        $scope.restaurantInfo.homePagePic = API.USER + "/restaurants/images?relativePath=NonePicture.jpg";
+                        $scope.restaurantInfo.homePagePic = API.DATA + "/restaurants/images?relativePath=NonePicture.jpg";
                     }
 
                     $scope.discount = true;
@@ -309,7 +309,7 @@ angular.module('sbAdminApp')
 
                 for(var i = 0; i < $scope.details.length; i ++) {
 
-                    $scope.details[i].picname = API.USER + $scope.details[i].picname;
+                    $scope.details[i].picname = API.DATA + $scope.details[i].picname;
                 }
             });
 
@@ -321,7 +321,7 @@ angular.module('sbAdminApp')
                 $scope.description = $scope.details[0].introduction;
             }
             else {
-                $scope.details[0].picname = API.USER + '/restaurants/images?relativePath=NonePicture2.jpg';
+                $scope.details[0].picname = API.DATA + '/restaurants/images?relativePath=NonePicture2.jpg';
             }
             if ($scope.picLen > 5)
                 $scope.details = $scope.details.slice(-5);

@@ -23,6 +23,7 @@ angular.module('sbAdminApp')
 
         console.log($scope.basicInfo);
 
+
         $scope.isMarketing = function() {
 
             var user = $cookieStore.get('user');

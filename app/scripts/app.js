@@ -491,6 +491,22 @@ angular
             }
         })
 
+        .state('dashboard.createNewRestaurant', {
+            templateUrl: 'views/createNewRestaurant.html',
+            url:'/createNewRestaurant',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/createNewRestaurant.js',
+                            'scripts/controllers/restaurant-detail.js'
+                        ]
+                    })
+                }
+            }
+        })
+
         .state('dashboard.panels-wells',{
           templateUrl:'views/ui-elements/panels-wells.html',
           url:'/panels-wells'

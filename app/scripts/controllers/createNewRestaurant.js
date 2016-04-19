@@ -19,9 +19,6 @@ angular.module('sbAdminApp')
         $scope.restaurantToCreate = {};
         $scope.restaurantLL = {};
         $scope.marketingUsers = [];
-        $scope.cityToSearch = "";
-        $scope.starToSearch = 0;
-        $scope.hotelIdToSearch = -1;
         $scope.rowCollection = [];
         $scope.displayedCollection = [].concat($scope.rowCollection);
         $scope.hotelCollection = [];
@@ -340,6 +337,27 @@ angular.module('sbAdminApp')
         $scope.goHotel = function () {
             $state.go('dashboard.hotel');
         };
+
+        $scope.initialize = function() {
+
+            $scope.cityToSearch = $cookies.get('cityOfNewRestaurant');
+            if ($scope.cityToSearch == null) {
+                $scope.cityToSearch = "";
+                $scope.starToSearch = 0;
+                $scope.hotelIdToSearch = -1;
+            } else {
+                $scope.starToSearch = $cookies.get('starOfNewRestaurant');
+                $scope.hotelIdToSearch = $cookies.get('hotelIdOfNewRestaurant');
+
+                $cookies.remove('cityOfNewRestaurant');
+                $cookies.remove('starOfNewRestaurant');
+                $cookies.remove('hotelIdOfNewRestaurant');
+
+                $scope.hotelSelected();
+            }
+        };
+
+        $scope.initialize();
 
         $scope.getCities();
         $scope.getProductions();

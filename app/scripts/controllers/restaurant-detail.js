@@ -296,8 +296,9 @@ angular.module('sbAdminApp')
         };
 
         if ($cookies.get('restID') == null || $cookies.get('restID') == "" || $cookies.get('restID') == undefined) {
-            window.location = "/";
+            alert('请先输入餐厅基本信息');
         }
+
         ManageService.getRestaurantInfo($cookies.get('restID'))
             .success(function (data) {
                 console.log(data);

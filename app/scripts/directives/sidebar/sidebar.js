@@ -46,7 +46,7 @@ angular.module('sbAdminApp')
                     }
 
                     if(!flag) {
-                        console.log(item);
+                        //console.log(item);
                     }
                     return flag;
                 };

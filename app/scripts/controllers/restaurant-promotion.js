@@ -11,7 +11,7 @@
  */
 
 angular.module('sbAdminApp')
-    .controller('restaurantPromotionCtrl', function ($scope, $http, $cookies) {
+    .controller('restaurantPromotionCtrl', function ($scope, $http, $cookies, API) {
 
         $scope.token = $cookies.get('token');
 
@@ -41,14 +41,15 @@ angular.module('sbAdminApp')
 
         $scope.setRestaurantToDelete = function(row) {
             $scope.restaurantToDelete = row;
-        }
+        };
 
         $scope.setRestaurantToUpdate = function(row) {
             $scope.restaurantToUpdate = row;
-        }
+        };
 
         $scope.updatePromotedRestaurant = function() {
             var promotedRestaurant = [];
+            var url = API.DATA + '/restaurant/update';
 
             for (var i = 0; i < $scope.rowCollection.length; i++) {
 
@@ -57,7 +58,7 @@ angular.module('sbAdminApp')
 
                 $http({
                     method: 'POST',
-                    url: 'http://202.120.40.175:21104/restaurant/update',
+                    url: url,
                     headers: {
                         'Content-Type': 'application/json'
                     },
@@ -71,13 +72,15 @@ angular.module('sbAdminApp')
             }
 
             alert("更新成功");
-        }
+        };
 
         $scope.getRestaurantList = function() {
             // get restaurant list request
+            var url = API.OPERATION + '/cities/' + $scope.selectedCity + '/restaurants';
+
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/cities/' + $scope.selectedCity + '/restaurants',
+                url: url,
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -92,9 +95,11 @@ angular.module('sbAdminApp')
         };
 
         $scope.getCites = function() {
+
+            var url = API.OPERATION + '/cities';
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/cities',
+                url: url,
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -105,12 +110,14 @@ angular.module('sbAdminApp')
             }).error(function () {
                 console.log("getCites failed");
             });
-        }
+        };
 
         $scope.getUsers = function() {
+
+            var url = API.OPERATION + '/roles/marketing/users';
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21108/roles/marketing/users',
+                url: url,
                 headers: {
                     //'Content-Type': 'application/json',
                     'x-auth-token': $scope.token
@@ -121,7 +128,7 @@ angular.module('sbAdminApp')
             }).error(function () {
                 console.log("getCites failed");
             });
-        }
+        };
 
         $scope.changeCity = function() {
 
@@ -132,9 +139,11 @@ angular.module('sbAdminApp')
 
         $scope.searchBtnClicked = function() {
             //console.log($scope.restaurantToSearch.city + $scope.restaurantToSearch.name);
+            var url = API.DATA + '/restaurant/search/hotelnamecity';
+
             $http({
                 method: 'GET',
-                url: 'http://202.120.40.175:21104/restaurant/search/hotelnamecity',
+                url: url,
                 params: {
                     hotelName: $scope.restaurantToSearch.hotelName,
                     city: $scope.restaurantToSearch.city

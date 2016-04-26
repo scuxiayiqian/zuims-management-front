@@ -23,11 +23,11 @@ angular
     'ngCsv'
   ])
     .constant('API', {
-        USER: 'http://202.120.40.175:21101',
-        RESTAURANT: 'http://202.120.40.175:21100',
-        MERCHANT: 'http://202.120.40.175:21104',
-        OPERATION: 'http://202.120.40.175:21108',
-        DATA: 'http://202.120.40.175:21104'
+        USER: 'http://115.159.87.129:8001',
+        RESTAURANT: 'http://115.159.87.129:8000',
+        MERCHANT: 'http://115.159.87.129:8004',
+        OPERATION: 'http://115.159.87.129:8008',
+        DATA: 'http://115.159.87.129:8004'
     })
 
     .constant('_',

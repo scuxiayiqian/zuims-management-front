@@ -5,15 +5,34 @@
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
-<div class="row">
+<div class="row"  ng-controller="hotelCtrl">
     <div class="col-lg-12">
-        <div class="panel panel-default" ng-controller="hotelCtrl">
+        <div class="panel panel-default">
+            <div class="panel-heading">查询酒店</div>
+            <div class="panel-body" ng-enter="searchBtnClicked()">
+                <div class="col-md-2">
+                    酒店所在地
+                    <select class="form-control" ng-model="cityToSearch" ng-options="city.name as city.name for city in cities" ng-change="citySelected()">
+                        <option value="">选择城市</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    酒店星级
+                    <select class="form-control" ng-model="starToSearch"  ng-change="citySelected()">
+                        <!--<option value="">选择星级</option>-->
+                        <option value="5">五星</option>
+                        <option value="4">四星</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <div class="panel panel-default">
             <div class="panel-heading">
                 <div align="right">
-                    <button type="button" ng-click="setHotelToUpdate()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-success">
-                        <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
-                        <i class="glyphicon glyphicon-plus">
-                        </i> 添加酒店
+                    <button type="button" ng-click="setHotelToCreate()"  data-toggle="modal" data-target="#addModal" class="btn btn-sm btn-success">
+                        <i class="glyphicon glyphicon-plus"></i> 添加酒店
                     </button>
                 </div>
             </div>
@@ -24,27 +43,30 @@
                     <tr>
                         <th colspan="6">
                             <div class="input-group">
-                                <input st-search="" class="form-control" placeholder="搜索" type="text"/>
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
-                                    </button>
-                                </span>
+                                <input st-search="" class="form-control" placeholder="搜索" type="text">
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                        </button>
+                                    </span>
+                                </input>
                             </div>
                         </th>
                     </tr>
                     <tr>
                         <th width="20%" st-sort="hotelName">酒店名称</th>
                         <th width="10%" st-sort="city">城市</th>
-                        <th width="25%">酒店地址</th>
+                        <th width="5%">星级</th>
+                        <th width="35%">酒店地址</th>
                         <th width="15%">电话号码</th>
                         <th width="15%">编辑</th>
-                        <th width="15%">添加餐厅</th>
+                        <!--<th width="15%">添加餐厅</th>-->
                     </tr>
                     </thead>
                     <tbody>
                     <tr st-select-row="row" ng-repeat="row in displayedCollection">
                         <td>{{row.hotelName}}</td>
                         <td>{{row.city}}</td>
+                        <td>{{row.star}}</td>
                         <td>{{row.hotelAddress}}</td>
                         <td>{{row.hotelTele}}</td>
                         <td align="center">
@@ -55,11 +77,11 @@
                                 <i class="fa fa-remove"></i>
                             </button>
                         </td>
-                        <td align="center">
-                            <button class="btn btn-xs" type="button" ng-click="createRestaurantClicked(row)">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </td>
+                        <!--<td align="center">-->
+                        <!--<button class="btn btn-xs" type="button" ng-click="createRestaurantClicked(row)">-->
+                        <!--<i class="fa fa-plus"></i>-->
+                        <!--</button>-->
+                        <!--</td>-->
                     </tr>
                     </tbody>
                 </table>
@@ -106,6 +128,16 @@
                                         <label class="col-sm-3 control-label">酒店名: </label>
                                         <div class="col-sm-8">
                                             <input class="form-control" ng-model="hotelToUpdate.hotelName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">星级: </label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" ng-model="hotelToUpdate.star">
+                                                <!--<option value="">选择星级</option>-->
+                                                <option value="5">五星</option>
+                                                <option value="4">四星</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -174,6 +206,16 @@
                                         <label class="col-sm-3 control-label">酒店名: </label>
                                         <div class="col-sm-8">
                                             <input class="form-control" ng-model="hotelToCreate.hotelName">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">星级: </label>
+                                        <div class="col-sm-8">
+                                            <select class="form-control" ng-model="hotelToCreate.star" convertToNumber>
+                                                <!--<option value="">选择星级</option>-->
+                                                <option value="5">五星</option>
+                                                <option value="4">四星</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">

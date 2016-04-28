@@ -14,34 +14,59 @@
  */
 
 angular.module('sbAdminApp')
+    .directive('convertToNumber', function() {
+        return {
+            require: 'ngModel',
+            link: function(scope, element, attrs, ngModel) {
+                ngModel.$parsers.push(function(val) {
+                    //saves integer to model null as null
+                    return val == null ? null : parseInt(val, 10);
+                });
+                ngModel.$formatters.push(function(val) {
+                    //return string for formatter and null as null
+                    return val == null ? null : '' + val ;
+                });
+            }
+        };
+    })
+
     .controller('hotelCtrl', function ($scope, $http, $cookies, $state, API) {
 
         $scope.token = $cookies.get('token');
         $scope.cities = [];
-
+        $scope.stars = ['四星','五星'];
+        $scope.hotelToSearch = {};
+        $scope.hotelToSearch.city = '上海市';
+        $scope.cityToSearch = "上海市";
+        $scope.starToSearch = "5";
+        $scope.hotelToCreate = {};
         $scope.rowCollection = [];
 
         //copy the references (you could clone ie angular.copy but then have to go through a dirty checking for the matches)
         $scope.displayedCollection = [].concat($scope.rowCollection);
 
-        $scope.hotelToCreate = {};
-
         $scope.setHotelToDelete = function(row) {
             $scope.hotelToDelete = row;
-        }
+        };
+
+        $scope.setHotelToCreate = function() {
+            $scope.hotelToCreate.city = $scope.cityToSearch;
+            $scope.hotelToCreate.star = "5";
+        };
 
         $scope.setHotelToUpdate = function(row) {
             $scope.hotelToUpdate = row;
+            $scope.hotelToUpdate.star = $scope.hotelToUpdate.star.toString();
 
             $scope.hotelToUpdate.longitudeNLatitude = row.longitude + "," + row.latitude;
-        }
+        };
 
         //remove to the real data holder
         $scope.deleteHotel = function() {
 
             $http({
                 method: 'GET',
-                url: API.MERCHANT + 'restaurant/hotel/delete?hotelId=' + $scope.hotelToDelete.hotelId,
+                url: API.MERCHANT + '/restaurant/hotel/delete?hotelId=' + $scope.hotelToDelete.hotelId,
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -54,7 +79,7 @@ angular.module('sbAdminApp')
             }).error(function () {
                 console.log("hotel delete failed");
             });
-        }
+        };
 
         $scope.updateHotel = function () {
 
@@ -75,12 +100,12 @@ angular.module('sbAdminApp')
                 data: $scope.hotelToUpdate,
                 crossDomain: true
             }).success(function(data) {
-                $scope.getHotelList();
+                $scope.citySelected();
                 console.log("update hotel successed");
             }).error(function () {
                 console.log("update hotel failed");
             });
-        }
+        };
 
         $scope.createHotel = function () {
 
@@ -104,7 +129,7 @@ angular.module('sbAdminApp')
                 crossDomain: true
             }).success(function(data) {
                 console.log("hotel create successed");
-                $scope.getHotelList();
+                $scope.citySelected();
             }).error(function () {
                 console.log("city create failed");
                 alert("fail");
@@ -128,14 +153,20 @@ angular.module('sbAdminApp')
 
         $scope.createRestaurantClicked = function(row) {
 
-            $cookies.put('hotelId', row.hotelId);
-            $cookies.put('hotelName', row.hotelName);
-            $cookies.put('longitude', row.longitude);
-            $cookies.put('latitude', row.latitude);
-            $cookies.put('city', row.city);
-            $cookies.put('hotelAddress', row.hotelAddress);
+            // $cookies.put('hotelId', row.hotelId);
+            // $cookies.put('hotelName', row.hotelName);
+            // $cookies.put('longitude', row.longitude);
+            // $cookies.put('latitude', row.latitude);
+            // $cookies.put('city', row.city);
+            // $cookies.put('hotelAddress', row.hotelAddress);
 
-            $state.go("dashboard.restaurant-create");
+            console.log(row);
+
+            $cookies.put('hotelIdOfNewRestaurant', row.hotelId);
+            $cookies.put('starOfNewRestaurant', row.latitude);
+            $cookies.put('cityOfNewRestaurant', row.city);
+
+            $state.go("dashboard.createNewRestaurant");
 
         };
 
@@ -159,8 +190,46 @@ angular.module('sbAdminApp')
             for (var i = 0; i < cityArray.length; i++) {
                 $scope.cities.push(cityArray[i]);
             }
+        }
+
+        $scope.citySelected = function() {
+            $scope.notFoundHotel = true;
+
+            if ($scope.starToSearch != 0) {
+                $http({
+                    method: 'GET',
+                    url: API.DATA + '/restaurant/hotel/citystar',
+                    params: {
+                        city: $scope.cityToSearch,
+                        star: $scope.starToSearch
+                    },
+                    crossDomain: true
+                }).success(function(data) {
+                    console.log(data);
+                    $scope.rowCollection = data;
+                    $scope.displayedCollection = $scope.rowCollection;
+                }).error(function (error) {
+                    alert("failed from cityselected function");
+                });
+            }
+            else {
+                $http({
+                    method: 'GET',
+                    url: API.DATA + '/restaurant/hotel/citystar',
+                    params: {
+                        city: $scope.cityToSearch
+                    },
+                    crossDomain: true
+                }).success(function(data) {
+                    console.log(data);
+                    $scope.rowCollection = data;
+                    $scope.displayedCollection = data;
+                }).error(function (error) {
+                    alert("failed from cityselected function");
+                });
+            }
         };
 
-        $scope.getHotelList();
         $scope.getCites();
+        $scope.citySelected();
     });

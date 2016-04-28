@@ -72,7 +72,7 @@ angular.module('sbAdminApp')
             $scope.restaurantToCreate.smoke = "否";
             $scope.restaurantToCreate.introduction = "无";
             $scope.restaurantToCreate.memo = "无";
-            $scope.restaurantToCreate.hotelId = $scope.hotelIdToSearch.toString();
+            $scope.restaurantToCreate.hotelId = $scope.hotelselected.hotelId.toString();
 
             $http({
                 method: 'POST',
@@ -124,7 +124,7 @@ angular.module('sbAdminApp')
                     $scope.restaurantToCreate.smoke = "否";
                     $scope.restaurantToCreate.introduction = "无";
                     $scope.restaurantToCreate.memo = "无";
-                    $scope.restaurantToCreate.hotelId = $scope.hotelIdToSearch.toString();
+                    $scope.restaurantToCreate.hotelId = $scope.hotelselected.hotelId.toString();
 
                     $http({
                         method: 'POST',
@@ -278,7 +278,7 @@ angular.module('sbAdminApp')
 
         $scope.addNewRestaurant = function() {
             // 预设定酒店名和城市
-            $scope.restaurantToCreate.hotelName = $scope.hotelIdToSearch;
+            $scope.restaurantToCreate.hotelName = $scope.hotelselected.hotelName;
             $scope.restaurantToCreate.city = $scope.cityToSearch;
             $scope.restaurantToCreate.persistTable = 10;
             $scope.restaurantToCreate.persistTime = 3;
@@ -287,11 +287,12 @@ angular.module('sbAdminApp')
         };
 
         $scope.hotelSelected = function() {
+            console.log($scope.hotelselected);
             $http({
                 method: 'GET',
                 url: API.DATA + '/restaurant/info/hotel2restaurant',
                 params: {
-                    hotelId: $scope.hotelIdToSearch
+                    hotelId: $scope.hotelselected.hotelId
                 },
                 crossDomain: true
             }).success(function(data) {
@@ -344,10 +345,10 @@ angular.module('sbAdminApp')
             if ($scope.cityToSearch == null) {
                 $scope.cityToSearch = "";
                 $scope.starToSearch = 0;
-                $scope.hotelIdToSearch = -1;
+                $scope.hotelselected = -1;
             } else {
                 $scope.starToSearch = $cookies.get('starOfNewRestaurant');
-                $scope.hotelIdToSearch = $cookies.get('hotelIdOfNewRestaurant');
+                $scope.hotelselected = $cookies.get('hotelIdOfNewRestaurant');
 
                 $cookies.remove('cityOfNewRestaurant');
                 $cookies.remove('starOfNewRestaurant');

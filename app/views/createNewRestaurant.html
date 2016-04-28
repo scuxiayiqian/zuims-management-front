@@ -25,7 +25,7 @@
                 </div>
                 <div class="col-md-4">
                     酒店名称
-                    <select class="form-control" ng-model="hotelIdToSearch" ng-options="hotel.hotelId as hotel.hotelName for hotel in hotelCollection" ng-change="hotelSelected()">
+                    <select class="form-control" ng-model="hotelselected" ng-options="hotel as hotel.hotelName for hotel in hotelCollection" ng-change="hotelSelected()">
                         <option value="">选择酒店</option>
                     </select>
                 </div>

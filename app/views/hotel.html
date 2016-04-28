@@ -18,7 +18,7 @@
                 </div>
                 <div class="col-md-2">
                     酒店星级
-                    <select class="form-control" ng-model="starToSearch"  convertToNumber ng-change="citySelected()">
+                    <select class="form-control" ng-model="starToSearch"  ng-change="citySelected()">
                         <!--<option value="">选择星级</option>-->
                         <option value="5">五星</option>
                         <option value="4">四星</option>
@@ -133,7 +133,7 @@
                                     <div class="form-group">
                                         <label class="col-sm-3 control-label">星级: </label>
                                         <div class="col-sm-8">
-                                            <select class="form-control" ng-model="hotelToUpdate.star" convertToNumber>
+                                            <select class="form-control" ng-model="hotelToUpdate.star">
                                                 <!--<option value="">选择星级</option>-->
                                                 <option value="5">五星</option>
                                                 <option value="4">四星</option>

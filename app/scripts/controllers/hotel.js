@@ -38,7 +38,7 @@ angular.module('sbAdminApp')
         $scope.hotelToSearch = {};
         $scope.hotelToSearch.city = '上海市';
         $scope.cityToSearch = "上海市";
-        $scope.starToSearch = 5;
+        $scope.starToSearch = "5";
         $scope.hotelToCreate = {};
         $scope.rowCollection = [];
 
@@ -56,6 +56,7 @@ angular.module('sbAdminApp')
 
         $scope.setHotelToUpdate = function(row) {
             $scope.hotelToUpdate = row;
+            $scope.hotelToUpdate.star = $scope.hotelToUpdate.star.toString();
 
             $scope.hotelToUpdate.longitudeNLatitude = row.longitude + "," + row.latitude;
         };
@@ -99,7 +100,7 @@ angular.module('sbAdminApp')
                 data: $scope.hotelToUpdate,
                 crossDomain: true
             }).success(function(data) {
-                $scope.getHotelList();
+                $scope.citySelected();
                 console.log("update hotel successed");
             }).error(function () {
                 console.log("update hotel failed");

@@ -19,9 +19,6 @@ angular.module('sbAdminApp')
         $scope.restaurantToCreate = {};
         $scope.restaurantLL = {};
         $scope.marketingUsers = [];
-        $scope.cityToSearch = "";
-        $scope.starToSearch = 0;
-        $scope.hotelIdToSearch = -1;
         $scope.rowCollection = [];
         $scope.displayedCollection = [].concat($scope.rowCollection);
         $scope.hotelCollection = [];
@@ -266,8 +263,8 @@ angular.module('sbAdminApp')
                     },
                     crossDomain: true
                 }).success(function(data) {
-                //    $scope.rowCollection = data;
-                //    $scope.displayedCollection = data;
+                    //    $scope.rowCollection = data;
+                    //    $scope.displayedCollection = data;
                     $scope.hotelCollection = data;
                 }).error(function (error) {
                     alert("failed from cityselected function");
@@ -281,7 +278,7 @@ angular.module('sbAdminApp')
 
         $scope.addNewRestaurant = function() {
             // 预设定酒店名和城市
-            $scope.restaurantToCreate.hotelName = $scope.rowCollection[0].hotelName;
+            $scope.restaurantToCreate.hotelName = $scope.hotelIdToSearch;
             $scope.restaurantToCreate.city = $scope.cityToSearch;
             $scope.restaurantToCreate.persistTable = 10;
             $scope.restaurantToCreate.persistTime = 3;
@@ -340,6 +337,27 @@ angular.module('sbAdminApp')
         $scope.goHotel = function () {
             $state.go('dashboard.hotel');
         };
+
+        $scope.initialize = function() {
+
+            $scope.cityToSearch = $cookies.get('cityOfNewRestaurant');
+            if ($scope.cityToSearch == null) {
+                $scope.cityToSearch = "";
+                $scope.starToSearch = 0;
+                $scope.hotelIdToSearch = -1;
+            } else {
+                $scope.starToSearch = $cookies.get('starOfNewRestaurant');
+                $scope.hotelIdToSearch = $cookies.get('hotelIdOfNewRestaurant');
+
+                $cookies.remove('cityOfNewRestaurant');
+                $cookies.remove('starOfNewRestaurant');
+                $cookies.remove('hotelIdOfNewRestaurant');
+
+                $scope.hotelSelected();
+            }
+        };
+
+        $scope.initialize();
 
         $scope.getCities();
         $scope.getProductions();

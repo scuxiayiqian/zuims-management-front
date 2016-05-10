@@ -561,7 +561,7 @@ angular.module('sbAdminApp')
                     updateBasicInfo();
 
                 } else {
-                    if (Math.abs(point.lng - $scope.basicInfo.longitude) < 0.005 && Math.abs(point.lat - $scope.basicInfo.latitude) < 0.005)
+                    if (Math.abs(point.lng - $scope.basicInfo.longitude) < 0.01 && Math.abs(point.lat - $scope.basicInfo.latitude) < 0.01)
                     {
                         console.log('2');
                         updateBasicInfo();

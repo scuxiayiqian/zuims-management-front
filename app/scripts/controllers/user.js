@@ -23,6 +23,7 @@ angular.module('sbAdminApp')
         $scope.userToDelete = {};
         $scope.userToUpdate = {};
         $scope.userToCreate = {};
+        $scope.userCount = -1;
 
         $scope.setUserToDelete = function(row) {
             $scope.userToDelete = row;
@@ -124,7 +125,7 @@ angular.module('sbAdminApp')
                 console.log(error);
                 console.log("user create failed");
             });
-        }
+        };
 
         $scope.getUserList = function() {
             // get restaurant list request
@@ -134,6 +135,7 @@ angular.module('sbAdminApp')
                 crossDomain: true
             }).success(function (userArr) {
                 console.log("getUserList successed");
+                $scope.userCount = userArr.length;
                 $scope.rowCollection = userArr;
                 $scope.displayedCollection = $scope.rowCollection;
             }).error(function () {

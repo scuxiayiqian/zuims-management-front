@@ -330,7 +330,7 @@ angular.module('sbAdminApp')
             ManageService.getHomePage($cookies.get('restID'))
                 .success(function (data) {
 
-                    $scope.restaurantInfo.homePagePic = API.DATA + data.picname;
+                    $scope.restaurantInfo.homePagePic = data.picname;
                     $scope.restaurantInfo.restaurantTeles = $scope.restaurantInfo.restaurantTele.split(" ");
                     $scope.description = data.introduction;
 
@@ -368,23 +368,38 @@ angular.module('sbAdminApp')
 
         //详情图文信息预览
         $scope.previewDetail = function () {
-            $scope.picLen = $scope.details.length;
-            if ($scope.picLen > 0) {
-                $scope.discount = true;
-                $scope.description = $scope.details[0].introduction;
-            }
-            else {
-                $scope.details[0].picname = API.DATA + '/restaurants/images?relativePath=NonePicture2.jpg';
-            }
-            if ($scope.picLen > 5)
-                $scope.details = $scope.details.slice(-5);
+            ManageService.getDetail($cookies.get('restID'))
+                .success(function (data) {
+                    $scope.details = data;
 
-            console.log($scope.details);
+                    $scope.picLen = $scope.details.length;
 
-            ngDialog.open({
-                templateUrl: 'detailPic.html',
-                scope: $scope
-            });
+                    if ($scope.picLen > 5)
+                        $scope.details = $scope.details.slice(-5);
+                    if ($scope.picLen > 0) {
+                        $scope.discount = $scope.basicInfo.discountType == 'discount' ? true : false;
+                        $scope.description = $scope.details[0].introduction;
+                    }
+                    else {
+                        $scope.details = [];
+                        $scope.details[0].picname = API.DATA + restaurantPort + '/restaurants/images?relativePath=NonePicture2.jpg';
+                    }
+
+                    if ($scope.discount) {
+                        $scope.restaurantInfo.detailOriginAveragePrice = $scope.restaurantInfo.averagePrice;
+                        $scope.restaurantInfo.detailAveragePrice = Math.round(parseFloat($scope.restaurantInfo.detailOriginAveragePrice) * 0.67);
+
+                        console.log($scope.restaurantInfo.detailOriginAveragePrice);
+                    }
+                    else {
+                        $scope.restaurantInfo.detailAveragePrice = $scope.restaurantInfo.averagePrice;
+                    }
+
+                    ngDialog.open({
+                        templateUrl: 'detailPic.html',
+                        scope: $scope
+                    });
+                });
         };
 
 

@@ -263,7 +263,7 @@ angular.module('sbAdminApp')
             }).error(function () {
                 console.log("user delete failed");
             });
-        }
+        };
 
         $scope.getDataByCity();
 

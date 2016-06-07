@@ -4,19 +4,19 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
-<div class="row" ng-controller="restaurantSortController">
+<div class="row" ng-controller="userReservationRankController">
     <div class="col-lg-12">
         <div class="panel panel-default">
             <div class="panel-body">
                 <div class="col-md-12">
                     <div class="query-data">
                         <!--<div style="float: right">-->
-                            <!--<select class="form-control" ng-model="restaurantToSearch.city" ng-options="city.name as city.name for city in cities" ng-change="getDataByCity()">-->
-                                <!--<option value="">选择城市</option>-->
-                            <!--</select>-->
+                        <!--<select class="form-control" ng-model="restaurantToSearch.city" ng-options="city.name as city.name for city in cities" ng-change="getDataByCity()">-->
+                        <!--<option value="">选择城市</option>-->
+                        <!--</select>-->
                         <!--</div>-->
                         <div style="float: right">
-                            <button class="btn btn-xs btn-primary" style="margin-left: 10px;width:30px;height:30px;margin-right: 20px"  type="button" ng-click="searchSort()">
+                            <button class="btn btn-xs btn-primary" style="margin-left: 10px;width:30px;height:30px;margin-right: 20px"  type="button" ng-click="searchRank()">
                                 <i class="fa fa-search"></i>
                             </button>
                         </div>
@@ -40,15 +40,10 @@
                             <button type="button" class="btn btn-default" ng-click="openEndDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
                         </span>
                         </div>
-                        <div style="float: left; width: 150px;">
-                            <select class="form-control" ng-model="sortSearch.city" ng-options="city.name as city.name for city in cities">
-                                <option value="">选择城市</option>
-                            </select>
-                        </div>
                         <!--<div style="float: right; padding: 0 10px;height: 30px" class="display-right">-->
-                            <!--<a class="days selectDays" ng-click="queryOrder(7)" style="padding-right: 10px;">7天</a>-->
-                            <!--<a class="days" ng-click="queryOrder(14)" style="padding-right: 10px;">14天</a>-->
-                            <!--<a class="days" ng-click="queryOrder(30)" style="padding-right: 10px;">30天</a>-->
+                        <!--<a class="days selectDays" ng-click="queryOrder(7)" style="padding-right: 10px;">7天</a>-->
+                        <!--<a class="days" ng-click="queryOrder(14)" style="padding-right: 10px;">14天</a>-->
+                        <!--<a class="days" ng-click="queryOrder(30)" style="padding-right: 10px;">30天</a>-->
                         <!--</div>-->
                     </div>
                 </div>
@@ -60,7 +55,7 @@
     <div class="col-lg-12 col-sm-12" id="line-chart">
         <div class="panel panel-default">
             <div class="panel-heading">
-                餐厅预定数量排名</div>
+                用户预定数量排名</div>
             <div class="panel-body">
                 <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
                     <thead>
@@ -76,14 +71,16 @@
                         </th>
                     </tr>
                     <tr>
-                        <th>餐厅名</th>
-                        <th st-sort="finishNum" st-sort-default="reverse">预定量</th>
+                        <th st-sort="finishNum" st-sort-default="reverse">预定次数</th>
+                        <th>用户名</th>
+                        <th>联系方式</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr st-select-row="row" ng-repeat="row in displayedCollection">
-                        <td>{{row.restaruantName}}</td>
                         <td>{{row.finishNum}}</td>
+                        <td>{{row.userName}}</td>
+                        <td>{{row.userPhone}}</td>
                     </tr>
                     </tbody>
                 </table>

@@ -475,6 +475,21 @@ angular
             }
         })
 
+        .state('dashboard.userReservationRank', {
+            templateUrl: 'views/userReservationRank.html',
+            url:'/userReservationRank',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/userReservationRank.js'
+                        ]
+                    })
+                }
+            }
+        })
+
         .state('dashboard.dataGathering', {
             templateUrl: 'views/dataGathering.html',
             url:'/dataGathering',

@@ -460,6 +460,21 @@ angular
             }
         })
 
+        .state('dashboard.restaurantSort', {
+            templateUrl: 'views/restaurantSort.html',
+            url:'/restaurantSort',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/restaurantSort.js'
+                        ]
+                    })
+                }
+            }
+        })
+
         .state('dashboard.dataGathering', {
             templateUrl: 'views/dataGathering.html',
             url:'/dataGathering',

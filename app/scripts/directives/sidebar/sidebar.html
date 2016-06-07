@@ -32,29 +32,28 @@
                     <li ui-sref-active="active" ng-show="isVisible('repastRate')">
                         <a ui-sref="dashboard.repastRate">有效就餐率</a>
                     </li>
-                    <li ui-sref-active="active" ng-show="isVisible('dataGathering')">
-                        <a ui-sref="dashboard.dataGathering">数据统计</a>
+                    <li ui-sref-active="active" ng-show="isVisible('repastRate')">
+                        <a ui-sref="dashboard.restaurantSort">数据统计</a>
                     </li>
                 </ul>
                 <!-- /.nav-second-level -->
             </li>
-            <li ng-class="{active: collapseVar==3}" ng-show="isVisible('trafficManagement')">
-                <a href="" ng-click="check(3)"><i class="fa fa-random fa-fw"></i> 流量管理<span
-                        class="fa arrow"></span></a>
-                <ul class="nav nav-second-level" uib-collapse="collapseVar!=3" ng-show="isVisible('trafficManagement')">
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.traffic">流量统计</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
-            </li>
+            <!--<li ng-class="{active: collapseVar==3}" ng-show="isVisible('trafficManagement')">-->
+                <!--<a href="" ng-click="check(3)"><i class="fa fa-random fa-fw"></i> 流量管理<span-->
+                        <!--class="fa arrow"></span></a>-->
+                <!--<ul class="nav nav-second-level" uib-collapse="collapseVar!=3" ng-show="isVisible('trafficManagement')">-->
+                    <!--<li ui-sref-active="active">-->
+                        <!--<a ui-sref="dashboard.traffic">流量统计</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</li>-->
             <li ng-class="{active: collapseVar==5}" ng-show="isVisible('userManagement')">
                 <a href="" ng-click="check(5)"><i class="fa fa-user fa-fw"></i> 用户管理<span
                         class="fa arrow"></span></a>
                 <ul class="nav nav-second-level" uib-collapse="collapseVar!=5">
-                    <li ui-sref-active="active">
-                        <a ui-sref="dashboard.user-reservation" ng-show="isVisible('userReservation')">预定用户数量统计</a>
-                    </li>
+                    <!--<li ui-sref-active="active">-->
+                        <!--<a ui-sref="dashboard.user-reservation" ng-show="isVisible('userReservation')">预定用户数量统计</a>-->
+                    <!--</li>-->
                     <li ui-sref-active="active">
                         <a ui-sref="dashboard.user-reservation-rank" ng-show="isVisible('userReservationRank')">预定次数排名</a>
                     </li>

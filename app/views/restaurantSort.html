@@ -1,0 +1,116 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header">预定统计</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row" ng-controller="restaurantSortController">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <div class="col-md-12">
+                    <div class="query-data">
+                        <!--<div style="float: right">-->
+                            <!--<select class="form-control" ng-model="restaurantToSearch.city" ng-options="city.name as city.name for city in cities" ng-change="getDataByCity()">-->
+                                <!--<option value="">选择城市</option>-->
+                            <!--</select>-->
+                        <!--</div>-->
+                        <div style="float: right">
+                            <button class="btn btn-xs btn-primary" style="margin-left: 10px;width:30px;height:30px;margin-right: 20px"  type="button" ng-click="searchSort()">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                        <div class='input-group date display-right' id="endDate" style="height:30px">
+                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="myEnd"
+                                   is-open="status.opened" datepicker-options="dateOptions"
+                                   ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                            </span>
+                        </div>
+                        <div style="float: right;padding: 0 10px; font-size: 15px">
+                            至
+                        </div>
+                        <div class='input-group date display-right' id="startDate" style="height:30px">
+                            <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="myStart"
+                                   is-open="endDateStatus.opened" datepicker-options="dateOptions"
+                                   ng-required="true" close-text="Close" />
+                        <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openEndDate($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
+                        </div>
+                        <div style="float: left; width: 150px;">
+                            <select class="form-control" ng-model="sortSearch.city" ng-options="city.name as city.name for city in cities">
+                                <option value="">选择城市</option>
+                            </select>
+                        </div>
+                        <!--<div style="float: right; padding: 0 10px;height: 30px" class="display-right">-->
+                            <!--<a class="days selectDays" ng-click="queryOrder(7)" style="padding-right: 10px;">7天</a>-->
+                            <!--<a class="days" ng-click="queryOrder(14)" style="padding-right: 10px;">14天</a>-->
+                            <!--<a class="days" ng-click="queryOrder(30)" style="padding-right: 10px;">30天</a>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.col-lg-12 -->
+
+    <div class="col-lg-12 col-sm-12" id="line-chart">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                预定数量统计图</div>
+            <div class="panel-body">
+                <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
+                    <thead>
+                    <tr>
+                        <th colspan="5">
+                            <div class="input-group">
+                                <input st-search="" class="form-control" placeholder="搜索" type="text"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>餐厅名</th>
+                        <th st-sort="finishNum" st-sort-default="reverse">预定量</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr st-select-row="row" ng-repeat="row in displayedCollection">
+                        <td>{{row.restaruantName}}</td>
+                        <td>{{row.finishNum}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .full button span {
+        background-color: limegreen;
+        border-radius: 32px;
+        color: black;
+    }
+    .partially button span {
+        background-color: orange;
+        border-radius: 32px;
+        color: black;
+    }
+</style>
+
+<script>
+    $('.days').click(function () {
+        $('.days').each(function () {
+            $(this).removeClass("selectDays");
+        });
+        $(this).addClass("selectDays");
+    });
+</script>

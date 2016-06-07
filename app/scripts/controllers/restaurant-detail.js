@@ -370,6 +370,7 @@ angular.module('sbAdminApp')
         $scope.previewDetail = function () {
             ManageService.getDetail($cookies.get('restID'))
                 .success(function (data) {
+                    console.log(data);
                     $scope.details = data;
 
                     $scope.picLen = $scope.details.length;

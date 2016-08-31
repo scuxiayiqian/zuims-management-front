@@ -585,7 +585,10 @@ angular.module('sbAdminApp')
 
                     else {
                         console.log('3');
-                        alert("经检验,您填写的餐厅地址与餐厅经纬度匹配的精准度不够高,请重新查询地址或经纬度后再提交!");
+                        var flag = confirm("经检验,您填写的餐厅地址与餐厅经纬度匹配的精准度不够高,仍要保存点击确定,否则点击取消!");
+                        if(flag){
+                            updateBasicInfo();
+                        }
                         return;
                     }
                 }

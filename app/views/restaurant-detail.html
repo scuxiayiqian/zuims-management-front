@@ -117,8 +117,8 @@
                         <div class="image-uploads separator">
                             <div class="handle-image" ng-controller="ImageRecommendCtrl">
                                 <div id="recommend-pic">
-                                    平台首页展示餐厅照片
-                                    <div><span class="explain">图片分辨率：530*715</span></div>
+                                    平台首页展示餐厅照片,,
+                                    <div><span class="explain">建议:图片分辨率:530*715,竖图</span></div>
 
 
                                     <div ng-show="homePageShow">
@@ -145,19 +145,35 @@
                                             </a>
                                         </div>
                                     </div>
+                                    <!--<div class="image-upload" ng-hide="homePageShow">-->
+                                        <!--<a href="javascript:;" class="file"><span class="glyphicon glyphicon-picture"></span>选择图片-->
+                                            <!--<input type="file" accept="image/*" name="recommend" id="fileInputRecommend">-->
+                                        <!--</a>-->
+                                        <!--<a href="javascript:;" class="file btn-warning" ng-click="previewHomePage()"><span-->
+                                                <!--class="glyphicon glyphicon-search"></span>首页图文信息预览-->
+                                        <!--</a>-->
+                                    <!--</div>-->
                                     <div class="image-upload" ng-hide="homePageShow">
-                                        <a href="javascript:;" class="file"><span class="glyphicon glyphicon-picture"></span>选择图片
+                                        <a href="javascript:;" class="file lty-tag-a"><span class="glyphicon glyphicon-picture"></span>选择图片..
                                             <input type="file" accept="image/*" name="recommend" id="fileInputRecommend">
                                         </a>
-                                        <a href="javascript:;" class="file btn-warning" ng-click="previewHomePage()"><span
-                                                class="glyphicon glyphicon-search"></span>首页图文信息预览
+                                        <a href="javascript:;" class="file btn-primary lty-tag-a" ng-click="editHomePage()"><span
+                                                class="glyphicon glyphicon-edit"></span>编辑图片
+                                        </a>
+
+                                    </div>
+                                    <div class="image-upload" ng-hide="homePageShow">
+                                        <a href="javascript:;" class="file btn-primary lty-tag-a lty-pic-preview" ng-click="previewHomePage()"
+                                           style="padding-left: 41px; padding-right: 41px">
+                                            <span class="glyphicon glyphicon-search"></span>首页图文信息预览
                                         </a>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>
+
                                 <div id="detail-pic" ng-controller="ImageDetailCtrl">
                                     餐厅详情图文
-                                    <div><span class="explain">图片分辨率：640*420，用户手机端显示最近上传的五张图片以及对应的文字描述</span></div>
+                                    <div><span class="explain">建议:图片分辨率:640*420,横图</span></div>
 
                                     <div ng-show="detailPicShow">
                                         <div class="cropAreaDetail">
@@ -170,27 +186,30 @@
                                         <!--<div>图片预览:</div>-->
                                         <div class="croppedPic" style="display: none"><img ng-src="{{myDetailCroppedPic}}"/></div>
                                         <div class="picDetailDescription">
-                                            <input class="form-control" type="text" placeholder="图片描述，限20字，与图片同时显示在用户手机上"
+                                            <input class="form-control" type="text" placeholder="图片描述,限20字,与图片同时显示在用户手机上"
                                                    ng-model="picDescription"/>
                                         </div>
                                         <div class="image-upload">
-                                            <a href="javascript:;" class="file" ng-click="uploadPic()"><span
-                                                    class="glyphicon glyphicon-saved"></span>上传图片
+                                            <a href="javascript:;" class="file" ng-click="uploadPic()">
+                                                <span class="glyphicon glyphicon-saved"></span>上传图片
                                             </a>
-                                            <a href="javascript:;" class="file-cancel" ng-click="removePic()"><span
-                                                    class="glyphicon glyphicon-remove"></span>取消上传
+                                            <a href="javascript:;" class="file-cancel" ng-click="removePic()">
+                                                <span class="glyphicon glyphicon-remove"></span>取消上传
                                             </a>
                                         </div>
                                     </div>
                                     <div class="image-upload" ng-hide="detailPicShow">
-                                        <a href="javascript:;" class="file"><span
+                                        <a href="javascript:;" class="file lty-tag-a"><span
                                                 class="glyphicon glyphicon-picture"></span>选择图片
-                                            <input type="file" accept="image/*" name="detail" id="fileInputDetail"
-                                            >
+                                            <input type="file" accept="image/*" name="detail" id="fileInputDetail" >
                                         </a>
-
-                                        <a href="javascript:;" class="file btn-warning" ng-click="previewDetail()"><span
-                                                class="glyphicon glyphicon-search"></span>餐厅详细图文信息预览
+                                        <a href="javascript:;" class="file btn-primary lty-tag-a" ng-click="editDetail()">
+                                            <span class="glyphicon glyphicon-edit"></span>编辑图片
+                                        </a>
+                                    </div>
+                                    <div class="image-upload" ng-hide="detailPicShow">
+                                        <a href="javascript:;" class="file btn-primary lty-pic-preview lty-tag-a" ng-click="previewDetail()" >
+                                            <span class="glyphicon glyphicon-search"></span>餐厅详细图文信息预览
                                         </a>
                                     </div>
                                 </div>
@@ -401,6 +420,111 @@
             </div>
             <!--餐厅介绍结束-->
 
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="editPic.html">
+    <!--内容开始-->
+    <div>
+        <a class="lty-modify-pic-word">展示图片</a>
+    </div>
+    <div class="lty-modify-pic-block" sv-root>
+        <div sv-part="ltyAllPic.ShowPic">
+            <div ng-repeat="show in ltyAllPic.ShowPic" style="display: inline-block" sv-element>
+                <img src="{{show.picname}}" class="per100 lty-detail-pic">
+                <div class="lty-mlra">
+                    <a href="javascript:;" class="lty-btn" ng-click="cancelShowPic(show)">
+                        取消展示
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <a class="lty-modify-pic-word">已上传图片</a>
+    </div>
+    <div class="lty-modify-pic-block" >
+        <div ng-repeat="detail in ltyAllPic.DetailPic" style="display: inline-block" >
+            <img src="{{detail.picname}}" class="per100 lty-detail-pic" change-pic>
+            <div class="lty-mlra">
+                <a href="javascript:;" class="lty-btn" ng-click="showPic(detail)">
+                    展示
+                </a>
+                <a href="javascript:;" class="lty-btn" ng-click="deletePic(detail)">
+                    删除
+                </a>
+            </div>
+        </div>
+    </div>
+    <a href="javascript:;" class="file btn-primary lty-tag-a" autofocus="false" ng-click="setDetail()">
+        <span class="glyphicon glyphicon-file" autofocus="false"></span>保存修改
+    </a>
+</script>
+
+<script type="text/ng-template" id="editFrontPic.html">
+    <!--内容开始-->
+    <div>
+        <a class="lty-modify-pic-word">首页展示图片</a>
+    </div>
+    <div class="lty-modify-pic-block" style="min-height: 132px">
+        <img src="{{FrontPic.picname}}" class="per100 lty-detail-pic" style="width: 86px; height: 116px">
+    </div>
+    <div>
+        <a class="lty-modify-pic-word">已上传图片</a>
+    </div>
+    <div class="lty-modify-pic-block" style="min-height: 159px">
+        <div ng-repeat="detail in FrontPics" style="display: inline-block" >
+            <img src="{{detail.picname}}" class="per100 lty-detail-pic" style="width: 86px; height: 116px">
+            <div class="lty-mlra">
+                <a href="javascript:;" class="lty-btn" ng-click="setFront(detail)">
+                    展示
+                </a>
+                <a href="javascript:;" class="lty-btn" ng-click="deleteCFront(detail)">
+                    删除
+                </a>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="editListPic.html">
+    <!--内容开始-->
+    <div>
+        <a class="lty-modify-pic-word">首页展示图片</a>
+    </div>
+    <div class="lty-modify-pic-block" style="min-height: 85px">
+        <img src="{{ListPic.picname}}" class="per100 lty-detail-pic">
+    </div>
+    <div>
+        <a class="lty-modify-pic-word">已上传图片</a>
+    </div>
+    <div class="lty-modify-pic-block" >
+        <div ng-repeat="detail in ListPics" style="display: inline-block" >
+            <img src="{{detail.picname}}" class="per100 lty-detail-pic" change-pic>
+            <div class="lty-mlra">
+                <a href="javascript:;" class="lty-btn" ng-click="setList(detail)">
+                    展示
+                </a>
+                <a href="javascript:;" class="lty-btn" ng-click="deleteCList(detail)">
+                    删除
+                </a>
+            </div>
+        </div>
+    </div>
+</script>
+
+<script type="text/ng-template" id="previewList.html">
+    <!--内容开始-->
+    <div class="pd15 mt70" style="margin-top: 20px">
+        <div class="border border-r-5 bg-white padding">
+            <div class="pos-r">
+                <img src="{{listPic.picname}}" class="per100">
+
+                <div class="pos-a tc per100 bottom20">
+                    <p class="bg-t display-ib per90 ht40 l-ht40 font-white">{{listPic.introduction}}</p>
+                </div>
+            </div>
         </div>
     </div>
 </script>

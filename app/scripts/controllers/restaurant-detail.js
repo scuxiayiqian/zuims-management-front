@@ -27,10 +27,11 @@ angular.module('sbAdminApp')
 
         var token = $cookies.get('token');
 
+        //上传候选集
         var uploadHomePagePicRequest = function (imageInfo) {
             return $http({
                 method: 'POST',
-                url: restaurantBaseUrl + '/restaurant/uploadFrontImage',
+                url: restaurantBaseUrl + '/restaurant/uploadCFrontImage',
                 data: imageInfo,
                 headers: {'Content-Type': 'application/json;charset=UTF-8'},
                 crossDomain: true
@@ -40,7 +41,7 @@ angular.module('sbAdminApp')
         var uploadDetailPicRequest = function (imageInfo) {
             return $http({
                 method: 'POST',
-                url: restaurantBaseUrl + '/restaurant/uploadNormalImage',
+                url: restaurantBaseUrl + '/restaurant/uploadCNormalImage',
                 data: imageInfo,
                 headers: {'Content-Type': 'application/json;charset=UTF-8'},
                 crossDomain: true
@@ -57,14 +58,15 @@ angular.module('sbAdminApp')
         var getHomePageRequest = function (restaurantId) {
             return $http({
                 method: "GET",
-                url: restaurantBaseUrl + '/restaurant/frontimage?id=' + restaurantId
+                url: restaurantBaseUrl + '/restaurant/Cfrontimage/?id=' + restaurantId
             });
         };
+
 
         var getDetailRequest = function (restaurantId) {
             return $http({
                 method: "GET",
-                url: restaurantBaseUrl + '/restaurant/normalimage?id=' + restaurantId
+                url: restaurantBaseUrl + '/restaurant/Cnormalimage?id=' + restaurantId
             });
         };
 
@@ -72,6 +74,125 @@ angular.module('sbAdminApp')
             return $http({
                 method: "GET",
                 url: restaurantBaseUrl + '/restaurant/linkman?id=' + restaurantId
+            });
+        };
+
+
+        var updateLinkmanInfoRequest = function (linkmanInfo) {
+            return $http({
+                method: "POST",
+                url: restaurantBaseUrl + '/restaurant/linkman/update',
+                data: linkmanInfo,
+                dataType: {'Content-Type': 'application/json;charset=UTF-8'},
+                crossDomain: true
+            });
+        };
+
+
+        var updatePersistInfoRequest = function (persistInfo) {
+            return $http({
+                method: "POST",
+                url: restaurantBaseUrl + '/restaurant/info/persistinfoedit',
+                data: persistInfo,
+                crossDomain: true
+            });
+        };
+
+        var updatePwdRequest = function (pwdInfo) {
+            return $http({
+                method: "POST",
+                url: restaurantBaseUrl + '/restaurant/changepwd',
+                data: pwdInfo,
+                crossDomain: true
+            });
+        };
+
+        var getSellerInfoRequest = function () {
+            return $http({
+                method: "GET",
+                url: API.USER + "/roles/marketing/users",
+                crossDomain: true,
+                headers: {
+                    'Content-Type' : 'application/json;charset=UTF-8',
+                    "authorization": "Basic YWRtaW46aW5jb25ncnVvdXM="
+                }
+            });
+        };
+
+        //By lty
+        var newGetHomePageRequest = function (restaurantId) {
+            return $http({
+                method: "GET",
+                url: restaurantBaseUrl + '/restaurant/frontimage/get?id=' + restaurantId
+            });
+        };
+
+        var setFrontImageRequest = function (setInfo) {
+            return $http({
+                method: 'GET',
+                url: restaurantBaseUrl + '/restaurant/frontimage/set?id=' + setInfo.restaurantId
+                + '&pictureId=' + setInfo.pictureId,
+                crossDomain: true
+            });
+
+        };
+
+        var uploadCListImageRequest = function (imageInfo) {
+            return $http({
+                method: 'POST',
+                url: restaurantBaseUrl + '/restaurant/uploadCListImage',
+                data: imageInfo,
+                headers: {'Content-Type': 'application/json;charset=UTF-8'},
+                crossDomain: true
+            });
+        };
+
+        var getCListImageRequest = function (restaurantId){
+            return $http({
+                method: 'GET',
+                url: restaurantBaseUrl + '/restaurant/Clistimage?id=' + restaurantId,
+                crossDomain: true
+            });
+        };
+
+        var getListImageRequest = function (restaurantId){
+            return $http({
+                method: 'GET',
+                url: restaurantBaseUrl + '/restaurant/listimage/get?id=' + restaurantId,
+                crossDomain: true
+            });
+        };
+
+        var setListImageRequest = function(restaurantId, pictureId){
+            return $http({
+                method: 'GET',
+                url: restaurantBaseUrl + '/restaurant/listimage/set?id='
+                + restaurantId + '&pictureId=' + pictureId,
+                crossDomain: true
+            });
+        };
+
+        var deleteDetailRequest = function(pictureId) {
+            return $http({
+                method: 'GET',
+                url: restaurantBaseUrl + '/restaurant/image/delete?pictureId=' + pictureId
+            });
+        };
+
+        var setDetailPicRequest = function(setInfo){
+            return $http({
+                method: 'POST',
+                url: restaurantBaseUrl + '/restaurant/normalimage/set',
+                data: setInfo,
+                crossDomain: true
+            });
+        };
+
+        var getDetailShowPicRequest = function(restaurantId){
+            return $http({
+                method: 'GET',
+                url: restaurantBaseUrl + '/restaurant/normalimage/get?id='+restaurantId,
+                crossDomain: true
             });
         };
 
@@ -97,50 +218,6 @@ angular.module('sbAdminApp')
             })
         };
 
-        var getChartInfoRequest = function (id, date) {
-            return $http({
-                method: "GET",
-                url: restaurantBaseUrl + '/order/orderCountInfo?restaurantId=' + id + '&date=' + date,
-            });
-        };
-
-        var updateLinkmanInfoRequest = function (linkmanInfo) {
-            return $http({
-                method: "POST",
-                url: restaurantBaseUrl + '/restaurant/linkman/update',
-                data: linkmanInfo,
-                dataType: {'Content-Type': 'application/json;charset=UTF-8'},
-                crossDomain: true
-            });
-        };
-
-        var updateBasicInfoRequest = function (basicInfo) {
-            return $http({
-                method: "POST",
-                url: restaurantBaseUrl + '/restaurant/info/basicinfoedit',
-                data: basicInfo,
-                crossDomain: true
-            });
-        };
-
-        var updatePersistInfoRequest = function (persistInfo) {
-            return $http({
-                method: "POST",
-                url: restaurantBaseUrl + '/restaurant/info/persistinfoedit',
-                data: persistInfo,
-                crossDomain: true
-            });
-        };
-
-        var updatePwdRequest = function (pwdInfo) {
-            return $http({
-                method: "POST",
-                url: restaurantBaseUrl + '/restaurant/changepwd',
-                data: pwdInfo,
-                crossDomain: true
-            });
-        };
-
         return {
             updatePwd: function (pwdInfo) {
                 return updatePwdRequest(pwdInfo);
@@ -159,6 +236,12 @@ angular.module('sbAdminApp')
             },
             getHomePage: function (restaurantId) {
                 return getHomePageRequest(restaurantId);
+            },
+            newGetHomePage: function(restaurantId) {
+                return newGetHomePageRequest(restaurantId);
+            },
+            setFrontImage: function(setInfo) {
+                return setFrontImageRequest(setInfo);
             },
             getDetail: function (restaurantId) {
                 return getDetailRequest(restaurantId);
@@ -180,6 +263,30 @@ angular.module('sbAdminApp')
             },
             getProductionInfo: function () {
                 return getProductionRequest();
+            },
+            getSellerInfo: function () {
+                return getSellerInfoRequest();
+            },
+            uploadCListImage: function(imageInfo) {
+                return uploadCListImageRequest(imageInfo);
+            },
+            deleteDetail: function(pictureId){
+                return deleteDetailRequest(pictureId);
+            },
+            setDetailPic: function(setInfo){
+                return setDetailPicRequest(setInfo);
+            },
+            getDetailShowPic: function(restaurantId){
+                return getDetailShowPicRequest(restaurantId);
+            },
+            getCListImage: function(restaurantId){
+                return getCListImageRequest(restaurantId);
+            },
+            getListImage: function(restaurantId){
+                return getListImageRequest(restaurantId);
+            },
+            setListImage: function(restaurantId, pictureId){
+                return setListImageRequest(restaurantId, pictureId);
             }
         }
 
@@ -188,6 +295,7 @@ angular.module('sbAdminApp')
         //if ($cookies.get('restID') == null || $cookies.get('restID') == "" || $cookies.get('restID') == undefined) {
         //    window.location = "/";
         //}
+        var dialog;
         ManageService.getRestaurantInfo($cookies.get('restID'))
             .success(function (data) {
                 console.log(data);
@@ -210,24 +318,32 @@ angular.module('sbAdminApp')
             $anchorScroll();
         };
 
+        //$scope.reservationNum = 20;
+        //$scope.advanceTime = 4;
 
-        $scope.reservationNum = 20;
-        $scope.advanceTime = 4;
-
-        //首页图文信息预览
         $scope.previewHomePage = function () {
-            ManageService.getHomePage($cookies.get('restID'))
+            ManageService.newGetHomePage($cookies.get('restID'))
                 .success(function (data) {
 
-                    $scope.restaurantInfo.homePagePic = API.DATA + data.picname;
-                    $scope.restaurantInfo.restaurantTeles = $scope.restaurantInfo.restaurantTele.split(" ");
-                    $scope.description = data.introduction;
+                    console.log("the rst id is " + $cookies.get('restID'));
+                    console.log(data);
 
-                    if (data.picname == "" || data.picname == null) {
-                        $scope.restaurantInfo.homePagePic = API.DATA + "/restaurants/images?relativePath=NonePicture.jpg";
+                    $scope.restaurantInfo.homePagePic = data.picname;
+                    $scope.restaurantInfo.restaurantTeles = $scope.restaurantInfo.restaurantTele.split(" ");
+                    $scope.restaurantInfo.introduction = data.introduction;
+
+                    if (data.picname == "" || data.picname == null)
+                        $scope.restaurantInfo.homePagePic = API.MERCHANT + "/restaurants/images?relativePath=NonePicture1.jpg";
+
+                    $scope.discount = $scope.restaurantInfo.discountType == 'discount' ? true : false;
+                    if ($scope.discount) {
+                        $scope.restaurantInfo.homeOriginAveragePrice = $scope.restaurantInfo.averagePrice;
+                        $scope.restaurantInfo.homeAveragePrice = Math.round(parseFloat($scope.restaurantInfo.homeOriginAveragePrice) * 0.67);
+                    }
+                    else {
+                        $scope.restaurantInfo.homeAveragePrice = $scope.restaurantInfo.averagePrice;
                     }
 
-                    $scope.discount = true;
                     ngDialog.open({
                         templateUrl: 'homePic.html',
                         scope: $scope
@@ -235,8 +351,47 @@ angular.module('sbAdminApp')
                 });
         };
 
+        $scope.editHomePage = function(){
+            ManageService.newGetHomePage($cookies.get('restID'))
+                .success(function(data){
+                    $scope.FrontPic = data;
+                });
+            ManageService.getHomePage($cookies.get('restID'))
+                .success(function(data){
+                    $scope.FrontPics = data;
+                });
+            dialog = ngDialog.open({
+                templateUrl: 'editFrontPic.html',
+                scope: $scope,
+                width: 600
+            });
+        };
 
+        $scope.deleteCFront = function(detail){
+            ManageService.deleteDetail(detail.pictureId)
+                .success(function(data){
+                    var index = $scope.FrontPics.indexOf(detail);
+                    $scope.FrontPics.splice(index, 1);
+                    alert("图片删除成功");
+                });
+        };
+
+        $scope.setFront = function(detail){
+            var setInfo = {};
+            setInfo.restaurantId = $cookies.get('restID');
+            setInfo.pictureId = detail.pictureId;
+            ManageService.setFrontImage(setInfo)
+                .success(function(data){
+                    alert("首页图片设置成功");
+                    var index = $scope.FrontPics.indexOf(detail);
+                    $scope.FrontPics.splice(index, 1);
+                    $scope.FrontPics.push($scope.FrontPic);
+                    $scope.FrontPic = detail;
+                });
+
+        };
     })
+
     .controller('ImageRecommendCtrl', function ($scope, $location, $anchorScroll, ManageService, ngDialog, $cookies, API) {
 
         $scope.myRecommendImage = '';
@@ -259,13 +414,13 @@ angular.module('sbAdminApp')
         angular.element(document.querySelector('#fileInputRecommend')).on('change', handleFileSelect);
 
         $scope.uploadPic = function () {
-
-            if ($scope.picDescription == null ) {
-                alert("请填写图片描述!");
-                return;
-            }
             $scope.begin = $scope.myRecommendCroppedPic.indexOf("base64") + 7;
             $scope.myUploadPic = $scope.myRecommendCroppedPic.substr($scope.begin);
+
+            if ($scope.picDescription == null) {
+                alert('图片描述不能为空!');
+                return;
+            }
 
             if ($scope.picDescription.length > 20) {
                 alert('图片描述不能超过20个字!');
@@ -282,6 +437,7 @@ angular.module('sbAdminApp')
                 .success(function (data, status) {
                     if (data.success == true) {
                         alert("图片上传成功,可以点击首页图文信息预览进行查看!");
+                        $scope.picDescription = "";
                         $scope.homePageShow = false;
                     }
                 });
@@ -295,82 +451,126 @@ angular.module('sbAdminApp')
 
         };
 
-        if ($cookies.get('restID') == null || $cookies.get('restID') == "" || $cookies.get('restID') == undefined) {
-            alert('请先输入餐厅基本信息');
-        }
+    })
 
-        ManageService.getRestaurantInfo($cookies.get('restID'))
-            .success(function (data) {
-                console.log(data);
-                data.noonPrice = parseFloat(data.noonPrice, 10);
-                data.nightPrice = parseFloat(data.nightPrice, 10)
-                $scope.restaurantInfo = data;
-                $scope.basicInfo = data;
-                $scope.persistInfo = {"persistTable": data.persistTable, "persistTime": data.persistTime};
-                delete $scope.basicInfo.introduction;
-                delete $scope.basicInfo.smoke;
-                delete $scope.basicInfo.images;
-                //delete $scope.basicInfo.latitude;
-                //delete $scope.basicInfo.longitude;
+    .controller('ImageListCtrl', function ($scope, $location, $anchorScroll, ManageService, ngDialog, $cookies, API) {
+        $scope.uploadListImageShow = false;
+        $scope.myListCroppedPic = '';
+        $scope.myListImage = '';
+        $scope.listPicDescription = '';
+        var handleFileSelect = function (evt) {
 
-                $scope.longitudeNLatitude = $scope.basicInfo.longitude + ',' + $scope.basicInfo.latitude;
+            var target = (evt.currentTarget) ? evt.currentTarget : evt.srcElement;
+
+            var file = target.files[0];
+            var reader = new FileReader();
+            reader.onload = function (evt) {
+                $scope.$apply(function ($scope) {
+                    $scope.myListImage = evt.target.result;
+                });
+            };
+            reader.readAsDataURL(file);
+            $scope.uploadListImageShow = true;
+
+        };
+        angular.element(document.querySelector('#InputListImage')).on('change', handleFileSelect);
+        $scope.uploadPic = function () {
+            $scope.begin = $scope.myListCroppedPic.indexOf("base64") + 7;
+            $scope.myUploadPic = $scope.myListCroppedPic.substr($scope.begin);
+
+            if ($scope.listPicDescription == null) {
+                alert('图片描述不能为空!');
+                return;
+            }
+
+            if ($scope.listPicDescription.length > 20) {
+                alert('图片描述不能超过20个字!');
+                return;
+            }
+
+            $scope.uploadPicInfo = {
+                "imageValue": $scope.myUploadPic,
+                //"restaurantId": parseInt($cookies.get('restID')),
+                "restaurantId": parseInt($cookies.get('restID')),
+                "pictureIntro": $scope.listPicDescription
+            };
+            $scope.uploadInfo = JSON.stringify($scope.uploadPicInfo);
+            ManageService.uploadCListImage($scope.uploadInfo)
+                .success(function (data, status) {
+                    if (data.success == true) {
+                        alert("图片上传成功,可以点击首页图文信息预览进行查看!");
+                        $scope.listPicDescription = "";
+                        $scope.uploadListImageShow = false;
+                    }
+                });
+        };
+        $scope.removePic = function() {
+            $scope.uploadListImageShow = false;
+            $scope.myListImage = '';
+            $scope.listPicDescription = '';
+            $scope.myListCroppedPic = '';
+
+        };
+        $scope.editListPic = function() {
+            ManageService.getCListImage($cookies.get('restID'))
+                .success(function(data){
+                    $scope.ListPics = data;
+                });
+            ManageService.getListImage($cookies.get('restID'))
+                .success(function(data){
+                    $scope.ListPic = data;
+                });
+            ngDialog.open({
+                templateUrl: 'editListPic.html',
+                scope: $scope,
+                width: 600
             });
-
-        $scope.goto = function (id) {
-            $location.hash(id);
-            $anchorScroll();
         };
 
-
-        $scope.reservationNum = 20;
-        $scope.advanceTime = 4;
-
-        //首页图文信息预览
-        $scope.previewHomePage = function () {
-            ManageService.getHomePage($cookies.get('restID'))
-                .success(function (data) {
-
-                    $scope.restaurantInfo.homePagePic = data.picname;
-                    $scope.restaurantInfo.restaurantTeles = $scope.restaurantInfo.restaurantTele.split(" ");
-                    $scope.description = data.introduction;
-
-                    if (data.picname == "" || data.picname == null) {
-                        $scope.restaurantInfo.homePagePic = API.DATA + "/restaurants/images?relativePath=NonePicture.jpg";
-                    }
-
-                    $scope.discount = true;
-                    ngDialog.open({
-                        templateUrl: 'homePic.html',
-                        scope: $scope
-                    });
+        $scope.deleteCList = function(detail){
+            ManageService.deleteDetail(detail.pictureId)
+                .success(function(data){
+                    var index = $scope.ListPics.indexOf(detail);
+                    $scope.ListPics.splice(index, 1);
+                    alert("图片删除成功");
                 });
         };
 
+        $scope.setList = function(detail){
+            ManageService.setListImage($cookies.get('restID'), detail.pictureId)
+                .success(function(data){
+                    var index = $scope.ListPics.indexOf(detail);
+                    $scope.ListPics.splice(index, 1);
+                    $scope.ListPics.push($scope.ListPic);
+                    $scope.ListPic = detail;
+                    alert("列表图片展示成功");
+                });
+        };
+
+        $scope.previewList = function(){
+            ManageService.getListImage($cookies.get('restID'))
+                .success(function(data){
+                    $scope.listPic = data;
+                    ngDialog.open({
+                        templateUrl: 'previewList.html',
+                        scope: $scope
+                    });
+                })
+        }
+
     })
+
     .controller('ImageDetailCtrl', function ($scope, ManageService, ngDialog, $cookies, API) {
 
         $scope.myDetailImage = '';
         $scope.myDetailCroppedImage = '';
         $scope.detailPicShow = false;
-
-        //详情图文信息预览
-        ManageService.getDetail($cookies.get('restID'))
-            .success(function (data) {
-                console.log('---------');
-                console.log(data);
-                $scope.details = data;
-
-                for(var i = 0; i < $scope.details.length; i ++) {
-
-                    $scope.details[i].picname = API.DATA + $scope.details[i].picname;
-                }
-            });
+        var dialog;
 
         //详情图文信息预览
         $scope.previewDetail = function () {
-            ManageService.getDetail($cookies.get('restID'))
+            ManageService.getDetailShowPic($cookies.get('restID'))
                 .success(function (data) {
-                    console.log(data);
                     $scope.details = data;
 
                     $scope.picLen = $scope.details.length;
@@ -383,7 +583,10 @@ angular.module('sbAdminApp')
                     }
                     else {
                         $scope.details = [];
-                        $scope.details[0].picname = API.DATA + restaurantPort + '/restaurants/images?relativePath=NonePicture2.jpg';
+                        $scope.details[0].picname = API.MERCHANT + "/restaurants/images?relativePath=NonePicture2.jpg";
+                    }
+                    for (var i = 0; i < $scope.details.length; i++) {
+                        $scope.details[i].picname = $scope.details[i].picname;
                     }
 
                     if ($scope.discount) {
@@ -402,20 +605,6 @@ angular.module('sbAdminApp')
                     });
                 });
         };
-
-
-        //$scope.selectDetailPic = function(){
-        //    if ($scope.details.length > 5) {
-        //        ngDialog.open({
-        //            templateUrl: 'deleteDetailPic.html',
-        //            scope: $scope
-        //        });
-        //        return;
-        //    }
-        //    else{
-        //        angular.element(document.querySelector('#fileInputDetail')).click();
-        //    }
-        //};
 
         var handleFileSelect = function (evt) {
 
@@ -438,6 +627,11 @@ angular.module('sbAdminApp')
             $scope.begin = $scope.myDetailCroppedPic.indexOf("base64") + 7;
             $scope.myUploadPic = $scope.myDetailCroppedPic.substr($scope.begin);
 
+            if ($scope.picDescription == null) {
+                alert('图片描述不能为空!');
+                return;
+            }
+
             if ($scope.picDescription.length > 20) {
                 alert('图片描述不能超过20个字!');
                 return;
@@ -445,6 +639,7 @@ angular.module('sbAdminApp')
 
             $scope.uploadPicInfo = {
                 "imageValue": $scope.myUploadPic,
+                //"restaurantId": parseInt($cookies.get('restID')),
                 "restaurantId": parseInt($cookies.get('restID')),
                 "pictureIntro": $scope.picDescription
             };
@@ -455,6 +650,7 @@ angular.module('sbAdminApp')
                 .success(function (data, status) {
                     if (data.success == true) {
                         alert("图片上传成功,可以点击餐厅详细图文信息预览进行查看!");
+                        $scope.picDescription = "";
                         $scope.detailPicShow = false;
                     }
                 });
@@ -467,7 +663,61 @@ angular.module('sbAdminApp')
             $scope.detailPicShow = false;
         };
 
+        $scope.editDetail = function(){
+            $scope.ltyAllPic = {};
+            $scope.ltyAllPic.ShowPic = [];
+            $scope.ltyAllPic.DetailPic = [];
+            ManageService.getDetail($cookies.get('restID'))
+                .success(function (data) {
+                    $scope.ltyAllPic.DetailPic = data;
+                });
+            ManageService.getDetailShowPic($cookies.get('restID'))
+                .success(function(data){
+                    $scope.ltyAllPic.ShowPic = data;
+                });
+            dialog = ngDialog.open({
+                templateUrl: 'editPic.html',
+                scope: $scope,
+                width: 600
+            });
+        };
+
+        $scope.deletePic = function(detail){
+            ManageService.deleteDetail(detail.pictureId)
+                .success(function(data){
+                    var index = $scope.ltyAllPic.DetailPic.indexOf(detail);
+                    $scope.ltyAllPic.DetailPic.splice(index, 1);
+                    alert("图片删除成功");
+                });
+        };
+
+        $scope.showPic = function(detail){
+            var index = $scope.ltyAllPic.DetailPic.indexOf(detail);
+            $scope.ltyAllPic.DetailPic.splice(index, 1);
+            $scope.ltyAllPic.ShowPic.push(detail);
+        };
+
+        $scope.cancelShowPic = function(show){
+            var index = $scope.ltyAllPic.ShowPic.indexOf(show);
+            $scope.ltyAllPic.ShowPic.splice(index, 1);
+            $scope.ltyAllPic.DetailPic.push(show);
+        };
+
+        $scope.setDetail = function(){
+            var setInfo = {};
+            setInfo.restaurantId = $cookies.get('restID');
+            setInfo.pictureIds = [];
+            for(var i = 0; i < $scope.ltyAllPic.ShowPic.length; i++){
+                setInfo.pictureIds.push($scope.ltyAllPic.ShowPic[i].pictureId);
+            }
+            ManageService.setDetailPic(setInfo)
+                .success(function(data){
+                    alert("修改成功");
+                    dialog.close("editPic.html");
+                });
+        };
     })
+
     .controller('ContactCtrl', function ($scope, ManageService, $cookies) {
 
         function checkMobile(phone) {
@@ -772,7 +1022,7 @@ angular.module('sbAdminApp')
         $scope.totalSale = [];
         $scope.firstData = [];
 
-        ManageService.getChartInfo($.cookie('restaurantId'), $scope.queryDate)
+        ManageService.getChartInfo($cookies.get('restID'), $scope.queryDate)
             .success(function (data) {
 
                 var now = new Date();

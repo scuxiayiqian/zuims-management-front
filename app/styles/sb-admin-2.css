@@ -915,3 +915,120 @@ a:hover {
     cursor: pointer;
     text-decoration: none;
 }
+
+.lty-pic-preview {
+    padding-left: 24px;
+    padding-right: 26px;
+    margin-bottom: 8px;
+}
+
+.lty-tag-a {
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.lty-modify-pic-word {
+    background: #337ab7;
+    border: 1px solid #2e6da4;
+    border-radius: 4px;
+    color: #FFFFFF;
+    width: inherit;
+    margin-left: 0px;
+}
+
+.lty-modify-pic-block {
+    border: 2px dashed #337ab7;
+    min-height: 112px;
+    margin-top: 10px;
+    margin-bottom: 25px;
+    padding: 3px;
+    border-radius: 4px;
+    overflow: auto;
+    width: 100%;
+}
+
+
+/*.lty-modify-pic-list {*/
+/*padding-top: 16px;*/
+/*padding-bottom: 0px;*/
+/*padding-left: 6px;*/
+/*margin-top: 0px;*/
+/*}*/
+
+.lty-detail-pic {
+    border: 1px solid #337ab7;
+    width: 86px;
+    height: 69px;
+    margin: 3px;
+}
+
+.lty-btn{
+    margin: 0px auto;
+    text-align: center;
+    font-size: 16px;
+    color: #337ab7;
+    padding-top: 0px;
+    padding-bottom: 4px;
+}
+
+.lty-mlra{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.lty-product-management{
+    padding-bottom: 15px;
+}
+
+.lty-add-product {
+    width: 95%;
+    margin: 15px auto;
+
+}
+
+.lty-product-separator {
+    border-bottom: dashed 1px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+.lty-table {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 12px;
+}
+
+.lty-product-discount{
+    border: dashed 2px #337ab7;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 160px;
+    height: 90px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+}
+
+.lty-product-promotion {
+    border: dashed 2px #337ab7;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    width: 160px;
+    height: 90px;
+    display: inline-block;
+    text-align: center;
+    vertical-align: top;
+}
+
+.lty-align-horizontal-center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.lty-select-days{
+    display: inline-block;
+    width: 43%;
+}
+
+

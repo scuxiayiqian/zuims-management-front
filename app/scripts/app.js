@@ -20,7 +20,8 @@ angular
     'ngImgCrop',
     'ngDialog',
     'ngSanitize',
-    'ngCsv'
+    'ngCsv',
+    'angular-sortable-view'
   ])
     .constant('API', {
         USER: 'http://115.159.87.129:8001',
@@ -524,6 +525,7 @@ angular
         .state('dashboard.createNewRestaurant', {
             templateUrl: 'views/createNewRestaurant.html',
             url:'/createNewRestaurant',
+            controller: 'ManagementCtrl',
             resolve: {
                 loadMyFiles:function($ocLazyLoad) {
                     return $ocLazyLoad.load({

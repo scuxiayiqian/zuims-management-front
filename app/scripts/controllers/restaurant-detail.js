@@ -451,6 +451,37 @@ angular.module('sbAdminApp')
 
         };
 
+        $scope.previewHomePage = function () {
+            ManageService.newGetHomePage($cookies.get('restID'))
+                .success(function (data) {
+
+                    console.log("the rst id is " + $cookies.get('restID'));
+                    console.log(data);
+
+                    $scope.restaurantInfo.homePagePic = data.picname;
+                    $scope.restaurantInfo.restaurantTeles = $scope.restaurantInfo.restaurantTele.split(" ");
+                    $scope.restaurantInfo.introduction = data.introduction;
+
+                    if (data.picname == "" || data.picname == null)
+                        $scope.restaurantInfo.homePagePic = API.MERCHANT + "/restaurants/images?relativePath=NonePicture1.jpg";
+
+                    $scope.discount = $scope.restaurantInfo.discountType == 'discount' ? true : false;
+                    if ($scope.discount) {
+                        $scope.restaurantInfo.homeOriginAveragePrice = $scope.restaurantInfo.averagePrice;
+                        $scope.restaurantInfo.homeAveragePrice = Math.round(parseFloat($scope.restaurantInfo.homeOriginAveragePrice) * 0.67);
+                    }
+                    else {
+                        $scope.restaurantInfo.homeAveragePrice = $scope.restaurantInfo.averagePrice;
+                    }
+
+                    ngDialog.open({
+                        templateUrl: 'homePic.html',
+                        scope: $scope
+                    });
+                });
+        };
+
+
     })
 
     .controller('ImageListCtrl', function ($scope, $location, $anchorScroll, ManageService, ngDialog, $cookies, API) {
@@ -827,7 +858,7 @@ angular.module('sbAdminApp')
                     updateBasicInfo();
 
                 } else {
-                    if (Math.abs(point.lng - $scope.basicInfo.longitude) < 0.01 && Math.abs(point.lat - $scope.basicInfo.latitude) < 0.01)
+                    if (Math.abs(point.lng - $scope.basicInfo.longitude) < 0.5 && Math.abs(point.lat - $scope.basicInfo.latitude) < 0.5)
                     {
                         console.log('2');
                         updateBasicInfo();

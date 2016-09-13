@@ -154,7 +154,7 @@
                                         <!--</a>-->
                                     <!--</div>-->
                                     <div class="image-upload" ng-hide="homePageShow">
-                                        <a href="javascript:;" class="file lty-tag-a"><span class="glyphicon glyphicon-picture"></span>选择图片..
+                                        <a href="javascript:;" class="file lty-tag-a"><span class="glyphicon glyphicon-picture"></span>选择图片
                                             <input type="file" accept="image/*" name="recommend" id="fileInputRecommend">
                                         </a>
                                         <a href="javascript:;" class="file btn-primary lty-tag-a" ng-click="editHomePage()"><span
@@ -169,6 +169,50 @@
                                         </a>
                                     </div>
                                     <div class="clearfix"></div>
+                                </div>
+
+                                <div id="list-pic" ng-controller="ImageListCtrl">
+                                    列表展示图片
+                                    <div><span class="explain">建议:图片分辨率:640*420,横图</span></div>
+
+                                    <div ng-show="uploadListImageShow">
+                                        <div class="cropAreaDetail">
+                                            <img-crop image="myListImage" area-type="rectangle" aspect-ratio="1.52380952"
+                                                      result-image-size='{w: 640,h: 420}'
+                                                      result-image='myListCroppedPic'
+                                            ></img-crop>
+
+                                        </div>
+                                        <!--<div>图片预览:</div>-->
+                                        <div class="croppedPic" style="display: none"><img ng-src="{{myListCroppedPic}}"/></div>
+                                        <div class="picDetailDescription">
+                                            <input class="form-control" type="text" placeholder="图片描述,限20字,与图片同时显示在用户手机上"
+                                                   ng-model="listPicDescription"/>
+                                        </div>
+                                        <div class="image-upload">
+                                            <a href="javascript:;" class="file" ng-click="uploadPic()">
+                                                <span class="glyphicon glyphicon-saved"></span>上传图片
+                                            </a>
+                                            <a href="javascript:;" class="file-cancel" ng-click="removePic()">
+                                                <span class="glyphicon glyphicon-remove"></span>取消上传
+                                            </a>
+                                        </div>
+                                    </div>
+                                    <div class="image-upload" ng-hide="uploadListImageShow">
+                                        <a href="javascript:;" class="file lty-tag-a"><span
+                                                class="glyphicon glyphicon-picture"></span>选择图片
+                                            <input type="file" accept="image/*" name="listImage" id="InputListImage" >
+                                        </a>
+                                        <a href="javascript:;" class="file btn-primary lty-tag-a" ng-click="editListPic()">
+                                            <span class="glyphicon glyphicon-edit"></span>编辑图片
+                                        </a>
+                                    </div>
+                                    <div class="image-upload" ng-hide="uploadListImageShow">
+                                        <a href="javascript:;" class="file btn-primary lty-pic-preview lty-tag-a" ng-click="previewList()"
+                                           style="padding-left: 41px; padding-right: 41px" >
+                                            <span class="glyphicon glyphicon-search"></span>列表图文信息预览
+                                        </a>
+                                    </div>
                                 </div>
 
                                 <div id="detail-pic" ng-controller="ImageDetailCtrl">

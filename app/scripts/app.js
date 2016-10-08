@@ -36,7 +36,7 @@ angular
     )
 
   .config(['$stateProvider','$urlRouterProvider','$ocLazyLoadProvider',function ($stateProvider,$urlRouterProvider,$ocLazyLoadProvider) {
-    
+
     $ocLazyLoadProvider.config({
       debug:false,
       events:true
@@ -286,6 +286,21 @@ angular
                     })
                 }
             }
+        })
+
+        .state('dashboard.merchant',{
+          templateUrl:'views/merchant.html',
+          url:'/merchant',
+          resolve: {
+            loadMyFiles:function($ocLazyLoad) {
+              return $ocLazyLoad.load({
+                name:'sbAdminApp',
+                files:[
+                  'scripts/controllers/merchant.js'
+                ]
+              })
+            }
+          }
         })
 
         .state('dashboard.unconfirmedOrder',{
@@ -564,5 +579,3 @@ angular
        url:'/grid'
    })
   }]);
-
-    

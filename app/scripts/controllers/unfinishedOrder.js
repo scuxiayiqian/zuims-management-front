@@ -63,13 +63,30 @@ angular.module('sbAdminApp')
                 url: API.MERCHANT + '/order/unconfirmedorder',
                 crossDomain: true
             }).success(function (orderArr) {
+                for(var i = 0;i < orderArr.length;i++) {
+                  (function(i){
+                    return $http({
+                        method: 'GET',
+                        url: API.MERCHANT + "/order/ddstatusByorderid?orderId=" + orderArr[i].orderId,
+                    }).success(function(status){
+                      if(status.didi == "didi") {
+                        orderArr[i].source = "滴滴";
+                        //orderArr[i].isDidi = true;
+                      }
+                      else {
+                        //orderArr[i].isDidi = false;
+                      }
+                    });
+                  })(i)
+                }
+
                 console.log("get all order list successed");
                 $scope.rowCollection = orderArr;
                 $scope.displayedCollection = $scope.rowCollection;
             }).error(function () {
                 console.log("get order list failed");
             });
-        }
+        };
 
         getOrderList();
 
@@ -77,9 +94,9 @@ angular.module('sbAdminApp')
 
         // starts the interval
         $scope.start = function() {
- 
+
             // store the interval promise
-            promise = $interval(getOrderList, 60000);
+            promise = $interval(getOrderList, 30000);
             console.log("start");
         };
 

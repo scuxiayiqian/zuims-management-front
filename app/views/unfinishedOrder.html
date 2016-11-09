@@ -34,6 +34,7 @@
                         <th width="10%">预订人联系方式</th>
                         <th width="10%">会员等级</th>
                         <th width="15%">餐厅联系人</th>
+                        <th width="5%">来源</th>
                         <th width="5%">处理订单</th>
                     </tr>
                     </thead>
@@ -48,6 +49,7 @@
                         <td><b>{{row.phoneId}}</b></td>
                         <td>{{row.userVipLevel}}</td>
                         <td>{{row.linkman}}</td>
+                        <td>{{row.source}}</td>
                         <td align="center">
                             <button class="btn btn-xs" type="button" ng-click="setOrderToHandle(row)" data-toggle="modal" data-target="#confirmOrder">
                                 <i class="fa fa-send"></i>

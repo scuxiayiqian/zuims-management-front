@@ -71,16 +71,21 @@ angular.module('sbAdminApp')
                     }).success(function(status){
                       if(status.didi == "didi") {
                         orderArr[i].source = "滴滴";
-                        //orderArr[i].isDidi = true;
-                      }
-                      else {
-                        //orderArr[i].isDidi = false;
                       }
                     });
                   })(i)
                 }
 
                 console.log("get all order list successed");
+
+                var lengthOfRow = $scope.rowCollection.length;
+                var lengthOfOrder = orderArr.length;
+                if(lengthOfRow > 0) {
+                  if($scope.rowCollection[lengthOfRow - 1].orderId < orderArr[lengthOfOrder - 1].orderId) {
+                    alert("有新的订单");
+                  }
+                }
+
                 $scope.rowCollection = orderArr;
                 $scope.displayedCollection = $scope.rowCollection;
             }).error(function () {

@@ -27,13 +27,13 @@
                     <tr>
                         <th width="15%" st-sort="hotelName">餐厅名称</th>
                         <th width="10%">餐厅类型</th>
-                        <th width="15%" >餐厅电话</th>
+                        <th width="10%" >餐厅电话</th>
                         <th width="5%"> 订单用户</th>
-                        <th width="5%">就餐人数</th>
+                        <th width="10%">就餐人数</th>
                         <th width="10%">就餐时间</th>
                         <th width="10%">预订人联系方式</th>
                         <th width="10%">会员等级</th>
-                        <th width="15%">餐厅联系人</th>
+                        <th width="10%">餐厅联系人</th>
                         <th width="5%">来源</th>
                         <th width="5%">处理订单</th>
                     </tr>
@@ -71,7 +71,8 @@
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-danger" ng-click="cancelOrder(orderToHandle.orderId)" data-dismiss="modal">取消订单</button>
-                                <button type="button" class="btn btn-success" ng-click="confirmOrder(orderToHandle.orderId)" data-dismiss="modal">确认订单</button>
+                                <button ng-show="!orderToHandle.isDidi" type="button" class="btn btn-success" ng-click="confirmOrder(orderToHandle.orderId)" data-dismiss="modal">确认订单</button>
+                                <button ng-show="orderToHandle.isDidi" type="button" class="btn btn-success" ng-click="confirmDidiOrder(orderToHandle.orderId)" data-dismiss="modal">核销</button>
                             </div>
                         </div>
                         <!-- /.modal-content -->
@@ -155,3 +156,11 @@
     <!-- /.col-lg-12 -->
 </div>
 <!-- /.row -->
+
+<script type="text/ng-template" id="complete_didi_order.html">
+    <p>请输入核销码</p>
+    <input type="number" id = "couponCode"></input>
+    <div class="message" style="float: right">
+        <a class="btn btn-small btn-primary" ng-click = confirm()>确认核销</a>
+    </div>
+</script>

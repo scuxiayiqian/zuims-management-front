@@ -1,0 +1,80 @@
+<div class="row">
+    <div class="col-lg-12">
+        <h1 class="page-header"> 会员列表</h1>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+
+<!-- /.row -->
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default" ng-controller="vipCtrl">
+
+            <!-- /.panel-heading -->
+            <div class="panel-body">
+                <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
+                    <thea
+                    <tr>
+                        <th width="20%">会员姓名</th>
+                        <th width="20%">会员电话</th>
+                        <th width="20%">会员等级</th>
+                        <th width="20%">会员有效期</th>
+                        <th width="20%">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr st-select-row="row" ng-repeat="row in displayedCollection">
+                        <td>{{row.lastname}}</td>
+                        <td>{{row.phone}}</td>
+                        <td>{{row.vipLevel}}</td>
+                        <td>{{row.enddate}}</td>
+                        <td>
+                          <button class="btn btn-xs" type="button" ng-click="setVIP(row)" data-toggle="modal" data-target="#editModal">
+                              <i class="fa fa-edit"></i>
+                          </button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                <!-- Modal -->
+                <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="height:280px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="editModalLabel">VIP Information</h4>
+                            </div>
+                            <div class="modal-body" style="height:280px">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">会员等级</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="vipToHandle.viplevel">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">会员有效期</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="vipToHandle.end_date">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateVIP()">Yes</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<!-- /.row -->

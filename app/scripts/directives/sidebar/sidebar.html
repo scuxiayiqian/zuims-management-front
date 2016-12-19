@@ -17,6 +17,12 @@
                     <li ui-sref-active="active" ng-show="isVisible('unconfirmedOrder')">
                         <a ui-sref="dashboard.unconfirmedOrder">未完成订单</a>
                     </li>
+                    <li ui-sref-active="active" ng-show=isVisible('confirmedOrder')">
+                        <a ui-sref="dashboard.confirmedOrder">进行中订单</a>
+                    </li>
+                    <li ui-sref-active="active" ng-show=isVisible('finishedOrder')">
+                        <a ui-sref="dashboard.finishedOrder">已完成订单</a>
+                    </li>
                     <li ui-sref-active="active" ng-show="isVisible('reservationQuantity')">
                         <a ui-sref="dashboard.reservation-quantity">预定数量</a>
                     </li>

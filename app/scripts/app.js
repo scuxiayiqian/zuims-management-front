@@ -24,17 +24,17 @@ angular
     'angular-sortable-view'
   ])
     .constant('API', {
-        /*USER: 'http://115.159.87.129:8001',
+        USER: 'http://115.159.87.129:8001',
         RESTAURANT: 'http://115.159.87.129:8000',
         MERCHANT: 'http://115.159.87.129:8004',
         OPERATION: 'http://115.159.87.129:8008',
-        DATA: 'http://115.159.87.129:8004'*/
+        DATA: 'http://115.159.87.129:8004'
 
-        USER: 'http://202.120.40.175:21101',
+        /*USER: 'http://202.120.40.175:21101',
         RESTAURANT: 'http://202.120.40.175:21100',
         MERCHANT: 'http://202.120.40.175:21104',
         OPERATION: 'http://202.120.40.175:21108',
-        DATA: 'http://202.120.40.175:21104'
+        DATA: 'http://202.120.40.175:21104'*/
     })
 
     .constant('_',
@@ -333,6 +333,36 @@ angular
                         name:'sbAdminApp',
                         files:[
                             'scripts/controllers/unfinishedOrder.js'
+                        ]
+                    })
+                }
+            }
+        })
+
+        .state('dashboard.confirmedOrder',{
+            templateUrl:'views/confirmedOrder.html',
+            url:'/confirmedOrder',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/confirmedOrder.js'
+                        ]
+                    })
+                }
+            }
+        })
+
+        .state('dashboard.finishedOrder',{
+            templateUrl:'views/finishedOrder.html',
+            url:'/finishedOrder',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/finishedOrder.js'
                         ]
                     })
                 }

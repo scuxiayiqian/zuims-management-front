@@ -9,10 +9,18 @@
 <div class="row">
     <div class="col-lg-12">
         <div class="panel panel-default" ng-controller="confirmedOrderCtrl">
-
+            <div class="panel-heading">
+                <div align="right">
+                    <button type="button" onclick="printExcel('o')" class="btn btn-sm btn-primary">
+                        <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
+                        <i class="glyphicon glyphicon-cloud-upload">
+                        </i> 导出订单数据
+                    </button>
+                </div>
+            </div>
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
+                <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped" id="o">
                     <thea
                     <tr>
                       <th width="15%" st-sort="hotelName">餐厅名称</th>
@@ -25,6 +33,7 @@
                       <th width="10%">会员等级</th>
                       <th width="10%">餐厅联系人</th>
                       <th width="5%">来源</th>
+                      <th width="5%">处理订单</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -39,9 +48,38 @@
                       <td>{{row.userVipLevel}}</td>
                       <td>{{row.linkman}}</td>
                       <td>{{row.source}}</td>
+                      <td align="center">
+                          <button class="btn btn-xs" type="button" ng-click="setOrderToHandle(row)" data-toggle="modal" data-target="#completeOrder">
+                              <i class="fa fa-send"></i>
+                          </button>
+                      </td>
                     </tr>
                     </tbody>
                 </table>
+
+                <!-- Modal -->
+                <div class="modal fade" id="completeOrder" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="deleteModalLabel">订单处理</h4>
+                            </div>
+                            <div class="modal-body">
+                                {{orderToHandle.restaurantName}}:来自{{orderToHandle.userLastName}}{{orderToHandle.userFirstName}}的订单
+                            </div>
+                            <div class="modal-footer">
+                                <!--button type="button" class="btn btn-danger" ng-click="cancelOrder(orderToHandle.orderId)" data-dismiss="modal">取消订单</button!-->
+                                <button ng-show="!orderToHandle.isDidi" type="button" class="btn btn-success" ng-click="completeOrder(orderToHandle.orderId)" data-dismiss="modal">完成订单</button>
+                                <button ng-show="orderToHandle.isDidi" type="button" class="btn btn-success" ng-click="completeDidiOrder(orderToHandle.orderId)" data-dismiss="modal">核销</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    </div>
+                    <!-- /.modal-dialog -->
+                </div>
+                <!-- /.modal -->
+
             </div>
             <!-- /.panel-body -->
         </div>
@@ -49,3 +87,87 @@
     </div>
     <!-- /.col-lg-12 -->
 </div>
+
+<script type="text/ng-template" id="complete_didi_order.html">
+    <p>请输入核销码</p>
+    <input type="number" id = "couponCode"></input>
+    <div class="message" style="float: right">
+        <a class="btn btn-small btn-primary" ng-click = confirm()>确认核销</a>
+    </div>
+</script>
+
+<script type="text/javascript">
+        var idTmr;
+        function  getExplorer() {
+            var explorer = window.navigator.userAgent ;
+            //ie
+            if (explorer.indexOf("MSIE") >= 0) {
+                return 'ie';
+            }
+            //firefox
+            else if (explorer.indexOf("Firefox") >= 0) {
+                return 'Firefox';
+            }
+            //Chrome
+            else if(explorer.indexOf("Chrome") >= 0){
+                return 'Chrome';
+            }
+            //Opera
+            else if(explorer.indexOf("Opera") >= 0){
+                return 'Opera';
+            }
+            //Safari
+            else if(explorer.indexOf("Safari") >= 0){
+                return 'Safari';
+            }
+        }
+        function printExcel(tableid) {
+            if(getExplorer()=='ie')
+            {
+                var curTbl = document.getElementById(tableid);
+                var oXL = new ActiveXObject("Excel.Application");
+                var oWB = oXL.Workbooks.Add();
+                var xlsheet = oWB.Worksheets(1);
+                var sel = document.body.createTextRange();
+                sel.moveToElementText(curTbl);
+                sel.select();
+                sel.execCommand("Copy");
+                xlsheet.Paste();
+                oXL.Visible = true;
+
+                try {
+                    var fname = oXL.Application.GetSaveAsFilename("Excel.xls", "Excel Spreadsheets (*.xls), *.xls");
+                } catch (e) {
+                    print("Nested catch caught " + e);
+                } finally {
+                    oWB.SaveAs(fname);
+                    oWB.Close(savechanges = false);
+                    oXL.Quit();
+                    oXL = null;
+                    idTmr = window.setInterval("Cleanup();", 1);
+                }
+
+            }
+            else
+            {
+                tableToExcel(tableid)
+            }
+        }
+        function Cleanup() {
+            window.clearInterval(idTmr);
+            CollectGarbage();
+        }
+        var tableToExcel = (function() {
+            var uri = 'data:application/vnd.ms-excel;base64,',
+                    template = '<html><head><meta charset="UTF-8"></head><body><table>{table}</table></body></html>',
+                    base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) },
+                    format = function(s, c) {
+                        return s.replace(/{(\w+)}/g,
+                                function(m, p) { return c[p]; }) }
+            return function(table, name) {
+                if (!table.nodeType) table = document.getElementById(table)
+                var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                window.location.href = uri + base64(format(template, ctx))
+            }
+        })()
+</script>

@@ -11,6 +11,16 @@
         <div class="panel panel-default" ng-controller="finishedOrderCtrl">
             <div class="panel-heading">
                 <div align="right">
+                    <button type="button" ng-click="printAllDidiOrder()" class="btn btn-sm btn-primary">
+                      <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
+                      <i class="glyphicon glyphicon-cloud-upload">
+                      </i> 导出全部滴滴订单数据
+                    </button>
+                    <button type="button" ng-click="printMonthDidiOrder()" class="btn btn-sm btn-primary">
+                      <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
+                      <i class="glyphicon glyphicon-cloud-upload">
+                      </i> 导出本月滴滴订单数据
+                    </button>
                     <button type="button" onclick="printExcel('o')" class="btn btn-sm btn-primary">
                         <!--<button type="button" ng-click="getRestaurantList()" class="btn btn-sm btn-success">-->
                         <i class="glyphicon glyphicon-cloud-upload">
@@ -21,7 +31,18 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped" id="o">
-                    <thea
+                    <thead>
+                    <tr>
+                        <th colspan="10">
+                            <div class="input-group">
+                                <input st-search="" class="form-control" placeholder="搜索" type="text"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </th>
+                    </tr>
                     <tr>
                       <th width="15%" st-sort="hotelName">餐厅名称</th>
                       <th width="10%">餐厅类型</th>

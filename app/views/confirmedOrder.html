@@ -21,7 +21,18 @@
             <!-- /.panel-heading -->
             <div class="panel-body">
                 <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped" id="o">
-                    <thea
+                    <thead>
+                    <tr>
+                        <th colspan="10">
+                            <div class="input-group">
+                                <input st-search="" class="form-control" placeholder="搜索" type="text"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-default" type="button"><i class="fa fa-search"></i>
+                                    </button>
+                                </span>
+                            </div>
+                        </th>
+                    </tr>
                     <tr>
                       <th width="15%" st-sort="hotelName">餐厅名称</th>
                       <th width="10%">餐厅类型</th>

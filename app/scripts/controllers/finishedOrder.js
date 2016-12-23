@@ -40,6 +40,14 @@ angular.module('sbAdminApp')
             });
         };
 
+        $scope.printAllDidiOrder = function() {
+          window.location.href = API.MERCHANT + '/order/getAllDidiOrder';
+        };
+
+        $scope.printMonthDidiOrder = function() {
+          window.location.href = API.MERCHANT + '/order/getMonthDidiOrder';
+        };
+
         $scope.dataToExcel = function(tableid) {//整个表格拷贝到EXCEL中
           var curTbl = document.getElementById(tableid);
           var oXL;

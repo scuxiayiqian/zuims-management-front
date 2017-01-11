@@ -88,6 +88,15 @@ angular.module('sbAdminApp')
             });
         };
 
+        var updateBasicInfoRequest = function(basicInfo) {
+            return $http({
+                method:"POST",
+                url:restaurantBaseUrl + '/restaurant/info/basicinfoedit',
+                data:basicInfo,
+                crossDomain:true
+            });
+        };
+
 
         var updatePersistInfoRequest = function (persistInfo) {
             return $http({

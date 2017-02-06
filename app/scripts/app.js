@@ -24,17 +24,17 @@ angular
     'angular-sortable-view'
   ])
     .constant('API', {
-        USER: 'http://115.159.87.129:8001',
+        /*USER: 'http://115.159.87.129:8001',
         RESTAURANT: 'http://115.159.87.129:8000',
         MERCHANT: 'http://115.159.87.129:8004',
         OPERATION: 'http://115.159.87.129:8008',
-        DATA: 'http://115.159.87.129:8004'
+        DATA: 'http://115.159.87.129:8004'*/
 
-        /*USER: 'http://202.120.40.175:21101',
-        RESTAURANT: 'http://202.120.40.175:21100',
-        MERCHANT: 'http://202.120.40.175:21104',
-        OPERATION: 'http://202.120.40.175:21108',
-        DATA: 'http://202.120.40.175:21104'*/
+        USER: 'http://123.206.181.47:8001',
+        RESTAURANT: 'http://123.206.181.47:8000',
+        MERCHANT: 'http://123.206.181.47:8004',
+        OPERATION: 'http://123.206.181.47:8008',
+        DATA: 'http://123.206.181.47:8004'
     })
 
     .constant('_',
@@ -231,6 +231,20 @@ angular
                         name:'sbAdminApp',
                         files:[
                             'scripts/controllers/production.js'
+                        ]
+                    })
+                }
+            }
+        })
+        .state('dashboard.carousel',{
+            templateUrl:'views/carousel.html',
+            url:'/carousel',
+            resolve: {
+                loadMyFiles:function($ocLazyLoad) {
+                    return $ocLazyLoad.load({
+                        name:'sbAdminApp',
+                        files:[
+                            'scripts/controllers/carousel.js'
                         ]
                     })
                 }

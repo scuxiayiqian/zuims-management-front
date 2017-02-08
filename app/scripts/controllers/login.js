@@ -11,7 +11,7 @@ angular.module('sbAdminApp')
 
         $scope.clickEnterToLogin = function () {
             console.log("click enter to login");
-            $scope.login.logon();
+            $scope.login.login();
         };
 
         $scope.login = {

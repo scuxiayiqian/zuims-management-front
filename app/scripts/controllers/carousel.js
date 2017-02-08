@@ -56,11 +56,8 @@ angular.module('sbAdminApp')
 
         var deleteCarouselRequest = function(cid) {
             return $http({
-                method: 'POST',
-                url: restaurantBaseUrl + '/carousel/delete',
-                data: cid,
-                headers: {'Content-Type': 'application/json;charset=UTF-8'},
-                crossDomain: true 
+                method: 'GET',
+                url: restaurantBaseUrl + '/carousel/delete?cid=' + cid
             })
         }
 
@@ -191,6 +188,7 @@ angular.module('sbAdminApp')
         $scope.deleteCarousel = function(cid) {
             ManageService.deleteCarousel(cid)
                 .success(function(data){
+                    $scope.listPic.splice($scope.index, 1);
                     alert("图片删除成功！");
                 })
         }

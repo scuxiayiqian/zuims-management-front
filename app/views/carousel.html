@@ -57,7 +57,7 @@
             </div>
             <div>
                 <div class="picDetailDescription">
-                    <p>图片描述：<input class="form-control" type="text" ng-model="listPic[3].description"/></p>
+                    <p>图片描述：<input class="form-control" type="text" ng-model="listPic[index].description"/></p>
                 </div>
                 <div class="picDetailDescription">
                     <p>链接：<input class="form-control" type="text" ng-model="listPic[index].cHref"/></p>
@@ -72,7 +72,7 @@
         <a href="javascript:;" class="file btn-primary lty-tag-a" ng-click="editCarousel(listPic[index])">
             <span class="glyphicon glyphicon-edit"></span>保存图片
         </a>
-        <a href="javascript:;" class="file btn-primary lty-tag-a" ng-click="deleteCarousel()">
+        <a href="javascript:;" class="file btn-primary lty-tag-a" ng-click="deleteCarousel(listPic[index].cid)">
            <span class="glyphicon glyphicon-edit"></span>删除图片
         </a>
     </div>

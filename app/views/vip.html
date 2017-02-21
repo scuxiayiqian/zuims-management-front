@@ -12,18 +12,24 @@
 
             <!-- /.panel-heading -->
             <div class="panel-body">
-                <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped">
-                    <thea
+                <table st-table="displayedCollection" st-safe-src="rowCollection" class="table table-bordered table-striped" id="vipTable">
+                    <thead>
                     <tr>
+                        <th width="10%">
+                            <input type="checkbox" ng-model="allChosen" ng-click=setAll()>全选
+                        </th>
                         <th width="20%">会员姓名</th>
                         <th width="20%">会员电话</th>
                         <th width="20%">会员等级</th>
                         <th width="20%">会员有效期</th>
-                        <th width="20%">操作</th>
+                        <th width="10%">操作</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr st-select-row="row" ng-repeat="row in displayedCollection">
+                        <td>
+                            <input type="checkbox" ng-model="row.isChosen">
+                        </td>
                         <td>{{row.lastname}}</td>
                         <td>{{row.phone}}</td>
                         <td>{{row.vipLevel}}</td>
@@ -34,8 +40,14 @@
                           </button>
                         </td>
                     </tr>
-                    </tbody>
                 </table>
+
+                <div>
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editQueryModal">
+                        <i class="glyphicon glyphicon-cloud-upload"></i> 批量修改
+                    </button>
+                </div>
+
                 <!-- Modal -->
                 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
                     <div class="modal-dialog" style="height:280px">
@@ -70,6 +82,39 @@
                     <!-- /.modal-dialog -->
                 </div>
                 <!-- /.modal -->
+                <div class="modal fade" id="editQueryModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" style="height:280px">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                                <h4 class="modal-title" id="editModalLabel">VIP Information</h4>
+                            </div>
+                            <div class="modal-body" style="height:280px">
+                                <form role="form" class="form-horizontal">
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">会员等级</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="appointedVip.viplevel">
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-3 control-label">会员有效期</label>
+                                        <div class="col-sm-8">
+                                            <input class="form-control" ng-model="appointedVip.end_date">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                                <button type="button" class="btn btn-primary" data-dismiss="modal" ng-click="updateQueryVIP()">Yes</button>
+                            </div>
+                        </div>
+                        <!-- /.modal-content -->
+                    <!--/div>
+                    <!-- /.modal-dialog -->
+                <!--/div!-->
+
             </div>
             <!-- /.panel-body -->
         </div>
